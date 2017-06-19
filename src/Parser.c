@@ -59,8 +59,9 @@ void parser_data(t_Server *server, char **argv)
 {
 	int a;
 	int b;
-	char	*mcommand[] = {"-p", "-x", "-y", "-c", "-f", NULL};
-	void	*mfunction_ptr[] = {parser_port, parser_width, parser_height, NULL};
+	char	*mcommand[] = {"-p", "-x", "-y", "-n", "-f", "-c", NULL};
+	void	*mfunction_ptr[] = {parser_port, parser_width, parser_height,
+  parser_team, NULL};
 	int	(*fct_ptr)(t_Server *, char **, int);
 	bool found;
 

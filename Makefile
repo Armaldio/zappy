@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Mon Jun 19 16:57:16 2017 Martin Alais
+## Last update Mon Jun 19 17:21:43 2017 hamza hammouche
 ##
 
 CC    =    gcc
@@ -23,7 +23,8 @@ SRC    =    src/main.c \
 			src/World.c \
 			src/commande.c \
 			src/mouvement.c \
-			src/mouvement2.c
+			src/mouvement2.c \
+			src/Team_gestion.c
 
 FLAGS    =    -Iinclude
 
