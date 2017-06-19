@@ -5,17 +5,20 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void set_socket_statue(int fd, int blocking)
+int set_socket_statue(int fd, int blocking)
 {
 	int flags = fcntl(fd, F_GETFL, 0);
 	if (flags < 0)
-		return;
-	flags = blocking == 1 ? (flags&~O_NONBLOCK) : (flags|O_NONBLOCK);
+		return (0);
+	flags = blocking == 1 ? (flags&~O_NONBLOCK) : (flags | O_NONBLOCK);
 	fcntl(fd, F_SETFL, flags);
+	return (0);
 }
 
 void init_socket2(t_Connection *connection){
-	if (bind(connection->fd, (const struct sockaddr *)&connection->s_in, sizeof(connection->s_in)) == -1)
+	if (bind(connection->fd,
+		(const struct sockaddr *)&connection->s_in,
+		sizeof(connection->s_in)) == -1)
 	{
 		print(2, "Can not bind socket\n");
 		close(connection->fd);
@@ -32,8 +35,8 @@ void init_socket2(t_Connection *connection){
 bool send_message(int fd, char *msg)
 {
 	if (send(fd, msg, strlen(msg), MSG_DONTWAIT | MSG_NOSIGNAL) == -1)
-		return(false);
-	return(true);
+		return (false);
+	return (true);
 }
 
 void basic_init_socket(t_Connection *socket)
@@ -49,7 +52,8 @@ void init_socket(t_Connection *connection)
 		print(2, "Can not initialize TCP\n");
 		exit(1);
 	}
-	connection->fd = socket(AF_INET, SOCK_STREAM, connection->protocole->p_proto);
+	connection->fd = socket(AF_INET,
+		SOCK_STREAM, connection->protocole->p_proto);
 
 	if (connection->fd == -1)
 	{

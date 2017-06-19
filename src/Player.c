@@ -11,5 +11,5 @@ t_Player *init_player()
 	player_list->id = 1;
 	player_list->pos.x = -1;
 	player_list->pos.y = -1;
-	return(player_list);
+	return (player_list);
 }

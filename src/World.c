@@ -30,7 +30,7 @@ t_Map *init_case()
 	else
 		tmp->thystane = 0;
 	tmp->is_occuped = false;
-	return(tmp);
+	return (tmp);
 }
 
 void basic_init_world(t_World * world)
@@ -40,11 +40,9 @@ void basic_init_world(t_World * world)
 	world->nbr_player = 0;
 }
 
-
-
 bool case_occupation(t_World *world, int x, int y)
 {
-	return(world->map[x][y]->is_occuped);
+	return (world->map[x][y]->is_occuped);
 }
 
 void set_occupation(t_World *world, int x, int y, bool status)
@@ -63,10 +61,10 @@ void print_world(t_World *world)
 	int b;
 
 	a = 0;
-	while(world->map[a] != NULL)
+	while (world->map[a] != NULL)
 	{
 		b = 0;
-		while(world->map[a][b] != NULL)
+		while (world->map[a][b] != NULL)
 		{
 			printf("Map position: %d - %d\n", a, b);
 			printf("deraumere: %d\n", world->map[a][b]->deraumere);
@@ -91,7 +89,8 @@ void init_world(t_World * world)
 		world->height = 20;
 	if (world->width == -1)
 		world->width = 20;
-	printf("World initialized with height %d and width %d\n", world->height, world->width);
+	printf("World initialized with height %d and width %d\n", world->height,
+	world->width);
 	a = 0;
 	world->map = malloc(sizeof(t_Map **) * (world->height * world->width));
 	while (a < world->height)

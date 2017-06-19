@@ -5,7 +5,7 @@ void take_linemate(int id, t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (server->world->map[tmp->pos.x][tmp->pos.y]->linemate >= 1)
 	{
@@ -22,7 +22,7 @@ void take_deraumere(int id, t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (server->world->map[tmp->pos.x][tmp->pos.y]->deraumere >= 1)
 	{
@@ -39,7 +39,7 @@ void take_sibur(int id, t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (server->world->map[tmp->pos.x][tmp->pos.y]->sibur >= 1)
 	{
@@ -56,7 +56,7 @@ void take_mendiane(int id, t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (server->world->map[tmp->pos.x][tmp->pos.y]->mendiane >= 1)
 	{
@@ -73,7 +73,7 @@ void take_phiras(int id, t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (server->world->map[tmp->pos.x][tmp->pos.y]->phiras >= 1)
 	{
@@ -90,7 +90,7 @@ void take_thystane(int id, t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (server->world->map[tmp->pos.x][tmp->pos.y]->thystane >= 1)
 	{

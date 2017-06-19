@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Mon Jun 19 17:03:34 2017 hamza hammouche
+** Last update Mon Jun 19 19:22:43 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -14,7 +14,6 @@
 #include "Player.h"
 #include "Socket.h"
 #include "World.h"
-
 
 typedef struct s_Team
 {
@@ -42,5 +41,6 @@ void take_sibur(int id, t_Server *server);
 void take_mendiane(int id, t_Server *server);
 void take_phiras(int id, t_Server *server);
 void take_thystane(int id, t_Server *server);
+void add_new_player(t_Server *server, int fd);
 
 #endif /* !ZAPPY_SERVER_H_ */

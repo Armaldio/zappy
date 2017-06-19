@@ -56,7 +56,7 @@ int main(int ac, char **argv)
 	basic_init_server(server);
 	parser_data(server, argv);
 	init_server(server);
-	while(1)
+	while (1)
 	{
 		check_new_player(server);
 		check_data_player(server);
@@ -69,6 +69,6 @@ int main(int ac, char **argv)
 			}
 			a += 1;
 		}
-
 	}
+	return (0);
 }
