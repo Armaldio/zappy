@@ -11,7 +11,6 @@ int main(int ac, char **argv)
 	server = my_malloc(sizeof(t_Server));
 	basic_init_server(server);
 	parser_data(server, argv);
-	printf("%s", "test");
 	init_server(server);
 	while(1)
 	{
