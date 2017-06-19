@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
+#include "basic_data.h"
 
 typedef struct	s_Connection
 {
@@ -25,6 +25,6 @@ typedef struct	s_Connection
 void init_socket(t_Connection *connection);
 void basic_init_socket(t_Connection *connection);
 void set_socket_statue(int fd, int blocking);
-
+bool send_message(int fd, char *msg);
 
 #endif /* !ZAPPY_SOCKET_H_ */

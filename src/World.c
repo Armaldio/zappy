@@ -29,6 +29,7 @@ t_Map *init_case()
 		tmp->thystane = 1;
 	else
 		tmp->thystane = 0;
+	tmp->is_occuped = false;
 	return(tmp);
 }
 
@@ -63,11 +64,26 @@ void print_world(t_World *world, int c)
 	}
 }
 
+bool case_occupation(t_World *world, int x, int y)
+{
+	return(world->map[x][y]->is_occuped);
+}
+
+void set_occupation(t_World *world, int x, int y, bool status)
+{
+	if (world->map[x][y]->is_occuped == true && status == true)
+	{
+		printf("[ERROR] box already true\n");
+		exit(1);
+	}
+	world->map[x][y]->is_occuped = status;
+}
+
 void init_world(t_World * world)
 {
 	int a;
 	int b;
-	
+
 	b = 0;
 	if (world->height == -1)
 		world->height = 20;
@@ -88,5 +104,6 @@ void init_world(t_World * world)
 		a += 1;
 	}
 	world->map[a] = NULL;
-	print_world(world, a);
+	if (DEBUG)
+		print_world(world, a);
 }

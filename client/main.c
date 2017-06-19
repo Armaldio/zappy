@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue May  9 17:32:18 2017 Martin Alais
-** Last update Thu Jun 15 17:05:39 2017 Martin Alais
+** Last update Mon Jun 19 17:02:40 2017 Martin Alais
 */
 
 #include <sys/types.h>
@@ -86,10 +86,8 @@ int main(int ac, char **argv)
 		a = select(1 + 1, &rfds, NULL, NULL, &tv);
 		if (a != 0)
 		{
-			print(2, "data read from stdin\n");
 			read(1, data, 1000);
 			send(fd, data, strlen(data), MSG_DONTWAIT | MSG_NOSIGNAL);
-			print(2, "data send to server\n");
 			memset(data, '\0', 1000);
 		}
 		FD_ZERO(&rfds);
@@ -99,10 +97,8 @@ int main(int ac, char **argv)
 		a = select(fd + 1, &rfds, NULL, NULL, &tv);
 		if (a != 0)
 		{
-			print(2, "data read from oserver\n");
 			recv(fd, data, 1000, MSG_DONTWAIT);
 			write(1, data, strlen(data));
-			write(1, "\n", 1);
 			memset(data, '\0', 1000);
 		}
 	}
