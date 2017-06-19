@@ -12,11 +12,24 @@ void basic_init_server(t_Server *server)
 	basic_init_world(server->world);
 }
 
+void init_inventaire(t_Player *player)
+{
+	player->inventaire = my_malloc(sizeof(t_Inventaire));
+	player->inventaire->deraumere = 0;
+	player->inventaire->linemate = 0;
+	player->inventaire->mendiane = 0;
+	player->inventaire->phiras = 0;
+	player->inventaire->sibur = 0;
+	player->inventaire->thystane = 0;
+}
+
 void init_server(t_Server *server)
 {
 	init_socket(server->socket);
 	server->list_player = init_player();
 	init_world(server->world);
+	print_world(server->world);
+	init_inventaire(server->list_player);
 }
 
 t_Position get_spaw_pos(t_Server *server)
@@ -61,6 +74,8 @@ void add_new_player(t_Server *server, int fd)
 	new->pos.x = spaw_pos.x;
 	new->pos.y = spaw_pos.y;
 	set_occupation(server->world, new->pos.x, new->pos.y, true);
+	new->level = 1;
+	init_inventaire(new);
 	new->next = NULL;
 	tmp->next = new;
 	printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
@@ -77,6 +92,7 @@ void add_player(t_Server *server, int fd)
 		set_occupation(server->world, 0, 0, true);
 		server->list_player->pos.x = 0;
 		server->list_player->pos.y = 0;
+		server->list_player->level = 1;
 		printf("New player connected with fd: %d and id: %d\n", fd, server->list_player->id);
 		send_message(fd, "BIENVENUE\n");
 	}

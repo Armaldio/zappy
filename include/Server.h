@@ -36,5 +36,11 @@ void check_new_player(t_Server *server);
 void check_client_connection(t_Server *server);
 void check_data_player(t_Server *server);
 void basic_init_server(t_Server *server);
+void take_linemate(int id, t_Server *server);
+void take_deraumere(int id, t_Server *server);
+void take_sibur(int id, t_Server *server);
+void take_mendiane(int id, t_Server *server);
+void take_phiras(int id, t_Server *server);
+void take_thystane(int id, t_Server *server);
 
 #endif /* !ZAPPY_SERVER_H_ */

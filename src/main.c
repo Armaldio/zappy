@@ -19,6 +19,31 @@ void print_player(t_Server *server)
 	printf("pos_y: %d\n\n", tmp->pos.y);
 }
 
+void print_inventaire_player(t_Server *server)
+{
+	t_Player *tmp;
+
+	tmp = server->list_player;
+	while (tmp->next != NULL)
+	{
+		printf("Player id: %d\n", tmp->id);
+		printf("deraumere: %d\n", tmp->inventaire->deraumere);
+		printf("linemate: %d\n", tmp->inventaire->linemate);
+		printf("mendiane: %d\n", tmp->inventaire->mendiane);
+		printf("phiras: %d\n", tmp->inventaire->phiras);
+		printf("sibur: %d\n", tmp->inventaire->sibur);
+		printf("thystane: %d\n\n", tmp->inventaire->thystane);
+		tmp = tmp->next;
+	}
+	printf("Player id: %d\n", tmp->id);
+	printf("deraumere: %d\n", tmp->inventaire->deraumere);
+	printf("linemate: %d\n", tmp->inventaire->linemate);
+	printf("mendiane: %d\n", tmp->inventaire->mendiane);
+	printf("phiras: %d\n", tmp->inventaire->phiras);
+	printf("sibur: %d\n", tmp->inventaire->sibur);
+	printf("thystane: %d\n\n", tmp->inventaire->thystane);
+}
+
 int main(int ac, char **argv)
 {
 	t_Server *server;
@@ -38,7 +63,10 @@ int main(int ac, char **argv)
 		if (DEBUG)
 		{
 			if ((a % 10) == 0)
+			{
+				print_inventaire_player(server);
 				print_player(server);
+			}
 			a += 1;
 		}
 

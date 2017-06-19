@@ -26,5 +26,6 @@ void basic_init_world(t_World * world);
 void init_world(t_World * world);
 bool case_occupation(t_World *world, int x, int y);
 void set_occupation(t_World *world, int x, int y, bool status);
+void print_world(t_World *world);
 
 #endif /* !ZAPPY_WORLD_H_ */
