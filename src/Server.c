@@ -1,6 +1,7 @@
 #include "Server.h"
 #include "Player.h"
 #include "Socket.h"
+#include "zappy.h"
 
 void basic_init_server(t_Server *server)
 {
@@ -30,6 +31,9 @@ void add_new_player(t_Server *server, int fd)
 	new->fd = fd;
 	new->id = server->list_player->id + 1;
 	new->is_connected = true;
+	new->gaze = UP;
+	new->pos.x = 0;
+	new->pos.y = 0;
 	new->next = NULL;
 	tmp->next = new;
 	printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
@@ -42,6 +46,9 @@ void add_player(t_Server *server, int fd)
 	{
 		server->list_player->fd = fd;
 		server->list_player->is_connected = true;
+		server->list_player->gaze = UP;
+		server->list_player->pos.x = 0;
+		server->list_player->pos.y = 0;
 		printf("New player connected with fd: %d and id: %d\n", fd, server->list_player->id);
 		send(fd, "BIENVENUE\n", 10, MSG_DONTWAIT | MSG_NOSIGNAL);
 	}
@@ -102,7 +109,10 @@ void check_data_player(t_Server *server)
 				printf("Player with id %d disconected\n", tmp->id);
 			}
 			else
+			{
 				printf("%d: %s\n", tmp->id, data_recv);
+				parser_commande(tmp->id, server, data_recv);
+			}
 			memset(data_recv, '\0', 4096);
 		}
 		tmp = tmp->next;
@@ -121,22 +131,11 @@ void check_data_player(t_Server *server)
 			printf("Player with id %d disconected\n", tmp->id);
 		}
 		else
+		{
 			printf("%d: %s\n", tmp->id, data_recv);
+			parser_commande(tmp->id, server, data_recv);
+		}
 	}
-}
-
-void check_player(t_Server *server)
-{
-	t_Player *tmp;
-
-	tmp = server->list_player;
-	printf("Playerdata\n");
-	while(tmp->next != NULL)
-	{
-		printf("player: %d\n", tmp->id);
-		tmp = tmp->next;
-	}
-	printf("player: %d\n", tmp->id);
 }
 
 void check_new_player(t_Server *server)
@@ -145,9 +144,6 @@ void check_new_player(t_Server *server)
 	set_socket_statue(server->socket->fd, 0);
 	a = accept(server->socket->fd, (struct sockaddr *)&server->socket->s_in_accept, &server->socket->s_in_size_accept);
 	if (a != -1)
-	{
 		add_player(server, a);
-	}
 	set_socket_statue(server->socket->fd, 1);
-	// check_player(server);
 }

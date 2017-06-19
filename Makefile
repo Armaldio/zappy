@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Mon Jun 19 12:12:44 2017 Quentin Goinaud
+## Last update Mon Jun 19 14:56:35 2017 Martin Alais
 ##
 
 CC    =    gcc
@@ -20,7 +20,9 @@ SRC    =    src/main.c \
 			src/Socket.c \
 			src/basic_data.c \
 			src/Parser.c \
-			src/World.c
+			src/World.c \
+			src/commande.c \
+			src/mouvement.c
 
 FLAGS    =    -Iinclude
 
