@@ -76,7 +76,7 @@ void set_occupation(t_World *world, int x, int y, bool status)
 		printf("[ERROR] box already true\n");
 		exit(1);
 	}
-	world->map[y][y]->is_occuped = status;
+	world->map[x][y]->is_occuped = status;
 }
 
 void init_world(t_World * world)

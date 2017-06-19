@@ -54,6 +54,8 @@ void go_down(t_Server *server, int id)
 	}
 }
 
+
+
 void go_right(t_Server *server, int id)
 {
 	t_Player *tmp;

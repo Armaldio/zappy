@@ -19,10 +19,33 @@ void init_server(t_Server *server)
 	init_world(server->world);
 }
 
+t_Position get_spaw_pos(t_Server *server)
+{
+	t_Position res;
+
+	res.x = 0;
+	while (res.x < server->world->height - 1)
+	{
+		res.y = 0;
+		while (res.y < server->world->width - 1)
+		{
+			if (case_occupation(server->world, res.x, res.y) == false)
+				return(res);
+			res.y += 1;
+		}
+		res.x += 1;
+	}
+	printf("[Error] no more space for spawn\n");
+	res.x = -1;
+	res.y = -1;
+	return(res);
+}
+
 void add_new_player(t_Server *server, int fd)
 {
 	t_Player *new;
 	t_Player *tmp;
+	t_Position spaw_pos;
 
 	tmp = server->list_player;
 	while (tmp->next != NULL)
@@ -32,8 +55,12 @@ void add_new_player(t_Server *server, int fd)
 	new->id = server->list_player->id + 1;
 	new->is_connected = true;
 	new->gaze = UP;
-	new->pos.x = 0;
-	new->pos.y = 0;
+	spaw_pos = get_spaw_pos(server);
+	if (spaw_pos.x == -1 || spaw_pos.y == -1)
+		send(fd, "KO\n", 3, MSG_DONTWAIT | MSG_NOSIGNAL);
+	new->pos.x = spaw_pos.x;
+	new->pos.y = spaw_pos.y;
+	set_occupation(server->world, new->pos.x, new->pos.y, true);
 	new->next = NULL;
 	tmp->next = new;
 	printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
@@ -47,6 +74,7 @@ void add_player(t_Server *server, int fd)
 		server->list_player->fd = fd;
 		server->list_player->is_connected = true;
 		server->list_player->gaze = UP;
+		set_occupation(server->world, 0, 0, true);
 		server->list_player->pos.x = 0;
 		server->list_player->pos.y = 0;
 		printf("New player connected with fd: %d and id: %d\n", fd, server->list_player->id);
