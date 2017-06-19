@@ -34,6 +34,7 @@ void commande_right(int id, t_Server *server, char *data)
 		tmp->gaze = LEFT;
 	else
 		tmp->gaze = UP;
+	send_message(tmp->fd, "OK\n");
 }
 
 void commande_left(int id, t_Server *server, char *data)
@@ -52,6 +53,17 @@ void commande_left(int id, t_Server *server, char *data)
 		tmp->gaze = RIGHT;
 	else
 		tmp->gaze = UP;
+	send_message(tmp->fd, "OK\n");
+}
+
+void command_not_found(int id, t_Server *server)
+{
+	t_Player *tmp;
+
+	tmp = server->list_player;
+	while(tmp->next && tmp->id != id)
+		tmp = tmp->next;
+	send_message(tmp->fd, "KO\n");
 }
 
 void parser_commande(int id, t_Server *server, char *data)
@@ -68,7 +80,9 @@ void parser_commande(int id, t_Server *server, char *data)
 		{
 			fct_ptr = mfunction_ptr[a];
 			fct_ptr(id, server, data);
+			return;
 		}
 		a += 1;
 	}
+	command_not_found(id, server);
 }

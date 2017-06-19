@@ -29,6 +29,13 @@ void init_socket2(t_Connection *connection){
 	}
 }
 
+bool send_message(int fd, char *msg)
+{
+	if (send(fd, msg, strlen(msg), MSG_DONTWAIT | MSG_NOSIGNAL) == -1)
+		return(false);
+	return(true);
+}
+
 void basic_init_socket(t_Connection *socket)
 {
 	socket->port = -1;

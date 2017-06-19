@@ -57,14 +57,14 @@ void add_new_player(t_Server *server, int fd)
 	new->gaze = UP;
 	spaw_pos = get_spaw_pos(server);
 	if (spaw_pos.x == -1 || spaw_pos.y == -1)
-		send(fd, "KO\n", 3, MSG_DONTWAIT | MSG_NOSIGNAL);
+		send_message(fd, "KO\n");
 	new->pos.x = spaw_pos.x;
 	new->pos.y = spaw_pos.y;
 	set_occupation(server->world, new->pos.x, new->pos.y, true);
 	new->next = NULL;
 	tmp->next = new;
 	printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
-	send(fd, "BIENVENUE\n", 10, MSG_DONTWAIT | MSG_NOSIGNAL);
+	send_message(fd, "BIENVENUE\n");
 }
 
 void add_player(t_Server *server, int fd)
@@ -78,7 +78,7 @@ void add_player(t_Server *server, int fd)
 		server->list_player->pos.x = 0;
 		server->list_player->pos.y = 0;
 		printf("New player connected with fd: %d and id: %d\n", fd, server->list_player->id);
-		send(fd, "BIENVENUE\n", 10, MSG_DONTWAIT | MSG_NOSIGNAL);
+		send_message(fd, "BIENVENUE\n");
 	}
 	else
 		add_new_player(server, fd);
