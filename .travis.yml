@@ -1,6 +1,4 @@
-{
-        language: c
-        compiler:
-                - clang
-                - gcc
-}
+language: c
+compiler:
+        - clang
+        - gcc
