@@ -3,6 +3,7 @@
 
 typedef struct	s_Map
 {
+	bool is_occuped;
 	int pos_x;
 	int pos_y;
 	int linemate;
@@ -23,4 +24,7 @@ typedef struct	s_World
 
 void basic_init_world(t_World * world);
 void init_world(t_World * world);
+bool case_occupation(t_World *world, int x, int y);
+void set_occupation(t_World *world, int x, int y, bool status);
+
 #endif /* !ZAPPY_WORLD_H_ */

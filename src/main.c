@@ -2,10 +2,29 @@
 #include "zappy.h"
 #include "Server.h"
 
+void print_player(t_Server *server)
+{
+	t_Player *tmp;
+
+	tmp = server->list_player;
+	while (tmp->next != NULL)
+	{
+		printf("Player id: %d\n", tmp->id);
+		printf("pos_x: %d\n", tmp->pos.x);
+		printf("pos_y: %d\n\n", tmp->pos.y);
+		tmp = tmp->next;
+	}
+	printf("Player id: %d\n", tmp->id);
+	printf("pos_x: %d\n", tmp->pos.x);
+	printf("pos_y: %d\n\n", tmp->pos.y);
+}
+
 int main(int ac, char **argv)
 {
 	t_Server *server;
+	int a;
 
+	a = 0;
 	(void) ac;
 	srand(time(NULL));
 	server = my_malloc(sizeof(t_Server));
@@ -16,5 +35,12 @@ int main(int ac, char **argv)
 	{
 		check_new_player(server);
 		check_data_player(server);
+		if (DEBUG)
+		{
+			if ((a % 10) == 0)
+				print_player(server);
+			a += 1;
+		}
+
 	}
 }

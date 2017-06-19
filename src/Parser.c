@@ -64,7 +64,6 @@ void parser_data(t_Server *server, char **argv)
 	int	(*fct_ptr)(t_Server *, char **, int);
 	bool found;
 
-
 	a = 1;
 	while (argv[a])
 	{
