@@ -63,6 +63,7 @@ void commande_incantation(int id, t_Server *server, char data)
 	t_Player *tmp;
 	void	(*fct_ptr)(int, t_Server *);
 
+	(void) data;
 	tmp = server->list_player;
 	while(tmp->next && tmp->id != id)
 		tmp = tmp->next;
