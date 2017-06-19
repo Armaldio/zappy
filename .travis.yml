@@ -3,3 +3,5 @@ compiler:
         - clang
         - gcc
 script: make && make tests
+notifications:
+        webhooks: travis.armaldio.xyz/travis-ci.php
