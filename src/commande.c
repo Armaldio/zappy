@@ -1,4 +1,5 @@
 #include "zappy.h"
+#include "Incantation.h"
 
 void commande_forward(int id, t_Server *server, char *data)
 {
@@ -56,6 +57,45 @@ void commande_left(int id, t_Server *server, char *data)
 	send_message(tmp->fd, "OK\n");
 }
 
+void commande_incantation(int id, t_Server *server, char data)
+{
+	void	*mfunction_ptr[] = {incan_1, incan_2, incan_3, incan_4, incan_5, NULL};
+	t_Player *tmp;
+	void	(*fct_ptr)(int, t_Server *);
+
+	tmp = server->list_player;
+	while(tmp->next && tmp->id != id)
+		tmp = tmp->next;
+	fct_ptr = mfunction_ptr[tmp->level - 1];
+	fct_ptr(id, server);
+}
+
+void command_take(int id, t_Server *server, char *data)
+{
+	t_Player *tmp;
+	char *all_stone[] = {"linemate", "deraumere", "sibur", "mendiane", "phiras", "thystane", NULL};
+	void	*mfunction_ptr[] = {take_linemate, take_deraumere, take_sibur, take_mendiane, take_phiras, take_thystane, NULL};
+	void	(*fct_ptr)(int id, t_Server *);
+	int a;
+
+	a = 0;
+	data += 5;
+	tmp = server->list_player;
+	while(tmp->next && tmp->id != id)
+		tmp = tmp->next;
+	while(all_stone[a])
+	{
+		if (strncmp(all_stone[a], data, strlen(all_stone[a])) == 0)
+		{
+			fct_ptr = mfunction_ptr[a];
+			fct_ptr(id, server);
+			print_world(server->world);
+			return;
+		}
+		a += 1;
+	}
+}
+
 void command_not_found(int id, t_Server *server)
 {
 	t_Player *tmp;
@@ -68,8 +108,8 @@ void command_not_found(int id, t_Server *server)
 
 void parser_commande(int id, t_Server *server, char *data)
 {
-	char	*mcommand[] = {"Forward", "Right", "Left", NULL};
-	void	*mfunction_ptr[] = {commande_forward, commande_right, commande_left, NULL};
+	char	*mcommand[] = {"Forward", "Right", "Left", "Incantation", "Take", NULL};
+	void	*mfunction_ptr[] = {commande_forward, commande_right, commande_left, commande_incantation, command_take, NULL};
 	void	(*fct_ptr)(int, t_Server *, char *);
 	int		a;
 
