@@ -2,4 +2,4 @@ language: c
 compiler:
         - clang
         - gcc
-script: scons
+script: make
