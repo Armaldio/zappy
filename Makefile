@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Mon Jun 19 12:12:44 2017 Quentin Goinaud
+## Last update Mon Jun 19 18:27:47 2017 Quentin Goinaud
 ##
 
 CC    =    gcc
@@ -45,10 +45,14 @@ fclean: clean
 	@$(CC) $(FLAGS) $(CFLAGS) $(LDFLAGS) -c $^ -o $@
 
 install_bats:
-	-git clone https://github.com/sstephenson/bats.git && cd bats && pwd && ./install.sh ../ut
+	@echo "[Installing testing tool...]"
+	-@git clone https://github.com/sstephenson/bats.git && cd bats && pwd && ./install.sh ../ut
 
 tests: install_bats
-	./ut/bin/bats unit-tests/dummy.sh
+	@echo -e "\n\n[Running tests...]"
+	@./ut/bin/bats unit-tests/dummy.sh
+	@echo -e "\n\n[Running moulinette...]"
+	@./unit-tests/style.sh
 
 re: fclean all
 
