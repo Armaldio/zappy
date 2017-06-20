@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Tue Jun 20 17:17:40 2017 Martin Alais
+** Last update Tue Jun 20 17:42:06 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -41,5 +41,8 @@ void update_player_life(t_Server *server);
 void check_player_death(t_Server *server);
 void my_add_player(t_Server *server, int fd);
 void my_delete_player(t_Server *server, int id);
+void init_case2(t_Map *tmp);
+void start_look(t_Server *server, t_Player *tmp, char *data);
+void take_food(int id, t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */

@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:26 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 09:56:26 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 17:35:28 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -27,13 +27,7 @@ t_Map *init_case()
   tmp->phiras = 0;
   if (rand() % 3 == 0)
     tmp->phiras = 1;
-  tmp->sibur = 0;
-  if (rand() % 3 == 0)
-    tmp->sibur = 1;
-  tmp->thystane = 0;
-  if (rand() % 3 == 0)
-    tmp->thystane = 1;
-  tmp->is_occuped = false;
+	init_case2(tmp);
   return (tmp);
 }
 
