@@ -1,9 +1,5 @@
 #!/usr/bin/env bats
 
-@test "telnet command available" {
-  command -v telnet
-}
-
 @test "netcat command available" {
   command -v nc
 }
