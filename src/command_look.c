@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 12:54:04 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 13:05:43 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -16,7 +16,7 @@ void t_backward(t_Player *tmp, int i, int y, t_Server *server)
   if (tmp->pos.x - i + y < 0 || tmp->pos.y - y < 0 ||
       tmp->pos.x - i + y > server->world->width ||
       tmp->pos.y - y > server->world->height)
-    return;
+    return ;
   if (server->world->map[tmp->pos.x - i + y][tmp->pos.y - y]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[tmp->pos.x - i + y][tmp->pos.y - y]->linemate >= 1)
@@ -38,7 +38,7 @@ void t_forward(t_Player *tmp, int i, int y, t_Server *server)
   if (tmp->gaze == DOWN)
     {
       t_backward(tmp, i, y, server);
-      return;
+      return ;
     }
   if (tmp->pos.x + i - y < 0 || tmp->pos.y + y < 0 ||
       tmp->pos.x + i - y > server->world->width ||
@@ -65,7 +65,7 @@ void t_right(t_Player *tmp, int i, int y, t_Server *server)
   if (tmp->pos.x + y < 0 || tmp->pos.y - i + y < 0 ||
       tmp->pos.x + y > server->world->width ||
       tmp->pos.y - i + y > server->world->height)
-    return;
+    return ;
   if (server->world->map[tmp->pos.x + y][tmp->pos.y - i + y]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[tmp->pos.x + y][tmp->pos.y - i + y]->linemate >= 1)
@@ -87,12 +87,12 @@ void t_left(t_Player *tmp, int i, int y, t_Server *server)
   if (tmp->gaze == RIGHT)
     {
       t_right(tmp, i, y, server);
-      return;
+      return ;
     }
   if (tmp->pos.y + i - y < 0 || tmp->pos.x - y < 0 ||
       tmp->pos.y + i - y > server->world->width ||
       tmp->pos.x - y > server->world->height)
-    return;
+    return ;
   if (server->world->map[tmp->pos.x - y][tmp->pos.y + i - y]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[tmp->pos.x - y][tmp->pos.y + i - y]->linemate >= 1)
