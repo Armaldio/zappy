@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Mon Jun 19 19:09:33 2017 Martin Alais
+** Last update Tue Jun 20 10:57:23 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -109,4 +109,12 @@ int command_take(int id, t_Server *server, char *data)
 		a += 1;
 	}
 	return (0);
+}
+
+int command_look(int id, t_Server *server, char *data)
+{
+  (void)server;
+  (void)data;
+  send_message(id, "looking\n");
+  return (0);
 }
