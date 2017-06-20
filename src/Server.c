@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Mon Jun 19 19:23:09 2017 Martin Alais
+** Last update Tue Jun 20 10:48:28 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -24,6 +24,7 @@ void add_player(t_Server *server, int fd)
 		server->list_player->pos.x = 0;
 		server->list_player->pos.y = 0;
 		server->list_player->level = 1;
+      server->list_player->waitingTeam = true;
 		printf("New player connected with fd: %d and id: %d\n",
 		fd, server->list_player->id);
 		send_message(fd, "BIENVENUE\n");
