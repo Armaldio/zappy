@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:33:49 2017 Martin Alais
-** Last update Mon Jun 19 19:34:21 2017 Martin Alais
+** Last update Tue Jun 20 14:17:53 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -62,5 +62,24 @@ int parser_height(t_Server *server, char **argv, int a)
 		exit(1);
 	}
 	server->world->height = nbr;
+	return (1);
+}
+
+int parser_freq(t_Server *server, char **argv, int a)
+{
+	int nbr;
+
+	if (argv[a + 1] == NULL)
+	{
+		printf("[Error] unrecognized argument after -f\n");
+		exit(1);
+	}
+	nbr = atoi(argv[a + 1]);
+	if (nbr < 1)
+	{
+		printf("[Error] wrong argument after -f\n");
+		exit(1);
+	}
+	server->f = nbr;
 	return (1);
 }
