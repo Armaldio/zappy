@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Fri Jun 16 12:06:25 2017 Martin Alais
+## Last update Tue Jun 20 12:36:48 2017 hamza hammouche
 ##
 
 CC    =    gcc
@@ -20,7 +20,20 @@ SRC    =    src/main.c \
 			src/Socket.c \
 			src/basic_data.c \
 			src/Parser.c \
-			src/World.c
+			src/World.c \
+			src/commande.c \
+			src/mouvement.c \
+			src/mouvement2.c \
+			src/take_object.c \
+			src/incantation.c \
+			src/Team_gestion.c \
+			src/commande2.c \
+			src/server2.c \
+			src/Parser2.c \
+			src/checker.c \
+			src/take_object2.c \
+			src/server_gestion.c \
+			src/command_look.c \
 
 FLAGS    =    -Iinclude
 
@@ -43,6 +56,21 @@ fclean: clean
 
 %.o: %.c
 	@$(CC) $(FLAGS) $(CFLAGS) $(LDFLAGS) -c $^ -o $@
+
+install_bats:
+	@echo "[Installing testing tool...]"
+	-@git clone https://github.com/sstephenson/bats.git && cd bats && pwd && ./install.sh ../ut
+
+quick_client:
+	$(CC) client/main.c -o mouli
+
+tests: install_bats
+	@#./server&
+	@echo -e "\n\n[Running tests...]"
+	@./ut/bin/bats unit-tests/connect.sh
+	@#pkill server
+	@echo -e "\n\n[Running moulinette...]"
+	@./unit-tests/style.sh
 
 re: fclean all
 

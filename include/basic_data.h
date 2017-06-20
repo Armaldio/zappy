@@ -1,3 +1,13 @@
+/*
+** basic_data.h for zappy in /home/alaism/dev/tek2/PSU/zappy/include/
+**
+** Made by Martin Alais
+** Login   <martin.alais@epitech.eu>
+**
+** Started on  Mon Jun 19 19:00:53 2017 Martin Alais
+** Last update Mon Jun 19 19:01:43 2017 Martin Alais
+*/
+
 #ifndef ZAPPY_BASIC_H_
 # define ZAPPY_BASIC_H_
 
@@ -10,7 +20,6 @@ typedef struct	s_Position
 	int x;
 	int y;
 }			t_Position;
-
 
 void print(int fd, char *str);
 void *my_malloc(size_t size);

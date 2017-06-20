@@ -2,4 +2,15 @@ language: c
 compiler:
         - clang
         - gcc
-script: make
+script: make && make tests
+notifications:
+        webhooks: http://travis.armaldio.xyz/travis-ci.php
+        email:
+                recipients:
+                        - quentin.goinaud@epitech.eu
+                        - hamza.hammouche@epitech.eu
+                        - loic1.doyen@epitech.eu
+                        - martin.alais@epitech.eu
+                        - walter.bonetti@epitech.eu
+                on_success: change
+                on_failure: always
