@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Tue Jun 20 10:16:02 2017 Quentin Goinaud
+** Last update Tue Jun 20 10:54:21 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -15,9 +15,9 @@
 
 void basic_init_server(t_Server *server)
 {
-	server->list_player = malloc(sizeof(t_Player));
-	server->socket = malloc(sizeof(t_Connection));
-	server->world = malloc(sizeof(t_World));
+	server->list_player = my_malloc(sizeof(t_Player));
+	server->socket = my_malloc(sizeof(t_Connection));
+	server->world = my_malloc(sizeof(t_World));
 	basic_init_socket(server->socket);
 	basic_init_world(server->world);
 }
@@ -88,6 +88,7 @@ void add_new_player(t_Server *server, int fd)
 	new->pos.y = spaw_pos.y;
 	set_occupation(server->world, new->pos.x, new->pos.y, true);
 	new->level = 1;
+  new->waitingTeam = true;
 	init_inventaire(new);
 	new->next = NULL;
 	tmp->next = new;

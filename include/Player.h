@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Mon Jun 19 19:00:47 2017 Martin Alais
+** Last update Tue Jun 20 10:08:56 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -31,14 +31,17 @@ typedef struct	s_Player
 {
 	t_Position pos;
 	int level;
+  int teamId;
 	struct s_Player *next;
 	t_Inventaire *inventaire;
 	int fd;
 	int id;
 	bool is_connected;
+  bool waitingTeam;
 	enum direction gaze;
 }			t_Player;
 
+t_Player *get_Player(int id, t_Player *head);
 t_Player *init_player();
 
 #endif /* !ZAPPY_PLAYER_H_ */

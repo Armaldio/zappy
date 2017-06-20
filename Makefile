@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Tue Jun 20 12:22:40 2017 Quentin Goinaud
+## Last update Tue Jun 20 12:53:53 2017 Quentin Goinaud
 ##
 
 CC    =    gcc
@@ -63,7 +63,7 @@ quick_client:
 	$(CC) client/main.c -o mouli
 
 tests: install_bats
-	@./server&
+	./server&
 	@echo -e "\n\n[Running tests...]"
 	@./ut/bin/bats unit-tests/connect.sh
 	@pkill server

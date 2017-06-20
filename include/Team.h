@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 15:32:56 2017 hamza hammouche
-** Last update Mon Jun 19 17:05:01 2017 hamza hammouche
+** Last update Tue Jun 20 10:39:32 2017 hamza hammouche
 */
 
 #ifndef TEAM_H_
@@ -15,5 +15,6 @@
 
 t_team	*create_team(char *name);
 t_team	*add_team(t_team *head, char *name);
+t_team	*get_team(t_team *head, char *name, int id);
 
 #endif /* end of include guard: TEAM_H_ */
