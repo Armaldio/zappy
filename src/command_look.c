@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 13:05:43 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 13:09:13 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -43,7 +43,7 @@ void t_forward(t_Player *tmp, int i, int y, t_Server *server)
   if (tmp->pos.x + i - y < 0 || tmp->pos.y + y < 0 ||
       tmp->pos.x + i - y > server->world->width ||
       tmp->pos.y + y > server->world->height)
-    return;
+    return ;
   if (server->world->map[tmp->pos.x + i - y][tmp->pos.y + y]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[tmp->pos.x + i - y][tmp->pos.y + y]->linemate >= 1)
