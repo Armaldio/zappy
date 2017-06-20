@@ -45,6 +45,7 @@ typedef struct	s_Player
 {
 	t_Position pos;
 	int level;
+  int teamId;
 	struct s_Player *next;
 	t_Inventaire *inventaire;
 	t_action *action;
@@ -52,9 +53,12 @@ typedef struct	s_Player
 	int fd;
 	int id;
 	bool is_connected;
+  bool waitingTeam;
 	enum direction gaze;
 }			t_Player;
 
+int				get_Player_size(t_Player *head);
+t_Player *get_Player(int id, t_Player *head);
 t_Player *init_player();
 
 #endif /* !ZAPPY_PLAYER_H_ */

@@ -29,9 +29,12 @@ typedef struct	s_Server
 	t_World *world;
   t_team *list_teams;
   int		f;
+  int		nbClientMax;
   int		time;
   int		fake_time;
 }			t_Server;
+
+bool get_team_name(t_Player *, char *data, t_Server *serv);
 
 void init_server(t_Server *server);
 void check_new_player(t_Server *server);
@@ -44,7 +47,9 @@ void take_sibur(int id, t_Server *server);
 void take_mendiane(int id, t_Server *server);
 void take_phiras(int id, t_Server *server);
 void take_thystane(int id, t_Server *server);
+
 void add_new_player(t_Server *server, int fd);
 void init_inventaire(t_Player *player);
+t_Player	*delete_player(t_Server *serv, t_Player *player);
 
 #endif /* !ZAPPY_SERVER_H_ */

@@ -35,6 +35,8 @@ SRC    =    src/main.c \
 			src/action.c \
 			src/waiting_line.c \
 			src/init_player.c \
+			src/server_gestion.c \
+			src/command_look.c \
 
 FLAGS    =    -Iinclude
 
@@ -62,9 +64,14 @@ install_bats:
 	@echo "[Installing testing tool...]"
 	-@git clone https://github.com/sstephenson/bats.git && cd bats && pwd && ./install.sh ../ut
 
+quick_client:
+	$(CC) client/main.c -o mouli
+
 tests: install_bats
+	@#./server&
 	@echo -e "\n\n[Running tests...]"
-	@./ut/bin/bats unit-tests/dummy.sh
+	@./ut/bin/bats unit-tests/connect.sh
+	@#pkill server
 	@echo -e "\n\n[Running moulinette...]"
 	@./unit-tests/style.sh
 

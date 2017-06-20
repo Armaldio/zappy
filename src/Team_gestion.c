@@ -5,10 +5,25 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:04:19 2017 hamza hammouche
-** Last update Mon Jun 19 17:16:22 2017 hamza hammouche
+** Last update Tue Jun 20 13:44:32 2017 hamza hammouche
 */
 
 #include "Team.h"
+
+t_team *get_team(t_team *head, char *name, int id)
+{
+  t_team *tmp;
+
+  tmp = head;
+  if (name != NULL && name[strlen(name) - 1] == '\n')
+    name[strlen(name) - 1] = '\0';
+  while (tmp) {
+    if ((name != NULL && strcmp(tmp->name, name) == 0) || id == tmp->id)
+			return (tmp);
+    tmp = tmp->next;
+  }
+  return (NULL);
+}
 
 t_team *create_team(char *name)
 {

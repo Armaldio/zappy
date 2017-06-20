@@ -18,6 +18,7 @@ void basic_init_server(t_Server *server)
 	server->list_player = my_malloc(sizeof(t_Player));
 	server->socket = my_malloc(sizeof(t_Connection));
 	server->world = my_malloc(sizeof(t_World));
+  server->nbClientMax = 6;
 	basic_init_socket(server->socket);
 	basic_init_world(server->world);
 	server->f = 100;
@@ -79,7 +80,7 @@ void add_new_player(t_Server *server, int fd)
 		tmp = tmp->next;
 	new = malloc(sizeof(t_Player));
 	new->fd = fd;
-	new->id = server->list_player->id + 1;
+	new->id = tmp->id + 1;
 	new->is_connected = true;
 	new->gaze = UP;
 	spaw_pos = get_spaw_pos(server);
@@ -89,6 +90,7 @@ void add_new_player(t_Server *server, int fd)
 	new->pos.y = spaw_pos.y;
 	set_occupation(server->world, new->pos.x, new->pos.y, true);
 	init_player2(new);
+  new->waitingTeam = true;
 	tmp->next = new;
 	printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
 	send_message(fd, "BIENVENUE\n");

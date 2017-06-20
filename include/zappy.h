@@ -24,6 +24,8 @@ void commande_right(int id, t_Server *server, char *data);
 void commande_left(int id, t_Server *server, char *data);
 void commande_incantation(int id, t_Server *server, char data);
 int command_take(int id, t_Server *server, char *data);
+int command_look(int id, t_Server *server, char *data);
+int parser_nbMax(t_Server *server, char **argv, int a);
 int parser_port(t_Server *server, char **argv, int a);
 int parser_width(t_Server *server, char **argv, int a);
 int parser_height(t_Server *server, char **argv, int a);

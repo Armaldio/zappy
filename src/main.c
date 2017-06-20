@@ -1,3 +1,13 @@
+/*
+** main.c for  in /home/goinau_q/rendu/c/zappy/src/
+**
+** Made by Quentin Goinaud
+** Login   <quentin.goinaud@epitech.eu>
+**
+** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
+** Last update Tue Jun 20 11:08:38 2017 Quentin Goinaud
+*/
+
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"
@@ -52,7 +62,6 @@ void	manage_time(t_Server *server)
   now = time(0);
   if ((tm = localtime (&now)) == NULL)
     printf ("Error extracting time, no changes\n");
-
   if (tm->tm_sec != server->fake_time)
     {
       server->fake_time = tm->tm_sec;
