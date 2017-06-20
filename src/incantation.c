@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:39 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 09:44:40 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 09:52:12 2017 loic1.doyen@epitech.eu
 */
 
 #include "Incantation.h"
@@ -16,7 +16,7 @@ void incan_1(int id, t_Server *server)
 
 	(void) id;
 	tmp = server->list_player;
-	while(tmp->next && tmp->id != id)
+	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
 	if (tmp->inventaire->linemate >= 1)
 	{

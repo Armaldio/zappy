@@ -66,16 +66,10 @@ class norme:
             if self.cheat:
                 p = re.compile('([\w-]* [\w-]*)$')
                 test = re.search(p, self.line)
-                if test:
-                    if not test.group(1) in self.user:
-                        self.print_error('login '+ test.group(1) +' incorrect')
         elif (self.nb_line == 5):
             if self.cheat:
                 p = re.compile('<(.*)@')
                 test = re.search(p, self.line)
-                if test:
-                    if not test.group(1) in self.user:
-                        self.print_error('login '+ test.group(1) +' incorrect')
         else:
             if (self.line[:2] != '**'):
                 self.print_error('header incorrect')
