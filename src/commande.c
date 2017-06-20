@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 14:48:52 2017 Martin Alais
+** Last update Tue Jun 20 17:14:31 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -66,8 +66,8 @@ int parser_commande(int id, t_Server *server, char *data)
 	if (data == NULL)
 		return (0);
 	a = 0;
-  if (get_player_team(get_Player(id, server->list_player), data, server))
-    return (0);
+	if (get_player_team(get_Player(id, server->list_player), data, server))
+		return (0);
 	while (mcommand[a])
 	{
 		if (strncmp(mcommand[a], data, strlen(mcommand[a])) == 0)

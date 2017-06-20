@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Tue Jun 20 13:54:35 2017 Martin Alais
+** Last update Tue Jun 20 16:58:24 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -15,15 +15,16 @@
 
 void add_player(t_Server *server, int fd)
 {
-  add_new_player(server, fd);
+  my_add_player(server, fd);
 }
 
-void add_to_line(t_Player *tmp, char *data_recv, int a)
+void add_to_line(t_Player *tmp, char *data_recv, int a, t_Server *server)
 {
 	if (a == 0)
 	{
 		tmp->is_connected = false;
 		printf("Player with id %d disconected\n", tmp->id);
+		my_delete_player(server, tmp->id);
 	}
 	else
 	{
@@ -40,7 +41,7 @@ void check_data_player(t_Server *server)
 	t_Player *tmp;
 	fd_set rfds;
 
-	tmp = server->list_player->next;
+	tmp = server->list_player;
 	memset(data_recv, '\0', 4096);
 	while (tmp != NULL)
 	{
@@ -52,10 +53,10 @@ void check_data_player(t_Server *server)
 		if (a != 0 && tmp->is_connected == true)
 		{
 			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
-			add_to_line(tmp, data_recv, a);
+			add_to_line(tmp, data_recv, a, server);
 			memset(data_recv, '\0', 4096);
 		}
-		tmp = delete_player(server, tmp);
+		tmp = tmp->next;
 	}
 }
 
