@@ -1,13 +1,3 @@
-/*
-** main.c for  in /home/macdoy/Rendu/zappy/src/
-**
-** Made by loic1.doyen@epitech.eu
-** Login   <loic1.doyen@epitech.eu@epitech.eu>
-**
-** Started on  Tue Jun 20 09:44:44 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 09:44:46 2017 loic1.doyen@epitech.eu
-*/
-
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"
@@ -54,20 +44,37 @@ void print_inventaire_player(t_Server *server)
 	printf("thystane: %d\n\n", tmp->inventaire->thystane);
 }
 
+void	manage_time(t_Server *server)
+{
+  time_t	now;
+  struct tm	*tm;
+
+  now = time(0);
+  if ((tm = localtime (&now)) == NULL)
+    printf ("Error extracting time, no changes\n");
+
+  if (tm->tm_sec != server->fake_time)
+    {
+      server->fake_time = tm->tm_sec;
+      server->time++;
+      printf("Elapsed time since start : %ds\n", server->time);
+    }
+}
+
 int main(int ac, char **argv)
 {
 	t_Server *server;
 	int a;
 
 	a = 0;
-	(void) ac;
 	srand(time(NULL));
 	server = my_malloc(sizeof(t_Server));
 	basic_init_server(server);
-	parser_data(server, argv);
+	parser_data(server, ac, argv);
 	init_server(server);
 	while (1)
 	{
+		manage_time(server);
 		check_new_player(server);
 		check_data_player(server);
 		if (DEBUG)

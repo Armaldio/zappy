@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Mon Jun 19 19:34:44 2017 Martin Alais
+** Last update Tue Jun 20 10:20:36 2017 Quentin Goinaud
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -16,7 +16,7 @@
 
 # define DEBUG 0
 
-void parser_data(t_Server *server, char **argv);
+void parser_data(t_Server *server, int ac, char **argv);
 int	parser_team(t_Server *serv, char **argv, int a);
 int parser_commande(int id, t_Server *server, char *data);
 void commande_forward(int id, t_Server *server, char *data);
