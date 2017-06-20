@@ -1,3 +1,13 @@
+/*
+** incantation.c for  in /home/macdoy/Rendu/zappy/src/
+**
+** Made by loic1.doyen@epitech.eu
+** Login   <loic1.doyen@epitech.eu@epitech.eu>
+**
+** Started on  Tue Jun 20 09:44:39 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 09:44:40 2017 loic1.doyen@epitech.eu
+*/
+
 #include "Incantation.h"
 
 void incan_1(int id, t_Server *server)

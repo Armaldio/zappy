@@ -1,3 +1,13 @@
+/*
+** Socket.c for  in /home/macdoy/Rendu/zappy/src/
+**
+** Made by loic1.doyen@epitech.eu
+** Login   <loic1.doyen@epitech.eu@epitech.eu>
+**
+** Started on  Tue Jun 20 09:45:14 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 09:45:15 2017 loic1.doyen@epitech.eu
+*/
+
 #include "Socket.h"
 #include "basic_data.h"
 #include <sys/select.h>

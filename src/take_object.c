@@ -1,3 +1,13 @@
+/*
+** take_object.c for  in /home/macdoy/Rendu/zappy/src/
+**
+** Made by loic1.doyen@epitech.eu
+** Login   <loic1.doyen@epitech.eu@epitech.eu>
+**
+** Started on  Tue Jun 20 09:45:19 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 09:45:20 2017 loic1.doyen@epitech.eu
+*/
+
 #include "Server.h"
 
 void take_linemate(int id, t_Server *server)

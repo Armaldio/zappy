@@ -1,3 +1,13 @@
+/*
+** main.c for  in /home/macdoy/Rendu/zappy/src/
+**
+** Made by loic1.doyen@epitech.eu
+** Login   <loic1.doyen@epitech.eu@epitech.eu>
+**
+** Started on  Tue Jun 20 09:44:44 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 09:44:46 2017 loic1.doyen@epitech.eu
+*/
+
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"

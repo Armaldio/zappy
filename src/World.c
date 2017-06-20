@@ -1,3 +1,13 @@
+/*
+** World.c for  in /home/macdoy/Rendu/zappy/src/
+**
+** Made by loic1.doyen@epitech.eu
+** Login   <loic1.doyen@epitech.eu@epitech.eu>
+**
+** Started on  Tue Jun 20 09:45:26 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 09:45:27 2017 loic1.doyen@epitech.eu
+*/
+
 #include "zappy.h"
 
 t_Map *init_case()
