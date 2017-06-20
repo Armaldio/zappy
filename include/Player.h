@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Tue Jun 20 10:08:56 2017 hamza hammouche
+** Last update Tue Jun 20 12:03:54 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -16,6 +16,20 @@
 #include "basic_data.h"
 
 enum direction {UP, DOWN, RIGHT, LEFT};
+
+typedef struct	s_waiting_line
+{
+	char **line;
+	int nbr_ordre;
+}			t_waiting_line;
+
+typedef struct	s_action
+{
+	int start_time;
+	int end_time;
+	bool is_working;
+	bool is_leveling;
+}			t_action;
 
 typedef struct	s_Inventaire
 {
@@ -34,6 +48,8 @@ typedef struct	s_Player
   int teamId;
 	struct s_Player *next;
 	t_Inventaire *inventaire;
+	t_action *action;
+	t_waiting_line *waiting_line;
 	int fd;
 	int id;
 	bool is_connected;
@@ -41,6 +57,7 @@ typedef struct	s_Player
 	enum direction gaze;
 }			t_Player;
 
+int				get_Player_size(t_Player *head);
 t_Player *get_Player(int id, t_Player *head);
 t_Player *init_player();
 

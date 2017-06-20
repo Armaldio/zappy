@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Tue Jun 20 10:39:40 2017 hamza hammouche
+** Last update Tue Jun 20 14:35:26 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -29,6 +29,7 @@ typedef struct	s_Server
 	t_World *world;
   t_team *list_teams;
   int		f;
+  int		nbClientMax;
   int		time;
   int		fake_time;
 }			t_Server;
@@ -46,6 +47,9 @@ void take_sibur(int id, t_Server *server);
 void take_mendiane(int id, t_Server *server);
 void take_phiras(int id, t_Server *server);
 void take_thystane(int id, t_Server *server);
+
 void add_new_player(t_Server *server, int fd);
+void init_inventaire(t_Player *player);
+t_Player	*delete_player(t_Server *serv, t_Player *player);
 
 #endif /* !ZAPPY_SERVER_H_ */

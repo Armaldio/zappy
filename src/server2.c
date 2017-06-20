@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Tue Jun 20 10:54:21 2017 hamza hammouche
+** Last update Tue Jun 20 14:37:07 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -18,8 +18,10 @@ void basic_init_server(t_Server *server)
 	server->list_player = my_malloc(sizeof(t_Player));
 	server->socket = my_malloc(sizeof(t_Connection));
 	server->world = my_malloc(sizeof(t_World));
+  server->nbClientMax = 6;
 	basic_init_socket(server->socket);
 	basic_init_world(server->world);
+	server->f = 100;
 }
 
 void init_inventaire(t_Player *player)
@@ -38,9 +40,9 @@ void init_server(t_Server *server)
 	init_socket(server->socket);
 	server->list_player = init_player();
 	init_world(server->world);
-	print_world(server->world);
 	init_inventaire(server->list_player);
-	server->f = 100;
+	init_action(server->list_player);
+	ini_waiting_line(server->list_player);
 	server->time = 0;
 	server->fake_time = -1;
 }
@@ -78,7 +80,7 @@ void add_new_player(t_Server *server, int fd)
 		tmp = tmp->next;
 	new = malloc(sizeof(t_Player));
 	new->fd = fd;
-	new->id = server->list_player->id + 1;
+	new->id = tmp->id + 1;
 	new->is_connected = true;
 	new->gaze = UP;
 	spaw_pos = get_spaw_pos(server);
@@ -87,10 +89,8 @@ void add_new_player(t_Server *server, int fd)
 	new->pos.x = spaw_pos.x;
 	new->pos.y = spaw_pos.y;
 	set_occupation(server->world, new->pos.x, new->pos.y, true);
-	new->level = 1;
+	init_player2(new);
   new->waitingTeam = true;
-	init_inventaire(new);
-	new->next = NULL;
 	tmp->next = new;
 	printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
 	send_message(fd, "BIENVENUE\n");

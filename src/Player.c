@@ -5,16 +5,30 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:35:13 2017 hamza hammouche
-** Last update Tue Jun 20 10:54:08 2017 hamza hammouche
+** Last update Tue Jun 20 13:45:16 2017 hamza hammouche
 */
 
 #include "Player.h"
+
+int				get_Player_size(t_Player *head)
+{
+  int			i;
+  t_Player *tmp;
+
+  i = 0;
+	tmp = head->next;
+  while (tmp) {
+    tmp = tmp->next;
+    i++;
+  }
+  return (i);
+}
 
 t_Player	*get_Player(int id, t_Player *head)
 {
   t_Player *tmp;
 
-	tmp = head;
+	tmp = head->next;
   while (tmp) {
     if (tmp->id == id)
 			return (tmp);

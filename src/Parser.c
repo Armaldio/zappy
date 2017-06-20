@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:59 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 10:22:14 2017 Quentin Goinaud
+** Last update Tue Jun 20 14:45:17 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -13,7 +13,7 @@
 void parser_data2(int b, int *a, t_Server *server, char **argv)
 {
 	void	*mfunction_ptr[] = {parser_port, parser_width, parser_height,
-  parser_team, NULL};
+  parser_team, parser_nbMax, parser_freq, NULL};
 	int	(*fct_ptr)(t_Server *, char **, int);
 
 	fct_ptr = mfunction_ptr[b];
@@ -31,7 +31,7 @@ void parser_data(t_Server *server, int ac, char **argv)
 {
 	int a;
 	int b;
-	char	*mcommand[] = {"-p", "-x", "-y", "-n", "-f", "-c", NULL};
+	char	*mcommand[] = {"-p", "-x", "-y", "-n", "-c", "-f", NULL};
 	bool found;
 
 	a = 1;
