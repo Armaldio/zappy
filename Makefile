@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Tue Jun 20 12:19:12 2017 loic1.doyen@epitech.eu
+## Last update Tue Jun 20 12:55:24 2017 loic1.doyen@epitech.eu
 ##
 
 CC    =    gcc
@@ -60,9 +60,14 @@ install_bats:
 	@echo "[Installing testing tool...]"
 	-@git clone https://github.com/sstephenson/bats.git && cd bats && pwd && ./install.sh ../ut
 
+quick_client:
+	$(CC) client/main.c -o mouli
+
 tests: install_bats
+	./server&
 	@echo -e "\n\n[Running tests...]"
-	@./ut/bin/bats unit-tests/dummy.sh
+	@./ut/bin/bats unit-tests/connect.sh
+	@pkill server
 	@echo -e "\n\n[Running moulinette...]"
 	@./unit-tests/style.sh
 

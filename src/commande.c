@@ -35,10 +35,23 @@ void command_not_found(int id, t_Server *server)
 	send_message(tmp->fd, "KO\n");
 }
 
+void exit_client(int id, t_Server *server, char *data)
+{
+  t_Player *tmp;
+
+  (void) data;
+  printf("close client\n");
+  tmp = server->list_player;
+  while (tmp->next && tmp->id != id)
+    tmp = tmp->next;
+  tmp->is_connected = false;
+  close(tmp->fd);
+}
+
 int parser_commande(int id, t_Server *server, char *data)
 {
 	char	*mcommand[] = {"Forward", "Right", "Left",
-	"Incantation", "Take", "Look", NULL};
+	"Incantation", "Take", "Look", "Exit", NULL};
 	void	*mfunction_ptr[] = {commande_forward, commande_right,
 		commande_left, commande_incantation, command_take, command_look, NULL};
 	void	(*fct_ptr)(int, t_Server *, char *);

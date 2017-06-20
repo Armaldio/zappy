@@ -1,11 +1,11 @@
 /*
-** main.c for  in /home/macdoy/Rendu/zappy/src/
+** main.c for  in /home/goinau_q/rendu/c/zappy/src/
 **
-** Made by loic1.doyen@epitech.eu
-** Login   <loic1.doyen@epitech.eu@epitech.eu>
+** Made by Quentin Goinaud
+** Login   <quentin.goinaud@epitech.eu>
 **
-** Started on  Tue Jun 20 10:59:41 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 10:59:43 2017 loic1.doyen@epitech.eu
+** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
+** Last update Tue Jun 20 11:08:38 2017 Quentin Goinaud
 */
 
 #include <time.h>
@@ -62,7 +62,6 @@ void	manage_time(t_Server *server)
   now = time(0);
   if ((tm = localtime (&now)) == NULL)
     printf ("Error extracting time, no changes\n");
-
   if (tm->tm_sec != server->fake_time)
     {
       server->fake_time = tm->tm_sec;
