@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Tue Jun 20 11:55:44 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 13:30:25 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -19,6 +19,7 @@ void commande_forward(int id, t_Server *server, char *data)
 	tmp = server->list_player;
 	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
+	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		go_up(server, id);
 	else if (tmp->gaze == DOWN)
@@ -37,6 +38,7 @@ void commande_right(int id, t_Server *server, char *data)
 	tmp = server->list_player;
 	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
+	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		tmp->gaze = RIGHT;
 	else if (tmp->gaze == RIGHT)
@@ -56,6 +58,7 @@ void commande_left(int id, t_Server *server, char *data)
 	tmp = server->list_player;
 	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
+	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		tmp->gaze = LEFT;
 	else if (tmp->gaze == LEFT)
@@ -78,6 +81,8 @@ void commande_incantation(int id, t_Server *server, char data)
 	tmp = server->list_player;
 	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
+	start_action(server, tmp, 300);
+	tmp->action->is_leveling = true;
 	fct_ptr = mfunction_ptr[tmp->level - 1];
 	fct_ptr(id, server);
 }
@@ -97,13 +102,13 @@ int command_take(int id, t_Server *server, char *data)
 	tmp = server->list_player;
 	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
+	start_action(server, tmp, 7);
 	while (all_stone[a])
 	{
 		if (strncmp(all_stone[a], data, strlen(all_stone[a])) == 0)
 		{
 			fct_ptr = mfunction_ptr[a];
 			fct_ptr(id, server);
-			print_world(server->world);
 			return (0);
 		}
 		a += 1;

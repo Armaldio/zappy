@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Tue Jun 20 13:14:47 2017 hamza hammouche
+** Last update Tue Jun 20 14:35:26 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -49,6 +49,7 @@ void take_phiras(int id, t_Server *server);
 void take_thystane(int id, t_Server *server);
 
 void add_new_player(t_Server *server, int fd);
+void init_inventaire(t_Player *player);
 t_Player	*delete_player(t_Server *serv, t_Player *player);
 
 #endif /* !ZAPPY_SERVER_H_ */

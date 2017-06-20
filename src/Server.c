@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Tue Jun 20 13:53:13 2017 hamza hammouche
+** Last update Tue Jun 20 13:54:35 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -18,7 +18,7 @@ void add_player(t_Server *server, int fd)
   add_new_player(server, fd);
 }
 
-void do_it(t_Player *tmp, t_Server *server, char *data_recv, int a)
+void add_to_line(t_Player *tmp, char *data_recv, int a)
 {
 	if (a == 0)
 	{
@@ -27,8 +27,8 @@ void do_it(t_Player *tmp, t_Server *server, char *data_recv, int a)
 	}
 	else
 	{
-		printf("%d: %s\n", tmp->id, data_recv);
-		parser_commande(tmp->id, server, data_recv);
+		printf("%d: %s", tmp->id, data_recv);
+		add_data_in_line(tmp, data_recv);
 	}
 }
 
@@ -52,7 +52,7 @@ void check_data_player(t_Server *server)
 		if (a != 0 && tmp->is_connected == true)
 		{
 			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
-			do_it(tmp, server, data_recv, a);
+			add_to_line(tmp, data_recv, a);
 			memset(data_recv, '\0', 4096);
 		}
 		tmp = delete_player(server, tmp);

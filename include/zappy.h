@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Tue Jun 20 12:23:17 2017 hamza hammouche
+** Last update Tue Jun 20 14:35:39 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -29,6 +29,14 @@ int parser_nbMax(t_Server *server, char **argv, int a);
 int parser_port(t_Server *server, char **argv, int a);
 int parser_width(t_Server *server, char **argv, int a);
 int parser_height(t_Server *server, char **argv, int a);
-
+int parser_freq(t_Server *server, char **argv, int a);
+void init_action(t_Player *player);
+void start_action(t_Server *server, t_Player *player, int action_time);
+void check_action_status(t_Server *server);
+void action_update_time(t_Server *server);
+char *get_data_from_line(t_Player *player);
+int add_data_in_line(t_Player * player, char *order);
+void ini_waiting_line(t_Player *player);
+void init_player2(t_Player *);
 
 #endif /* !ZAPPY_MAIN_H_ */

@@ -67,15 +67,27 @@ void	manage_time(t_Server *server)
       server->fake_time = tm->tm_sec;
       server->time++;
       printf("Elapsed time since start : %ds\n", server->time);
+	  action_update_time(server);
     }
+}
+
+void check_order_player(t_Server *server)
+{
+	t_Player *tmp;
+
+	tmp = server->list_player;
+	while (tmp != NULL)
+	{
+		if (tmp->is_connected == true && tmp->action->is_working == false)
+			parser_commande(tmp->id, server, get_data_from_line(tmp));
+		tmp = tmp->next;
+	}
 }
 
 int main(int ac, char **argv)
 {
 	t_Server *server;
-	int a;
 
-	a = 0;
 	srand(time(NULL));
 	server = my_malloc(sizeof(t_Server));
 	basic_init_server(server);
@@ -85,16 +97,9 @@ int main(int ac, char **argv)
 	{
 		manage_time(server);
 		check_new_player(server);
+		check_order_player(server);
 		check_data_player(server);
-		if (DEBUG)
-		{
-			if ((a % 10) == 0)
-			{
-				print_inventaire_player(server);
-				print_player(server);
-			}
-			a += 1;
-		}
+		check_action_status(server);
 	}
 	return (0);
 }
