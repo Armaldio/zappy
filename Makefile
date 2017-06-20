@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Tue Jun 20 12:59:40 2017 Quentin Goinaud
+## Last update Tue Jun 20 12:36:48 2017 hamza hammouche
 ##
 
 CC    =    gcc
@@ -32,6 +32,7 @@ SRC    =    src/main.c \
 			src/Parser2.c \
 			src/checker.c \
 			src/take_object2.c \
+			src/server_gestion.c \
 			src/command_look.c \
 
 FLAGS    =    -Iinclude

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Tue Jun 20 10:08:56 2017 hamza hammouche
+** Last update Tue Jun 20 11:23:58 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -41,6 +41,7 @@ typedef struct	s_Player
 	enum direction gaze;
 }			t_Player;
 
+int				get_Player_size(t_Player *head);
 t_Player *get_Player(int id, t_Player *head);
 t_Player *init_player();
 

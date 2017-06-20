@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 10:59:29 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 13:44:18 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -15,13 +15,18 @@
 bool		get_player_team(t_Player *player, char *data, t_Server *serv)
 {
   t_team *tmp;
+  char		buffer[1256];
 
   if (!player->waitingTeam)
     return (false);
   if ((tmp = get_team(serv->list_teams, data, -1)) == NULL)
-    return (false);
+    return (send_message(player->fd, "Ko Team not found\n"), false);
   player->teamId = tmp->id;
   player->waitingTeam = false;
+  sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax
+	  - get_Player_size(serv->list_player),
+	  serv->world->width, serv->world->height);
+  send_message(player->fd, buffer);
   return (true);
 }
 
