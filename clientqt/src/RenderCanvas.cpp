@@ -17,6 +17,7 @@ zappy::RenderCanvas::RenderCanvas(QWidget *parent, const QPoint &position, const
                                   const unsigned int timeFrame)
         : qsf::QSFMLCanvas(parent, position, size, timeFrame) {
     std::cerr << "RenderCanvas";
+    setFramerateLimit(60);
 }
 
 zappy::RenderCanvas::~RenderCanvas() {
@@ -25,7 +26,7 @@ zappy::RenderCanvas::~RenderCanvas() {
 
 void zappy::RenderCanvas::OnUpdate() {
     zappy::SceneManager::get_instance_ptr()->update();
-    sf::RenderWindow::clear(sf::Color(0, 0, 255));
+    sf::RenderWindow::clear(sf::Color(0, 0, 0));
     zappy::SceneManager::get_instance_ptr()->draw();
 
 

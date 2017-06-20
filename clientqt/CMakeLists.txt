@@ -48,7 +48,7 @@ set(SOURCE_FILES
         src/QSFML/KeyConverter.cpp
         include/QSFML/KeyConverter.hpp
         src/MainWindow.cpp
-        include/MainWindow.hpp src/Scene/SceneManager.cpp include/Scene/SceneManager.hpp src/Scene/Scene.cpp include/Scene/Scene.hpp src/Scene/SplashScene.cpp include/Scene/SplashScene.hpp include/Singleton.hpp src/Game/Inventaire.cpp include/Inventaire.hpp src/Scene/GameScene.cpp include/Scene/GameScene.hpp src/Game/Player.cpp include/Game/Player.hpp src/Game/Map.cpp include/Game/Map.hpp)
+        include/MainWindow.hpp src/Scene/SceneManager.cpp include/Scene/SceneManager.hpp src/Scene/Scene.cpp include/Scene/Scene.hpp src/Scene/SplashScene.cpp include/Scene/SplashScene.hpp include/Singleton.hpp src/Game/Inventaire.cpp include/Game/Inventaire.hpp src/Scene/GameScene.cpp include/Scene/GameScene.hpp src/Game/Player.cpp include/Game/Player.hpp src/Game/Map.cpp include/Game/Map.hpp src/Game/MapSquare.cpp include/Game/MapSquare.hpp)
 
 qt5_wrap_ui(UI_SRC src/UI/MainWindow.ui)
 

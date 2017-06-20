@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     setFixedSize(1024, 768);
-    renderCanvas = new zappy::RenderCanvas(ui->renderFrame, QPoint(0, 0), QSize(ui->renderFrame->geometry().size()), 16);
+    renderCanvas = new zappy::RenderCanvas(ui->renderFrame, QPoint(0, 0), QSize(ui->renderFrame->geometry().size()), 0);
     renderCanvas->show();
 }
 

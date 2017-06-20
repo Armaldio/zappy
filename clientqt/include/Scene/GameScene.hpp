@@ -10,10 +10,17 @@
 #ifndef CLIENTQT_GAMESCENE_HPP
 #define CLIENTQT_GAMESCENE_HPP
 
+#include <Game/Map.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include "Scene.hpp"
 
 namespace zappy {
     class GameScene : public Scene {
+    private:
+        Map *_map;
+        sf::RectangleShape _recShape;
+        sf::Vector2f _ratio;
+
     public:
         GameScene(sf::RenderWindow *renderWindow, const std::string &name);
 

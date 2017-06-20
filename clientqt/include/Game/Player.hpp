@@ -11,14 +11,18 @@
 #define CLIENTQT_PLAYER_HPP
 
 
-#include <Inventaire.hpp>
+#include <Game/Inventaire.hpp>
 
-class Player {
-public:
-    Player();
+namespace zappy {
+    class Player {
+    protected:
+        Inventaire *_inventaire;
+    public:
+        Player();
 
-    virtual ~Player();
-};
+        virtual ~Player();
+    };
+}
 
 
 #endif //CLIENTQT_PLAYER_HPP

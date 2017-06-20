@@ -31,7 +31,7 @@ void zappy::SplashScene::loadRessources() {
         _title.setFont(_font);
         _title.setCharacterSize(120);
         _title.setStyle(sf::Text::Regular);
-        _title.setFillColor(sf::Color(0, 255, 255));
+        _title.setFillColor(sf::Color(255, 0, 10));
         _title.setString("Zappy");
         _initialized = true;
         resize();
@@ -43,10 +43,10 @@ void zappy::SplashScene::unloadRessources() {
 }
 
 void zappy::SplashScene::update() {
-    static int b = 0;
-
-    b = (b + 255 / 60) % 255;
-    _circleShape.setFillColor(sf::Color(0, b, 0));
+    _fadeColor = (sf::Uint16) (_fadeColor + 1) % 5120;
+    const sf::Uint16 color = (_fadeColor > 2560) ? 2560 - (_fadeColor % 2560) : _fadeColor;
+    _circleShape.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
+    _title.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
 }
 
 void zappy::SplashScene::draw() {
@@ -55,6 +55,10 @@ void zappy::SplashScene::draw() {
 }
 
 void zappy::SplashScene::resize() {
+    const sf::FloatRect titleBound = _title.getLocalBounds();
+    _title.setOrigin(titleBound.left + titleBound.width / 2.0f,
+                     titleBound.top + titleBound.height / 2.0f);
+
     _title.setPosition(_renderWindow->getSize().x / 2,
                        _renderWindow->getSize().y / 2);
 }

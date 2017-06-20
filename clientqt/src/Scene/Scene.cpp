@@ -7,11 +7,12 @@
 //-----------------------------------------------------------------------------
 //
 
+#include <iostream>
 #include "include/Scene/Scene.hpp"
 
 zappy::Scene::Scene(sf::RenderWindow *renderWindow, const std::string &name)
         :_renderWindow(renderWindow),  _stateName(name), _initialized(false) {
-
+    std::cout << "Scene name = " << name << std::endl;
 }
 
 zappy::Scene::~Scene() {

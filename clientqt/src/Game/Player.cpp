@@ -8,3 +8,11 @@
 //
 
 #include "Game/Player.hpp"
+
+zappy::Player::Player() {
+
+}
+
+zappy::Player::~Player() {
+
+}

@@ -22,6 +22,8 @@ namespace zappy {
         sf::CircleShape _circleShape;
         sf::Font _font;
         sf::Text _title;
+        sf::Uint16 _fadeColor;
+
     public:
         SplashScene(sf::RenderWindow *renderWindow, const std::string &stateName);
 
@@ -36,6 +38,7 @@ namespace zappy {
         void update() override;
 
         void draw() override;
+
     };
 }
 

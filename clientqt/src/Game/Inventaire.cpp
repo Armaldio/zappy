@@ -1,79 +1,79 @@
 //
 //-----------------------------------------------------------------------------
-//Filename:    Invetaire.cpp
+//Filename:    Inventaire.cpp
 //-----------------------------------------------------------------------------
 //
 // Created by bonett_w on 6/20/17.
 //-----------------------------------------------------------------------------
 //
 
-#include "Inventaire.hpp"
+#include "Game/Inventaire.hpp"
 
-const sf::Vector2i &Invetaire::get_pos() const {
+const sf::Vector2i &Inventaire::getPos() const {
     return _pos;
 }
 
-void Invetaire::setPos(const sf::Vector2i &_pos) {
-    Invetaire::_pos = _pos;
+void Inventaire::setPos(const sf::Vector2i &_pos) {
+    Inventaire::_pos = _pos;
 }
 
-int Invetaire::getNourriture() const {
+int Inventaire::getNourriture() const {
     return _nourriture;
 }
 
-void Invetaire::setNourriture(int _nourriture) {
-    Invetaire::_nourriture = _nourriture;
+void Inventaire::setNourriture(int _nourriture) {
+    Inventaire::_nourriture = _nourriture;
 }
 
-int Invetaire::getLinemate() const {
+int Inventaire::getLinemate() const {
     return _linemate;
 }
 
-void Invetaire::setLinemate(int _linemate) {
-    Invetaire::_linemate = _linemate;
+void Inventaire::setLinemate(int _linemate) {
+    Inventaire::_linemate = _linemate;
 }
 
-int Invetaire::getDeraumere() const {
+int Inventaire::getDeraumere() const {
     return _deraumere;
 }
 
-void Invetaire::setDeraumere(int _deraumere) {
-    Invetaire::_deraumere = _deraumere;
+void Inventaire::setDeraumere(int _deraumere) {
+    Inventaire::_deraumere = _deraumere;
 }
 
-int Invetaire::getSibur() const {
+int Inventaire::getSibur() const {
     return _sibur;
 }
 
-void Invetaire::setSibur(int _sibur) {
-    Invetaire::_sibur = _sibur;
+void Inventaire::setSibur(int _sibur) {
+    Inventaire::_sibur = _sibur;
 }
 
-int Invetaire::getMendiane() const {
+int Inventaire::getMendiane() const {
     return _mendiane;
 }
 
-void Invetaire::setMendiane(int _mendiane) {
-    Invetaire::_mendiane = _mendiane;
+void Inventaire::setMendiane(int _mendiane) {
+    Inventaire::_mendiane = _mendiane;
 }
 
-int Invetaire::getPhiras() const {
+int Inventaire::getPhiras() const {
     return _phiras;
 }
 
-void Invetaire::setPhiras(int _phiras) {
-    Invetaire::_phiras = _phiras;
+void Inventaire::setPhiras(int _phiras) {
+    Inventaire::_phiras = _phiras;
 }
 
-int Invetaire::getThystame() const {
+int Inventaire::getThystame() const {
     return _thystame;
 }
 
-void Invetaire::setThystame(int _thystame) {
-    Invetaire::_thystame = _thystame;
+void Inventaire::setThystame(int _thystame) {
+    Inventaire::_thystame = _thystame;
 }
 
-Invetaire::Invetaire() : _deraumere(0),
+Inventaire::Inventaire() : _deraumere(0),
                          _linemate(0),
                          _mendiane(0),
                          _nourriture(0),
@@ -84,6 +84,6 @@ Invetaire::Invetaire() : _deraumere(0),
 
 }
 
-Invetaire::~Invetaire() {
+Inventaire::~Inventaire() {
 
 }

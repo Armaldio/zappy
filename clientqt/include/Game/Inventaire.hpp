@@ -1,6 +1,6 @@
 //
 //-----------------------------------------------------------------------------
-//Filename:    Invetaire.hpp
+//Filename:    Inventaire.hpp
 //-----------------------------------------------------------------------------
 //
 // Created by bonett_w on 6/20/17.
@@ -13,7 +13,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
-class Invetaire {
+class Inventaire {
 protected:
     sf::Vector2i _pos;
     int _nourriture;
@@ -25,11 +25,11 @@ protected:
     int _thystame;
 
 public:
-    Invetaire();
+    Inventaire();
 
-    virtual ~Invetaire();
+    virtual ~Inventaire();
 
-    const sf::Vector2i &get_pos() const;
+    const sf::Vector2i &getPos() const;
 
     void setPos(const sf::Vector2i &_pos);
 
