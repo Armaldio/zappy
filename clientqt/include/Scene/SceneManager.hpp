@@ -10,7 +10,7 @@
 #ifndef CLIENTQT_SCENEMANAGER_HPP
 #define CLIENTQT_SCENEMANAGER_HPP
 
-#include <include/Scene/Scene.hpp>
+#include <Scene/Scene.hpp>
 #include <vector>
 #include "Singleton.hpp"
 

@@ -8,9 +8,9 @@
 //
 
 #include <iostream>
-#include <include/Scene/SceneManager.hpp>
-#include <include/Scene/SplashScene.hpp>
-#include <include/Scene/GameScene.hpp>
+#include <Scene/SceneManager.hpp>
+#include <Scene/SplashScene.hpp>
+#include <Scene/GameScene.hpp>
 #include "RenderCanvas.hpp"
 
 zappy::RenderCanvas::RenderCanvas(QWidget *parent, const QPoint &position, const QSize &size,

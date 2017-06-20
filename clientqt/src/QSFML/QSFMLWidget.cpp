@@ -9,7 +9,7 @@
 
 #include <SFML/System.hpp>
 #include <QMouseEvent>
-#include <include/QSFML/KeyConverter.hpp>
+#include <QSFML/KeyConverter.hpp>
 #include "QSFML/QSFMLWidget.hpp"
 
 #ifdef Q_WS_X11

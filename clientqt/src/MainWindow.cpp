@@ -1,5 +1,5 @@
-#include <include/RenderCanvas.hpp>
-#include <include/Scene/SceneManager.hpp>
+#include <RenderCanvas.hpp>
+#include <Scene/SceneManager.hpp>
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 

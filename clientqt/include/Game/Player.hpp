@@ -11,7 +11,7 @@
 #define CLIENTQT_PLAYER_HPP
 
 
-#include <include/Inventaire.hpp>
+#include <Inventaire.hpp>
 
 class Player {
 public:

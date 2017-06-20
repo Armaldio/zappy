@@ -52,10 +52,10 @@ set(SOURCE_FILES
 
 qt5_wrap_ui(UI_SRC src/UI/MainWindow.ui)
 
-add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES} ${UI_SRC} ${MOC_SRCS} ${RES_SOURCES} ${UI_HEADERS})
-
 # Includes directory
 include_directories(${CMAKE_BINARY_DIR} ${SFML_INCLUDE_DIR} "include")
+
+add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES} ${UI_SRC} ${MOC_SRCS} ${RES_SOURCES} ${UI_HEADERS})
 
 # Linkage
 # build it (link libraries)
