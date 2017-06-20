@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Mon Jun 19 19:22:21 2017 Martin Alais
+** Last update Tue Jun 20 10:16:02 2017 Quentin Goinaud
 */
 
 #include "Server.h"
@@ -40,6 +40,9 @@ void init_server(t_Server *server)
 	init_world(server->world);
 	print_world(server->world);
 	init_inventaire(server->list_player);
+	server->f = 100;
+	server->time = 0;
+	server->fake_time = -1;
 }
 
 t_Position get_spaw_pos(t_Server *server)

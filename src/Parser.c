@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:59 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 09:45:00 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 20 10:22:14 2017 Quentin Goinaud
 */
 
 #include "zappy.h"
@@ -27,16 +27,15 @@ void print_parse_error(char *data)
 	exit(1);
 }
 
-void parser_data(t_Server *server, char **argv)
+void parser_data(t_Server *server, int ac, char **argv)
 {
 	int a;
 	int b;
 	char	*mcommand[] = {"-p", "-x", "-y", "-n", "-f", "-c", NULL};
-
 	bool found;
 
 	a = 1;
-	while (argv[a])
+	while (a < ac)
 	{
 		b = 0;
 		found = false;

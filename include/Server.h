@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Mon Jun 19 19:22:43 2017 Martin Alais
+** Last update Tue Jun 20 10:06:12 2017 Quentin Goinaud
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -28,6 +28,9 @@ typedef struct	s_Server
 	t_Connection *socket;
 	t_World *world;
   t_team *list_teams;
+  int		f;
+  int		time;
+  int		fake_time;
 }			t_Server;
 
 void init_server(t_Server *server);
