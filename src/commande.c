@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 14:45:56 2017 Martin Alais
+** Last update Tue Jun 20 14:48:52 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -58,7 +58,8 @@ int parser_commande(int id, t_Server *server, char *data)
 	char	*mcommand[] = {"Forward", "Right", "Left",
 	"Incantation", "Take", "Look", "Exit", NULL};
 	void	*mfunction_ptr[] = {commande_forward, commande_right,
-		commande_left, commande_incantation, command_take, command_look, exit_client, NULL};
+		commande_left, commande_incantation, command_take,
+		command_look, exit_client, NULL};
 	void	(*fct_ptr)(int, t_Server *, char *);
 	int		a;
 
