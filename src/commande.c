@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 17:14:31 2017 Martin Alais
+** Last update Wed Jun 21 16:27:22 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -53,6 +53,16 @@ void exit_client(int id, t_Server *server, char *data)
 	close(tmp->fd);
 }
 
+int get_size_commmande(char *str)
+{
+	int a;
+
+	a = 0;
+	while (str[a] != '\0' && str[a] != ' ' && str[a] != '\n')
+		a += 1;
+	return (a);
+}
+
 int parser_commande(int id, t_Server *server, char *data)
 {
 	char	*mcommand[] = {"Forward", "Right", "Left",
@@ -70,7 +80,7 @@ int parser_commande(int id, t_Server *server, char *data)
 		return (0);
 	while (mcommand[a])
 	{
-		if (strncmp(mcommand[a], data, strlen(mcommand[a])) == 0)
+		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)
 		{
 			fct_ptr = mfunction_ptr[a];
 			fct_ptr(id, server, data);

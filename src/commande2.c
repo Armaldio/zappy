@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Wed Jun 21 14:17:28 2017 Martin Alais
+** Last update Wed Jun 21 17:55:25 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -78,7 +78,7 @@ void commande_incantation(int id, t_Server *server, char data)
 	tmp = server->list_player;
 	while (tmp->next && tmp->id != id)
 		tmp = tmp->next;
-	start_action(server, tmp, 5);
+	start_action(server, tmp, 300);
 	tmp->action->is_leveling = true;
 }
 

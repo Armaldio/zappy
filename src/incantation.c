@@ -5,11 +5,12 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:39 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 14:48:46 2017 Martin Alais
+** Last update Wed Jun 21 17:37:33 2017 Martin Alais
 */
 
 #include "Incantation.h"
 
+// level 1 a 2
 void incan_1(t_Server *server, t_Player *player)
 {
 	(void) server;
@@ -23,6 +24,7 @@ void incan_1(t_Server *server, t_Player *player)
 	}
 }
 
+// level 2 a 3
 void incan_2(t_Server *server, t_Player *player)
 {
 	t_Player *tmp;
@@ -44,6 +46,7 @@ void incan_2(t_Server *server, t_Player *player)
 	}
 }
 
+// level 3 a 4
 void incan_3(t_Server *server, t_Player *player)
 {
 	t_Player *tmp;
@@ -57,18 +60,19 @@ void incan_3(t_Server *server, t_Player *player)
 			tmp = tmp->next;
 		if (is_ready_to_up_3(tmp, player) == true)
 		{
-			level_up_3(tmp);
 			level_up_3(player);
+			level_up_3(tmp);
 			send_message(tmp->fd, "OK\n");
 			send_message(player->fd, "OK\n");
 		}
 	}
 }
 
+// level 4 a 5
 void incan_4(t_Server *server, t_Player *player)
 {
 	t_Player *tmp;
-	t_Player *tmp2[3];
+	t_Player **tmp2;
 
 	tmp = server->list_player;
 	if (tmp->inventaire->linemate >= 1 && tmp->inventaire->deraumere >= 1 &&
@@ -76,17 +80,44 @@ void incan_4(t_Server *server, t_Player *player)
 	if (check_nbr_at_level(server, 4) >= 4)
 	{
 		tmp2 = get_list_level_4(server, player);
-		if (is_ready_to_up_3(tmp, player) == true)
+		if (tmp2[0] != NULL && tmp2[1] != NULL && tmp2[2] != NULL)
 		{
-			level_up_3(tmp);
-			level_up_3(player);
+			player->inventaire->linemate -= 1;
+			player->inventaire->deraumere -= 1;
+			player->inventaire->sibur -= 2;
+			player->inventaire->phiras -= 1;
+			player->action->is_leveling = false;
+			player->level = 5;
+			printf("Player %d reach level 5!\n", player->id);
 			send_message(tmp->fd, "OK\n");
-			send_message(player->fd, "OK\n");
+			level_up_4(tmp2);
 		}
 	}
 }
 
+// level 5 a 6
 void incan_5(t_Server *server, t_Player *player)
 {
-	(void) server;
+	t_Player *tmp;
+	t_Player **tmp2;
+
+	tmp = server->list_player;
+	if (tmp->inventaire->linemate >= 1 && tmp->inventaire->deraumere >= 2 &&
+		tmp->inventaire->sibur >= 1 && tmp->inventaire->mendiane >= 3)
+	if (check_nbr_at_level(server, 5) >= 4)
+	{
+		tmp2 = get_list_level_5(server, player);
+		if (tmp2[0] != NULL && tmp2[1] != NULL && tmp2[2] != NULL)
+		{
+			player->inventaire->linemate -= 1;
+			player->inventaire->deraumere -= 2;
+			player->inventaire->sibur -= 1;
+			player->inventaire->mendiane -= 3;
+			player->action->is_leveling = false;
+			player->level = 6;
+			printf("Player %d reach level 6!\n", player->id);
+			send_message(player->fd, "OK\n");
+			level_up_5(tmp2);
+		}
+	}
 }

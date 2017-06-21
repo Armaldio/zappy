@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:45:08 2017 Martin Alais
-** Last update Wed Jun 21 14:54:00 2017 Martin Alais
+** Last update Wed Jun 21 17:40:34 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -59,16 +59,29 @@ void level_up_2(t_Player *player)
 	printf("Player %d reach level 3!\n", player->id);
 }
 
-void level_up_3(t_Player *player)
+t_Player **get_list_level_4(t_Server *server, t_Player *player)
 {
-	player->inventaire->linemate -= 2;
-	player->inventaire->phiras -= 2;
-	player->inventaire->sibur -= 1;
-	player->action->is_leveling = false;
-	player->level = 4;
-	printf("Player %d reach level 4!\n", player->id);
-}
+	t_Player **tmp2;
+	t_Player *tmp;
+	int a;
 
-void get_list_level_4(t_Server *server, t_Player *player)
-{
+	a = 0;
+	tmp2 = my_malloc(sizeof(t_Player *) * 3);
+	tmp2[0] = NULL;
+	tmp2[1] = NULL;
+	tmp2[2] = NULL;
+	tmp = server->list_player;
+	while (tmp)
+	{
+		if (tmp->id != player->id && tmp->action->is_leveling == true &&
+			tmp->level == 4 && tmp->inventaire->linemate >= 1 &&
+			tmp->inventaire->deraumere >= 1 && a < 3 &&
+			tmp->inventaire->sibur >= 2 && tmp->inventaire->phiras >= 1)
+		{
+			tmp2[a] = tmp;
+			a += 1;
+		}
+		tmp = tmp->next;
+	}
+	return (tmp2);
 }

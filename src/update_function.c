@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:32:36 2017 Martin Alais
-** Last update Wed Jun 21 14:15:08 2017 Martin Alais
+** Last update Wed Jun 21 17:40:57 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -13,7 +13,8 @@
 
 void check_update_level(t_Server *server, t_Player *player)
 {
-	void	*mfunction_ptr[] = {incan_1, incan_2, incan_3, incan_4, incan_5, NULL};
+	void	*mfunction_ptr[] = {incan_1, incan_2, incan_3,
+		incan_4, incan_5, incan_6, incan_7, NULL};
 	void	(*fct_ptr)(t_Server *, t_Player *);
 
 	fct_ptr = mfunction_ptr[player->level - 1];
