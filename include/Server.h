@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Tue Jun 20 17:17:15 2017 Martin Alais
+** Last update Wed Jun 21 18:37:46 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -36,6 +36,7 @@ typedef struct	s_Server
 
 bool get_team_name(t_Player *, char *data, t_Server *serv);
 
+bool end_game(t_Server *serv);
 void init_server(t_Server *server);
 void check_new_player(t_Server *server);
 void check_client_connection(t_Server *server);
