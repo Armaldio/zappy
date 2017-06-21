@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Tue Jun 20 15:39:08 2017 Martin Alais
+** Last update Wed Jun 21 14:13:31 2017 Quentin Goinaud
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -41,24 +41,26 @@ typedef struct	s_Inventaire
 	int thystane;
 }			t_Inventaire;
 
-typedef struct	s_Player
+typedef struct		s_Player
 {
-	t_Position pos;
-	int death_time;
-	int life_time;
-	int level;
-	int teamId;
-	struct s_Player *next;
-	t_Inventaire *inventaire;
-	t_action *action;
-	t_waiting_line *waiting_line;
-	int fd;
-	int id;
-	bool is_connected;
-  bool waitingTeam;
-  bool is_dead;
-	enum direction gaze;
-}			t_Player;
+  t_Position		pos;
+  int				death_time;
+  int				life_time;
+  int				level;
+  int				teamId;
+  struct s_Player	*next;
+  t_Inventaire		*inventaire;
+  t_action			*action;
+  t_waiting_line	*waiting_line;
+  int				fd;
+  int				id;
+  bool				is_connected;
+  bool				waitingTeam;
+  bool				is_dead;
+  enum direction	gaze;
+  bool				controlled;
+  bool				isEgg;
+}					t_Player;
 
 int				get_Player_size(t_Player *head);
 t_Player *get_Player(int id, t_Player *head);
