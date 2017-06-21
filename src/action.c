@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Tue Jun 20 14:05:00 2017 Martin Alais
+** Last update Wed Jun 21 14:23:23 2017 Quentin Goinaud
 */
 
 #include <time.h>
@@ -33,7 +33,7 @@ void start_action(t_Server *server, t_Player *player, int action_time)
 	+ (action_time / server->f);
 	player->action->is_working = true;
 	player->action->is_leveling = false;
-	printf("Player %d started an action\n", player->id);
+	printf("Player %d starting an action for %dt\n", player->id, action_time);
 }
 
 void check_action_status(t_Server *server)

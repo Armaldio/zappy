@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Tue Jun 20 13:30:25 2017 Martin Alais
+** Last update Tue Jun 20 17:44:47 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -91,9 +91,9 @@ int command_take(int id, t_Server *server, char *data)
 {
 	t_Player *tmp;
 	char *all_stone[] = {"linemate", "deraumere", "sibur",
-	"mendiane", "phiras", "thystane", NULL};
+	"mendiane", "phiras", "thystane", "food", NULL};
 	void	*mfunction_ptr[] = {take_linemate, take_deraumere,
-		take_sibur, take_mendiane, take_phiras, take_thystane, NULL};
+	take_sibur, take_mendiane, take_phiras, take_thystane, take_food, NULL};
 	void	(*fct_ptr)(int id, t_Server *);
 	int a;
 
