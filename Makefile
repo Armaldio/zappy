@@ -8,7 +8,7 @@
 ## Last update Wed Jun 21 17:49:03 2017 Martin Alais
 ##
 
-CC    =    gcc
+CC    =    gcc -g
 
 RM    =    rm -rf
 
@@ -28,6 +28,7 @@ SRC    =    src/main.c \
 			src/incantation.c \
 			src/Team_gestion.c \
 			src/commande2.c \
+			src/commande3.c \
 			src/server2.c \
 			src/Parser2.c \
 			src/checker.c \
@@ -75,12 +76,13 @@ quick_client:
 	$(CC) client/main.c -o mouli
 
 tests: install_bats
-	@#./server&
+	-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
-	@./ut/bin/bats unit-tests/connect.sh
-	@#pkill server
+	-@./ut/bin/bats unit-tests/connect.sh
+	@pkill server
+	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
-	@./unit-tests/style.sh
+	-@./unit-tests/style.sh
 
 re: fclean all
 

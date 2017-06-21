@@ -5,18 +5,13 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Tue Jun 20 16:58:24 2017 Martin Alais
+** Last update Wed Jun 21 15:56:55 2017 Quentin Goinaud
 */
 
 #include "Server.h"
 #include "Player.h"
 #include "Socket.h"
 #include "zappy.h"
-
-void add_player(t_Server *server, int fd)
-{
-  my_add_player(server, fd);
-}
 
 void add_to_line(t_Player *tmp, char *data_recv, int a, t_Server *server)
 {
@@ -62,12 +57,26 @@ void check_data_player(t_Server *server)
 
 void check_new_player(t_Server *server)
 {
-	int a;
-	set_socket_statue(server->socket->fd, 0);
-	a = accept(server->socket->fd,
-		(struct sockaddr *)&server->socket->s_in_accept,
-		&server->socket->s_in_size_accept);
-	if (a != -1)
-		add_player(server, a);
-	set_socket_statue(server->socket->fd, 1);
+  int a;
+
+  set_socket_statue(server->socket->fd, 0);
+  a = accept(server->socket->fd,
+	     (struct sockaddr *)&server->socket->s_in_accept,
+	     &server->socket->s_in_size_accept);
+  t_Player *p = get_First_Player_Available(server->list_player);
+  if (a != -1)
+    {
+      if (p != NULL)
+	{
+	  printf("Linking connection to player %d\n", p->id);
+	  p->is_connected = true;
+	  p->isEgg = false;
+	  p->controlled = true;
+	  p->fd = a;
+	  return ;
+	}
+      else
+	my_add_player(server, a);
+    }
+  set_socket_statue(server->socket->fd, 1);
 }
