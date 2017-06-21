@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:39 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 17:37:33 2017 Martin Alais
+** Last update Wed Jun 21 18:17:41 2017 Martin Alais
 */
 
 #include "Incantation.h"
@@ -91,6 +91,7 @@ void incan_4(t_Server *server, t_Player *player)
 			printf("Player %d reach level 5!\n", player->id);
 			send_message(tmp->fd, "OK\n");
 			level_up_4(tmp2);
+			free(tmp2);
 		}
 	}
 }
@@ -118,6 +119,7 @@ void incan_5(t_Server *server, t_Player *player)
 			printf("Player %d reach level 6!\n", player->id);
 			send_message(player->fd, "OK\n");
 			level_up_5(tmp2);
+			free(tmp2);
 		}
 	}
 }
