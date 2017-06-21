@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 12:00:37 2017 Martin Alais
-** Last update Wed Jun 21 16:19:06 2017 Martin Alais
+** Last update Wed Jun 21 21:53:45 2017 Martin Alais
 */
 
 #include <string.h>
@@ -41,11 +41,11 @@ int add_data_in_line(t_Player * player, char *order)
 	}
 	remove_newline(order);
 	player->waiting_line->line[player->waiting_line->nbr_ordre] =
-	my_malloc(sizeof(char) * (strlen(order) + 1) );
+	my_malloc(sizeof(char) * (strlen(order) + 2) );
 	memset(player->waiting_line->line[player->waiting_line->nbr_ordre],
-		'\0', (strlen(order)));
+		'\0', (strlen(order) + 2));
 	memcpy(player->waiting_line->line[player->waiting_line->nbr_ordre],
-		order, strlen(order) - 1);
+		order, strlen(order));
 	strcat(player->waiting_line->line[player->waiting_line->nbr_ordre], "\0");
 	player->waiting_line->nbr_ordre += 1;
 	player->waiting_line->line[player->waiting_line->nbr_ordre] = NULL;
