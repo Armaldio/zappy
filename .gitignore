@@ -5,3 +5,4 @@ server
 test
 *.o
 a.out
+vgcore*
