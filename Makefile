@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Tue Jun 20 17:39:33 2017 Martin Alais
+## Last update Wed Jun 21 14:13:51 2017 Martin Alais
 ##
 
 CC    =    gcc
@@ -39,6 +39,8 @@ SRC    =    src/main.c \
 			src/player_life.c \
 			src/init_world2.c \
 			src/commande_look2.c \
+			src/update_function.c \
+			src/incantation2.c
 
 FLAGS    =    -Iinclude
 

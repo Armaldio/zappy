@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Tue Jun 20 17:17:28 2017 Martin Alais
+** Last update Wed Jun 21 14:16:45 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -27,12 +27,12 @@ void basic_init_server(t_Server *server)
 void init_inventaire(t_Player *player)
 {
 	player->inventaire = my_malloc(sizeof(t_Inventaire));
-	player->inventaire->deraumere = 0;
-	player->inventaire->linemate = 0;
-	player->inventaire->mendiane = 0;
-	player->inventaire->phiras = 0;
-	player->inventaire->sibur = 0;
-	player->inventaire->thystane = 0;
+	player->inventaire->deraumere = 100;
+	player->inventaire->linemate = 100;
+	player->inventaire->mendiane = 100;
+	player->inventaire->phiras = 100;
+	player->inventaire->sibur = 100;
+	player->inventaire->thystane = 100;
 }
 
 void init_server(t_Server *server)
