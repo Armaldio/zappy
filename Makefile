@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Wed Jun 21 15:16:07 2017 Quentin Goinaud
+## Last update Wed Jun 21 15:33:25 2017 Quentin Goinaud
 ##
 
 CC    =    gcc -g
@@ -74,7 +74,8 @@ tests: install_bats
 	-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
 	-@./ut/bin/bats unit-tests/connect.sh
-	pkill server
+	@pkill server
+	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
 	-@./unit-tests/style.sh
 
