@@ -31,7 +31,7 @@ public:
     };
 
 
-    Inventaire();
+    Inventaire(const sf::Vector2f & position = {0, 0});
 
     virtual ~Inventaire();
 

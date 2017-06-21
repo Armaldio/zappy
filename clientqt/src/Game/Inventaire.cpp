@@ -73,7 +73,7 @@ void Inventaire::setThystame(int _thystame) {
     Inventaire::_returnAllmat[THYSTAME] = _thystame;
 }
 
-Inventaire::Inventaire() : _pos(0, 0) {
+Inventaire::Inventaire(const sf::Vector2f & position) : _pos(position) {
     for (int i = 0; i < getNbMat(); ++i) {
         _returnAllmat[i] = 0;
     }

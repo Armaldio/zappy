@@ -43,8 +43,8 @@ void zappy::SplashScene::unloadRessources() {
 }
 
 void zappy::SplashScene::update(sf::Event const &event) {
-    _fadeColor = (sf::Uint16) (_fadeColor + 1) % 5120;
-    const sf::Uint16 color = (_fadeColor > 2560) ? 2560 - (_fadeColor % 2560) : _fadeColor;
+    _fadeColor = (sf::Uint16) (_fadeColor + 10) % 5100;
+    const sf::Uint16 color = (_fadeColor > 2550) ? 2550 - (_fadeColor % 2550) : _fadeColor;
     _circleShape.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
     _title.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
 }

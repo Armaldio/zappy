@@ -12,15 +12,20 @@
 
 
 #include <Game/Inventaire.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 namespace zappy {
     class Player {
+    public:
+        sf::RectangleShape characterShape;
     protected:
         Inventaire *_inventaire;
     public:
-        Player();
+        Player(const sf::Vector2f &position = {0, 0});
 
         virtual ~Player();
+
+        Inventaire *getInventaire() const;
     };
 }
 

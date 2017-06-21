@@ -20,6 +20,7 @@ namespace zappy {
         Map *_map;
         sf::Texture _tileTextures[10];
         sf::Texture _matTextures[10];
+        sf::Texture _characterTexture;
         sf::RectangleShape _recShape;
         sf::Vector2f _ratio;
 
@@ -48,7 +49,6 @@ namespace zappy {
         void resize(unsigned int width, unsigned int height) override;
 
         void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom);
-
 
     };
 };

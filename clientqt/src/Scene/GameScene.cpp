@@ -18,7 +18,7 @@ zappy::GameScene::GameScene(sf::RenderWindow *renderWindow, const std::string &n
           _lastX(0), _lastY(0), _lastDiffX(0), _lastDiffY(0), _zoomAmount(1.1f), _currentZoom(1.0f) {
     _ratio.x = 0;
     _ratio.y = 0;
-    _map = new Map(QSize(10, 10));
+    _map = nullptr;
 }
 
 void zappy::GameScene::loadRessources() {
@@ -34,6 +34,8 @@ void zappy::GameScene::loadRessources() {
         _matTextures[4].loadFromFile("assets/items.png", sf::IntRect(4 * 34, 15 * 34, 32, 32));
         _matTextures[5].loadFromFile("assets/items.png", sf::IntRect(5 * 34, 15 * 34, 32, 32));
         _matTextures[6].loadFromFile("assets/items.png", sf::IntRect(6 * 34, 15 * 34, 32, 32));
+
+        _characterTexture.loadFromFile("assets/items.png", sf::IntRect(5 * 34, 26 * 34, 32, 32));
 
         _recShape.setFillColor(sf::Color::Green);
         _initialized = true;
@@ -112,8 +114,20 @@ void zappy::GameScene::draw() {
             block->matShape[i].setTexture(&_matTextures[i]);
             _renderWindow->draw(block->matShape[i]);
         }
+    }
 
-
+    auto &players = _map->getPlayers();
+    for (auto player : players) {
+        const auto inventaire = player->getInventaire();
+        const auto realPosition = inventaire->getPos();
+        const sf::Vector2f pos(((realPosition.x) * _ratio.x + 1 * realPosition.x + _ratio.x / 2),
+                               ((realPosition.y) * _ratio.y + 1 * realPosition.y + _ratio.y / 2));
+        const float squareSize = _ratio.x / 2;
+        player->characterShape.setPosition(pos);
+        player->characterShape.setSize({squareSize, squareSize});
+        player->characterShape.setOrigin({squareSize / 2, squareSize / 2});
+        player->characterShape.setTexture(&_characterTexture);
+        _renderWindow->draw(player->characterShape);
     }
 }
 
