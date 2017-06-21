@@ -14,13 +14,13 @@
 #include <vector>
 #include <mutex>
 #include <QtCore/QSize>
-#include "MapSquare.hpp"
+#include "Tile.hpp"
 #include "Player.hpp"
 
 namespace zappy {
     class Map {
     private:
-        std::vector<MapSquare *> _mapSquares;
+        std::vector<Tile *> _mapSquares;
         std::vector<Player *> _players;
         QSize _mapSize;
 
@@ -29,7 +29,7 @@ namespace zappy {
 
         virtual ~Map();
 
-        std::vector<MapSquare *> &getMapSquares();
+        std::vector<Tile *> &getTiles();
 
         std::vector<Player *> &getPlayers();
 

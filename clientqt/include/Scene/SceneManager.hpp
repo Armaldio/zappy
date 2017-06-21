@@ -33,7 +33,9 @@ namespace zappy {
 
         void unloadAllRessources();
 
-        void update();
+        void update(sf::Event const &event);
+
+        void resize(unsigned int width, unsigned int height);
 
         void draw();
 

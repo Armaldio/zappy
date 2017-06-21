@@ -16,6 +16,11 @@ public:
 
     ~MainWindow();
 
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
+    void resizeEvent(QResizeEvent *event) override;
+
 private slots:
 
     void on_quitButton_pressed();
@@ -25,6 +30,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     zappy::RenderCanvas *renderCanvas;
+    bool _firstShow;
 };
 
 #endif // MAINWINDOW_H

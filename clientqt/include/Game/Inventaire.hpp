@@ -15,23 +15,29 @@
 
 class Inventaire {
 protected:
-    sf::Vector2i _pos;
-    int _nourriture;
-    int _linemate;
-    int _deraumere;
-    int _sibur;
-    int _mendiane;
-    int _phiras;
-    int _thystame;
+    static const int _nbMat = 7;
+    sf::Vector2f _pos;
+    int _returnAllmat[_nbMat];
 
 public:
+    enum MAT {
+        NOURRITURE = 0,
+        LINEMATE,
+        DERAUMERE,
+        SIBUR,
+        MENDIANE,
+        PHIRAS,
+        THYSTAME
+    };
+
+
     Inventaire();
 
     virtual ~Inventaire();
 
-    const sf::Vector2i &getPos() const;
+    const sf::Vector2f &getPos() const;
 
-    void setPos(const sf::Vector2i &_pos);
+    void setPos(const sf::Vector2f &_pos);
 
     int getNourriture() const;
 
@@ -60,6 +66,10 @@ public:
     int getThystame() const;
 
     void setThystame(int _thystame);
+
+    const int *getAllMat() const;
+
+    int getNbMat() const;
 };
 
 

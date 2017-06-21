@@ -26,8 +26,8 @@ void zappy::SceneManager::unloadRessources() {
     _currentScene->unloadRessources();
 }
 
-void zappy::SceneManager::update() {
-    _currentScene->update();
+void zappy::SceneManager::update(sf::Event const &event) {
+    _currentScene->update(event);
 }
 
 void zappy::SceneManager::draw() {
@@ -76,4 +76,8 @@ bool zappy::SceneManager::runScene(std::string const &name) {
     }
     throw std::runtime_error("runScene invalid name ref!");
     return false;
+}
+
+void zappy::SceneManager::resize(unsigned int width, unsigned int height) {
+    _currentScene->resize(width, height);
 }

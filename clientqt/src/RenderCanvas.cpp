@@ -25,23 +25,25 @@ zappy::RenderCanvas::~RenderCanvas() {
 }
 
 void zappy::RenderCanvas::OnUpdate() {
-    zappy::SceneManager::get_instance_ptr()->update();
     sf::RenderWindow::clear(sf::Color(0, 0, 0));
-    zappy::SceneManager::get_instance_ptr()->draw();
-
 
     sf::Event event;
+    event.type = (sf::Event::EventType) -1;
+    zappy::SceneManager::get_instance_ptr()->update(event);
     while (pollEvent(event)) {
+        std::cout << "event: " << event.type << std::endl;
+        zappy::SceneManager::get_instance_ptr()->update(event);
         switch (event.type) {
             case sf::Event::KeyPressed:
                 if (event.key.code == sf::Keyboard::Key::Escape)
                     QWidget::close();
                 break;
             case sf::Event::Resized:
-                std::cout << "Resized" << std::endl;
+                zappy::SceneManager::get_instance_ptr()->resize(event.size.width, event.size.height);
                 break;
         }
     }
+    zappy::SceneManager::get_instance_ptr()->draw();
 }
 
 void zappy::RenderCanvas::OnInit() {

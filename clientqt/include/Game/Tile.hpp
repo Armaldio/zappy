@@ -1,6 +1,6 @@
 //
 //-----------------------------------------------------------------------------
-//Filename:    MapSquare.hpp
+//Filename:    Tile.hpp
 //-----------------------------------------------------------------------------
 //
 // Created by bonett_w on 6/20/17.
@@ -15,15 +15,16 @@
 #include "Inventaire.hpp"
 
 namespace zappy {
-    class MapSquare : public Inventaire {
+    class Tile : public Inventaire {
     public:
         sf::RectangleShape rectangleShape;
+        sf::RectangleShape matShape[10];
 
-        MapSquare();
+        Tile();
 
-        MapSquare(unsigned int x, unsigned int y);
+        Tile(unsigned int x, unsigned int y);
 
-        virtual ~MapSquare();
+        virtual ~Tile();
     };
 }
 

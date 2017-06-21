@@ -10,6 +10,7 @@
 #include <SFML/System.hpp>
 #include <QMouseEvent>
 #include <QSFML/KeyConverter.hpp>
+#include <iostream>
 #include "QSFML/QSFMLWidget.hpp"
 
 #ifdef Q_WS_X11
@@ -24,9 +25,9 @@ qsf::QSFMLCanvas::QSFMLCanvas(QWidget *parent, const QPoint &position, const QSi
     setAttribute(Qt::WA_PaintOnScreen);
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
-    setAttribute(Qt::WA_PaintUnclipped);
+    setAttribute(Qt::WA_PendingResizeEvent);
 
-    setFocusPolicy(Qt::StrongFocus);
+    setFocusPolicy(Qt::FocusPolicy::StrongFocus);
 
     //Under X11, we need to flush the commands sent to the server to ensure that
     //SFML will get an updated view of the windows
@@ -69,7 +70,7 @@ void qsf::QSFMLCanvas::showEvent(QShowEvent *event) {
 }
 
 void qsf::QSFMLCanvas::OnUpdate() {
-    sf::RenderWindow::clear(sf::Color(0, 255, 0));
+    sf::RenderWindow::clear(sf::Color(0, 0, 0));
 }
 
 void qsf::QSFMLCanvas::OnInit() {
@@ -84,6 +85,7 @@ void qsf::QSFMLCanvas::wheelEvent(QWheelEvent *event) {
     sf::Event ev;
     ev.type = sf::Event::MouseWheelMoved;
 
+    ev.mouseButton.button = (event->buttons() == Qt::RightButton ? sf::Mouse::Right : sf::Mouse::Left);
     ev.mouseWheel.delta = event->delta() / 8 / 15;
     ev.mouseWheel.x = sf::Mouse::getPosition(*this).x;
     ev.mouseWheel.y = sf::Mouse::getPosition(*this).y;
@@ -149,4 +151,15 @@ bool qsf::QSFMLCanvas::pollEvent(sf::Event &event) {
     _sfEvents.pop_back();
 
     return true;
+}
+
+void qsf::QSFMLCanvas::mouseMoveEvent(QMouseEvent *event) {
+    sf::Event ev;
+    ev.type = sf::Event::MouseMoved;
+
+    ev.mouseMove.x = sf::Mouse::getPosition(*this).x;
+    ev.mouseMove.y = sf::Mouse::getPosition(*this).y;
+
+    _sfEvents.push_back(ev);
+    event->accept();
 }

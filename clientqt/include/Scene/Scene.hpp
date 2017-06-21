@@ -30,11 +30,11 @@ namespace zappy {
 
         virtual void unloadRessources() = 0;
 
-        virtual void update() = 0;
+        virtual void update(sf::Event const &event) = 0;
 
         virtual void draw() = 0;
 
-        virtual void resize() = 0;
+        virtual void resize(unsigned int width, unsigned int height) = 0;
 
         const std::string &getName() const;
     };

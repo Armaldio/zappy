@@ -41,6 +41,8 @@ namespace qsf {
 
         virtual void resizeEvent(QResizeEvent *event);
 
+        virtual void mouseMoveEvent(QMouseEvent *event);
+
         virtual void OnUpdate();
 
         virtual void OnInit();

@@ -14,7 +14,7 @@ zappy::Map::Map(QSize const &size) {
     auto length = size.width() * size.height();
 
     for (auto i = 0; i < length; i++) {
-        _mapSquares.push_back(new MapSquare((unsigned int) (i % size.width()),
+        _mapSquares.push_back(new Tile((unsigned int) (i % size.width()),
                                             (unsigned int) (i / size.width())));
     }
 }
@@ -23,7 +23,7 @@ zappy::Map::~Map() {
 
 }
 
-std::vector<zappy::MapSquare *> &zappy::Map::getMapSquares() {
+std::vector<zappy::Tile *> &zappy::Map::getTiles() {
     return _mapSquares;
 }
 

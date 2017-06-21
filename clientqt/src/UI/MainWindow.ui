@@ -112,16 +112,10 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="0" column="0">
          <widget class="QFrame" name="renderFrame">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
           <property name="minimumSize">
            <size>
-            <width>747</width>
-            <height>523</height>
+            <width>0</width>
+            <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -134,7 +128,7 @@ p, li { white-space: pre-wrap; }
            <cursorShape>WhatsThisCursor</cursorShape>
           </property>
           <property name="autoFillBackground">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -143,7 +137,7 @@ p, li { white-space: pre-wrap; }
            <enum>QFrame::Plain</enum>
           </property>
           <property name="lineWidth">
-           <number>0</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
