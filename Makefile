@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Tue Jun 20 14:36:15 2017 Martin Alais
+## Last update Tue Jun 20 17:39:33 2017 Martin Alais
 ##
 
 CC    =    gcc
@@ -34,9 +34,11 @@ SRC    =    src/main.c \
 			src/take_object2.c \
 			src/action.c \
 			src/waiting_line.c \
-			src/init_player.c \
-			src/server_gestion.c \
 			src/command_look.c \
+			src/player_list.c \
+			src/player_life.c \
+			src/init_world2.c \
+			src/commande_look2.c \
 
 FLAGS    =    -Iinclude
 

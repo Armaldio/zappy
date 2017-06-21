@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Tue Jun 20 12:03:54 2017 Martin Alais
+** Last update Tue Jun 20 15:39:08 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -44,8 +44,10 @@ typedef struct	s_Inventaire
 typedef struct	s_Player
 {
 	t_Position pos;
+	int death_time;
+	int life_time;
 	int level;
-  int teamId;
+	int teamId;
 	struct s_Player *next;
 	t_Inventaire *inventaire;
 	t_action *action;
@@ -54,6 +56,7 @@ typedef struct	s_Player
 	int id;
 	bool is_connected;
   bool waitingTeam;
+  bool is_dead;
 	enum direction gaze;
 }			t_Player;
 

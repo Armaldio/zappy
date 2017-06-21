@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Tue Jun 20 11:08:38 2017 Quentin Goinaud
+** Last update Tue Jun 20 17:21:04 2017 Martin Alais
 */
 
 #include <time.h>
@@ -68,6 +68,7 @@ void	manage_time(t_Server *server)
       server->time++;
       printf("Elapsed time since start : %ds\n", server->time);
 	  action_update_time(server);
+	  update_player_life(server);
     }
 }
 
@@ -100,6 +101,7 @@ int main(int ac, char **argv)
 		check_order_player(server);
 		check_data_player(server);
 		check_action_status(server);
+		check_player_death(server);
 	}
 	return (0);
 }

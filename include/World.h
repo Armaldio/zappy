@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 18:59:02 2017 Martin Alais
-** Last update Mon Jun 19 18:59:08 2017 Martin Alais
+** Last update Tue Jun 20 17:40:12 2017 Martin Alais
 */
 
 #ifndef ZAPPY_WORLD_H_
@@ -14,6 +14,7 @@
 typedef struct	s_Map
 {
 	bool is_occuped;
+	int food;
 	int pos_x;
 	int pos_y;
 	int linemate;

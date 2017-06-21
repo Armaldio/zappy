@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 09:41:28 2017 loic1.doyen@epitech.eu
+** Last update Wed Jun 21 09:43:14 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -119,10 +119,10 @@ int		command_look(int id, t_Server *server, char *data)
   int		i;
   int		y;
 
-  (void) data;
   tmp = server->list_player;
   while (tmp->next && tmp->id != id)
     tmp = tmp->next;
+	start_look(server, tmp, data);
   send_message(tmp->fd, "[player");
   y = 0;
   while (y <= tmp->level)
