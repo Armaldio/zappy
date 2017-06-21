@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Wed Jun 21 14:50:59 2017 Quentin Goinaud
+** Last update Wed Jun 21 15:04:18 2017 Quentin Goinaud
 */
 
 #include "zappy.h"
@@ -31,15 +31,6 @@ void command_fork(int id, t_Server *server, char *data)
   tmp->pos = pos;
   start_action(server, tmp, 42);
   add_data_in_line(tmp, "Hatch");
-
-  printf("Command : %s\nTab : [", data);
-  int	i = 0;
-  while (get_Player(id, server->list_player)->waiting_line->line[i] != NULL)
-    {
-      printf("%s\n", get_Player(id, server->list_player)->waiting_line->line[i]);
-      i++;
-    }
-  printf("]\n");
 }
 
 void command_hatch(int id, t_Server *server, char *data)
@@ -51,10 +42,10 @@ void command_hatch(int id, t_Server *server, char *data)
   while (tmp->next && tmp->id != id)
     tmp = tmp->next;
   start_action(server, tmp, 600);
-  add_data_in_line(tmp, "Hatched");
+  add_data_in_line(tmp, "Bloom");
 }
 
-void command_hatched(int id, t_Server *server, char *data)
+void command_bloom(int id, t_Server *server, char *data)
 {
   t_Player	*tmp;
 

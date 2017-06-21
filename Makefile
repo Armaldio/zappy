@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Wed Jun 21 14:50:35 2017 Quentin Goinaud
+## Last update Wed Jun 21 15:16:07 2017 Quentin Goinaud
 ##
 
 CC    =    gcc -g
@@ -71,12 +71,12 @@ quick_client:
 	$(CC) client/main.c -o mouli
 
 tests: install_bats
-	@#./server&
+	-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
-	@./ut/bin/bats unit-tests/connect.sh
-	@#pkill server
+	-@./ut/bin/bats unit-tests/connect.sh
+	pkill server
 	@echo -e "\n\n[Running moulinette...]"
-	@./unit-tests/style.sh
+	-@./unit-tests/style.sh
 
 re: fclean all
 

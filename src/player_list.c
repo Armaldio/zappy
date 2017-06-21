@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Wed Jun 21 14:14:22 2017 Quentin Goinaud
+** Last update Wed Jun 21 15:19:29 2017 Quentin Goinaud
 */
 
 #include "zappy.h"
@@ -35,6 +35,7 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->death_time = 1260 / server->f;
   new->next = NULL;
   printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
+  send_message(fd, "WELCOME\n");
 }
 
 void my_add_player(t_Server *server, int fd)
