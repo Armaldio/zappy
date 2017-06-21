@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 17:14:31 2017 Martin Alais
+** Last update Wed Jun 21 14:46:34 2017 Quentin Goinaud
 */
 
 #include "zappy.h"
@@ -56,15 +56,17 @@ void exit_client(int id, t_Server *server, char *data)
 int parser_commande(int id, t_Server *server, char *data)
 {
 	char	*mcommand[] = {"Forward", "Right", "Left",
-	"Incantation", "Take", "Look", "Exit", NULL};
+	"Incantation", "Take", "Look", "Exit", "Fork", "Hatch", "Hatched", NULL};
 	void	*mfunction_ptr[] = {commande_forward, commande_right,
 		commande_left, commande_incantation, command_take,
-		command_look, exit_client, NULL};
+		command_look, exit_client, command_fork, command_hatch,
+		command_hatched, NULL};
 	void	(*fct_ptr)(int, t_Server *, char *);
 	int		a;
 
 	if (data == NULL)
 		return (0);
+
 	a = 0;
 	if (get_player_team(get_Player(id, server->list_player), data, server))
 		return (0);

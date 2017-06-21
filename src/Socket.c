@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:14 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 09:45:15 2017 loic1.doyen@epitech.eu
+** Last update Wed Jun 21 14:30:13 2017 Quentin Goinaud
 */
 
 #include "Socket.h"
@@ -56,25 +56,28 @@ void basic_init_socket(t_Connection *socket)
 
 void init_socket(t_Connection *connection)
 {
-	connection->protocole = getprotobyname("TCP");
-	if (!connection->protocole)
-	{
-		print(2, "Can not initialize TCP\n");
-		exit(1);
-	}
-	connection->fd = socket(AF_INET,
-		SOCK_STREAM, connection->protocole->p_proto);
+  connection->protocole = getprotobyname("TCP");
+  if (!connection->protocole)
+    {
+      print(2, "Can not initialize TCP\n");
+      exit(1);
+    }
+  connection->fd = socket(AF_INET,
+			  SOCK_STREAM, connection->protocole->p_proto);
 
-	if (connection->fd == -1)
-	{
-		print(2, "Can not initialize socket\n");
-		exit(1);
-	}
-	if (connection->port == -1)
-		connection->port = 6666;
-	connection->s_in.sin_family = AF_INET;
-    connection->s_in.sin_port = htons(connection->port);
-    connection->s_in.sin_addr.s_addr = INADDR_ANY;
-	init_socket2(connection);
-	printf("Server start with port: %d\n", connection->port);
+  if (connection->fd == -1)
+    {
+      print(2, "Can not initialize socket\n");
+      exit(1);
+    }
+  if (setsockopt(connection->fd, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 },
+		 sizeof(int)) < 0)
+    printf("setsockopt(SO_REUSEADDR) failed");
+  if (connection->port == -1)
+    connection->port = 6666;
+  connection->s_in.sin_family = AF_INET;
+  connection->s_in.sin_port = htons(connection->port);
+  connection->s_in.sin_addr.s_addr = INADDR_ANY;
+  init_socket2(connection);
+  printf("Server start with port: %d\n", connection->port);
 }

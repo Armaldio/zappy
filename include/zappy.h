@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Tue Jun 20 17:42:06 2017 Martin Alais
+** Last update Wed Jun 21 14:19:27 2017 Quentin Goinaud
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -23,6 +23,9 @@ void commande_forward(int id, t_Server *server, char *data);
 void commande_right(int id, t_Server *server, char *data);
 void commande_left(int id, t_Server *server, char *data);
 void commande_incantation(int id, t_Server *server, char data);
+void	command_fork(int id, t_Server *server, char *data);
+void	command_hatch(int id, t_Server *server, char *data);
+void	command_hatched(int id, t_Server *server, char *data);
 int command_take(int id, t_Server *server, char *data);
 int command_look(int id, t_Server *server, char *data);
 int parser_nbMax(t_Server *server, char **argv, int a);
@@ -40,6 +43,7 @@ void ini_waiting_line(t_Player *player);
 void update_player_life(t_Server *server);
 void check_player_death(t_Server *server);
 void my_add_player(t_Server *server, int fd);
+int		my_add_player_id(t_Server *server, int fd);
 void my_delete_player(t_Server *server, int id);
 void init_case2(t_Map *tmp);
 void start_look(t_Server *server, t_Player *tmp, char *data);
