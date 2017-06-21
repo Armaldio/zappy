@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 16:27:22 2017 Martin Alais
+** Last update Wed Jun 21 18:09:47 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -82,8 +82,6 @@ int parser_commande(int id, t_Server *server, char *data)
     return (0);
   while (mcommand[a])
     {
-      if (strncmp(mcommand[a], data, strlen(mcommand[a])) == 0)
-	{
 		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)
 		{
 			fct_ptr = mfunction_ptr[a];
@@ -91,8 +89,6 @@ int parser_commande(int id, t_Server *server, char *data)
 			return (0);
 		}
 		a += 1;
-	}
-      a += 1;
     }
   command_not_found(id, server);
   return (0);
