@@ -5,12 +5,12 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:49 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 10:54:10 2017 Martin Alais
+** Last update Thu Jun 22 14:04:21 2017 Martin Alais
 */
 
 #include "mouvement.h"
 
-void go_up(t_Server *server, int id)
+void go_left(t_Server *server, int id)
 {
 	t_Player *tmp;
 
@@ -24,7 +24,7 @@ void go_up(t_Server *server, int id)
 	send_message(tmp->fd, "OK\n");
 }
 
-void go_down(t_Server *server, int id)
+void go_right(t_Server *server, int id)
 {
 	t_Player *tmp;
 
@@ -38,7 +38,7 @@ void go_down(t_Server *server, int id)
 	send_message(tmp->fd, "OK\n");
 }
 
-void go_right(t_Server *server, int id)
+void go_down(t_Server *server, int id)
 {
 	t_Player *tmp;
 
@@ -52,7 +52,7 @@ void go_right(t_Server *server, int id)
 	send_message(tmp->fd, "OK\n");
 }
 
-void go_left(t_Server *server, int id)
+void go_up(t_Server *server, int id)
 {
 	t_Player *tmp;
 
