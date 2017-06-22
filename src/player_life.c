@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Thu Jun 22 13:22:25 2017 Martin Alais
+** Last update Thu Jun 22 15:08:18 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -36,7 +36,7 @@ void check_player_death(t_Server *server)
 			if (tmp->inventaire->food >= 1)
 			{
 				tmp->inventaire->food -= 1;
-				tmp->death_time += 126;
+				tmp->death_time += (126 / server->f);
 				printf("player %d eat food !\n", tmp->id);
 			}
 			else

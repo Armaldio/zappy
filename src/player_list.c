@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Thu Jun 22 11:04:30 2017 Martin Alais
+** Last update Thu Jun 22 15:13:33 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -20,12 +20,12 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->pos = get_spaw_pos(server);
   new->gaze = UP;
   new->level = 1;
-  init_inventaire(new);
+  init_inventaire(new, server);
   init_action(new);
   ini_waiting_line(new);
   new->life_time = 0;
   new->waitingTeam = true;
-  new->death_time = 1260 / server->f;
+  new->death_time = 0;
   new->next = NULL;
   printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
   printf("Player position: %d %d\n", new->pos.x, new->pos.y);

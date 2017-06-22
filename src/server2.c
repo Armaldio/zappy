@@ -25,6 +25,7 @@ void basic_init_server(t_Server *server)
 }
 
 void init_inventaire(t_Player *player)
+void init_inventaire(t_Player *player, t_Server *server)
 {
 	player->inventaire = my_malloc(sizeof(t_Inventaire));
 	player->inventaire->deraumere = 0;
@@ -34,6 +35,7 @@ void init_inventaire(t_Player *player)
 	player->inventaire->sibur = 0;
 	player->inventaire->thystane = 0;
 	player->inventaire->food = 0;
+	player->inventaire->food = (1260 / server->f) / (126 / server->f);
 }
 
 void init_server(t_Server *server)
