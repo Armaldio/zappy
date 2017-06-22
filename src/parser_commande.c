@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 22 15:23:15 2017 Martin Alais
+** Last update Thu Jun 22 15:50:07 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -50,7 +50,8 @@ int parser_commande2(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-	command_not_found(id, server);
+	if (graphic_parser(id, server, data) == false)
+		command_not_found(id, server);
 	return (0);
 }
 
