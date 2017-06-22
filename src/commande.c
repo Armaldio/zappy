@@ -93,7 +93,8 @@ void command_eject(int id, t_Server *server, char *data)
 	start_action(server, player, 7);
 	while (tmp)
 	{
-		if (tmp->id != player->id && tmp->pos.x == player->pos.x && tmp->pos.y == player->pos.y)
+		if (tmp->id != player->id && tmp->pos.x == player->pos.x
+		    && tmp->pos.y == player->pos.y)
 		{
 			printf("Player %d ejected by player %d !\n", tmp->id, player->id);
 			eject_player(server, tmp);
