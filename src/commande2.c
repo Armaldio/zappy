@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Thu Jun 22 16:39:47 2017 hamza hammouche
+** Last update Thu Jun 22 16:57:59 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -98,6 +98,7 @@ int command_take(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-  send_message(tmp->fd, "sbp\n");
+	server->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
+      send_message(tmp->fd, "ko\n");
 	return (0);
 }

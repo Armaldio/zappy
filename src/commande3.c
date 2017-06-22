@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 16:46:08 2017 hamza hammouche
+** Last update Thu Jun 22 16:58:09 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -72,7 +72,8 @@ int command_set(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-  send_message(tmp->fd, "sbp\n");
+  server->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
+      send_message(tmp->fd, "ko\n");
 	return (0);
 }
 
