@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 12:32:07 2017 Martin Alais
+** Last update Thu Jun 22 15:31:24 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -82,4 +82,19 @@ int command_set(int id, t_Server *server, char *data)
 		a += 1;
 	}
 	return (0);
+}
+
+void command_inventory(int id, t_Server *server, char *data)
+{
+	char send_data[4096]; // c'est propre tg
+	t_Player *tmp;
+
+	tmp = get_Player(id, server->list_player);
+	memset(send_data, '\0', 4096);
+	sprintf(send_data, "[food %d, linemate %d, deraumere %d, sibur %d, \
+mendiane %d, phiras %d, thystane %d]\n", tmp->inventaire->food,
+	tmp->inventaire->linemate, tmp->inventaire->deraumere,
+	tmp->inventaire->sibur, tmp->inventaire->mendiane,
+	tmp->inventaire->phiras, tmp->inventaire->thystane);
+	send_message(tmp->fd, send_data);
 }

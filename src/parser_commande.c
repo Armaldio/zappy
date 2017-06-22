@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 22 14:18:34 2017 loic1.doyen@epitech.eu
+** Last update Thu Jun 22 15:23:15 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -33,9 +33,9 @@ int get_size_commmande(char *str)
 
 int parser_commande2(int id, t_Server *server, char *data)
 {
-	char	*mcommand[] = {"Eject", "POS", "Broadcast", NULL};
+	char	*mcommand[] = {"Eject", "POS", "Broadcast", "Inventory", NULL};
 	void	*mfunction_ptr[] = {command_eject, command_pos,
-  command_broadcast, NULL};
+  command_broadcast, command_inventory, NULL};
 	void	(*fct_ptr)(int, t_Server *, char *);
 	int		a;
 

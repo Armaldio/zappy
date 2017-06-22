@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Thu Jun 22 10:56:58 2017 Martin Alais
+** Last update Thu Jun 22 15:33:44 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -24,7 +24,6 @@ void basic_init_server(t_Server *server)
 	server->f = 100;
 }
 
-void init_inventaire(t_Player *player)
 void init_inventaire(t_Player *player, t_Server *server)
 {
 	player->inventaire = my_malloc(sizeof(t_Inventaire));
@@ -34,7 +33,6 @@ void init_inventaire(t_Player *player, t_Server *server)
 	player->inventaire->phiras = 0;
 	player->inventaire->sibur = 0;
 	player->inventaire->thystane = 0;
-	player->inventaire->food = 0;
 	player->inventaire->food = (1260 / server->f) / (126 / server->f);
 }
 
