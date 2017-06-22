@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Wed Jun 21 16:17:22 2017 hamza hammouche
+** Last update Thu Jun 22 12:28:15 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -68,10 +68,10 @@ int get_size_commmande(char *str)
 int parser_commande(int id, t_Server *server, char *data)
 {
     char	*mcommand[] = {"Forward", "Right", "Left", "Incantation",
-  "Take", "Look", "Exit", "Fork", "Hatch", "Bloom", NULL};
+  "Take", "Look", "Exit", "Fork", "Hatch", "Bloom", "Set", NULL};
     void	*mfunction_ptr[] = {commande_forward, commande_right,
       commande_left, commande_incantation, command_take, command_look,
-  exit_client, command_fork, command_hatch, command_bloom, NULL};
+  exit_client, command_fork, command_hatch, command_bloom, command_set, NULL};
   void		(*fct_ptr)(int, t_Server *, char *);
   int		a;
 

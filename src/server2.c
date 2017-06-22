@@ -33,6 +33,7 @@ void init_inventaire(t_Player *player)
 	player->inventaire->phiras = 0;
 	player->inventaire->sibur = 0;
 	player->inventaire->thystane = 0;
+	player->inventaire->food = 0;
 }
 
 void init_server(t_Server *server)
