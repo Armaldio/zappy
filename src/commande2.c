@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Tue Jun 20 17:44:47 2017 Martin Alais
+** Last update Wed Jun 21 17:55:25 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -72,10 +72,7 @@ void commande_left(int id, t_Server *server, char *data)
 
 void commande_incantation(int id, t_Server *server, char data)
 {
-	void	*mfunction_ptr[] = {incan_1, incan_2,
-		incan_3, incan_4, incan_5, NULL};
 	t_Player *tmp;
-	void	(*fct_ptr)(int, t_Server *);
 
 	(void) data;
 	tmp = server->list_player;
@@ -83,8 +80,6 @@ void commande_incantation(int id, t_Server *server, char data)
 		tmp = tmp->next;
 	start_action(server, tmp, 300);
 	tmp->action->is_leveling = true;
-	fct_ptr = mfunction_ptr[tmp->level - 1];
-	fct_ptr(id, server);
 }
 
 int command_take(int id, t_Server *server, char *data)

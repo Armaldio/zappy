@@ -5,10 +5,10 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Tue Jun 20 17:39:33 2017 Martin Alais
+## Last update Wed Jun 21 18:40:24 2017 hamza hammouche
 ##
 
-CC    =    gcc
+CC    =    gcc -g
 
 RM    =    rm -rf
 
@@ -28,6 +28,7 @@ SRC    =    src/main.c \
 			src/incantation.c \
 			src/Team_gestion.c \
 			src/commande2.c \
+			src/commande3.c \
 			src/server2.c \
 			src/Parser2.c \
 			src/checker.c \
@@ -39,6 +40,12 @@ SRC    =    src/main.c \
 			src/player_life.c \
 			src/init_world2.c \
 			src/commande_look2.c \
+			src/update_function.c \
+			src/incantation2.c \
+			src/incantation3.c \
+			src/incantation4.c \
+			src/incantation5.c \
+			src/command_end_gestion.c \
 
 FLAGS    =    -Iinclude
 
@@ -70,12 +77,13 @@ quick_client:
 	$(CC) client/main.c -o mouli
 
 tests: install_bats
-	@#./server&
+	-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
-	@./ut/bin/bats unit-tests/connect.sh
-	@#pkill server
+	-@./ut/bin/bats unit-tests/connect.sh
+	@pkill server
+	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
-	@./unit-tests/style.sh
+	-@./unit-tests/style.sh
 
 re: fclean all
 
