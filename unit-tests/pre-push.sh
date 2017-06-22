@@ -62,14 +62,14 @@ if [[ $push_command =~ $will_remove_protected_branch ]]; then
   do_exit
 fi
 
-#echo $make_test_command
-echo $err_code
+echo $make_test_command
+#echo $err_code
 
 if (( $err_code != 0)); then
-  echo "Tests failed. Cannot push. Go learn how to code."
+  echo -e "\e[31mTests failed. Cannot push. Go learn how to code.\e[39m"
   exit 1
 else
-  echo "Nice you can push"
+  echo "\e[32mNice you can push\e[39m"
 fi
 
 unset do_exit
