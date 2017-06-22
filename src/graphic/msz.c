@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:01:38 2017 Martin Alais
-** Last update Thu Jun 22 16:11:42 2017 Martin Alais
+** Last update Thu Jun 22 17:38:51 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -20,4 +20,12 @@ void commande_msz(t_Player *player, t_Server *server, char *data)
 	sprintf(data_send, "msz %d %d\n",
 	server->world->width, server->world->height);
 	send_message(player->fd, data_send);
+}
+
+void send_message_death(int id, int fd)
+{
+	char buffer[512];
+
+  sprintf(buffer, "pdi %d\n", id);
+  send_message(fd, buffer);
 }

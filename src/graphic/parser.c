@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:50:27 2017 Martin Alais
-** Last update Thu Jun 22 16:10:49 2017 Martin Alais
+** Last update Thu Jun 22 17:43:34 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -27,7 +27,7 @@ bool graphic_parser(int id, t_Server *server, char *data)
 		{
 			fct_ptr = mfunction_ptr[a];
 			fct_ptr(tmp, server, data);
-			return (0);
+			return (true);
 		}
 		a += 1;
 	}

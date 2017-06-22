@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Thu Jun 22 15:08:18 2017 Martin Alais
+** Last update Thu Jun 22 17:15:14 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -28,7 +28,6 @@ void check_player_death(t_Server *server)
 	t_Player *tmp;
 
 	tmp = server->list_player;
-
 	while (tmp)
 	{
 		if (tmp->life_time > tmp->death_time)
@@ -42,7 +41,8 @@ void check_player_death(t_Server *server)
 			else
 			{
 				printf("Player %d is dead!\n", tmp->id);
-				send_message(tmp->fd, "dead\n");
+        server->isGraphic == true ? send_message_death(tmp->id, tmp->fd) :
+            send_message(tmp->fd, "dead\n");
 				close(tmp->fd);
 				my_delete_player(server, tmp->id);
 			}

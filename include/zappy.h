@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 22 15:53:42 2017 Martin Alais
+** Last update Thu Jun 22 17:13:00 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -19,6 +19,7 @@
 void parser_data(t_Server *server, int ac, char **argv);
 int	parser_team(t_Server *serv, char **argv, int a);
 int parser_commande(int id, t_Server *server, char *data);
+void send_message_death(int, int fd);
 void commande_forward(int id, t_Server *server, char *data);
 void commande_right(int id, t_Server *server, char *data);
 void commande_left(int id, t_Server *server, char *data);

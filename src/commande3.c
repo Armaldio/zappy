@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 16:58:09 2017 hamza hammouche
+** Last update Thu Jun 22 17:39:53 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -14,6 +14,7 @@
 void command_fork(int id, t_Server *server, char *data)
 {
   t_Player	*tmp;
+  char			buffer[512];
 
   (void) id;
   (void) data;
@@ -25,6 +26,9 @@ void command_fork(int id, t_Server *server, char *data)
   tmp->pos = get_spaw_pos(server);
   start_action(server, tmp, 42);
   add_data_in_line(tmp, "Hatch");
+  sprintf(buffer, "pfk %d", tmp->id);
+  server->isGraphic == true ?  send_message(tmp->fd, buffer):
+      send_message(tmp->fd, "ok\n");
 }
 
 void command_hatch(int id, t_Server *server, char *data)
