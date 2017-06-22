@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 22 12:29:11 2017 Martin Alais
+## Last update Thu Jun 22 13:35:49 2017 loic1.doyen@epitech.eu
 ##
 
 CC    =    gcc -g
@@ -46,6 +46,7 @@ SRC    =    src/main.c \
 			src/command_end_gestion.c \
 			src/set_object.c \
 			src/set_object2.c \
+			src/command_broadcast.c \
 
 FLAGS    =    -Iinclude
 

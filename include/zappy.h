@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 22 12:28:30 2017 Martin Alais
+** Last update Thu Jun 22 13:35:32 2017 loic1.doyen@epitech.eu
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -28,6 +28,7 @@ void	command_hatch(int id, t_Server *server, char *data);
 void	command_bloom(int id, t_Server *server, char *data);
 int command_take(int id, t_Server *server, char *data);
 int command_look(int id, t_Server *server, char *data);
+int command_broadcast(int id, t_Server *server, char *data);
 int parser_nbMax(t_Server *server, char **argv, int a);
 int parser_port(t_Server *server, char **argv, int a);
 int parser_width(t_Server *server, char **argv, int a);
