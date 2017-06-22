@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 12:28:15 2017 Martin Alais
+** Last update Thu Jun 22 14:07:56 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -32,16 +32,6 @@ bool		get_player_team(t_Player *player, char *data, t_Server *serv)
   return (true);
 }
 
-void command_not_found(int id, t_Server *server)
-{
-  t_Player *tmp;
-
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
-  send_message(tmp->fd, "KO\n");
-}
-
 void exit_client(int id, t_Server *server, char *data)
 {
   t_Player *tmp;
@@ -55,41 +45,47 @@ void exit_client(int id, t_Server *server, char *data)
   close(tmp->fd);
 }
 
-int get_size_commmande(char *str)
+void command_pos(int id, t_Server *server, char *data)
 {
-	int a;
+	t_Player *player;
+	char data_send[200];
 
-	a = 0;
-	while (str[a] != '\0' && str[a] != ' ' && str[a] != '\n')
-		a += 1;
-	return (a);
+	(void) data;
+	player = get_Player(id, server->list_player);
+	sprintf(data_send, "Eject %d, %d\n", player->pos.x, player->pos.y);
+	send_message(player->fd, data_send);
 }
 
-int parser_commande(int id, t_Server *server, char *data)
+void eject_player(t_Server *server, t_Player *player)
 {
-    char	*mcommand[] = {"Forward", "Right", "Left", "Incantation",
-  "Take", "Look", "Exit", "Fork", "Hatch", "Bloom", "Set", NULL};
-    void	*mfunction_ptr[] = {commande_forward, commande_right,
-      commande_left, commande_incantation, command_take, command_look,
-  exit_client, command_fork, command_hatch, command_bloom, command_set, NULL};
-  void		(*fct_ptr)(int, t_Server *, char *);
-  int		a;
+	if (player->gaze == UP)
+		go_up(server, player->id);
+	else if (player->gaze == DOWN)
+		go_down(server, player->id);
+	else if (player->gaze == RIGHT)
+		go_right(server, player->id);
+	else
+		go_left(server, player->id);
+}
 
-  if (data == NULL)
-    return (0);
-  a = 0;
-  if (get_player_team(get_Player(id, server->list_player), data, server))
-    return (0);
-  while (mcommand[a])
-    {
-		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)
+void command_eject(int id, t_Server *server, char *data)
+{
+	t_Player *tmp;
+	t_Player *player;
+
+	(void) data;
+	player = server->list_player;
+	tmp = server->list_player;
+	while (player->next && player->id != id)
+		player = player->next;
+	start_action(server, player, 7);
+	while (tmp)
+	{
+		if (tmp->id != player->id && tmp->pos.x == player->pos.x && tmp->pos.y == player->pos.y)
 		{
-			fct_ptr = mfunction_ptr[a];
-			fct_ptr(id, server, data);
-			return (0);
+			printf("Player %d ejected by player %d !\n", tmp->id, player->id);
+			eject_player(server, tmp);
 		}
-		a += 1;
-    }
-  command_not_found(id, server);
-  return (0);
+		tmp = tmp->next;
+	}
 }

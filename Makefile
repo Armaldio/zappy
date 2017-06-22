@@ -46,6 +46,8 @@ SRC    =    src/main.c \
 			src/command_end_gestion.c \
 			src/set_object.c \
 			src/set_object2.c \
+			src/parser_commande.c \
+			src/command_broadcast.c \
 
 FLAGS    =    -Iinclude
 
