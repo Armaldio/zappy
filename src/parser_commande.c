@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 22 15:23:15 2017 Martin Alais
+** Last update Thu Jun 22 16:01:15 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -54,7 +54,7 @@ int parser_commande2(int id, t_Server *server, char *data)
 	return (0);
 }
 
-int parser_commande(int id, t_Server *server, char *data)
+int parser_commande(int id, t_Server *serv, char *data)
 {
     char	*mcommand[] = {"Forward", "Right", "Left", "Incantation",
   "Take", "Look", "Exit", "Fork", "Hatch", "Bloom", "Set", NULL};
@@ -67,18 +67,18 @@ int parser_commande(int id, t_Server *server, char *data)
   if (data == NULL)
     return (0);
   a = 0;
-  if (get_player_team(get_Player(id, server->list_player), data, server))
+  if (get_player_team(get_Player(id, serv->list_player), data, serv) == true)
     return (0);
   while (mcommand[a])
     {
 		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)
 		{
 			fct_ptr = mfunction_ptr[a];
-			fct_ptr(id, server, data);
+			fct_ptr(id, serv, data);
 			return (0);
 		}
 		a += 1;
     }
-	parser_commande2(id, server, data);
+	parser_commande2(id, serv, data);
   return (0);
 }

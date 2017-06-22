@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Thu Jun 22 15:11:18 2017 Martin Alais
+** Last update Thu Jun 22 12:28:34 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -19,6 +19,7 @@ typedef struct s_Team
 {
   int					id;
   char				*name;
+  int					nbMember;
   struct s_Team *next;
 }							t_team;
 
