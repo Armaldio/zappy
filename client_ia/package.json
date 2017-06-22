@@ -1,0 +1,12 @@
+{
+  "name": "client_ia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client_ia.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node client_ia.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

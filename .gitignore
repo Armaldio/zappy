@@ -6,3 +6,5 @@ test
 *.o
 a.out
 vgcore*
+
+client_ia/\.idea/

@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Wed Jun 21 18:40:24 2017 hamza hammouche
+## Last update Thu Jun 22 10:37:07 2017 Quentin Goinaud
 ##
 
 CC    =    gcc -g
@@ -83,7 +83,7 @@ tests: install_bats
 	@pkill server
 	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
-	-@./unit-tests/style.sh
+	@./unit-tests/style.sh
 
 re: fclean all
 
