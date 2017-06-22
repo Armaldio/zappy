@@ -50,17 +50,17 @@ do_exit(){
   exit 1
 }
 
-if [[ $push_command =~ $is_destructive ]] && [ $current_branch = $protected_branch ]; then
-  do_exit
-fi
-
-if [[ $push_command =~ $is_destructive ]] && [[ $push_command =~ $protected_branch ]]; then
-  do_exit
-fi
-
-if [[ $push_command =~ $will_remove_protected_branch ]]; then
-  do_exit
-fi
+# if [[ $push_command =~ $is_destructive ]] && [ $current_branch = $protected_branch ]; then
+#   do_exit
+# fi
+#
+# if [[ $push_command =~ $is_destructive ]] && [[ $push_command =~ $protected_branch ]]; then
+#   do_exit
+# fi
+#
+# if [[ $push_command =~ $will_remove_protected_branch ]]; then
+#   do_exit
+# fi
 
 echo $make_test_command
 #echo $err_code
