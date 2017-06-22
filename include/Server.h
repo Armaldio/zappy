@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Wed Jun 21 18:37:46 2017 hamza hammouche
+** Last update Thu Jun 22 12:27:31 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -51,5 +51,12 @@ void take_thystane(int id, t_Server *server);
 t_Position get_spaw_pos(t_Server *server);
 void init_inventaire(t_Player *player);
 t_Player	*delete_player(t_Server *serv, t_Player *player);
+void set_linemate(int id, t_Server *server);
+void set_deraumere(int id, t_Server *server);
+void set_sibur(int id, t_Server *server);
+void set_mendiane(int id, t_Server *server);
+void set_phiras(int id, t_Server *server);
+void set_thystane(int id, t_Server *server);
+void set_food(int id, t_Server *server);
 
 #endif /* !ZAPPY_SERVER_H_ */
