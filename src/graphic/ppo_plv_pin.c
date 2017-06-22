@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 18:05:16 2017 Martin Alais
-** Last update Thu Jun 22 18:34:13 2017 Martin Alais
+** Last update Thu Jun 22 19:17:22 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -19,6 +19,11 @@ void commande_ppo(t_Player *player, t_Server *server, char *data2)
 
 	data2 += 4;
 	id = atoi(data2);
+	if (id <= 0)
+	{
+		send_message(player->fd, "sbp\n");
+		return ;
+	}
 	tmp = get_Player(id, server->list_player);
 	memset(data, '\0', 100);
 	sprintf(data, "ppo %d %d %d %d\n", tmp->id,
@@ -34,6 +39,11 @@ void commande_plv(t_Player *player, t_Server *server, char *data2)
 
 	data2 += 4;
 	id = atoi(data2);
+	if (id <= 0)
+	{
+		send_message(player->fd, "sbp\n");
+		return ;
+	}
 	tmp = get_Player(id, server->list_player);
 	memset(data, '\0', 100);
 	sprintf(data, "plv %d %d\n", tmp->id, tmp->level);
@@ -48,6 +58,11 @@ void commande_pin(t_Player *player, t_Server *server, char *data2)
 
 	data2 += 4;
 	id = atoi(data2);
+	if (id <= 0)
+	{
+		send_message(player->fd, "sbp\n");
+		return ;
+	}
 	tmp = get_Player(id, server->list_player);
 	memset(data, '\0', 300);
 	sprintf(data, "pin %d %d %d %d %d %d %d %d %d %d\n",
