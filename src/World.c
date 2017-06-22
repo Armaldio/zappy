@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:26 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 17:35:28 2017 Martin Alais
+** Last update Thu Jun 22 10:59:11 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -36,16 +36,6 @@ void basic_init_world(t_World * world)
   world->height = -1;
   world->width = -1;
   world->nbr_player = 0;
-}
-
-void set_occupation(t_World *world, int x, int y, bool status)
-{
-  if (world->map[x][y]->is_occuped == true && status == true)
-    {
-      printf("[ERROR] box already true\n");
-      exit(1);
-    }
-  world->map[x][y]->is_occuped = status;
 }
 
 void print_world(t_World *world)

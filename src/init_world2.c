@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 17:33:43 2017 Martin Alais
-** Last update Tue Jun 20 17:40:18 2017 Martin Alais
+** Last update Thu Jun 22 10:59:22 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,5 +21,4 @@ void init_case2(t_Map *tmp)
     tmp->food = 0;
     if (rand() % 3 == 0)
       tmp->food = 1;
-    tmp->is_occuped = false;
 }

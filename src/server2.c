@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Wed Jun 21 18:16:38 2017 Martin Alais
+** Last update Thu Jun 22 10:56:58 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -50,20 +50,7 @@ t_Position get_spaw_pos(t_Server *server)
 {
 	t_Position res;
 
-	res.x = 0;
-	while (res.x < server->world->height - 1)
-	{
-		res.y = 0;
-		while (res.y < server->world->width - 1)
-		{
-			if (case_occupation(server->world, res.x, res.y) == false)
-				return (res);
-			res.y += 1;
-		}
-		res.x += 1;
-	}
-	printf("[Error] no more space for spawn\n");
-	res.x = -1;
-	res.y = -1;
+	res.x = rand() % (server->world->height - 1);
+	res.y = rand() % (server->world->width - 1);
 	return (res);
 }

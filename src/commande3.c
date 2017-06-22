@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Wed Jun 21 15:04:18 2017 Quentin Goinaud
+** Last update Thu Jun 22 11:07:21 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -15,7 +15,6 @@ void command_fork(int id, t_Server *server, char *data)
 {
   t_Player	*tmp;
   int		egg_id;
-  t_Position	pos;
 
   (void) id;
   (void) data;
@@ -26,9 +25,7 @@ void command_fork(int id, t_Server *server, char *data)
   tmp->is_connected = true;
   tmp->controlled = false;
   tmp->isEgg = true;
-  pos = get_spaw_pos(server);
-  set_occupation(server->world, pos.x, pos.y, true);
-  tmp->pos = pos;
+  tmp->pos = get_spaw_pos(server);
   start_action(server, tmp, 42);
   add_data_in_line(tmp, "Hatch");
 }
