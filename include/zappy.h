@@ -28,6 +28,7 @@ void	command_hatch(int id, t_Server *server, char *data);
 void	command_bloom(int id, t_Server *server, char *data);
 int command_take(int id, t_Server *server, char *data);
 int command_look(int id, t_Server *server, char *data);
+int command_broadcast(int id, t_Server *server, char *data);
 int parser_nbMax(t_Server *server, char **argv, int a);
 int parser_port(t_Server *server, char **argv, int a);
 int parser_width(t_Server *server, char **argv, int a);
