@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 22 10:37:07 2017 Quentin Goinaud
+## Last update Thu Jun 22 10:59:00 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -23,7 +23,6 @@ SRC    =    src/main.c \
 			src/World.c \
 			src/commande.c \
 			src/mouvement.c \
-			src/mouvement2.c \
 			src/take_object.c \
 			src/incantation.c \
 			src/Team_gestion.c \
@@ -31,7 +30,6 @@ SRC    =    src/main.c \
 			src/commande3.c \
 			src/server2.c \
 			src/Parser2.c \
-			src/checker.c \
 			src/take_object2.c \
 			src/action.c \
 			src/waiting_line.c \

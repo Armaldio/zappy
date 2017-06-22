@@ -5,27 +5,20 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Wed Jun 21 15:19:29 2017 Quentin Goinaud
+** Last update Thu Jun 22 11:04:30 2017 Martin Alais
 */
 
 #include "zappy.h"
 
 void my_init_player(t_Player *new, int fd, int id, t_Server *server)
 {
-  t_Position spaw_pos;
-
   new->fd = fd;
   new->id = id;
   new->controlled = true;
   new->isEgg = false;
   new->is_connected = true;
+  new->pos = get_spaw_pos(server);
   new->gaze = UP;
-  spaw_pos = get_spaw_pos(server);
-  if (spaw_pos.x == -1 || spaw_pos.y == -1)
-    send_message(fd, "KO\n");
-  new->pos.x = spaw_pos.x;
-  new->pos.y = spaw_pos.y;
-  set_occupation(server->world, new->pos.x, new->pos.y, true);
   new->level = 1;
   init_inventaire(new);
   init_action(new);
@@ -35,6 +28,7 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->death_time = 1260 / server->f;
   new->next = NULL;
   printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
+  printf("Player position: %d %d\n", new->pos.x, new->pos.y);
   send_message(fd, "WELCOME\n");
 }
 
