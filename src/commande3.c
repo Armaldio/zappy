@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 17:39:53 2017 hamza hammouche
+** Last update Thu Jun 22 19:07:02 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -39,17 +39,23 @@ void command_hatch(int id, t_Server *server, char *data)
   tmp = get_Player(id, server->list_player);
   start_action(server, tmp, 600);
   add_data_in_line(tmp, "Bloom");
+  server->isGraphic == true ? send_message_enw(tmp, 1) :
+  send_message(tmp->fd, "ok\n");
 }
 
 void command_bloom(int id, t_Server *server, char *data)
 {
   t_Player	*tmp;
+  char			buff[512];
 
   (void) data;
   tmp = get_Player(id, server->list_player);
   tmp->gaze = rand() % 4;
   tmp->isEgg = false;
   tmp->is_connected = false;
+  sprintf(buff, "eht %d\n", 1);
+  server->isGraphic == true ? send_message(tmp->fd, buff) :
+  send_message(tmp->fd, "ok\n");
 }
 
 int command_set(int id, t_Server *server, char *data)
