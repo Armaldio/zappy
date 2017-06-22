@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 14:07:56 2017 Martin Alais
+** Last update Thu Jun 22 14:19:04 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -81,7 +81,8 @@ void command_eject(int id, t_Server *server, char *data)
 	start_action(server, player, 7);
 	while (tmp)
 	{
-		if (tmp->id != player->id && tmp->pos.x == player->pos.x && tmp->pos.y == player->pos.y)
+		if (tmp->id != player->id && tmp->pos.x == player->pos.x
+		    && tmp->pos.y == player->pos.y)
 		{
 			printf("Player %d ejected by player %d !\n", tmp->id, player->id);
 			eject_player(server, tmp);
