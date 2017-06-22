@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 16:39:11 2017 hamza hammouche
+** Last update Thu Jun 22 17:58:35 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -22,9 +22,9 @@ bool		get_player_team(t_Player *player, char *data, t_Server *serv)
   if (player == NULL || player->waitingTeam == false)
     return (false);
   if ((tmp = get_team(serv->list_teams, data, -1)) == NULL)
-    return (send_message(player->fd, "Ko\n"), true);
+    return (send_message(player->fd, "ko\n"), true);
   if (serv->nbClientMax < tmp->nbMember + 1)
-    return (send_message(player->fd, "Ko\n"), true);
+    return (send_message(player->fd, "ko\n"), true);
   tmp->nbMember++;
   sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax -
 	  tmp->nbMember,
@@ -88,6 +88,7 @@ void command_eject(int id, t_Server *server, char *data)
 {
 	t_Player *tmp;
 	t_Player *player;
+  char buffer[512];
 
 	(void) data;
 	player = server->list_player;
@@ -103,5 +104,7 @@ void command_eject(int id, t_Server *server, char *data)
 		}
 		tmp = tmp->next;
 	}
-	send_message(player->fd, "OK\n");
+  sprintf(buffer, "pex %d\n", id);
+  server->isGraphic == true ? send_message(tmp->fd, buffer) :
+      send_message(tmp->fd, "ok\n");
 }
