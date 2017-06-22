@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 18:05:16 2017 Martin Alais
-** Last update Thu Jun 22 18:26:38 2017 Martin Alais
+** Last update Thu Jun 22 18:34:13 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,7 +21,8 @@ void commande_ppo(t_Player *player, t_Server *server, char *data2)
 	id = atoi(data2);
 	tmp = get_Player(id, server->list_player);
 	memset(data, '\0', 100);
-	sprintf(data, "ppo %d %d %d %d\n", tmp->id, tmp->pos.x, tmp->pos.y, tmp->gaze);
+	sprintf(data, "ppo %d %d %d %d\n", tmp->id,
+	tmp->pos.x, tmp->pos.y, tmp->gaze);
 	send_message(player->fd, data);
 }
 
