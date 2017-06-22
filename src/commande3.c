@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 15:35:59 2017 Martin Alais
+** Last update Thu Jun 22 17:39:53 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -14,20 +14,21 @@
 void command_fork(int id, t_Server *server, char *data)
 {
   t_Player	*tmp;
-  int		egg_id;
+  char			buffer[512];
 
   (void) id;
   (void) data;
-  egg_id = my_add_player_id(server, -1);
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != egg_id)
-    tmp = tmp->next;
+  my_add_player_id(server, -1);
+  tmp = get_Player(id, server->list_player);
   tmp->is_connected = true;
   tmp->controlled = false;
   tmp->isEgg = true;
   tmp->pos = get_spaw_pos(server);
   start_action(server, tmp, 42);
   add_data_in_line(tmp, "Hatch");
+  sprintf(buffer, "pfk %d", tmp->id);
+  server->isGraphic == true ?  send_message(tmp->fd, buffer):
+      send_message(tmp->fd, "ok\n");
 }
 
 void command_hatch(int id, t_Server *server, char *data)
@@ -35,9 +36,7 @@ void command_hatch(int id, t_Server *server, char *data)
   t_Player	*tmp;
 
   (void) data;
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
   start_action(server, tmp, 600);
   add_data_in_line(tmp, "Bloom");
 }
@@ -47,9 +46,7 @@ void command_bloom(int id, t_Server *server, char *data)
   t_Player	*tmp;
 
   (void) data;
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
   tmp->gaze = rand() % 4;
   tmp->isEgg = false;
   tmp->is_connected = false;
@@ -67,9 +64,7 @@ int command_set(int id, t_Server *server, char *data)
 
 	a = 0;
 	data += 4;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+	tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	while (all_stone[a])
 	{
@@ -81,6 +76,8 @@ int command_set(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
+  server->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
+      send_message(tmp->fd, "ko\n");
 	return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 22 16:01:15 2017 hamza hammouche
+** Last update Thu Jun 22 17:22:03 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -15,10 +15,9 @@ void command_not_found(int id, t_Server *server)
 {
   t_Player *tmp;
 
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
-  send_message(tmp->fd, "KO\n");
+  tmp = get_Player(id, server->list_player);
+  server->isGraphic == true ? send_message(tmp->fd, "suc\n") :
+      send_message(tmp->fd, "ko\n");
 }
 
 int get_size_commmande(char *str)
@@ -50,7 +49,9 @@ int parser_commande2(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-	command_not_found(id, server);
+
+	if (graphic_parser(id, server, data) == false)
+		command_not_found(id, server);
 	return (0);
 }
 

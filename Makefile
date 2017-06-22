@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 22 14:37:54 2017 Quentin Goinaud
+## Last update Thu Jun 22 18:29:01 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -48,6 +48,12 @@ SRC    =    src/main.c \
 			src/set_object2.c \
 			src/parser_commande.c \
 			src/command_broadcast.c \
+			src/graphic/commande_graphic.c \
+			src/graphic/msz_sgt.c \
+			src/graphic/parser.c \
+			src/graphic/bct_pnw.c \
+			src/graphic/tna.c \
+			src/graphic/ppo_plv_pin.c \
 
 FLAGS    =    -Iinclude
 

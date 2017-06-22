@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Thu Jun 22 14:23:51 2017 Martin Alais
+** Last update Thu Jun 22 16:57:59 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -16,9 +16,7 @@ void commande_forward(int id, t_Server *server, char *data)
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		go_up(server, id, true);
@@ -35,9 +33,7 @@ void commande_right(int id, t_Server *server, char *data)
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		tmp->gaze = RIGHT;
@@ -55,9 +51,7 @@ void commande_left(int id, t_Server *server, char *data)
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		tmp->gaze = LEFT;
@@ -75,9 +69,7 @@ void commande_incantation(int id, t_Server *server, char data)
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 300);
 	tmp->action->is_leveling = true;
 }
@@ -94,9 +86,7 @@ int command_take(int id, t_Server *server, char *data)
 
 	a = 0;
 	data += 5;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+	tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	while (all_stone[a])
 	{
@@ -108,5 +98,7 @@ int command_take(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
+	server->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
+      send_message(tmp->fd, "ko\n");
 	return (0);
 }
