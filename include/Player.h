@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Thu Jun 22 12:19:32 2017 Martin Alais
+** Last update Thu Jun 22 17:24:05 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "basic_data.h"
 
-enum direction {UP, DOWN, RIGHT, LEFT};
+enum direction {UP, RIGHT, DOWN, LEFT};
 
 typedef struct	s_waiting_line
 {

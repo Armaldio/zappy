@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:26 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 10:59:11 2017 Martin Alais
+** Last update Thu Jun 22 16:53:54 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -69,9 +69,9 @@ void init_world(t_World * world)
 
   b = 0;
   if (world->height == -1)
-    world->height = 20;
+    world->height = 10;
   if (world->width == -1)
-    world->width = 20;
+    world->width = 10;
   printf("World initialized with height %d and width %d\n", world->height,
 	 world->width);
   a = 0;

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:51:04 2017 Martin Alais
-** Last update Thu Jun 22 16:04:39 2017 Martin Alais
+** Last update Thu Jun 22 17:44:31 2017 Martin Alais
 */
 
 #ifndef ZAPPY_GRAPHIC_H_
@@ -15,4 +15,10 @@
 
 void commande_graphic(t_Player *player, t_Server *server, char *data);
 void commande_msz(t_Player *player, t_Server *server, char *data);
+void commande_sgt(t_Player *player, t_Server *server, char *data);
+void commande_bct2(t_Server *server, int x, int y, t_Player *player);
+void commande_tna(t_Player *player, t_Server *server, char *data);
+void commande_pnw(t_Player *player, t_Server *server, char *dataaze);
+void commande_btc(t_Player *player, t_Server *server, char *data);
+void commande_mct(t_Player *player, t_Server *server, char *data);
 #endif /* !ZAPPY_GRAPHIC_H_ */
