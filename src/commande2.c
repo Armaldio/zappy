@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Wed Jun 21 17:55:25 2017 Martin Alais
+** Last update Thu Jun 22 14:23:51 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,13 +21,13 @@ void commande_forward(int id, t_Server *server, char *data)
 		tmp = tmp->next;
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
-		go_up(server, id);
+		go_up(server, id, true);
 	else if (tmp->gaze == DOWN)
-		go_down(server, id);
+		go_down(server, id, true);
 	else if (tmp->gaze == RIGHT)
-		go_right(server, id);
+		go_right(server, id, true);
 	else
-		go_left(server, id);
+		go_left(server, id, true);
 }
 
 void commande_right(int id, t_Server *server, char *data)

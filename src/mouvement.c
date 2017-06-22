@@ -5,12 +5,12 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:49 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 14:04:21 2017 Martin Alais
+** Last update Thu Jun 22 14:23:12 2017 Martin Alais
 */
 
 #include "mouvement.h"
 
-void go_left(t_Server *server, int id)
+void go_left(t_Server *server, int id, bool send)
 {
 	t_Player *tmp;
 
@@ -21,10 +21,11 @@ void go_left(t_Server *server, int id)
 		tmp->pos.x -= 1;
 	else
 		tmp->pos.x = server->world->height - 1;
-	send_message(tmp->fd, "OK\n");
+	if (send)
+		send_message(tmp->fd, "OK\n");
 }
 
-void go_right(t_Server *server, int id)
+void go_right(t_Server *server, int id, bool send)
 {
 	t_Player *tmp;
 
@@ -35,10 +36,11 @@ void go_right(t_Server *server, int id)
 		tmp->pos.x += 1;
 	else
 		tmp->pos.x = 0;
-	send_message(tmp->fd, "OK\n");
+	if (send)
+		send_message(tmp->fd, "OK\n");
 }
 
-void go_down(t_Server *server, int id)
+void go_down(t_Server *server, int id, bool send)
 {
 	t_Player *tmp;
 
@@ -49,10 +51,11 @@ void go_down(t_Server *server, int id)
 		tmp->pos.y += 1;
 	else
 		tmp->pos.y = 0;
-	send_message(tmp->fd, "OK\n");
+	if (send)
+		send_message(tmp->fd, "OK\n");
 }
 
-void go_up(t_Server *server, int id)
+void go_up(t_Server *server, int id, bool send)
 {
 	t_Player *tmp;
 
@@ -63,5 +66,6 @@ void go_up(t_Server *server, int id)
 		tmp->pos.y -= 1;
 	else
 		tmp->pos.y = server->world->width - 1;
-	send_message(tmp->fd, "OK\n");
+	if (send)
+		send_message(tmp->fd, "OK\n");
 }

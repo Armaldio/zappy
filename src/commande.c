@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 14:07:56 2017 Martin Alais
+** Last update Thu Jun 22 14:28:12 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -52,20 +52,32 @@ void command_pos(int id, t_Server *server, char *data)
 
 	(void) data;
 	player = get_Player(id, server->list_player);
-	sprintf(data_send, "Eject %d, %d\n", player->pos.x, player->pos.y);
+	sprintf(data_send, "%d - %d\n", player->pos.x, player->pos.y);
 	send_message(player->fd, data_send);
 }
 
 void eject_player(t_Server *server, t_Player *player)
 {
 	if (player->gaze == UP)
-		go_up(server, player->id);
+	{
+		go_up(server, player->id, false);
+		send_message(player->fd, "eject: 1\n");
+	}
 	else if (player->gaze == DOWN)
-		go_down(server, player->id);
+	{
+		go_down(server, player->id, false);
+		send_message(player->fd, "eject: 3\n");
+	}
 	else if (player->gaze == RIGHT)
-		go_right(server, player->id);
+	{
+		go_right(server, player->id, false);
+		send_message(player->fd, "eject: 2\n");
+	}
 	else
-		go_left(server, player->id);
+	{
+		go_left(server, player->id, false);
+		send_message(player->fd, "eject: 4\n");
+	}
 }
 
 void command_eject(int id, t_Server *server, char *data)
@@ -88,4 +100,5 @@ void command_eject(int id, t_Server *server, char *data)
 		}
 		tmp = tmp->next;
 	}
+	send_message(player->fd, "OK\n");
 }
