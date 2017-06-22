@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 11:07:21 2017 Martin Alais
+** Last update Thu Jun 22 12:32:07 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -53,4 +53,33 @@ void command_bloom(int id, t_Server *server, char *data)
   tmp->gaze = rand() % 4;
   tmp->isEgg = false;
   tmp->is_connected = false;
+}
+
+int command_set(int id, t_Server *server, char *data)
+{
+	t_Player *tmp;
+	char *all_stone[] = {"linemate", "deraumere", "sibur",
+	"mendiane", "phiras", "thystane", "food", NULL};
+	void	*mfunction_ptr[] = {set_linemate, set_deraumere,
+	set_sibur, set_mendiane, set_phiras, set_thystane, NULL};
+	void	(*fct_ptr)(int id, t_Server *);
+	int a;
+
+	a = 0;
+	data += 4;
+	tmp = server->list_player;
+	while (tmp->next && tmp->id != id)
+		tmp = tmp->next;
+	start_action(server, tmp, 7);
+	while (all_stone[a])
+	{
+		if (strncmp(all_stone[a], data, strlen(all_stone[a])) == 0)
+		{
+			fct_ptr = mfunction_ptr[a];
+			fct_ptr(id, server);
+			return (0);
+		}
+		a += 1;
+	}
+	return (0);
 }

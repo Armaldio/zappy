@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 22 10:59:00 2017 Martin Alais
+## Last update Thu Jun 22 12:29:11 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -44,6 +44,8 @@ SRC    =    src/main.c \
 			src/incantation4.c \
 			src/incantation5.c \
 			src/command_end_gestion.c \
+			src/set_object.c \
+			src/set_object2.c \
 
 FLAGS    =    -Iinclude
 
