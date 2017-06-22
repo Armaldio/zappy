@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 09:43:14 2017 loic1.doyen@epitech.eu
+** Last update Wed Jun 21 09:53:21 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -18,6 +18,10 @@ void	t_backward(t_Player *tmp, int i, int y, t_Server *server)
 
   x = ((tmp->pos.x - i + y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y - y) + server->world->width) % server->world->width;
+  if (server->world->map[x][j]->is_occuped && (x != 0 || y != 0))
+    send_message(tmp->fd, " player");
+  if (server->world->map[x][j]->food >= 1)
+    send_message(tmp->fd, " food");
   if (server->world->map[x][j]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[x][j]->linemate >= 1)
@@ -46,6 +50,10 @@ void	t_forward(t_Player *tmp, int i, int y, t_Server *server)
     }
   x = ((tmp->pos.x + i - y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y + y) + server->world->width) % server->world->width;
+  if (server->world->map[x][j]->is_occuped && (x != 0 || y != 0))
+    send_message(tmp->fd, " player");
+  if (server->world->map[x][j]->food >= 1)
+    send_message(tmp->fd, " food");
   if (server->world->map[x][j]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[x][j]->linemate >= 1)
@@ -69,6 +77,10 @@ void	t_right(t_Player *tmp, int i, int y, t_Server *server)
 
   x = ((tmp->pos.x + y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y - i + y) + server->world->width) % server->world->width;
+  if (server->world->map[x][j]->is_occuped && (x != 0 || y != 0))
+    send_message(tmp->fd, " player");
+  if (server->world->map[x][j]->food >= 1)
+    send_message(tmp->fd, " food");
   if (server->world->map[x][j]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[x][j]->linemate >= 1)
@@ -97,6 +109,10 @@ void	t_left(t_Player *tmp, int i, int y, t_Server *server)
     }
   x = ((tmp->pos.x + i - y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y - y) + server->world->width) % server->world->width;
+  if (server->world->map[x][j]->is_occuped && (x != 0 || y != 0))
+    send_message(tmp->fd, " player");
+  if (server->world->map[x][j]->food >= 1)
+    send_message(tmp->fd, " food");
   if (server->world->map[x][j]->deraumere >= 1)
     send_message(tmp->fd, " deraumere");
   if (server->world->map[x][j]->linemate >= 1)
@@ -122,7 +138,7 @@ int		command_look(int id, t_Server *server, char *data)
   tmp = server->list_player;
   while (tmp->next && tmp->id != id)
     tmp = tmp->next;
-	start_look(server, tmp, data);
+  start_look(server, tmp, data);
   send_message(tmp->fd, "[player");
   y = 0;
   while (y <= tmp->level)

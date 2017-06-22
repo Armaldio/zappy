@@ -81,7 +81,7 @@ tests: install_bats
 	@pkill server
 	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
-	-@./unit-tests/style.sh
+	@./unit-tests/style.sh
 
 re: fclean all
 
