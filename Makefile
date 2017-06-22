@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 22 14:01:24 2017 Quentin Goinaud
+## Last update Thu Jun 22 14:37:54 2017 Quentin Goinaud
 ##
 
 CC    =    gcc -g
@@ -79,8 +79,8 @@ quick_client:
 	$(CC) client/main.c -o mouli
 
 hooks:
-	cp unit-tests/pre-push.sh .git/hooks/pre-push
-	chmod +x .git/hooks/pre-push
+	-@cp unit-tests/pre-push.sh .git/hooks/pre-push
+	-@chmod +x .git/hooks/pre-push
 
 tests: install_bats
 	-./unit-tests/run-server.sh

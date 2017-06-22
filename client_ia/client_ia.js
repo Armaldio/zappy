@@ -82,7 +82,6 @@ client.on('data', (data) => {
                         send("Take " + datas[0].items[0]);
                     else
                         send("Forward");
-
                     break;
 
                 case "Take":

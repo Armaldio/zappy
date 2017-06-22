@@ -8,5 +8,23 @@
     "start": "node client_ia.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "nexe": "^1.1.2"
+  },
+  "nexe": {
+    "input": ".",
+    "output": "zappy_ai^$",
+    "temp": "src",
+    "browserify": {
+      "requires": [],
+      "excludes": [],
+      "paths": []
+    },
+    "runtime": {
+      "framework": "node",
+      "js-flags": "--use_strict",
+      "ignoreFlags": true
+    }
+  }
 }
