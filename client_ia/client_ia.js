@@ -29,8 +29,6 @@ let send = function (cmd) {
 
 client.connect(6666, '127.0.0.1', () => {
     console.log('Client connected');
-
-
 });
 
 let flux = "";
@@ -52,19 +50,31 @@ client.on('data', (data) => {
                         return x.trim();
                     });
 
-
+                    // Format datas
                     datas.forEach((item, i) => {
                         let a = item.split(' ');
-                        datas[i] = {"items": a, "length": a.length};
+                        datas[i] = {"items": a, "length": a.length, "case": i};
                     });
 
-                    /*datas.sort((a, b) => {
-                     return (b.length - a.length);
-                     });*/
+                    // Sort datas
+                    datas.sort((a, b) => {
+                        return (b.length - a.length);
+                    });
 
-                    send("Take " + datas[0].items[1]);
+                    // Remove players
+                    datas.forEach((item, i) => {
+                        item.items.forEach((x, xi) => {
+                            if (x === "player") {
+                                item.items.splice(xi, 1);
+                            }
+                        });
+                    });
 
-                    console.log(datas);
+                    if (datas[0].items.length !== 0)
+                        send("Take " + datas[0].items[0]);
+
+
+                    console.log(JSON.stringify(datas, null, '\t'));
 
                     break;
 
