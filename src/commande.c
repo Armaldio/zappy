@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 14:28:12 2017 Martin Alais
+** Last update Thu Jun 22 15:55:31 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -19,15 +19,18 @@ bool		get_player_team(t_Player *player, char *data, t_Server *serv)
 
   if (strncmp(data, "Exit", 4) == 0)
     return (false);
-  if (!player->waitingTeam || serv->list_player)
+  if (player == NULL || player->waitingTeam == false)
     return (false);
   if ((tmp = get_team(serv->list_teams, data, -1)) == NULL)
-    return (send_message(player->fd, "Ko Team not found\n"), false);
+    return (send_message(player->fd, "Ko\n"), true);
+  if (serv->nbClientMax < tmp->nbMember + 1)
+    return (send_message(player->fd, "Ko\n"), true);
+  tmp->nbMember++;
+  sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax -
+	  tmp->nbMember,
+	  serv->world->width, serv->world->height);
   player->teamId = tmp->id;
   player->waitingTeam = false;
-  sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax
-	  - get_Player_size(serv->list_player),
-	  serv->world->width, serv->world->height);
   send_message(player->fd, buffer);
   return (true);
 }
@@ -43,6 +46,7 @@ void exit_client(int id, t_Server *server, char *data)
     tmp = tmp->next;
   tmp->is_connected = false;
   close(tmp->fd);
+  my_delete_player(server, tmp->id);
 }
 
 void command_pos(int id, t_Server *server, char *data)

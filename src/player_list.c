@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Thu Jun 22 15:13:33 2017 Martin Alais
+** Last update Thu Jun 22 12:49:41 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -81,23 +81,21 @@ void my_delete_player(t_Server *server, int id)
 {
 	t_Player *tmp;
 	t_Player *last;
+  t_team		*team;
 
 	tmp = server->list_player;
-	if (tmp->id == id)
-		{
-			printf("Player with id %d deleted\n", server->list_player->id);
-			server->list_player = tmp->next;
-			free(tmp);
-			return;
-		}
-	last = tmp;
-	tmp = tmp->next;
+	last = NULL;
 	while (tmp != NULL)
 	{
 		if (tmp->id == id)
 		{
 			printf("Player with id %d deleted\n", tmp->id);
-			last->next = tmp->next;
+	  	if ((team = get_team(server->list_teams, NULL, tmp->teamId)) != NULL)
+	    	team->nbMember--;
+	  	if (last == NULL)
+	    	server->list_player = tmp->next;
+	  	else
+	    	last->next = tmp->next;
 			free(tmp);
 			return;
 		}

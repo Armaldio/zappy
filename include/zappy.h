@@ -11,7 +11,7 @@
 #ifndef ZAPPY_MAIN_H_
 # define ZAPPY_MAIN_H_
 
-#include "Server.h"
+#include "Team.h"
 #include "mouvement.h"
 
 # define DEBUG 0
