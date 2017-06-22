@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 22 15:50:07 2017 Martin Alais
+** Last update Thu Jun 22 16:33:48 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -15,10 +15,8 @@ void command_not_found(int id, t_Server *server)
 {
   t_Player *tmp;
 
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
-  send_message(tmp->fd, "KO\n");
+  tmp = get_Player(id, server->list_player);
+  send_message(tmp->fd, "suc\n");
 }
 
 int get_size_commmande(char *str)

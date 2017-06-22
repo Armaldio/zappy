@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Thu Jun 22 15:33:44 2017 Martin Alais
+** Last update Thu Jun 22 16:53:39 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -19,6 +19,7 @@ void basic_init_server(t_Server *server)
 	server->socket = my_malloc(sizeof(t_Connection));
 	server->world = my_malloc(sizeof(t_World));
   server->nbClientMax = 6;
+  server->isGraphic = false;
 	basic_init_socket(server->socket);
 	basic_init_world(server->world);
 	server->f = 100;
@@ -40,7 +41,7 @@ void init_server(t_Server *server)
 {
 	init_socket(server->socket);
 
-	server->list_player = malloc(sizeof(t_Player));
+	server->list_player = my_malloc(sizeof(t_Player));
 	server->list_player = NULL;
 	init_world(server->world);
 	server->time = 0;

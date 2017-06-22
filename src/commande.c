@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 15:55:31 2017 hamza hammouche
+** Last update Thu Jun 22 16:39:11 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -91,9 +91,7 @@ void command_eject(int id, t_Server *server, char *data)
 
 	(void) data;
 	player = server->list_player;
-	tmp = server->list_player;
-	while (player->next && player->id != id)
-		player = player->next;
+	tmp = get_Player(id, server->list_player);
 	start_action(server, player, 7);
 	while (tmp)
 	{

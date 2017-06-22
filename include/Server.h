@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Thu Jun 22 12:28:34 2017 hamza hammouche
+** Last update Thu Jun 22 16:52:59 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -30,6 +30,7 @@ typedef struct	s_Server
 	t_World *world;
   t_team *list_teams;
   int		f;
+  bool	isGraphic;
   int		nbClientMax;
   int		time;
   int		fake_time;
