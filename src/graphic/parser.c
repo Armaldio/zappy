@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:50:27 2017 Martin Alais
-** Last update Thu Jun 22 17:48:47 2017 Martin Alais
+** Last update Thu Jun 22 18:28:39 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -14,9 +14,10 @@
 bool graphic_parser(int id, t_Server *server, char *data)
 {
 	char	*mcommand[] = {"GRAPHIC", "msz", "tna", "sgt", "pnw", "btc",
-	"mct", NULL};
+	"mct", "ppo", "plv", "pin", NULL};
 	void	*mfunction_ptr[] = {commande_graphic, commande_msz, commande_tna,
-		commande_sgt, commande_pnw, commande_btc, commande_mct, NULL};
+		commande_sgt, commande_pnw, commande_btc, commande_mct, commande_ppo,
+		commande_plv, commande_pin, NULL};
 	void	(*fct_ptr)(t_Player *, t_Server *, char *);
 	t_Player *tmp;
 	int		a;
