@@ -15,10 +15,9 @@ void command_not_found(int id, t_Server *server)
 {
   t_Player *tmp;
 
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
-  send_message(tmp->fd, "KO\n");
+  tmp = get_Player(id, server->list_player);
+  server->isGraphic == true ? send_message(tmp->fd, "suc\n") :
+      send_message(tmp->fd, "ko\n");
 }
 
 int get_size_commmande(char *str)
