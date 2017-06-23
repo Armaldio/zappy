@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:38:29 2017 Martin Alais
-** Last update Thu Jun 22 16:44:25 2017 Martin Alais
+** Last update Fri Jun 23 14:18:22 2017 hamza hammouche
 */
 #include "zappy.h"
 #include "Graphic.h"
@@ -14,8 +14,8 @@ void commande_tna(t_Player *player, t_Server *server, char *data)
 {
 	t_team *tmp;
 	char data_send[100];
-	(void) data;
 
+  (void) data;
 	tmp = server->list_teams;
 	while (tmp)
 	{
