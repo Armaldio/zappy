@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Fri Jun 23 10:53:18 2017 Martin Alais
+## Last update Fri Jun 23 12:03:15 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -57,6 +57,7 @@ SRC    =    src/main.c \
 			src/graphic/ppo_plv_pin.c \
 			src/Eggs.c \
 			src/graphic/sst_update_time.c \
+			src/graphic/smg.c \
 
 FLAGS    =    -Iinclude
 
