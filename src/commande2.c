@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Fri Jun 23 15:03:35 2017 Martin Alais
+** Last update Fri Jun 23 16:25:41 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -116,7 +116,7 @@ int command_take(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-	server->isGraphic == true ? stok_answer(tmp, "sbp\n") :
+	tmp->isGraphic == true ? stok_answer(tmp, "sbp\n") :
       stok_answer(tmp, "ko\n");
 	return (0);
 }

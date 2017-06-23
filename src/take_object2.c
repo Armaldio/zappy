@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:03:35 2017 loic1.doyen@epitech.eu
-** Last update Fri Jun 23 15:45:05 2017 Martin Alais
+** Last update Fri Jun 23 16:29:02 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -29,7 +29,7 @@ void take_thystane(int id, t_Server *server)
 	{
 		server->world->map[tmp->pos.x][tmp->pos.y]->thystane -= 1;
 		tmp->inventaire->thystane += 1;
-		server->isGraphic == true ? send_message_take(tmp, tmp->id, 6) :
+		tmp->isGraphic == true ? send_message_take(tmp, tmp->id, 6) :
 	      stok_answer(tmp, "ok\n");
 	}
 	else
@@ -47,7 +47,7 @@ void take_food(int id, t_Server *server)
 	{
 		server->world->map[tmp->pos.x][tmp->pos.y]->food -= 1;
 		tmp->inventaire->food += 1;
-		server->isGraphic == true ? send_message_take(tmp, tmp->id, 0) :
+		tmp->isGraphic == true ? send_message_take(tmp, tmp->id, 0) :
 	      stok_answer(tmp, "ok\n");
 	}
 	else

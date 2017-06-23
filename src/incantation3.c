@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 21 17:35:52 2017 Martin Alais
-** Last update Fri Jun 23 15:17:17 2017 Martin Alais
+** Last update Fri Jun 23 16:26:22 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -36,7 +36,7 @@ void level_up_4(t_Player **player, t_Server *server)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 5;
 		printf("Player %d reach level 5!\n", player[a]->id);
-		server->isGraphic == true ? send_message_pie(player[a], 1) :
+		player[a]->isGraphic == true ? send_message_pie(player[a], 1) :
 	  stok_answer(player[a], "ok\n");
 		a += 1;
 	}
@@ -57,7 +57,7 @@ void level_up_5(t_Player **player, t_Server *server)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 6;
 		printf("Player %d reach level 6!\n", player[a]->id);
-		server->isGraphic == true ? send_message_pie(player[a], 1) :
+		player[a]->isGraphic == true ? send_message_pie(player[a], 1) :
 	  stok_answer(player[a], "ok\n");
 		a += 1;
 	}
@@ -78,7 +78,7 @@ void level_up_6(t_Player **player, t_Server *server)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 7;
 		printf("Player %d reach level 7!\n", player[a]->id);
-		server->isGraphic == true ? send_message_pie(player[a], 1) :
+		player[a]->isGraphic == true ? send_message_pie(player[a], 1) :
 	  stok_answer(player[a], "ok\n");
 		a += 1;
 	}
@@ -101,7 +101,7 @@ void level_up_7(t_Player **player, t_Server *server)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 8;
 		printf("Player %d reach level 8!\n", player[a]->id);
-		server->isGraphic == true ? send_message_pie(player[a], 1) :
+		player[a]->isGraphic == true ? send_message_pie(player[a], 1) :
 	  stok_answer(player[a], "ok\n");
 		a += 1;
 	}
