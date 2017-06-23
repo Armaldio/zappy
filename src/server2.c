@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Fri Jun 23 14:13:44 2017 Martin Alais
+** Last update Fri Jun 23 14:16:42 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -34,7 +34,8 @@ void init_inventaire(t_Player *player, t_Server *server)
 	player->inventaire->phiras = 0;
 	player->inventaire->sibur = 0;
 	player->inventaire->thystane = 0;
-	player->inventaire->food = my_safe_div((1260 / server->f), (126 / server->f));
+	player->inventaire->food = my_safe_div((1260 / server->f),
+	(126 / server->f));
 }
 
 void init_server(t_Server *server)

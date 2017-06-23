@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:23:23 2017 Martin Alais
-** Last update Fri Jun 23 14:10:23 2017 Martin Alais
+** Last update Fri Jun 23 14:16:23 2017 Martin Alais
 */
 
 #include "basic_data.h"
@@ -34,5 +34,5 @@ int my_safe_div(int nbr1, int nbr2)
 {
 	if (nbr2 == 0)
 		return (nbr1);
-	return(nbr1 / nbr2);
+	return (nbr1 / nbr2);
 }
