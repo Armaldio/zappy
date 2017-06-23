@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Fri Jun 23 14:47:31 2017 Martin Alais
+## Last update Fri Jun 23 18:09:28 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -60,6 +60,8 @@ SRC    =    src/main.c \
 			src/graphic/sst_update_time.c \
 			src/graphic/smg.c \
 			src/manage_answer.c \
+			src/connection_graphic.c \
+			src/connection_undefine.c \
 
 FLAGS    =    -Iinclude
 

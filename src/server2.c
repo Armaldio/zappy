@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Fri Jun 23 15:02:32 2017 hamza hammouche
+** Last update Fri Jun 23 19:57:08 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -42,8 +42,10 @@ void init_server(t_Server *server)
 {
 	init_socket(server->socket);
 
-	server->list_player = my_malloc(sizeof(t_Player));
 	server->list_player = NULL;
+	server->list_graphic = NULL;
+	server->list_undefined = NULL;
+	server->list_teams = NULL;
 	init_world(server->world);
 	server->time = 0;
 	server->fake_time = -1;

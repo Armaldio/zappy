@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Fri Jun 23 15:02:24 2017 hamza hammouche
+** Last update Fri Jun 23 18:12:00 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -79,7 +79,7 @@ void check_new_player(t_Server *server)
 	  return ;
 	}
       else
-	my_add_player(server, a);
+	  add_undefined(a, server);
     }
   set_socket_statue(server->socket->fd, 1);
 }

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Fri Jun 23 14:47:20 2017 Martin Alais
+** Last update Fri Jun 23 18:36:12 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -64,5 +64,11 @@ bool graphic_parser(int id, t_Server *server, char *data);
 int get_size_commmande(char *str);
 void stok_answer(t_Player *player, char *answer);
 void send_answer(t_Player *player);
+void add_graphic(int fd, t_Server *server);
+void add_undefined(int fd, t_Server *server);
+void delete_undefine(t_Server *server, int id);
+void delete_graphic(t_Server *server, int id);
+void undefined_to_player(t_Server *server, t_undefined *undefine, t_team *team);
+void undefined_to_graphic(t_Server *server, t_undefined *undefine);
 
 #endif /* !ZAPPY_MAIN_H_ */

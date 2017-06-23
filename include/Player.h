@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Fri Jun 23 14:39:50 2017 Martin Alais
+** Last update Fri Jun 23 17:45:07 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -64,6 +64,20 @@ typedef struct		s_Player
   bool				controlled;
   bool				isEgg;
 }					t_Player;
+
+typedef struct	s_undefined
+{
+	int fd;
+	int id;
+	struct s_undefined *next;
+}			t_undefined;
+
+typedef struct	s_graphic
+{
+	int fd;
+	int id;
+	struct s_graphic *next;
+}			t_graphic;
 
 int				get_Player_size(t_Player *head);
 t_Player		*get_Player(int id, t_Player *head);

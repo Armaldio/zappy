@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 10:39:15 2017 Martin Alais
-** Last update Fri Jun 23 14:22:33 2017 Martin Alais
+** Last update Fri Jun 23 19:30:57 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -25,7 +25,7 @@ void update_player_life_time(t_Player *player, int new_time, t_Server *server)
 	player->life_time = (player->life_time * server->f) / new_time;
 }
 
-void commande_sst(t_Player *player, t_Server *server, char *data2)
+void commande_sst(t_graphic *player, t_Server *server, char *data2)
 {
 	int new_time;
 	t_Player *tmp;

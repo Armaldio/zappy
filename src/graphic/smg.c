@@ -5,13 +5,13 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 11:58:46 2017 Martin Alais
-** Last update Fri Jun 23 12:02:16 2017 Martin Alais
+** Last update Fri Jun 23 19:33:29 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Graphic.h"
 
-void commande_smg(t_Player * player, char *data)
+void commande_smg(t_graphic *player, char *data)
 {
 	send_message(player->fd, data);
 }
