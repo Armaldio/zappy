@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:29:47 2017 Martin Alais
-** Last update Thu Jun 22 17:48:58 2017 Martin Alais
+** Last update Fri Jun 23 14:14:22 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -26,12 +26,19 @@ void commande_bct2(t_Server *server, int x, int y, t_Player *player)
 void commande_pnw(t_Player *player, t_Server *server, char *dataaze)
 {
 	char data[300];
+  t_team	*team;
+  const char *str;
 
 	(void) dataaze;
 	memset(data, '\0', 300);
+  team = get_team(server->list_teams, NULL, player->teamId);
+  if (team != NULL)
+    str = team->name;
+  else
+    str = "";
 	sprintf(data, "pnw %d %d %d %d %d %s\n", player->id, player->pos.x,
 	player->pos.y, player->gaze + 1, player->level,
-	get_team(server->list_teams, NULL, player->teamId)->name);
+	str);
 	send_message(player->fd, data);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Thu Jun 22 17:58:35 2017 hamza hammouche
+** Last update Fri Jun 23 14:03:56 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -17,7 +17,7 @@ bool		get_player_team(t_Player *player, char *data, t_Server *serv)
   t_team *tmp;
   char		buffer[1256];
 
-  if (strncmp(data, "Exit", 4) == 0)
+  if (strncmp(data, "Exit", 4) == 0 || strncmp(data, "GRAPHIC", 7) == 0)
     return (false);
   if (player == NULL || player->waitingTeam == false)
     return (false);
