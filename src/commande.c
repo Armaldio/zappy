@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Fri Jun 23 15:20:09 2017 hamza hammouche
+** Last update Fri Jun 23 16:25:47 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -103,6 +103,6 @@ void command_eject(int id, t_Server *server, char *data)
 		tmp = tmp->next;
 	}
   sprintf(buffer, "pex %d\n", id);
-  player->isGraphic == true ? send_message(tmp->fd, buffer) :
-      send_message(tmp->fd, "ok\n");
+  tmp->isGraphic == true ? stok_answer(tmp, buffer) :
+      stok_answer(tmp, "ok\n");
 }

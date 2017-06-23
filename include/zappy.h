@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Fri Jun 23 11:49:46 2017 hamza hammouche
+** Last update Fri Jun 23 14:47:20 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -62,5 +62,7 @@ void command_pos(int id, t_Server *server, char *data);
 void command_inventory(int id, t_Server *server, char *data);
 bool graphic_parser(int id, t_Server *server, char *data);
 int get_size_commmande(char *str);
+void stok_answer(t_Player *player, char *answer);
+void send_answer(t_Player *player);
 
 #endif /* !ZAPPY_MAIN_H_ */

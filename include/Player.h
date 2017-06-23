@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Fri Jun 23 14:53:26 2017 hamza hammouche
+** Last update Fri Jun 23 14:39:50 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -29,6 +29,7 @@ typedef struct	s_action
 	int end_time;
 	bool is_working;
 	bool is_leveling;
+	char data_to_send[4096];
 }			t_action;
 
 typedef struct	s_Inventaire
