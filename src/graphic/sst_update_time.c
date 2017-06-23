@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 10:39:15 2017 Martin Alais
-** Last update Fri Jun 23 11:46:53 2017 Martin Alais
+** Last update Fri Jun 23 11:56:20 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -13,12 +13,10 @@
 
 void update_action_time(t_Player *player, int new_time, t_Server *server)
 {
-	printf("Old start time: %d\n", player->action->start_time);
-	printf("Old end time: %d\n", player->action->end_time);
-	player->action->start_time = (player->action->start_time * server->f) / new_time;
-	player->action->end_time = (player->action->end_time * server->f) / new_time;
-	printf("New start time: %d\n", player->action->start_time);
-	printf("New end time: %d\n", player->action->end_time);
+	player->action->start_time =
+	(player->action->start_time * server->f) / new_time;
+	player->action->end_time =
+	(player->action->end_time * server->f) / new_time;
 }
 
 void update_player_life_time(t_Player *player, int new_time, t_Server *server)
