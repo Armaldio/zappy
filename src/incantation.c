@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:39 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 18:38:51 2017 hamza hammouche
+** Last update Fri Jun 23 15:00:10 2017 hamza hammouche
 */
 
 #include "Incantation.h"
@@ -20,7 +20,7 @@ void incan_1(t_Server *server, t_Player *player)
 		player->level = 2;
 		player->action->is_leveling = false;
 		printf("Player %d reach level 2!\n", player->id);
-		server->isGraphic == true ? send_message_pie(player, 1) :
+		player->isGraphic == true ? send_message_pie(player, 1) :
 	  send_message(player->fd, "ok\n");
 	}
 }
@@ -41,9 +41,9 @@ void incan_2(t_Server *server, t_Player *player)
 		{
 			level_up_2(tmp);
 			level_up_2(player);
-			server->isGraphic == true ? send_message_pie(tmp, 1) :
+			tmp->isGraphic == true ? send_message_pie(tmp, 1) :
 		send_message(tmp->fd, "ok\n");
-			server->isGraphic == true ? send_message_pie(player, 1) :
+			player->isGraphic == true ? send_message_pie(player, 1) :
 		send_message(tmp->fd, "ok\n");
 		}
 	}
@@ -65,9 +65,9 @@ void incan_3(t_Server *server, t_Player *player)
 		{
 			level_up_3(player);
 			level_up_3(tmp);
-			server->isGraphic == true ? send_message_pie(tmp, 1) :
+			tmp->isGraphic == true ? send_message_pie(tmp, 1) :
 	    send_message(tmp->fd, "ok\n");
-	  	server->isGraphic == true ? send_message_pie(player, 1) :
+	  	player->isGraphic == true ? send_message_pie(player, 1) :
 	    send_message(tmp->fd, "ok\n");
 		}
 	}
@@ -94,7 +94,7 @@ void incan_4(t_Server *server, t_Player *player)
 			player->action->is_leveling = false;
 			player->level = 5;
 			printf("Player %d reach level 5!\n", player->id);
-			server->isGraphic == true ? send_message_pie(player, 1) :
+			player->isGraphic == true ? send_message_pie(player, 1) :
 	    send_message(player->fd, "ok\n");
 			level_up_4(tmp2, server);
 			free(tmp2);
@@ -123,7 +123,7 @@ void incan_5(t_Server *server, t_Player *player)
 			player->action->is_leveling = false;
 			player->level = 6;
 			printf("Player %d reach level 6!\n", player->id);
-			server->isGraphic == true ? send_message_pie(player, 1) :
+			player->isGraphic == true ? send_message_pie(player, 1) :
 	  	send_message(player->fd, "ok\n");
 			level_up_5(tmp2, server);
 			free(tmp2);

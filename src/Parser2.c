@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:33:49 2017 Martin Alais
-** Last update Tue Jun 20 14:17:53 2017 Martin Alais
+** Last update Fri Jun 23 11:30:34 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -94,7 +94,7 @@ int parser_freq(t_Server *server, char **argv, int a)
 		exit(1);
 	}
 	nbr = atoi(argv[a + 1]);
-	if (nbr < 1)
+	if (nbr < 2)
 	{
 		printf("[Error] wrong argument after -f\n");
 		exit(1);

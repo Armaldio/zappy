@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Thu Jun 22 17:15:14 2017 hamza hammouche
+** Last update Fri Jun 23 15:02:02 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -17,7 +17,7 @@ void		update_player_life(t_Server *server)
   tmp = server->list_player;
   while (tmp)
     {
-      if (!tmp->isEgg)
+      if (!tmp->isEgg && tmp->waitingTeam == false)
 	tmp->life_time += 1;
       tmp = tmp->next;
     }
@@ -35,13 +35,13 @@ void check_player_death(t_Server *server)
 			if (tmp->inventaire->food >= 1)
 			{
 				tmp->inventaire->food -= 1;
-				tmp->death_time += (126 / server->f);
+				tmp->death_time += my_safe_div(126, server->f);
 				printf("player %d eat food !\n", tmp->id);
 			}
 			else
 			{
 				printf("Player %d is dead!\n", tmp->id);
-        server->isGraphic == true ? send_message_death(tmp->id, tmp->fd) :
+        tmp->isGraphic == true ? send_message_death(tmp->id, tmp->fd) :
             send_message(tmp->fd, "dead\n");
 				close(tmp->fd);
 				my_delete_player(server, tmp->id);

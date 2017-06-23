@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Thu Jun 22 16:53:39 2017 hamza hammouche
+** Last update Fri Jun 23 15:02:32 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -18,8 +18,8 @@ void basic_init_server(t_Server *server)
 	server->list_player = my_malloc(sizeof(t_Player));
 	server->socket = my_malloc(sizeof(t_Connection));
 	server->world = my_malloc(sizeof(t_World));
+  server->list_teams = my_malloc(sizeof(t_team));
   server->nbClientMax = 6;
-  server->isGraphic = false;
 	basic_init_socket(server->socket);
 	basic_init_world(server->world);
 	server->f = 100;
@@ -34,7 +34,8 @@ void init_inventaire(t_Player *player, t_Server *server)
 	player->inventaire->phiras = 0;
 	player->inventaire->sibur = 0;
 	player->inventaire->thystane = 0;
-	player->inventaire->food = (1260 / server->f) / (126 / server->f);
+	player->inventaire->food = my_safe_div((1260 / server->f),
+	(126 / server->f));
 }
 
 void init_server(t_Server *server)

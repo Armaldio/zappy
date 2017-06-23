@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Thu Jun 22 12:49:41 2017 hamza hammouche
+** Last update Fri Jun 23 14:55:01 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -27,6 +27,7 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->waitingTeam = true;
   new->death_time = 0;
   new->next = NULL;
+  new->isGraphic = false;
   printf("New player connected with fd: %d and id: %d\n", new->fd, new->id);
   printf("Player position: %d %d\n", new->pos.x, new->pos.y);
   send_message(fd, "WELCOME\n");

@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 22 19:03:01 2017 hamza hammouche
+## Last update Fri Jun 23 11:48:40 2017 hamza hammouche
 ##
 
 CC    =    gcc -g
@@ -43,6 +43,7 @@ SRC    =    src/main.c \
 			src/incantation3.c \
 			src/incantation4.c \
 			src/incantation5.c \
+			src/send_message.c \
 			src/command_egg.c \
 			src/command_end_gestion.c \
 			src/set_object.c \
@@ -55,7 +56,9 @@ SRC    =    src/main.c \
 			src/graphic/bct_pnw.c \
 			src/graphic/tna.c \
 			src/graphic/ppo_plv_pin.c \
-			src/Eggs.c
+			src/Eggs.c \
+			src/graphic/sst_update_time.c \
+			src/graphic/smg.c \
 
 FLAGS    =    -Iinclude
 

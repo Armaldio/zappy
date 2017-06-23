@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Thu Jun 22 19:07:02 2017 hamza hammouche
+** Last update Fri Jun 23 14:59:13 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -27,7 +27,7 @@ void command_fork(int id, t_Server *server, char *data)
   start_action(server, tmp, 42);
   add_data_in_line(tmp, "Hatch");
   sprintf(buffer, "pfk %d", tmp->id);
-  server->isGraphic == true ?  send_message(tmp->fd, buffer):
+  tmp->isGraphic == true ?  send_message(tmp->fd, buffer):
       send_message(tmp->fd, "ok\n");
 }
 
@@ -39,7 +39,7 @@ void command_hatch(int id, t_Server *server, char *data)
   tmp = get_Player(id, server->list_player);
   start_action(server, tmp, 600);
   add_data_in_line(tmp, "Bloom");
-  server->isGraphic == true ? send_message_enw(tmp, 1) :
+  tmp->isGraphic == true ? send_message_enw(tmp, 1) :
   send_message(tmp->fd, "ok\n");
 }
 
@@ -54,7 +54,7 @@ void command_bloom(int id, t_Server *server, char *data)
   tmp->isEgg = false;
   tmp->is_connected = false;
   sprintf(buff, "eht %d\n", 1);
-  server->isGraphic == true ? send_message(tmp->fd, buff) :
+  tmp->isGraphic == true ? send_message(tmp->fd, buff) :
   send_message(tmp->fd, "ok\n");
 }
 
@@ -82,7 +82,7 @@ int command_set(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-  server->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
+  tmp->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
       send_message(tmp->fd, "ko\n");
 	return (0);
 }

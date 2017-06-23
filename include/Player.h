@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Fri Jun 23 10:11:13 2017 Quentin Goinaud
+** Last update Fri Jun 23 14:53:26 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -49,6 +49,7 @@ typedef struct		s_Player
   int				life_time;
   int				level;
   int				teamId;
+  bool	isGraphic;
   struct s_Player	*next;
   t_Inventaire		*inventaire;
   t_action			*action;

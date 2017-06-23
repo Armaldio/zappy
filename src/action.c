@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Thu Jun 22 18:28:51 2017 hamza hammouche
+** Last update Fri Jun 23 14:55:31 2017 hamza hammouche
 */
 
 #include <time.h>
@@ -58,7 +58,7 @@ void check_action_status(t_Server *server)
 			tmp->action->is_working = false;
 			if (tmp->action->is_leveling == true)
 	    {
-				server->isGraphic == true ? send_message_pie(tmp, 0) :
+				tmp->isGraphic == true ? send_message_pie(tmp, 0) :
 		  send_message(tmp->fd, "ko\n");
 	    }
 			tmp->action->is_leveling = false;
