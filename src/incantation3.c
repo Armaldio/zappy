@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 21 17:35:52 2017 Martin Alais
-** Last update Wed Jun 21 17:36:44 2017 Martin Alais
+** Last update Thu Jun 22 18:38:36 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -21,7 +21,7 @@ void level_up_3(t_Player *player)
 	printf("Player %d reach level 4!\n", player->id);
 }
 
-void level_up_4(t_Player **player)
+void level_up_4(t_Player **player, t_Server *server)
 {
 	int a;
 
@@ -35,12 +35,13 @@ void level_up_4(t_Player **player)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 5;
 		printf("Player %d reach level 5!\n", player[a]->id);
-		send_message(player[a]->fd, "OK\n");
+		server->isGraphic == true ? send_message_pie(player[a], 1) :
+	  send_message(player[a]->fd, "ok\n");
 		a += 1;
 	}
 }
 
-void level_up_5(t_Player **player)
+void level_up_5(t_Player **player, t_Server *server)
 {
 	int a;
 
@@ -54,12 +55,13 @@ void level_up_5(t_Player **player)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 6;
 		printf("Player %d reach level 6!\n", player[a]->id);
-		send_message(player[a]->fd, "OK\n");
+		server->isGraphic == true ? send_message_pie(player[a], 1) :
+	  send_message(player[a]->fd, "ok\n");
 		a += 1;
 	}
 }
 
-void level_up_6(t_Player **player)
+void level_up_6(t_Player **player, t_Server *server)
 {
 	int a;
 
@@ -73,12 +75,13 @@ void level_up_6(t_Player **player)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 7;
 		printf("Player %d reach level 7!\n", player[a]->id);
-		send_message(player[a]->fd, "OK\n");
+		server->isGraphic == true ? send_message_pie(player[a], 1) :
+	  send_message(player[a]->fd, "ok\n");
 		a += 1;
 	}
 }
 
-void level_up_7(t_Player **player)
+void level_up_7(t_Player **player, t_Server *server)
 {
 	int a;
 
@@ -94,7 +97,8 @@ void level_up_7(t_Player **player)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 8;
 		printf("Player %d reach level 8!\n", player[a]->id);
-		send_message(player[a]->fd, "OK\n");
+		server->isGraphic == true ? send_message_pie(player[a], 1) :
+	  send_message(player[a]->fd, "ok\n");
 		a += 1;
 	}
 }

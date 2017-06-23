@@ -5,11 +5,19 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Wed Jun 21 14:20:36 2017 Martin Alais
+** Last update Thu Jun 22 18:28:51 2017 hamza hammouche
 */
 
 #include <time.h>
 #include "zappy.h"
+
+void send_message_pie(t_Player *p, int r)
+{
+	char buffer[512];
+
+  sprintf(buffer, "pie %d %d %d\n", p->pos.x, p->pos.y, r);
+  send_message(p->fd, buffer);
+}
 
 void init_action(t_Player *player)
 {
@@ -49,7 +57,10 @@ void check_action_status(t_Server *server)
 			tmp->action->start_time = 0;
 			tmp->action->is_working = false;
 			if (tmp->action->is_leveling == true)
-				send_message(tmp->fd, "KO\n");
+	    {
+				server->isGraphic == true ? send_message_pie(tmp, 0) :
+		  send_message(tmp->fd, "ko\n");
+	    }
 			tmp->action->is_leveling = false;
 			printf("Player %d terminated an action\n", tmp->id);
 		}
