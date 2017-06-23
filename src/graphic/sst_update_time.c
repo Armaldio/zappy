@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 10:39:15 2017 Martin Alais
-** Last update Fri Jun 23 11:56:20 2017 Martin Alais
+** Last update Fri Jun 23 14:22:33 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,7 +21,7 @@ void update_action_time(t_Player *player, int new_time, t_Server *server)
 
 void update_player_life_time(t_Player *player, int new_time, t_Server *server)
 {
-	player->death_time = (126 / new_time); // faux
+	player->death_time = (player->death_time * server->f) / (new_time);
 	player->life_time = (player->life_time * server->f) / new_time;
 }
 
