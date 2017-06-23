@@ -109,8 +109,8 @@ client.on('data', (data) => {
 
                 // First command
                 case "":
-                    //send("team1");
-                    send("Look");
+                    send("team1");
+                    //send("Look");
                     break;
 
                 default:

@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:35:13 2017 hamza hammouche
-** Last update Wed Jun 21 15:55:54 2017 Quentin Goinaud
+** Last update Fri Jun 23 10:10:45 2017 Quentin Goinaud
 */
 
 #include "Player.h"
@@ -13,21 +13,22 @@
 int				get_Player_size(t_Player *head)
 {
   int			i;
-  t_Player *tmp;
+  t_Player		*tmp;
 
   i = 0;
   tmp = head->next;
   while (tmp)
     {
       tmp = tmp->next;
-      i++;
+      if (tmp->isEgg == false)
+	i++;
     }
   return (i);
 }
 
 t_Player		*get_First_Player_Available(t_Player *head)
 {
-  t_Player *tmp;
+  t_Player		*tmp;
 
   tmp = head;
   while (tmp)
@@ -43,16 +44,32 @@ t_Player		*get_First_Player_Available(t_Player *head)
 
 t_Player	*get_Player(int id, t_Player *head)
 {
-  t_Player *tmp;
+  t_Player	*tmp;
 
   tmp = head;
   while (tmp)
     {
-      if (tmp->id == id)
+      if (tmp->id == id && tmp->isEgg == false)
 	return (tmp);
       tmp = tmp->next;
     }
   return (NULL);
+}
+
+int	get_New_PlayerID(t_Player *head)
+{
+  t_Player *tmp;
+  int	last;
+
+  tmp = head;
+  last = 0;
+  while (tmp)
+    {
+      if (tmp->isEgg == false)
+	last = tmp->id;
+      tmp = tmp->next;
+    }
+  return (last);
 }
 
 t_Player	*init_player()
