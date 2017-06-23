@@ -25,6 +25,7 @@ void level_up_4(t_Player **player, t_Server *server)
 {
 	int a;
 
+  (void)server;
 	a = 0;
 	while (a < 3)
 	{
@@ -45,6 +46,7 @@ void level_up_5(t_Player **player, t_Server *server)
 {
 	int a;
 
+  (void)server;
 	a = 0;
 	while (a < 3)
 	{
@@ -65,6 +67,7 @@ void level_up_6(t_Player **player, t_Server *server)
 {
 	int a;
 
+  (void)server;
 	a = 0;
 	while (a < 5)
 	{
@@ -85,6 +88,7 @@ void level_up_7(t_Player **player, t_Server *server)
 {
 	int a;
 
+  (void)server;
 	a = 0;
 	while (a < 5)
 	{

@@ -30,7 +30,6 @@ typedef struct	s_Server
 	t_World *world;
   t_team *list_teams;
   int		f;
-  bool	isGraphic;
   int		nbClientMax;
   int		time;
   int		fake_time;

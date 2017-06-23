@@ -50,6 +50,7 @@ typedef struct		s_Player
   int				life_time;
   int				level;
   int				teamId;
+  bool	isGraphic;
   struct s_Player	*next;
   t_Inventaire		*inventaire;
   t_action			*action;

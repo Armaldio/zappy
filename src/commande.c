@@ -17,8 +17,6 @@ bool		get_player_team(t_Player *player, char *data, t_Server *serv)
   t_team *tmp;
   char		buffer[1256];
 
-  if (strncmp(data, "Exit", 4) == 0 || strncmp(data, "GRAPHIC", 7) == 0)
-    return (false);
   if (player == NULL || player->waitingTeam == false)
     return (false);
   if ((tmp = get_team(serv->list_teams, data, -1)) == NULL)
@@ -91,8 +89,8 @@ void command_eject(int id, t_Server *server, char *data)
   char buffer[512];
 
 	(void) data;
-	player = server->list_player;
-	tmp = get_Player(id, server->list_player);
+	player = get_Player(id, server->list_player);
+	tmp = server->list_player;
 	start_action(server, player, 7);
 	while (tmp)
 	{
