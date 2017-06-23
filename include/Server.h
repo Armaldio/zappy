@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Fri Jun 23 15:42:14 2017 Martin Alais
+** Last update Fri Jun 23 17:47:06 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -25,6 +25,8 @@ typedef struct s_Team
 
 typedef struct	s_Server
 {
+	t_undefined *list_undefined;
+	t_graphic *list_graphic;
 	t_Player *list_player;
 	t_Connection *socket;
 	t_World *world;

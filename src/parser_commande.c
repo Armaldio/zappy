@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Fri Jun 23 17:12:03 2017 Martin Alais
+** Last update Fri Jun 23 19:33:56 2017 Martin Alais
 */
 
 #include "Graphic.h"
@@ -63,14 +63,14 @@ bool	check_client_graphic(int id, t_Server *serv, char *data)
     return (false);
   else if (player->isGraphic == true)
     {
-      if (graphic_parser(id, serv, data) == false)
-				command_not_found(id, serv);
+    //   if (graphic_parser(id, serv, data) == false)
+	// 			command_not_found(id, serv);
       return (true);
     }
-  if (strncmp(data, "GRAPHIC", 7) == 0)
-    commande_graphic(player, serv, data);
-  else
-    get_player_team(player, data, serv);
+  // if (strncmp(data, "GRAPHIC", 7) == 0)
+  //   commande_graphic(player, serv, data);
+  // else
+  //   get_player_team(player, data, serv);
   return (true);
 }
 

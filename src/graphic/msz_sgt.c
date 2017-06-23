@@ -5,13 +5,13 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:01:38 2017 Martin Alais
-** Last update Thu Jun 22 17:54:45 2017 Martin Alais
+** Last update Fri Jun 23 19:25:08 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Graphic.h"
 
-void commande_msz(t_Player *player, t_Server *server, char *data)
+void commande_msz(t_graphic *player, t_Server *server, char *data)
 {
 	char data_send[100];
 
@@ -22,7 +22,7 @@ void commande_msz(t_Player *player, t_Server *server, char *data)
 	send_message(player->fd, data_send);
 }
 
-void commande_sgt(t_Player *player, t_Server *server, char *data)
+void commande_sgt(t_graphic *player, t_Server *server, char *data)
 {
 	char data_send[100];
 

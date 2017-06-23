@@ -5,13 +5,13 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 18:05:16 2017 Martin Alais
-** Last update Fri Jun 23 15:09:43 2017 Martin Alais
+** Last update Fri Jun 23 19:33:21 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Graphic.h"
 
-void commande_ppo(t_Player *player, t_Server *server, char *data2)
+void commande_ppo(t_graphic *player, t_Server *server, char *data2)
 {
 	char data[100];
 	int id;
@@ -31,7 +31,7 @@ void commande_ppo(t_Player *player, t_Server *server, char *data2)
 	send_message(player->fd, data);
 }
 
-void commande_plv(t_Player *player, t_Server *server, char *data2)
+void commande_plv(t_graphic *player, t_Server *server, char *data2)
 {
 	char data[100];
 	int id;
@@ -50,7 +50,7 @@ void commande_plv(t_Player *player, t_Server *server, char *data2)
 	send_message(player->fd, data);
 }
 
-void commande_pin(t_Player *player, t_Server *server, char *data2)
+void commande_pin(t_graphic *player, t_Server *server, char *data2)
 {
 	char data[300];
 	int id;

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:55:33 2017 Martin Alais
-** Last update Fri Jun 23 15:51:51 2017 hamza hammouche
+** Last update Fri Jun 23 19:27:22 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -30,18 +30,16 @@ int		get_random_team(t_Player *player, t_Server *server)
   return (0);
 }
 
-void commande_graphic(t_Player *player, t_Server *server, char *data)
+void commande_graphic(t_graphic *player, t_Server *server, char *data)
 {
-  player->isGraphic = true;
-  get_random_team(player, server);
 	commande_msz(player, server, data);
 	commande_sgt(player, server, data);
 	commande_mct(player, server, data);
 	commande_tna(player, server, data);
-	commande_pnw(player, server, data);
+	// commande_pnw(player, server, data);
 }
 
-void commande_mct(t_Player *player, t_Server *server, char *data)
+void commande_mct(t_graphic *player, t_Server *server, char *data)
 {
 	int a;
 	int b;
