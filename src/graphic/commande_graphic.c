@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:55:33 2017 Martin Alais
-** Last update Thu Jun 22 17:46:25 2017 Martin Alais
+** Last update Fri Jun 23 15:07:06 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -13,6 +13,7 @@
 
 void commande_graphic(t_Player *player, t_Server *server, char *data)
 {
+  player->isGraphic = true;
 	commande_msz(player, server, data);
 	commande_sgt(player, server, data);
 	commande_mct(player, server, data);

@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Fri Jun 23 14:03:56 2017 hamza hammouche
+** Last update Fri Jun 23 14:56:51 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -91,8 +91,8 @@ void command_eject(int id, t_Server *server, char *data)
   char buffer[512];
 
 	(void) data;
-	player = server->list_player;
-	tmp = get_Player(id, server->list_player);
+	player = get_Player(id, server->list_player);
+	tmp = server->list_player;
 	start_action(server, player, 7);
 	while (tmp)
 	{
@@ -105,6 +105,6 @@ void command_eject(int id, t_Server *server, char *data)
 		tmp = tmp->next;
 	}
   sprintf(buffer, "pex %d\n", id);
-  server->isGraphic == true ? send_message(tmp->fd, buffer) :
+  player->isGraphic == true ? send_message(tmp->fd, buffer) :
       send_message(tmp->fd, "ok\n");
 }

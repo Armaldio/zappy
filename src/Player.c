@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:35:13 2017 hamza hammouche
-** Last update Fri Jun 23 10:10:45 2017 Quentin Goinaud
+** Last update Fri Jun 23 14:54:26 2017 hamza hammouche
 */
 
 #include "Player.h"
@@ -83,5 +83,6 @@ t_Player	*init_player()
 	player_list->id = 1;
 	player_list->pos.x = -1;
 	player_list->pos.y = -1;
+  player_list->isGraphic = false;
 	return (player_list);
 }

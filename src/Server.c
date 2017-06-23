@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Thu Jun 22 19:17:12 2017 hamza hammouche
+** Last update Fri Jun 23 15:02:24 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -70,7 +70,7 @@ void check_new_player(t_Server *server)
       if (p != NULL)
 	{
 	  printf("Linking connection to player %d\n", p->id);
-		server->isGraphic == true ? send_message_ebo(p, 1) :
+		p->isGraphic == true ? send_message_ebo(p, 1) :
 		send_message(p->fd, "ok\n");
 	  p->is_connected = true;
 	  p->isEgg = false;
