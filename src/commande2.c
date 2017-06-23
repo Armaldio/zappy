@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Fri Jun 23 11:49:37 2017 hamza hammouche
+** Last update Fri Jun 23 15:03:35 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -44,7 +44,7 @@ void commande_right(int id, t_Server *server, char *data)
 		tmp->gaze = LEFT;
 	else
 		tmp->gaze = UP;
-	send_message(tmp->fd, "OK\n");
+	stok_answer(tmp, "ok\n");
 }
 
 void commande_left(int id, t_Server *server, char *data)
@@ -62,7 +62,7 @@ void commande_left(int id, t_Server *server, char *data)
 		tmp->gaze = RIGHT;
 	else
 		tmp->gaze = UP;
-	send_message(tmp->fd, "OK\n");
+	stok_answer(tmp, "ok\n");
 }
 
 void commande_incantation(int id, t_Server *server, char data)
@@ -116,7 +116,7 @@ int command_take(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-	server->isGraphic == true ? send_message(tmp->fd, "sbp\n") :
-      send_message(tmp->fd, "ko\n");
+	server->isGraphic == true ? stok_answer(tmp, "sbp\n") :
+      stok_answer(tmp, "ko\n");
 	return (0);
 }

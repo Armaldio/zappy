@@ -5,17 +5,17 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 12:06:35 2017 Martin Alais
-** Last update Thu Jun 22 17:35:53 2017 hamza hammouche
+** Last update Fri Jun 23 15:36:54 2017 Martin Alais
 */
 
 #include "zappy.h"
 
-void send_message_item(int fd, int id, int nb)
+void send_message_item(t_Player *player, int id, int nb)
 {
 	char buffer[512];
 
   sprintf(buffer, "pdr %d %d\n", id, nb);
-  send_message(fd, buffer);
+  stok_answer(player, buffer);
 }
 
 void set_thystane(int id, t_Server *server)
@@ -29,11 +29,11 @@ void set_thystane(int id, t_Server *server)
 	{
 		server->world->map[tmp->pos.x][tmp->pos.y]->thystane += 1;
 		tmp->inventaire->thystane -= 1;
-		server->isGraphic == true ? send_message_item(tmp->fd, tmp->id, 6) :
-	      send_message(tmp->fd, "ok\n");
+		server->isGraphic == true ? send_message_item(tmp, tmp->id, 6) :
+	      stok_answer(tmp, "ok\n");
 	}
 	else
-		send_message(tmp->fd, "ko\n");
+		stok_answer(tmp, "ko\n");
 }
 
 void set_food(int id, t_Server *server)
@@ -47,9 +47,9 @@ void set_food(int id, t_Server *server)
 	{
 		server->world->map[tmp->pos.x][tmp->pos.y]->food += 1;
 		tmp->inventaire->food -= 1;
-		server->isGraphic == true ? send_message_item(tmp->fd, tmp->id, 0) :
-	      send_message(tmp->fd, "ok\n");
+		server->isGraphic == true ? send_message_item(tmp, tmp->id, 0) :
+	      stok_answer(tmp, "ok\n");
 	}
 	else
-		send_message(tmp->fd, "ko\n");
+		stok_answer(tmp, "ko\n");
 }

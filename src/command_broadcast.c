@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:36:04 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 13:51:25 2017 loic1.doyen@epitech.eu
+** Last update Fri Jun 23 14:51:50 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,9 +21,9 @@ int command_broadcast(int id, t_Server *server, char *data)
   strcat(data, "\n");
     while (tmp) {
       if (tmp->id == id)
-	send_message(tmp->fd, "OK\n");
+	  stok_answer(tmp, "ok\n");
       else
-	send_message(tmp->fd, data);
+	  stok_answer(tmp, data);
       tmp = tmp->next;
     }
   return (0);

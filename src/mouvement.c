@@ -5,9 +5,10 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:49 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 14:23:12 2017 Martin Alais
+** Last update Fri Jun 23 15:45:56 2017 Martin Alais
 */
 
+#include "zappy.h"
 #include "mouvement.h"
 
 void go_left(t_Server *server, int id, bool send)
@@ -22,7 +23,7 @@ void go_left(t_Server *server, int id, bool send)
 	else
 		tmp->pos.x = server->world->height - 1;
 	if (send)
-		send_message(tmp->fd, "OK\n");
+		stok_answer(tmp, "OK\n");
 }
 
 void go_right(t_Server *server, int id, bool send)
@@ -37,7 +38,7 @@ void go_right(t_Server *server, int id, bool send)
 	else
 		tmp->pos.x = 0;
 	if (send)
-		send_message(tmp->fd, "OK\n");
+		stok_answer(tmp, "OK\n");
 }
 
 void go_down(t_Server *server, int id, bool send)
@@ -52,7 +53,7 @@ void go_down(t_Server *server, int id, bool send)
 	else
 		tmp->pos.y = 0;
 	if (send)
-		send_message(tmp->fd, "OK\n");
+		stok_answer(tmp, "OK\n");
 }
 
 void go_up(t_Server *server, int id, bool send)
@@ -67,5 +68,5 @@ void go_up(t_Server *server, int id, bool send)
 	else
 		tmp->pos.y = server->world->width - 1;
 	if (send)
-		send_message(tmp->fd, "OK\n");
+		stok_answer(tmp, "OK\n");
 }

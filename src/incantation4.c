@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 21 17:37:05 2017 Martin Alais
-** Last update Thu Jun 22 18:42:47 2017 hamza hammouche
+** Last update Fri Jun 23 15:17:37 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -34,7 +34,7 @@ void incan_6(t_Server *server, t_Player *player)
 			player->level = 7;
 			printf("Player %d reach level 7!\n", player->id);
 			server->isGraphic == true ? send_message_pie(player, 1) :
-			send_message(player->fd, "ok\n");
+			stok_answer(player, "ok\n");
 			level_up_6(tmp2, server);
 			free(tmp2);
 		}
@@ -61,7 +61,7 @@ void incan_7(t_Server *server, t_Player *player)
 			player->level = 8;
 			printf("Player %d reach level 8!\n", player->id);
 			server->isGraphic == true ? send_message_pie(player, 1) :
-	      send_message(player->fd, "ok\n");
+	      stok_answer(player, "ok\n");
 			level_up_7(tmp2, server);
 			free(tmp2);
 		}
