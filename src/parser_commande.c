@@ -5,10 +5,10 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Fri Jun 23 15:00:40 2017 hamza hammouche
+** Last update Fri Jun 23 15:45:41 2017 hamza hammouche
 */
 
-#include "zappy.h"
+#include "Graphic.h"
 #include "Team.h"
 
 void command_not_found(int id, t_Server *server)
@@ -49,10 +49,29 @@ int parser_commande2(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-
-	if (graphic_parser(id, server, data) == false)
-		command_not_found(id, server);
+	command_not_found(id, server);
 	return (0);
+}
+
+bool	check_client_graphic(int id, t_Server *serv, char *data)
+{
+  t_Player	*player;
+
+  player = get_Player(id, serv->list_player);
+  if (strncmp(data, "Exit", 4) == 0 || (player->waitingTeam == false &&
+	      player->isGraphic == false))
+    return (false);
+  else if (player->isGraphic == true)
+    {
+      if (graphic_parser(id, serv, data) == false)
+				command_not_found(id, serv);
+      return (true);
+    }
+  if (strncmp(data, "GRAPHIC", 7) == 0)
+    commande_graphic(player, serv, data);
+  else
+    get_player_team(player, data, serv);
+  return (true);
 }
 
 int parser_commande(int id, t_Server *serv, char *data)
@@ -68,7 +87,7 @@ int parser_commande(int id, t_Server *serv, char *data)
   if (data == NULL)
     return (0);
   a = 0;
-  if (get_player_team(get_Player(id, serv->list_player), data, serv) == true)
+  if (check_client_graphic(id, serv, data) == true)
     return (0);
   while (mcommand[a])
     {
