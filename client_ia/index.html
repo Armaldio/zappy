@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Zappy</title>
+</head>
+<body>
+<div id="datas">
+
+</div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io('http://localhost:4244');
+
+	socket.on('connect', function () {
+		console.log("Connected");
+
+		socket.emit('msg', "Hello")
+	});
+
+	socket.on('message', function (data) {
+		console.log(data);
+
+        var $datas = $("#datas");
+
+        /*
+         "inventory     ": this.inventory,
+         "view          ": this.view,
+         "direction     ": this.direction,
+         "queue         ": this.queue,
+         "behaviour     ": this.behaviour,
+         "flux          ": this.flux,
+         "team          ": this.team,
+         "searchingFood ": this.searchingFood,
+         "clientNum     ": this.clientNum,
+         "mapSize       ": this.mapSize,
+         "lastCommand   ": this.lastCommand,
+         "totalCommands ": this.totalCommands,
+         "goesUp        ": this.goesUp,
+         "level         ": this.level,
+         "incantating "  : this.incantating,
+         "behaviour "    : this.behaviour,
+         */
+
+        /*var text = "";
+        $.each(data, function (key, value) {
+            console.log("Key : " , key, "value : " , value);
+            text =+ key + " : " + "\n";
+		});*/
+
+        $datas.text(JSON.stringify(data, null, '\t'));
+	});
+
+	//socket.emit('my other event', {my: 'data'});
+</script>
+</html>
