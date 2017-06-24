@@ -5,9 +5,10 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Fri Jun 23 10:10:31 2017 Quentin Goinaud
-** Last update Fri Jun 23 10:10:57 2017 Quentin Goinaud
+** Last update Sat Jun 24 12:15:21 2017 Martin Alais
 */
 
+#include "zappy.h"
 #include "Player.h"
 
 t_Player	*get_Egg(int id, t_Player *head)

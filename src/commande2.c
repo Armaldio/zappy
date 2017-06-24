@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Fri Jun 23 16:25:41 2017 Martin Alais
+** Last update Sat Jun 24 12:02:52 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -27,6 +27,13 @@ void commande_forward(int id, t_Server *server, char *data)
 		go_right(server, id, true);
 	else
 		go_left(server, id, true);
+	tmp = server->list_player;
+	while (tmp)
+	{
+		if (tmp->isEgg == true)
+			printf("Eggs %d\n", tmp->id);
+		tmp = tmp->next;
+	}
 }
 
 void commande_right(int id, t_Server *server, char *data)

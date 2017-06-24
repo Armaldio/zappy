@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Fri Jun 23 19:33:56 2017 Martin Alais
+** Last update Sat Jun 24 14:34:13 2017 Martin Alais
 */
 
 #include "Graphic.h"
@@ -87,8 +87,8 @@ int parser_commande(int id, t_Server *serv, char *data)
   if (data == NULL)
     return (0);
   a = 0;
-  if (check_client_graphic(id, serv, data) == true)
-    return (0);
+  // if (check_client_graphic(id, serv, data) == true)
+  //   return (0);
   while (mcommand[a])
     {
 		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)

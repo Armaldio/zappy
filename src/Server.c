@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Fri Jun 23 18:12:00 2017 Martin Alais
+** Last update Sat Jun 24 14:46:28 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -69,6 +69,7 @@ void check_new_player(t_Server *server)
     {
       if (p != NULL)
 	{
+		send_message(a, "WELCOME\n");
 	  printf("Linking connection to player %d\n", p->id);
 		p->isGraphic == true ? send_message_ebo(p, 1) :
 		send_message(p->fd, "ok\n");

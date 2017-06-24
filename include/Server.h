@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Fri Jun 23 17:47:06 2017 Martin Alais
+** Last update Sat Jun 24 12:15:56 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -30,7 +30,7 @@ typedef struct	s_Server
 	t_Player *list_player;
 	t_Connection *socket;
 	t_World *world;
-  t_team *list_teams;
+	t_team *list_teams;
   int		f;
   int		nbClientMax;
   int		time;

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 12:00:37 2017 Martin Alais
-** Last update Thu Jun 22 19:17:30 2017 Quentin Goinaud
+** Last update Sat Jun 24 15:04:25 2017 Martin Alais
 */
 
 #include <string.h>
@@ -34,8 +34,8 @@ void remove_newline(char *str)
 
 int add_data_in_line(t_Player * player, char *order)
 {
-  if (player->controlled == false || player->isEgg == true)
-    return (0);
+  // if (player->controlled == false || player->isEgg == true)
+  //   return (0);
 
   if (player->waiting_line->nbr_ordre > 9)
     {
