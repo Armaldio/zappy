@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Fri Jun 23 18:41:14 2017 Quentin Goinaud
+** Last update Sat Jun 24 15:12:20 2017 Martin Alais
 */
 
 #include <time.h>
@@ -41,7 +41,12 @@ void start_action(t_Server *server, t_Player *player, int action_time)
 	+ (action_time / server->f);
 	player->action->is_working = true;
 	player->action->is_leveling = false;
-	printf("Player %d starting an action for %dt\n", player->id, action_time);
+	if (player->isEgg == false)
+		printf("Player %d starting an action for %dt\n",
+		player->id, action_time);
+	else
+		printf("Eggs %d starting an action for %dt\n",
+		player->id, action_time);
 }
 
 void check_action_status(t_Server *server)
@@ -57,14 +62,13 @@ void check_action_status(t_Server *server)
 			tmp->action->start_time = 0;
 			tmp->action->is_working = false;
 			if (tmp->action->is_leveling == true)
-	    {
-				tmp->isGraphic == true ? send_message_pie(tmp, 0) :
-		  send_message(tmp->fd, "ko\n");
-	    }
+	    	send_message(tmp->fd, "ko\n");
 			tmp->action->is_leveling = false;
 			send_answer(tmp);
-			printf("Player %d terminated an action\n", tmp->id);
-			printf("Sending : %s\n", tmp->action->data_to_send);
+			if (tmp->isEgg == false)
+				printf("Player %d terminated an action\n", tmp->id);
+			else
+				printf("Eggs %d terminated an action\n", tmp->id);
 		}
 		tmp = tmp->next;
 	}

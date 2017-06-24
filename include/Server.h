@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Fri Jun 23 17:47:06 2017 Martin Alais
+** Last update Sat Jun 24 12:15:56 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -30,7 +30,7 @@ typedef struct	s_Server
 	t_Player *list_player;
 	t_Connection *socket;
 	t_World *world;
-  t_team *list_teams;
+	t_team *list_teams;
   int		f;
   int		nbClientMax;
   int		time;
@@ -41,6 +41,11 @@ bool get_team_name(t_Player *, char *data, t_Server *serv);
 void send_message_item(t_Player *player, int, int nb);
 void send_message_take(t_Player *player, int, int nb);
 
+void print_player(t_Server *server);
+bool check_valide_team(char *team_name, t_Server *server,
+		       t_undefined *undefine);
+void check_data_undefine(t_undefined *tmp, char *data_recv,
+           			 int a, t_Server *server);
 bool end_game(t_Server *serv);
 void init_server(t_Server *server);
 void check_new_player(t_Server *server);

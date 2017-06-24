@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Sat Jun 24 12:07:04 2017 Quentin Goinaud
+## Last update Sat Jun 24 16:11:18 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -50,6 +50,8 @@ SRC    =    src/main.c \
 			src/set_object2.c \
 			src/parser_commande.c \
 			src/command_broadcast.c \
+			src/undefinded_to_graphic.c \
+			src/check_data_undefine.c \
 			src/graphic/commande_graphic.c \
 			src/graphic/msz_sgt.c \
 			src/graphic/parser.c \
@@ -62,6 +64,9 @@ SRC    =    src/main.c \
 			src/manage_answer.c \
 			src/connection_graphic.c \
 			src/connection_undefine.c \
+			src/event/player_connection.c \
+			src/egg2.c \
+			src/event/event2.c \
 
 FLAGS    =    -Iinclude
 

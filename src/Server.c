@@ -5,13 +5,14 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Fri Jun 23 18:12:00 2017 Martin Alais
+** Last update Sat Jun 24 16:14:04 2017 Martin Alais
 */
 
 #include "Server.h"
 #include "Player.h"
 #include "Socket.h"
 #include "zappy.h"
+#include "Event.h"
 
 void add_to_line(t_Player *tmp, char *data_recv, int a, t_Server *server)
 {
@@ -56,6 +57,29 @@ void check_data_player(t_Server *server)
 	}
 }
 
+int get_new_id(t_Server *server)
+{
+	int a;
+	t_Player *tmp;
+	a = 0;
+
+	tmp = server->list_player;
+	while (tmp)
+	{
+		if (tmp->isEgg == false)
+			a = tmp->id;
+		tmp = tmp->next;
+	}
+	return (a);
+}
+
+void eggs_connection_message(int a, t_Player *p)
+{
+	send_message(a, "WELCOME\n");
+  printf("Linking connection to player %d\n", p->id);
+	send_message(p->fd, "ok\n");
+}
+
 void check_new_player(t_Server *server)
 {
   int a;
@@ -69,13 +93,14 @@ void check_new_player(t_Server *server)
     {
       if (p != NULL)
 	{
-	  printf("Linking connection to player %d\n", p->id);
-		p->isGraphic == true ? send_message_ebo(p, 1) :
-		send_message(p->fd, "ok\n");
+		eggs_connection_message(a, p);
 	  p->is_connected = true;
 	  p->isEgg = false;
 	  p->controlled = true;
 	  p->fd = a;
+	  event_conection_for_eggs(server, p);
+	  p->id = get_new_id(server);
+	  event_new_player(server, p);
 	  return ;
 	}
       else

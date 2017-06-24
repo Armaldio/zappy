@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Fri Jun 23 17:45:07 2017 Martin Alais
+** Last update Sat Jun 24 12:45:43 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -57,6 +57,8 @@ typedef struct		s_Player
   t_waiting_line	*waiting_line;
   int				fd;
   int				id;
+  int 				id_eggs;
+  int				father_id;
   bool				is_connected;
   bool				waitingTeam;
   bool				is_dead;

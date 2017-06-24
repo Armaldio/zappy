@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:44:59 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 20 14:45:17 2017 Martin Alais
+** Last update Sat Jun 24 12:52:32 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -18,7 +18,6 @@ void parser_data2(int b, int *a, t_Server *server, char **argv)
 
 	fct_ptr = mfunction_ptr[b];
 	*a += fct_ptr(server, argv, *a);
-
 }
 
 void print_parse_error(char *data)

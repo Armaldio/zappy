@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Fri Jun 23 16:30:44 2017 Martin Alais
+** Last update Sat Jun 24 15:13:17 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -13,49 +13,53 @@
 
 void command_fork(int id, t_Server *server, char *data)
 {
-  t_Player	*tmp;
-  char			buffer[512];
+	t_Player	*egg;
+	t_Player *player;
+	int eggs_id;
 
-  (void) id;
-  (void) data;
-  my_add_player_id(server, -1);
-  tmp = get_Player(id, server->list_player);
-  tmp->is_connected = true;
-  tmp->controlled = false;
-  tmp->isEgg = true;
-  tmp->pos = get_spaw_pos(server);
-  start_action(server, tmp, 42);
-  add_data_in_line(tmp, "Hatch");
-  sprintf(buffer, "pfk %d", tmp->id);
-  tmp->isGraphic == true ?  stok_answer(tmp, buffer):
-      stok_answer(tmp, "ok\n");
+	(void) id;
+	(void) data;
+	player = get_Player(id, server->list_player);
+	eggs_id = my_add_eggs(server, player);
+	egg = get_eggs(eggs_id, server->list_player);
+	start_action(server, player, 42);
+	start_action(server, egg, 42);
+	add_data_in_line(egg, "Hatch");
+	stok_answer(player, "ok\n");
 }
 
 void command_hatch(int id, t_Server *server, char *data)
 {
-  t_Player	*tmp;
+	t_Player	*tmp;
 
-  (void) data;
-  tmp = get_Player(id, server->list_player);
-  start_action(server, tmp, 600);
-  add_data_in_line(tmp, "Bloom");
-  tmp->isGraphic == true ? send_message_enw(tmp, 1) :
-  stok_answer(tmp, "ok\n");
+	(void) data;
+	tmp = get_eggs(id, server->list_player);
+	if (tmp == NULL)
+	{
+		tmp = get_Player(id, server->list_player);
+		printf("IS NOT AN EGGS\n");
+	}
+	else
+		printf("IS AN EGGS\n");
+	start_action(server, tmp, 600);
+	add_data_in_line(tmp, "Bloom");
+	if (tmp->controlled == true)
+    	stok_answer(tmp, "ok\n");
 }
 
 void command_bloom(int id, t_Server *server, char *data)
 {
-  t_Player	*tmp;
-  char			buff[512];
+	t_Player	*tmp;
 
-  (void) data;
-  tmp = get_Player(id, server->list_player);
-  tmp->gaze = rand() % 4;
-  tmp->isEgg = false;
-  tmp->is_connected = false;
-  sprintf(buff, "eht %d\n", 1);
-  tmp->isGraphic == true ? stok_answer(tmp, buff) :
-  stok_answer(tmp, "ok\n");
+	(void) data;
+	tmp = get_eggs(id, server->list_player);
+	if (tmp == NULL)
+		tmp = get_Player(id, server->list_player);
+	if (tmp->isEgg == false)
+		return;
+	tmp->gaze = rand() % 4;
+	tmp->isEgg = false;
+	tmp->is_connected = false;
 }
 
 int command_set(int id, t_Server *server, char *data)
@@ -82,8 +86,7 @@ int command_set(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-  tmp->isGraphic == true ? stok_answer(tmp, "sbp\n") :
-      stok_answer(tmp, "ko\n");
+  stok_answer(tmp, "ko\n");
 	return (0);
 }
 

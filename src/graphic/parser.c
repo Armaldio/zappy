@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:50:27 2017 Martin Alais
-** Last update Fri Jun 23 19:34:38 2017 Martin Alais
+** Last update Sat Jun 24 15:57:17 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -19,7 +19,7 @@ t_graphic *get_graphic_user(int id, t_Server *server)
 	while (tmp)
 	{
 		if (tmp->id == id)
-			return(tmp);
+			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);
@@ -27,10 +27,10 @@ t_graphic *get_graphic_user(int id, t_Server *server)
 
 bool graphic_parser(int id, t_Server *server, char *data)
 {
-	char	*mcommand[] = {"msz", "tna", "sgt", "pnw", "btc",
+	char	*mcommand[] = {"msz", "tna", "sgt", "bct",
 	"mct", "ppo", "plv", "pin", "sst", NULL};
 	void	*mfunction_ptr[] = {commande_msz, commande_tna,
-		commande_sgt, commande_pnw, commande_btc, commande_mct, commande_ppo,
+		commande_sgt, commande_btc, commande_mct, commande_ppo,
 		commande_plv, commande_pin, commande_sst, NULL};
 	void	(*fct_ptr)(t_graphic *, t_Server *, char *);
 	t_graphic *tmp;
