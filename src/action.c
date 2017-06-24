@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Sat Jun 24 14:18:49 2017 Martin Alais
+** Last update Sat Jun 24 15:12:20 2017 Martin Alais
 */
 
 #include <time.h>
@@ -42,9 +42,11 @@ void start_action(t_Server *server, t_Player *player, int action_time)
 	player->action->is_working = true;
 	player->action->is_leveling = false;
 	if (player->isEgg == false)
-		printf("Player %d starting an action for %dt\n", player->id, action_time);
+		printf("Player %d starting an action for %dt\n",
+		player->id, action_time);
 	else
-		printf("Eggs %d starting an action for %dt\n", player->id, action_time);
+		printf("Eggs %d starting an action for %dt\n",
+		player->id, action_time);
 }
 
 void check_action_status(t_Server *server)

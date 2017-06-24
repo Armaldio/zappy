@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Sat Jun 24 12:03:18 2017 Martin Alais
+## Last update Sat Jun 24 15:14:05 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -65,6 +65,7 @@ SRC    =    src/main.c \
 			src/connection_graphic.c \
 			src/connection_undefine.c \
 			src/event/player_connection.c \
+			src/egg2.c \
 
 FLAGS    =    -Iinclude
 

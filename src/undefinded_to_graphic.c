@@ -5,11 +5,12 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Sat Jun 24 12:42:19 2017 hamza hammouche
-** Last update Sat Jun 24 12:43:00 2017 hamza hammouche
+** Last update Sat Jun 24 15:11:46 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Graphic.h"
+#include "Event.h"
 
 void undefined_to_graphic(t_Server *server, t_undefined *undefine)
 {
@@ -20,6 +21,7 @@ void undefined_to_graphic(t_Server *server, t_undefined *undefine)
 	printf("Undefine %d become Graphic %d !\n", undefine->id, tmp->id);
 	commande_graphic(tmp, server, "");
 	delete_undefine(server, undefine->id);
+	send_all_player(server, tmp);
 }
 
 void delete_undefine(t_Server *server, int id)
