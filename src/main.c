@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Fri Jun 23 19:13:49 2017 Martin Alais
+** Last update Sat Jun 24 11:13:31 2017 Martin Alais
 */
 
 #include <time.h>
@@ -36,7 +36,6 @@ bool check_valide_team(char *team_name, t_Server *server, t_undefined *undefine)
 	tmp = server->list_teams;
 	while (tmp)
 	{
-		printf("strcmp: %s / %s\n", tmp->name, team_name);
 		if (strncmp(tmp->name, team_name, strlen(tmp->name)) == 0)
 		{
 			undefined_to_player(server, undefine, tmp);
