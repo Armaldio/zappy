@@ -9,7 +9,13 @@ const path  = require("path");
 module.exports = class Bot {
 	constructor (behaviour) {
 		this.inventory     = {};
-		this.view          = [];
+		this.view          = {
+			"up": [],
+			"down": [],
+			"left": [],
+			"right": [],
+		};
+		this.direction = "";
 		this.queue         = [];
 		this.client        = {};
 		this.behaviour     = {};
@@ -18,6 +24,7 @@ module.exports = class Bot {
 		this.searchingFood = false;
 		this.clientNum     = -1;
 		this.mapSize       = {};
+		this.lastCommand = "";
 
 		this.behaviour = JSON.parse(fs.readFileSync(path.join(__dirname, "behaviours", behaviour + ".json"), 'utf8'));
 
@@ -33,13 +40,14 @@ module.exports = class Bot {
 		this.queue.push(cmd.split(/(\\n)| /g)[0]);
 
 		this.client.write(cmd + "\n", () => {
-			console.log(chalk.blue(">> " + cmd));
+			console.log(chalk.blue("[Sending] " + cmd));
 			this.output(this.queue);
 		});
 
 	}
 
 	onLook () {
+		this.output("Look");
 		let datas = this.flux.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
 			return x.trim();
 		});
@@ -68,7 +76,7 @@ module.exports = class Bot {
 			});
 		});
 
-		this.view = datas;
+		this.view[this.direction] = datas;
 
 		if (datas[0].items && datas[0].items.length !== 0)
 			this.send("Take " + datas[0].items[0]);
@@ -77,28 +85,32 @@ module.exports = class Bot {
 	}
 
 	onTake () {
-		if (this.flux === "ok")
+		this.output("Took object");
+		if (this.msg === "ok")
 			this.send("Look");
 	}
 
 	onForward () {
-		if (this.flux === "ok")
+		this.output("Going forward");
+		if (this.msg === "ok")
 			this.send("Look");
 	}
 
 	onTeam () {
 		let a       = {};
-		let split   = this.flux.split(/[\\n\s]/g);
+		let split   = this.msg.split(/[\\n\s]/g);
 		a.remaining = split[0];
 		a.w         = split[1];
 		a.h         = split[2];
 
-		this.send("Inventory");
 		this.send("Look");
+		this.send("Inventory");
+
 	}
 
 	onInventory () {
-		let inventory = this.flux.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
+		this.output("Showing inventory : ");
+		let inventory = this.msg.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
 			return x.trim()
 		});
 

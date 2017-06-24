@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Fri Jun 23 15:11:29 2017 Martin Alais
+** Last update Fri Jun 23 18:41:14 2017 Quentin Goinaud
 */
 
 #include <time.h>
@@ -64,6 +64,7 @@ void check_action_status(t_Server *server)
 			tmp->action->is_leveling = false;
 			send_answer(tmp);
 			printf("Player %d terminated an action\n", tmp->id);
+			printf("Sending : %s\n", tmp->action->data_to_send);
 		}
 		tmp = tmp->next;
 	}

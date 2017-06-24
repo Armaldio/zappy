@@ -58,38 +58,42 @@ bot.client.connect(yargs.port, yargs.machine, () => {
 	console.log('Client connected');
 });
 
-let flux = "";
-
 bot.client.on('data', (data) => {
-	flux += data;
+	bot.flux += data;
 
 	if (data[data.length - 1] === '\n') {
 
-		flux = flux.toLowerCase();
+		bot.flux = bot.flux.toLowerCase();
 
-		let msgs = flux.split("\n").filter(v => v !== '');
+		console.log(chalk.green("[RAW] " + JSON.stringify(bot.flux)));
+
+		let msgs = bot.flux.split("\n").filter(v => v !== '');
 
 		msgs.forEach((msg) => {
+			bot.msg = msg;
 
-			if (msg === "ko")
-				console.log(chalk.red("Command not recognized by the server"));
-			else if (msg === "welcome")
+			/*if (msg === "ko") {
+			 console.log(chalk.red(`Command [${bot.queue[0]}] failed : ${msg}`));
+			 bot.queue.shift();
+			 }
+			 else */
+			if (bot.msg === "welcome")
 				bot.send(yargs.name);
-			else if (msg === "dead")
+			else if (bot.msg === "dead")
 				console.log(chalk.red("You are dead"));
 			else {
 
 				//When no errors if command is XXX
 
-				bot.flux = msg;
+				bot.lastCommand = bot.queue[0];
+				if (bot.queue[0] !== bot.team) {
+					bot.lastCommand = bot.queue.shift();
+				}
 
-				let lastCommand = bot.queue[0];
-				if (bot.queue[0] !== bot.team)
-					lastCommand = bot.queue.shift();
+				console.log(chalk.green("[Receiving] " + bot.lastCommand + ' : ' + JSON.stringify(msg)));
+				bot.output(bot.queue);
 
-				console.log(chalk.green(lastCommand + ' << ' + JSON.stringify(msg)));
-
-				switch (lastCommand) {
+				switch (bot.lastCommand) {
 
 					case "Look":
 						bot.onLook();
@@ -107,7 +111,7 @@ bot.client.on('data', (data) => {
 						if (bot.clientNum === -1)
 							bot.clientNum = bot.flux * 1;
 						else {
-							let size      = flux.split(" ");
+							let size      = bot.flux.split(" ");
 							bot.mapSize.x = size[0];
 							bot.mapSize.y = size[1];
 							bot.queue.shift();
@@ -123,10 +127,9 @@ bot.client.on('data', (data) => {
 						console.log(chalk.red(`Command [${bot.queue[0]}] not supported by client`));
 				}
 			}
-
 		});
 
-		flux = "";
+		bot.flux = "";
 	}
 });
 

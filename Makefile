@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Fri Jun 23 18:09:28 2017 Martin Alais
+## Last update Sat Jun 24 12:07:04 2017 Quentin Goinaud
 ##
 
 CC    =    gcc -g
@@ -97,10 +97,10 @@ hooks:
 	-@chmod +x .git/hooks/pre-push
 
 tests: install_bats
-	-./unit-tests/run-server.sh
+	#-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
 	-@./ut/bin/bats unit-tests/connect.sh
-	@pkill server
+	#@pkill server
 	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
 	@./unit-tests/style.sh
