@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:50:27 2017 Martin Alais
-** Last update Fri Jun 23 19:34:38 2017 Martin Alais
+** Last update Sat Jun 24 12:54:31 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -19,7 +19,7 @@ t_graphic *get_graphic_user(int id, t_Server *server)
 	while (tmp)
 	{
 		if (tmp->id == id)
-			return(tmp);
+			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);

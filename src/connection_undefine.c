@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 17:45:21 2017 Martin Alais
-** Last update Fri Jun 23 19:50:02 2017 Martin Alais
+** Last update Sat Jun 24 12:43:02 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -73,38 +73,4 @@ t_graphic *get_last_graphic(t_Server *server)
 	while (tmp->next)
 		tmp = tmp->next;
 	return (tmp);
-}
-
-void undefined_to_graphic(t_Server *server, t_undefined *undefine)
-{
-	t_graphic *tmp;
-
-	add_graphic(undefine->fd, server);
-	tmp = get_last_graphic(server);
-	printf("Undefine %d become Graphic %d !\n", undefine->id, tmp->id);
-	commande_graphic(tmp, server, "");
-	delete_undefine(server, undefine->id);
-}
-
-void delete_undefine(t_Server *server, int id)
-{
-	t_undefined *tmp;
-	t_undefined *last;
-
-	last = NULL;
-	tmp = server->list_undefined;
-	while (tmp)
-	{
-		if (tmp->id == id)
-		{
-			if (last == NULL)
-				server->list_undefined = tmp->next;
-			else
-				last->next = tmp->next;
-			free(tmp);
-			return;
-		}
-		last = tmp;
-		tmp = tmp->next;
-	}
 }

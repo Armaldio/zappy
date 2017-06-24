@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Fri Jun 23 18:41:14 2017 Quentin Goinaud
+** Last update Sat Jun 24 12:33:29 2017 hamza hammouche
 */
 
 #include <time.h>
@@ -57,10 +57,7 @@ void check_action_status(t_Server *server)
 			tmp->action->start_time = 0;
 			tmp->action->is_working = false;
 			if (tmp->action->is_leveling == true)
-	    {
-				tmp->isGraphic == true ? send_message_pie(tmp, 0) :
-		  send_message(tmp->fd, "ko\n");
-	    }
+	    	send_message(tmp->fd, "ko\n");
 			tmp->action->is_leveling = false;
 			send_answer(tmp);
 			printf("Player %d terminated an action\n", tmp->id);

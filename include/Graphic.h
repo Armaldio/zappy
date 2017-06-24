@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:51:04 2017 Martin Alais
-** Last update Fri Jun 23 19:41:24 2017 Martin Alais
+** Last update Sat Jun 24 12:44:27 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_GRAPHIC_H_
@@ -13,6 +13,8 @@
 
 #include "zappy.h"
 
+t_graphic *get_last_graphic(t_Server *server);
+void undefined_to_player(t_Server *server, t_undefined *undefine, t_team *team);
 void commande_graphic(t_graphic *player, t_Server *server, char *data);
 void commande_msz(t_graphic *player, t_Server *server, char *data);
 void commande_sgt(t_graphic *player, t_Server *server, char *data);
