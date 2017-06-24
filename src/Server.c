@@ -71,7 +71,6 @@ void check_new_player(t_Server *server)
 	{
 		send_message(a, "WELCOME\n");
 	  printf("Linking connection to player %d\n", p->id);
-		p->isGraphic == true ? send_message_ebo(p, 1) :
 		send_message(p->fd, "ok\n");
 	  p->is_connected = true;
 	  p->isEgg = false;

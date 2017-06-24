@@ -13,6 +13,8 @@
 
 #include "zappy.h"
 
+t_graphic *get_last_graphic(t_Server *server);
+void undefined_to_player(t_Server *server, t_undefined *undefine, t_team *team);
 void commande_graphic(t_graphic *player, t_Server *server, char *data);
 void commande_msz(t_graphic *player, t_Server *server, char *data);
 void commande_sgt(t_graphic *player, t_Server *server, char *data);

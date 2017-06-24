@@ -50,6 +50,8 @@ SRC    =    src/main.c \
 			src/set_object2.c \
 			src/parser_commande.c \
 			src/command_broadcast.c \
+			src/undefinded_to_graphic.c \
+			src/check_data_undefine.c \
 			src/graphic/commande_graphic.c \
 			src/graphic/msz_sgt.c \
 			src/graphic/parser.c \
@@ -98,10 +100,10 @@ hooks:
 	-@chmod +x .git/hooks/pre-push
 
 tests: install_bats
-	-./unit-tests/run-server.sh
+	#-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
 	-@./ut/bin/bats unit-tests/connect.sh
-	@pkill server
+	#@pkill server
 	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
 	@./unit-tests/style.sh

@@ -41,6 +41,11 @@ bool get_team_name(t_Player *, char *data, t_Server *serv);
 void send_message_item(t_Player *player, int, int nb);
 void send_message_take(t_Player *player, int, int nb);
 
+void print_player(t_Server *server);
+bool check_valide_team(char *team_name, t_Server *server,
+		       t_undefined *undefine);
+void check_data_undefine(t_undefined *tmp, char *data_recv,
+           			 int a, t_Server *server);
 bool end_game(t_Server *serv);
 void init_server(t_Server *server);
 void check_new_player(t_Server *server);

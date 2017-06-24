@@ -150,8 +150,7 @@ int command_set(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-  tmp->isGraphic == true ? stok_answer(tmp, "sbp\n") :
-      stok_answer(tmp, "ko\n");
+  stok_answer(tmp, "ko\n");
 	return (0);
 }
 

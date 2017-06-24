@@ -4,135 +4,143 @@
 
 
 const stones = [
-    "linemate",
-    "deraumere",
-    "sibur",
-    "mendiane",
-    "phiras",
-    "thystame"
+	"linemate",
+	"deraumere",
+	"sibur",
+	"mendiane",
+	"phiras",
+	"thystame"
 ];
 
-const net = require('net');
-
+const net    = require('net');
 const client = new net.Socket();
+const fs     = require("fs");
+const path   = require('path');
+const chalk  = require('chalk');
+
+const Bot = require("./bot.js");
 
 client.setEncoding('utf8');
 
-let lastCommand = "";
+/**
+ * Command line arguments
+ * @type {any}
+ */
+const yargs = require('yargs').options({
+	'behaviour': {
+		alias   : 'b',
+		describe: 'Specify an IA behaviour',
+		default : 'default'
+	},
+	'port'     : {
+		alias   : 'p',
+		describe: 'port is the port number',
+	},
+	'name'     : {
+		alias   : 'n',
+		describe: 'name is the name of the team',
+	},
+	'machine'  : {
+		alias   : 'h',
+		describe: 'machine is the name of the machine; localhost by default',
+		default : 'localhost'
+	}
+}).demandOption(['port', 'name'], 'Please provide both port and name arguments')
+							  .help().argv;
 
-let send = function (cmd) {
-    lastCommand = cmd.split(/[\\n\s]/g)[0];
-    client.write(cmd + "\n", function () {
-        console.log(">> " + cmd);
-    });
-};
+//TODO Check errors !
 
-client.connect(4242, '127.0.0.1', () => {
-    console.log('Client connected');
+let bot    = new Bot(yargs.behaviour);
+bot.team   = yargs.name;
+bot.client = client;
+
+bot.client.connect(yargs.port, yargs.machine, () => {
+	console.log('Client connected');
 });
 
-let flux = "";
+bot.client.on('data', (data) => {
+	bot.flux += data;
 
-client.on('data', (data) => {
-    flux += data;
+	if (data[data.length - 1] === '\n') {
 
-    if (data[data.length - 1] === '\n') {
+		bot.flux = bot.flux.toLowerCase();
 
-        console.log('<< ' + JSON.stringify(flux));
+		console.log(chalk.green("[RAW] " + JSON.stringify(bot.flux)));
 
-        flux = flux.toLowerCase();
+		let msgs = bot.flux.split("\n").filter(v => v !== '');
 
-        if (flux === "ko\n")
-            console.log("Command not recognized by the server");
-        else if (flux === "dead\n")
-            console.log("You are dead");
-        else {
+		msgs.forEach((msg) => {
+			bot.msg = msg;
 
-            switch (lastCommand) {
-                case "Look":
-                    let datas = flux.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
-                        return x.trim();
-                    });
+			/*if (msg === "ko") {
+			 console.log(chalk.red(`Command [${bot.queue[0]}] failed : ${msg}`));
+			 bot.queue.shift();
+			 }
+			 else */
+			if (bot.msg === "welcome")
+				bot.send(yargs.name);
+			else if (bot.msg === "dead")
+				console.log(chalk.red("You are dead"));
+			else {
 
-                    // Format datas
-                    datas.forEach((item, i) => {
-                        let a = item.split(' ');
-                        datas[i] = {"items": a, "length": a.length, "case": i};
-                    });
+				//When no errors if command is XXX
 
-                    /* // Sort datas
-                     datas.sort((a, b) => {
-                     return (b.length - a.length);
-                     });*/
+				bot.lastCommand = bot.queue[0];
+				if (bot.queue[0] !== bot.team) {
+					bot.lastCommand = bot.queue.shift();
+				}
 
-                    // Remove players
-                    datas.forEach((item, i) => {
-                        item.items.forEach((x, xi) => {
-                            if (x === "player") {
-                                datas[i].items.splice(xi, 1);
-                            }
-                        });
-                    });
+				console.log(chalk.green("[Receiving] " + bot.lastCommand + ' : ' + JSON.stringify(msg)));
+				bot.output(bot.queue);
 
-                    //console.log(JSON.stringify(datas, null, '\t'));
+				switch (bot.lastCommand) {
 
-                    //datas = datas[0].items.splice(0, 1);
+					case "Look":
+						bot.onLook();
+						break;
 
-                    if (datas[0].items && datas[0].items.length !== 0)
-                        send("Take " + datas[0].items[0]);
-                    else
-                        send("Forward");
-                    break;
+					case "Take":
+						bot.onTake();
+						break;
 
-                case "Take":
-                    if (flux === "ok\n")
-                        send("Look");
+					case "Forward":
+						bot.onForward();
+						break;
 
-                    break;
+					case bot.team:
+						if (bot.clientNum === -1)
+							bot.clientNum = bot.flux * 1;
+						else {
+							let size      = bot.flux.split(" ");
+							bot.mapSize.x = size[0];
+							bot.mapSize.y = size[1];
+							bot.queue.shift();
+							bot.onTeam();
+						}
+						break;
 
-                case "Forward":
-                    if (flux === "ok\n")
-                        send("Look");
+					case "Inventory":
+						bot.onInventory();
+						break;
 
-                    break;
+					default:
+						console.log(chalk.red(`Command [${bot.queue[0]}] not supported by client`));
+				}
+			}
+		});
 
-                case "team1":
-                    let a = {};
-                    let split = flux.split(/[\\n\s]/g);
-                    a.remaining = split[0];
-                    a.w = split[1];
-                    a.h = split[2];
-
-                    send("Look");
-
-                    break;
-
-                // First command
-                case "":
-                    send("team1");
-                    //send("Look");
-                    break;
-
-                default:
-                    console.log("Command not supported by client");
-            }
-        }
-
-        flux = "";
-    }
+		bot.flux = "";
+	}
 });
 
-client.on('close', () => {
-    console.log('Connection closed');
+bot.client.on('close', () => {
+	console.log(chalk.red('Connection closed'));
 });
 
-client.on('end', function () {
-    console.log('Disconnected from server');
+bot.client.on('end', function () {
+	console.log(chalk.red('Disconnected from server'));
 });
 
-client.on('error', (err) => {
-    console.log("Error : ", err.code);
+bot.client.on('error', (err) => {
+	console.log(chalk.red("Error : ", err.code));
 });
-
-
-//client.destroy(); // kill client after server's response

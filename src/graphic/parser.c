@@ -19,7 +19,7 @@ t_graphic *get_graphic_user(int id, t_Server *server)
 	while (tmp)
 	{
 		if (tmp->id == id)
-			return(tmp);
+			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);
