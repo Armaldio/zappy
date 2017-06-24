@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 17:45:21 2017 Martin Alais
-** Last update Sat Jun 24 15:11:22 2017 Martin Alais
+** Last update Sat Jun 24 15:24:35 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -64,6 +64,7 @@ void undefined_to_player(t_Server *server, t_undefined *undefine, t_team *team)
 	printf("Undefine %d become Player %d !\n", undefine->id, tmp->id);
 	get_player_team(tmp, team->name, server);
 	delete_undefine(server, undefine->id);
+	event_new_player(server, tmp);
 }
 
 t_graphic *get_last_graphic(t_Server *server)

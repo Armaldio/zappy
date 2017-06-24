@@ -5,12 +5,13 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
-** Last update Sat Jun 24 12:33:47 2017 hamza hammouche
+** Last update Sat Jun 24 16:10:59 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Team.h"
 #include "Incantation.h"
+#include "Event.h"
 
 bool		get_player_team(t_Player *player, char *data, t_Server *serv)
 {
@@ -92,6 +93,7 @@ void command_eject(int id, t_Server *server, char *data)
 	player = get_Player(id, server->list_player);
 	tmp = server->list_player;
 	start_action(server, player, 7);
+	event_eject(server, tmp);
 	while (tmp)
 	{
 		if (tmp->id != player->id && tmp->pos.x == player->pos.x
@@ -99,6 +101,7 @@ void command_eject(int id, t_Server *server, char *data)
 		{
 			printf("Player %d ejected by player %d !\n", tmp->id, player->id);
 			eject_player(server, tmp);
+			event_eject(server, tmp);
 		}
 		tmp = tmp->next;
 	}

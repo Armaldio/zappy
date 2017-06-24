@@ -5,12 +5,13 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Sat Jun 24 12:02:52 2017 Martin Alais
+** Last update Sat Jun 24 15:46:18 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Incantation.h"
 #include <string.h>
+#include "Event.h"
 
 void commande_forward(int id, t_Server *server, char *data)
 {
@@ -27,13 +28,7 @@ void commande_forward(int id, t_Server *server, char *data)
 		go_right(server, id, true);
 	else
 		go_left(server, id, true);
-	tmp = server->list_player;
-	while (tmp)
-	{
-		if (tmp->isEgg == true)
-			printf("Eggs %d\n", tmp->id);
-		tmp = tmp->next;
-	}
+	event_ppo(server, tmp);
 }
 
 void commande_right(int id, t_Server *server, char *data)
@@ -52,6 +47,7 @@ void commande_right(int id, t_Server *server, char *data)
 	else
 		tmp->gaze = UP;
 	stok_answer(tmp, "ok\n");
+	event_ppo(server, tmp);
 }
 
 void commande_left(int id, t_Server *server, char *data)
@@ -70,6 +66,7 @@ void commande_left(int id, t_Server *server, char *data)
 	else
 		tmp->gaze = UP;
 	stok_answer(tmp, "ok\n");
+	event_ppo(server, tmp);
 }
 
 void commande_incantation(int id, t_Server *server, char data)
