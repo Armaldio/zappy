@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 11:32:03 2017 Martin Alais
-** Last update Sat Jun 24 16:10:03 2017 Martin Alais
+** Last update Sun Jun 25 11:51:18 2017 Martin Alais
 */
 
 #ifndef ZAPPY_EVENT_H_
@@ -22,5 +22,8 @@ void event_take(t_Server *server, t_Player *player, int id_ressource);
 void event_drop(t_Server *server, t_Player *player, int id_ressource);
 void event_eject(t_Server *server, t_Player *player);
 void event_eject2(t_Server *server, t_Player *player);
+void event_pfk(t_Server *server, t_Player *player);
+void event_enw(t_Server *server, int father, t_Player *player);
+void event_eht(t_Server *server, t_Player *player);
 
 #endif /* !ZAPPY_EVENT_H_ */

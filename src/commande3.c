@@ -5,11 +5,12 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:56:20 2017 Quentin Goinaud
-** Last update Sat Jun 24 15:13:17 2017 Martin Alais
+** Last update Sun Jun 25 11:51:05 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Incantation.h"
+#include "Event.h"
 
 void command_fork(int id, t_Server *server, char *data)
 {
@@ -23,6 +24,7 @@ void command_fork(int id, t_Server *server, char *data)
 	eggs_id = my_add_eggs(server, player);
 	egg = get_eggs(eggs_id, server->list_player);
 	start_action(server, player, 42);
+	event_pfk(server, player);
 	start_action(server, egg, 42);
 	add_data_in_line(egg, "Hatch");
 	stok_answer(player, "ok\n");
@@ -33,15 +35,12 @@ void command_hatch(int id, t_Server *server, char *data)
 	t_Player	*tmp;
 
 	(void) data;
+
 	tmp = get_eggs(id, server->list_player);
 	if (tmp == NULL)
-	{
 		tmp = get_Player(id, server->list_player);
-		printf("IS NOT AN EGGS\n");
-	}
-	else
-		printf("IS AN EGGS\n");
 	start_action(server, tmp, 600);
+	event_enw(server, tmp->father_id, tmp);
 	add_data_in_line(tmp, "Bloom");
 	if (tmp->controlled == true)
     	stok_answer(tmp, "ok\n");
@@ -60,6 +59,7 @@ void command_bloom(int id, t_Server *server, char *data)
 	tmp->gaze = rand() % 4;
 	tmp->isEgg = false;
 	tmp->is_connected = false;
+	event_eht(server, tmp);
 }
 
 int command_set(int id, t_Server *server, char *data)
