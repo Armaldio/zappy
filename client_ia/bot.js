@@ -10,12 +10,12 @@ module.exports = class Bot {
 	constructor (behaviour) {
 		this.inventory     = {};
 		this.view          = {
-			"up": [],
-			"down": [],
-			"left": [],
+			"up"   : [],
+			"down" : [],
+			"left" : [],
 			"right": [],
 		};
-		this.direction = "";
+		this.direction     = "up";
 		this.queue         = [];
 		this.client        = {};
 		this.behaviour     = {};
@@ -24,11 +24,38 @@ module.exports = class Bot {
 		this.searchingFood = false;
 		this.clientNum     = -1;
 		this.mapSize       = {};
-		this.lastCommand = "";
+		this.lastCommand   = "";
+		this.totalCommands = 0;
+		this.goesUp        = 0;
+		this.level         = 1;
+
+		this.incantating = false;
 
 		this.behaviour = JSON.parse(fs.readFileSync(path.join(__dirname, "behaviours", behaviour + ".json"), 'utf8'));
 
 		console.log(`Loading bot <${chalk.blue(this.behaviour.name)}> [${chalk.green(this.behaviour.description)}]`);
+	}
+
+	getState () {
+		let obj = {
+			"inventory     ": this.inventory,
+			"view          ": this.view,
+			"direction     ": this.direction,
+			"queue         ": this.queue,
+			"behaviour     ": this.behaviour,
+			"flux          ": this.flux,
+			"team          ": this.team,
+			"searchingFood ": this.searchingFood,
+			"clientNum     ": this.clientNum,
+			"mapSize       ": this.mapSize,
+			"lastCommand   ": this.lastCommand,
+			"totalCommands ": this.totalCommands,
+			"goesUp        ": this.goesUp,
+			"level         ": this.level,
+			"incantating "  : this.incantating,
+			"behaviour "    : this.behaviour,
+		};
+		return (obj);
 	}
 
 	send (cmd) {
@@ -38,16 +65,15 @@ module.exports = class Bot {
 		}
 
 		this.queue.push(cmd.split(/(\\n)| /g)[0]);
+		this.totalCommands++;
 
 		this.client.write(cmd + "\n", () => {
 			console.log(chalk.blue("[Sending] " + cmd));
-			this.output(this.queue);
+			//this.output(this.queue);
 		});
-
 	}
 
 	onLook () {
-		this.output("Look");
 		let datas = this.flux.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
 			return x.trim();
 		});
@@ -85,15 +111,25 @@ module.exports = class Bot {
 	}
 
 	onTake () {
-		this.output("Took object");
 		if (this.msg === "ok")
 			this.send("Look");
 	}
 
 	onForward () {
-		this.output("Going forward");
-		if (this.msg === "ok")
+		if (this.msg === "ok") {
 			this.send("Look");
+			this.goesUp++;
+		}
+	}
+
+	onRight () {
+		if (this.msg === "ok")
+			this.send("Forward");
+	}
+
+	onIncantation () {
+		this.output("Incantation done");
+		this.output("Elevation message : " + this.msg);
 	}
 
 	onTeam () {
@@ -104,12 +140,9 @@ module.exports = class Bot {
 		a.h         = split[2];
 
 		this.send("Look");
-		this.send("Inventory");
-
 	}
 
 	onInventory () {
-		this.output("Showing inventory : ");
 		let inventory = this.msg.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
 			return x.trim()
 		});
@@ -126,12 +159,10 @@ module.exports = class Bot {
 
 		this.inventory = obj;
 
-		if (this.inventory.food < 10)
-			this.searchFood();
-
-		this.output("Food : " + this.inventory.food);
-
-		this.send('Forward');
+		if (this.inventory["linemate"] >= 1) {
+			console.log("Player can rise to level 2 !");
+			this.startIncantation();
+		}
 	}
 
 	/**
@@ -149,17 +180,8 @@ module.exports = class Bot {
 			console.log(chalk.magenta(data));
 	}
 
-	searchFood () {
-		console.log(chalk.magenta("** Started searching for food **"));
-		this.searchingFood = true;
-		this.send("Look");
-		this.send("Right");
-		this.send("Look");
-		this.send("Right");
-		this.send("Look");
-		this.send("Right");
-		this.send("Look");
-		this.searchingFood = false;
-		console.log(chalk.magenta("** Stopped searching for food **"));
+	startIncantation () {
+		this.send("Set linemate");
+		this.send("Incantation");
 	}
 };

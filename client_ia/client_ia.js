@@ -2,7 +2,6 @@
  * Created by goinau_q on 21/06/17.
  */
 
-
 const stones = [
 	"linemate",
 	"deraumere",
@@ -11,6 +10,8 @@ const stones = [
 	"phiras",
 	"thystame"
 ];
+
+let clients = [];
 
 const net    = require('net');
 const client = new net.Socket();
@@ -50,6 +51,41 @@ const yargs = require('yargs').options({
 
 //TODO Check errors !
 
+/**
+ * COmmunication with client ---------------------------------------------------
+ */
+const app = require('http').createServer(handler);
+const io  = require('socket.io')(app);
+
+app.listen(4244);
+
+function handler (req, res) {
+	fs.readFile(__dirname + '/index.html',
+		function (err, data) {
+			if (err) {
+				res.writeHead(500);
+				return res.end('Error loading index.html');
+			}
+
+			res.writeHead(200);
+			res.end(data);
+		});
+}
+
+io.on('connection', function (socket) {
+	console.log("New client connected");
+	clients.push(socket);
+
+	socket.on('msg', function (msg) {
+		console.log("New message from client : " + msg);
+	});
+});
+
+/**
+ * End --------------------------------------------------------------------
+ */
+
+
 let bot    = new Bot(yargs.behaviour);
 bot.team   = yargs.name;
 bot.client = client;
@@ -65,12 +101,15 @@ bot.client.on('data', (data) => {
 
 		bot.flux = bot.flux.toLowerCase();
 
-		console.log(chalk.green("[RAW] " + JSON.stringify(bot.flux)));
+		//console.log(chalk.green("[RAW] " + JSON.stringify(bot.flux)));
 
 		let msgs = bot.flux.split("\n").filter(v => v !== '');
 
 		msgs.forEach((msg) => {
 			bot.msg = msg;
+
+			if (clients.length > 0)
+				clients[0].emit('message', bot.getState());
 
 			/*if (msg === "ko") {
 			 console.log(chalk.red(`Command [${bot.queue[0]}] failed : ${msg}`));
@@ -78,7 +117,7 @@ bot.client.on('data', (data) => {
 			 }
 			 else */
 			if (bot.msg === "welcome")
-				bot.send(yargs.name);
+				bot.send(bot.team);
 			else if (bot.msg === "dead")
 				console.log(chalk.red("You are dead"));
 			else {
@@ -86,12 +125,25 @@ bot.client.on('data', (data) => {
 				//When no errors if command is XXX
 
 				bot.lastCommand = bot.queue[0];
-				if (bot.queue[0] !== bot.team) {
+				if (bot.queue[0] !== bot.team &&
+					!bot.incantating) {
+
 					bot.lastCommand = bot.queue.shift();
 				}
 
 				console.log(chalk.green("[Receiving] " + bot.lastCommand + ' : ' + JSON.stringify(msg)));
-				bot.output(bot.queue);
+				//bot.output(bot.queue);
+
+				if (bot.totalCommands % 5 === 0) {
+					bot.send("Inventory");
+				}
+
+				if (bot.goesUp === bot.mapSize.y) {
+					bot.send("Right");
+					bot.send("Forward");
+					bot.send("Left");
+					bot.goesUp = 0;
+				}
 
 				switch (bot.lastCommand) {
 
@@ -107,15 +159,28 @@ bot.client.on('data', (data) => {
 						bot.onForward();
 						break;
 
+					case "Right":
+						bot.onRight();
+						break;
+
 					case bot.team:
 						if (bot.clientNum === -1)
 							bot.clientNum = bot.flux * 1;
 						else {
 							let size      = bot.flux.split(" ");
-							bot.mapSize.x = size[0];
-							bot.mapSize.y = size[1];
+							bot.mapSize.x = size[0] * 1;
+							bot.mapSize.y = size[1] * 1;
 							bot.queue.shift();
 							bot.onTeam();
+						}
+						break;
+
+					case "Incantation":
+						if (bot.msg !== "ko") {
+							if (!bot.incantating)
+								bot.incantating = true;
+							else
+								bot.level = bot.msg.replace("current level: ", "") * 1;
 						}
 						break;
 
@@ -124,7 +189,7 @@ bot.client.on('data', (data) => {
 						break;
 
 					default:
-						console.log(chalk.red(`Command [${bot.queue[0]}] not supported by client`));
+						console.log(chalk.red(`Command [${bot.lastCommand}] not supported by client`));
 				}
 			}
 		});
