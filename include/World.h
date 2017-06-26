@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 18:59:02 2017 Martin Alais
-** Last update Tue Jun 20 17:40:12 2017 Martin Alais
+** Last update Thu Jun 22 10:59:27 2017 Martin Alais
 */
 
 #ifndef ZAPPY_WORLD_H_
@@ -13,7 +13,6 @@
 
 typedef struct	s_Map
 {
-	bool is_occuped;
 	int food;
 	int pos_x;
 	int pos_y;
@@ -35,8 +34,6 @@ typedef struct	s_World
 
 void basic_init_world(t_World * world);
 void init_world(t_World * world);
-bool case_occupation(t_World *world, int x, int y);
-void set_occupation(t_World *world, int x, int y, bool status);
 void print_world(t_World *world);
 
 #endif /* !ZAPPY_WORLD_H_ */

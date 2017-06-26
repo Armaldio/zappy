@@ -5,29 +5,30 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Tue Jun 20 17:44:47 2017 Martin Alais
+** Last update Sat Jun 24 19:22:05 2017 hamza hammouche
 */
 
 #include "zappy.h"
 #include "Incantation.h"
+#include <string.h>
+#include "Event.h"
 
 void commande_forward(int id, t_Server *server, char *data)
 {
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
-		go_up(server, id);
+		go_up(server, id, true);
 	else if (tmp->gaze == DOWN)
-		go_down(server, id);
+		go_down(server, id, true);
 	else if (tmp->gaze == RIGHT)
-		go_right(server, id);
+		go_right(server, id, true);
 	else
-		go_left(server, id);
+		go_left(server, id, true);
+	event_ppo(server, tmp);
 }
 
 void commande_right(int id, t_Server *server, char *data)
@@ -35,9 +36,7 @@ void commande_right(int id, t_Server *server, char *data)
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		tmp->gaze = RIGHT;
@@ -47,7 +46,8 @@ void commande_right(int id, t_Server *server, char *data)
 		tmp->gaze = LEFT;
 	else
 		tmp->gaze = UP;
-	send_message(tmp->fd, "OK\n");
+	stok_answer(tmp, "ok\n");
+	event_ppo(server, tmp);
 }
 
 void commande_left(int id, t_Server *server, char *data)
@@ -55,9 +55,7 @@ void commande_left(int id, t_Server *server, char *data)
 	t_Player *tmp;
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		tmp->gaze = LEFT;
@@ -67,24 +65,35 @@ void commande_left(int id, t_Server *server, char *data)
 		tmp->gaze = RIGHT;
 	else
 		tmp->gaze = UP;
-	send_message(tmp->fd, "OK\n");
+	stok_answer(tmp, "ok\n");
+	event_ppo(server, tmp);
 }
 
 void commande_incantation(int id, t_Server *server, char data)
 {
-	void	*mfunction_ptr[] = {incan_1, incan_2,
-		incan_3, incan_4, incan_5, NULL};
 	t_Player *tmp;
-	void	(*fct_ptr)(int, t_Server *);
+  t_Player	*ptmp;
+  char			buffer[2048];
+  char			nb[15];
 
 	(void) data;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+  ptmp = server->list_player;
+  tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 300);
 	tmp->action->is_leveling = true;
-	fct_ptr = mfunction_ptr[tmp->level - 1];
-	fct_ptr(id, server);
+  sprintf(buffer, "pic %d %d %d %d", tmp->pos.x, tmp->pos.y, tmp->level,
+	  tmp->id);
+  while (ptmp)
+    {
+      if (ptmp != tmp)
+			{
+	  		sprintf(nb, " %d", ptmp->id);
+	  		strcat(buffer, nb);
+			}
+      ptmp = ptmp->next;
+    }
+  strcat(buffer, "\n");
+  send_message_position(server->list_graphic, buffer);
 }
 
 int command_take(int id, t_Server *server, char *data)
@@ -99,9 +108,7 @@ int command_take(int id, t_Server *server, char *data)
 
 	a = 0;
 	data += 5;
-	tmp = server->list_player;
-	while (tmp->next && tmp->id != id)
-		tmp = tmp->next;
+	tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 7);
 	while (all_stone[a])
 	{
@@ -113,5 +120,6 @@ int command_take(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
+	stok_answer(tmp, "ko\n");
 	return (0);
 }

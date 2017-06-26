@@ -4,42 +4,34 @@
 ** Made by hamza hammouche
 ** Login   <hamza.hammouche@epitech.eu>
 **
-** Started on  Tue Jun 20 09:44:32 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 15:30:25 2017 Quentin Goinaud
+** Started on  Wed Jun 21 16:07:53 2017 hamza hammouche
+** Last update Sat Jun 24 16:10:59 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Team.h"
 #include "Incantation.h"
+#include "Event.h"
 
 bool		get_player_team(t_Player *player, char *data, t_Server *serv)
 {
   t_team *tmp;
   char		buffer[1256];
 
-  if (strncmp(data, "Exit", 4) == 0)
-    return (false);
-  if (!player->waitingTeam || serv->list_player)
+  if (player == NULL || player->waitingTeam == false)
     return (false);
   if ((tmp = get_team(serv->list_teams, data, -1)) == NULL)
-    return (send_message(player->fd, "Ko Team not found\n"), false);
+    return (send_message(player->fd, "ko\n"), true);
+  if (serv->nbClientMax < tmp->nbMember + 1)
+    return (send_message(player->fd, "ko\n"), true);
+  tmp->nbMember++;
+  sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax -
+	  tmp->nbMember,
+	  serv->world->width, serv->world->height);
   player->teamId = tmp->id;
   player->waitingTeam = false;
-  sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax
-	  - get_Player_size(serv->list_player),
-	  serv->world->width, serv->world->height);
   send_message(player->fd, buffer);
   return (true);
-}
-
-void command_not_found(int id, t_Server *server)
-{
-  t_Player *tmp;
-
-  tmp = server->list_player;
-  while (tmp->next && tmp->id != id)
-    tmp = tmp->next;
-  send_message(tmp->fd, "KO\n");
 }
 
 void exit_client(int id, t_Server *server, char *data)
@@ -53,33 +45,66 @@ void exit_client(int id, t_Server *server, char *data)
     tmp = tmp->next;
   tmp->is_connected = false;
   close(tmp->fd);
+  my_delete_player(server, tmp->id);
 }
 
-int parser_commande(int id, t_Server *server, char *data)
+void command_pos(int id, t_Server *server, char *data)
 {
-    char	*mcommand[] = {"Forward", "Right", "Left", "Incantation",
-  "Take", "Look", "Exit", "Fork", "Hatch", "Bloom", NULL};
-    void	*mfunction_ptr[] = {commande_forward, commande_right,
-      commande_left, commande_incantation, command_take, command_look,
-  exit_client, command_fork, command_hatch, command_bloom, NULL};
-  void		(*fct_ptr)(int, t_Server *, char *);
-  int		a;
+	t_Player *player;
+	char data_send[200];
 
-  if (data == NULL)
-    return (0);
-  a = 0;
-  if (get_player_team(get_Player(id, server->list_player), data, server))
-    return (0);
-  while (mcommand[a])
-    {
-      if (strncmp(mcommand[a], data, strlen(mcommand[a])) == 0)
+	(void) data;
+	player = get_Player(id, server->list_player);
+	sprintf(data_send, "%d - %d\n", player->pos.x, player->pos.y);
+	send_message(player->fd, data_send);
+}
+
+void eject_player(t_Server *server, t_Player *player)
+{
+	if (player->gaze == UP)
 	{
-	  fct_ptr = mfunction_ptr[a];
-	  fct_ptr(id, server, data);
-	  return (0);
+		go_up(server, player->id, false);
+		send_message(player->fd, "eject: 1\n");
 	}
-      a += 1;
-    }
-  command_not_found(id, server);
-  return (0);
+	else if (player->gaze == DOWN)
+	{
+		go_down(server, player->id, false);
+		send_message(player->fd, "eject: 3\n");
+	}
+	else if (player->gaze == RIGHT)
+	{
+		go_right(server, player->id, false);
+		send_message(player->fd, "eject: 2\n");
+	}
+	else
+	{
+		go_left(server, player->id, false);
+		send_message(player->fd, "eject: 4\n");
+	}
+}
+
+void command_eject(int id, t_Server *server, char *data)
+{
+	t_Player *tmp;
+	t_Player *player;
+  char buffer[512];
+
+	(void) data;
+	player = get_Player(id, server->list_player);
+	tmp = server->list_player;
+	start_action(server, player, 7);
+	event_eject(server, tmp);
+	while (tmp)
+	{
+		if (tmp->id != player->id && tmp->pos.x == player->pos.x
+		    && tmp->pos.y == player->pos.y)
+		{
+			printf("Player %d ejected by player %d !\n", tmp->id, player->id);
+			eject_player(server, tmp);
+			event_eject(server, tmp);
+		}
+		tmp = tmp->next;
+	}
+  sprintf(buffer, "pex %d\n", id);
+  stok_answer(tmp, "ok\n");
 }

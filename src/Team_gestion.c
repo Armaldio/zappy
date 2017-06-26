@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:04:19 2017 hamza hammouche
-** Last update Tue Jun 20 13:44:32 2017 hamza hammouche
+** Last update Thu Jun 22 12:32:16 2017 hamza hammouche
 */
 
 #include "Team.h"
@@ -35,6 +35,7 @@ t_team *create_team(char *name)
       exit(1);
     }
   new->name = strdup(name);
+  new->nbMember = 0;
   new->id = 1;
   new->next = NULL;
   return (new);
@@ -56,6 +57,7 @@ t_team *add_team(t_team *head, char *name)
   tmp = head;
   while (tmp->next)
     tmp = tmp->next;
+  new->nbMember = 0;
   new->id = tmp->id + 1;
   tmp->next = new;
   return (head);

@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:14 2017 loic1.doyen@epitech.eu
-** Last update Wed Jun 21 14:30:13 2017 Quentin Goinaud
+** Last update Fri Jun 23 17:02:15 2017 Martin Alais
 */
 
 #include "Socket.h"
@@ -34,7 +34,7 @@ void init_socket2(t_Connection *connection){
 		close(connection->fd);
 		exit(1);
 	}
-	if (listen(connection->fd, 10) == -1)
+	if (listen(connection->fd, 100) == -1)
 	{
 		print(2, "Can not listen on server\n");
 		close(connection->fd);

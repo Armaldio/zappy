@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:33:49 2017 Martin Alais
-** Last update Tue Jun 20 14:17:53 2017 Martin Alais
+** Last update Fri Jun 23 16:05:09 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -16,13 +16,13 @@ int parser_nbMax(t_Server *server, char **argv, int a)
 
 	if (argv[a + 1] == NULL)
 	{
-		printf("[Error] unrecognized argument after -p\n");
+		printf("[Error] unrecognized argument after -c\n");
 		exit(1);
 	}
 	nbr = atoi(argv[a + 1]);
-	if (nbr < 1025)
+	if (nbr > 1025)
 	{
-		printf("[Error] wrong argument after -p\n");
+		printf("[Error] wrong argument after -c\n");
 		exit(1);
 	}
 	server->nbClientMax = nbr;
@@ -94,7 +94,7 @@ int parser_freq(t_Server *server, char **argv, int a)
 		exit(1);
 	}
 	nbr = atoi(argv[a + 1]);
-	if (nbr < 1)
+	if (nbr < 2)
 	{
 		printf("[Error] wrong argument after -f\n");
 		exit(1);

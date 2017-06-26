@@ -5,53 +5,65 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Tue Jun 20 17:21:04 2017 Martin Alais
+** Last update Sat Jun 24 12:50:38 2017 hamza hammouche
 */
 
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"
 
-void print_player(t_Server *server)
+void check_undefine(t_Server *server)
 {
-	t_Player *tmp;
+	int a;
+	char data_recv[4096];
+	struct timeval tv;
+	t_undefined *tmp;
+	fd_set rfds;
 
-	tmp = server->list_player;
-	while (tmp->next != NULL)
+	tmp = server->list_undefined;
+	memset(data_recv, '\0', 4096);
+	while (tmp != NULL)
 	{
-		printf("Player id: %d\n", tmp->id);
-		printf("pos_x: %d\n", tmp->pos.x);
-		printf("pos_y: %d\n\n", tmp->pos.y);
+		FD_ZERO(&rfds);
+		FD_SET(tmp->fd, &rfds);
+		tv.tv_sec = 0;
+		tv.tv_usec = 300;
+		a = select(tmp->fd + 1, &rfds, NULL, NULL, &tv);
+		if (a != 0)
+		{
+			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
+			check_data_undefine(tmp, data_recv, a, server);
+			memset(data_recv, '\0', 4096);
+		}
 		tmp = tmp->next;
 	}
-	printf("Player id: %d\n", tmp->id);
-	printf("pos_x: %d\n", tmp->pos.x);
-	printf("pos_y: %d\n\n", tmp->pos.y);
 }
 
-void print_inventaire_player(t_Server *server)
+void check_graphique(t_Server *server)
 {
-	t_Player *tmp;
+	int a;
+	char data_recv[4096];
+	struct timeval tv;
+	t_graphic *tmp;
+	fd_set rfds;
 
-	tmp = server->list_player;
-	while (tmp->next != NULL)
+	tmp = server->list_graphic;
+	memset(data_recv, '\0', 4096);
+	while (tmp != NULL)
 	{
-		printf("Player id: %d\n", tmp->id);
-		printf("deraumere: %d\n", tmp->inventaire->deraumere);
-		printf("linemate: %d\n", tmp->inventaire->linemate);
-		printf("mendiane: %d\n", tmp->inventaire->mendiane);
-		printf("phiras: %d\n", tmp->inventaire->phiras);
-		printf("sibur: %d\n", tmp->inventaire->sibur);
-		printf("thystane: %d\n\n", tmp->inventaire->thystane);
+		FD_ZERO(&rfds);
+		FD_SET(tmp->fd, &rfds);
+		tv.tv_sec = 0;
+		tv.tv_usec = 300;
+		a = select(tmp->fd + 1, &rfds, NULL, NULL, &tv);
+		if (a != 0)
+		{
+			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
+			graphic_parser(tmp->id, server, data_recv);
+			memset(data_recv, '\0', 4096);
+		}
 		tmp = tmp->next;
 	}
-	printf("Player id: %d\n", tmp->id);
-	printf("deraumere: %d\n", tmp->inventaire->deraumere);
-	printf("linemate: %d\n", tmp->inventaire->linemate);
-	printf("mendiane: %d\n", tmp->inventaire->mendiane);
-	printf("phiras: %d\n", tmp->inventaire->phiras);
-	printf("sibur: %d\n", tmp->inventaire->sibur);
-	printf("thystane: %d\n\n", tmp->inventaire->thystane);
 }
 
 void	manage_time(t_Server *server)
@@ -102,6 +114,9 @@ int main(int ac, char **argv)
 		check_data_player(server);
 		check_action_status(server);
 		check_player_death(server);
+		check_player_leveling(server);
+		check_undefine(server);
+		check_graphique(server);
 	}
 	return (0);
 }

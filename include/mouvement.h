@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 18:59:44 2017 Martin Alais
-** Last update Mon Jun 19 19:14:35 2017 Martin Alais
+** Last update Thu Jun 22 14:23:27 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MOVEMENT_H_
@@ -13,12 +13,8 @@
 
 #include "Server.h"
 
-int go_up(t_Server *server, int id);
-int go_down(t_Server *server, int id);
-int go_right(t_Server *server, int id);
-int go_left(t_Server *server, int id);
-void go_up2(t_Server *server, t_Player *tmp);
-void go_down2(t_Server *server, t_Player *tmp);
-void go_right2(t_Server *server, t_Player *tmp);
-void go_left2(t_Server *server, t_Player *tmp);
+void go_up(t_Server *server, int id, bool send_msg);
+void go_down(t_Server *server, int id, bool send_msg);
+void go_right(t_Server *server, int id, bool send_msg);
+void go_left(t_Server *server, int id, bool send_msg);
 #endif /* !ZAPPY_MOVEMENT_H_ */

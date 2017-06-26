@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Wed Jun 21 15:33:25 2017 Quentin Goinaud
+## Last update Sun Jun 25 11:51:31 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -23,7 +23,6 @@ SRC    =    src/main.c \
 			src/World.c \
 			src/commande.c \
 			src/mouvement.c \
-			src/mouvement2.c \
 			src/take_object.c \
 			src/incantation.c \
 			src/Team_gestion.c \
@@ -31,7 +30,6 @@ SRC    =    src/main.c \
 			src/commande3.c \
 			src/server2.c \
 			src/Parser2.c \
-			src/checker.c \
 			src/take_object2.c \
 			src/action.c \
 			src/waiting_line.c \
@@ -40,6 +38,36 @@ SRC    =    src/main.c \
 			src/player_life.c \
 			src/init_world2.c \
 			src/commande_look2.c \
+			src/update_function.c \
+			src/incantation2.c \
+			src/incantation3.c \
+			src/incantation4.c \
+			src/incantation5.c \
+			src/send_message.c \
+			src/command_egg.c \
+			src/command_end_gestion.c \
+			src/set_object.c \
+			src/set_object2.c \
+			src/parser_commande.c \
+			src/command_broadcast.c \
+			src/undefinded_to_graphic.c \
+			src/check_data_undefine.c \
+			src/graphic/commande_graphic.c \
+			src/graphic/msz_sgt.c \
+			src/graphic/parser.c \
+			src/graphic/bct_pnw.c \
+			src/graphic/tna.c \
+			src/graphic/ppo_plv_pin.c \
+			src/Eggs.c \
+			src/graphic/sst_update_time.c \
+			src/graphic/smg.c \
+			src/manage_answer.c \
+			src/connection_graphic.c \
+			src/connection_undefine.c \
+			src/event/player_connection.c \
+			src/egg2.c \
+			src/event/event2.c \
+			src/event/event3.c \
 
 FLAGS    =    -Iinclude
 
@@ -52,7 +80,7 @@ OBJ    =    $(SRC:.c=.o)
 $(NAME)    : $(OBJ)
 	$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
 
-all: $(NAME)
+all: $(NAME) hooks
 
 clean:
 	$(RM) $(OBJ)
@@ -70,14 +98,18 @@ install_bats:
 quick_client:
 	$(CC) client/main.c -o mouli
 
+hooks:
+	-@cp unit-tests/pre-push.sh .git/hooks/pre-push
+	-@chmod +x .git/hooks/pre-push
+
 tests: install_bats
-	-./unit-tests/run-server.sh
+	#-./unit-tests/run-server.sh
 	@echo -e "\n\n[Running tests...]"
 	-@./ut/bin/bats unit-tests/connect.sh
-	@pkill server
+	#@pkill server
 	@$(RM) log
 	@echo -e "\n\n[Running moulinette...]"
-	-@./unit-tests/style.sh
+	@./unit-tests/style.sh
 
 re: fclean all
 
