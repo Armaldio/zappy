@@ -90,7 +90,7 @@ void zappy::Network::_reader() {
 
     int n = 0;
 
-    while (_isRunning) {
+    while (_isRunning && _socket.isValid()) {
         n = poll(pollfds, 1, 500);
 
         if (n > 0) {

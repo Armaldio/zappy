@@ -106,6 +106,5 @@ void MainWindow::on_updated_log(const std::string *command) {
     auto game = zappy::Game::get_instance_ptr();
     ui->logsBrowser->append(command->c_str());
     game->fexecute(*command);
-    ui->
     delete(command);
 }
