@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Sat Jun 24 12:38:27 2017 hamza hammouche
+** Last update Sat Jun 24 19:03:52 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -41,6 +41,7 @@ void check_player_death(t_Server *server)
 			else
 			{
 				printf("Player %d is dead!\n", tmp->id);
+	      send_message_death(server->list_graphic, tmp->id);
         send_message(tmp->fd, "dead\n");
 				close(tmp->fd);
 				my_delete_player(server, tmp->id);

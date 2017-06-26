@@ -1,16 +1,14 @@
 /*
-** zappy.c for zappy in /home/hammouche/Documents/PSU_2016/zappy/src/
+** end_game.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/game/
 **
-** Made by hamza hammouche
-** Login   <hamza.hammouche@epitech.eu>
+** Made by Martin Alais
+** Login   <martin.alais@epitech.eu>
 **
-** Started on  Wed Jun 21 16:09:52 2017 hamza hammouche
-** Last update Fri Jun 23 14:58:04 2017 Martin Alais
+** Started on  Mon Jun 26 12:24:38 2017 Martin Alais
+** Last update Mon Jun 26 12:25:01 2017 Martin Alais
 */
 
 #include "zappy.h"
-#include "Team.h"
-#include "Incantation.h"
 
 t_team	*check_team_win(t_Server *serv)
 {
@@ -36,9 +34,9 @@ t_team	*check_team_win(t_Server *serv)
   return (NULL);
 }
 
-void send_winner(t_Player *head, t_team *winner)
+void send_winner(t_graphic *head, t_team *winner)
 {
-  t_Player *tmp;
+  t_graphic *tmp;
   char			buff[512];
 
   tmp = head;
@@ -56,7 +54,7 @@ bool end_game(t_Server *serv)
 
   if ((winner = check_team_win(serv)) == NULL)
     return (false);
-  send_winner(serv->list_player, winner);
+  send_winner(serv->list_graphic, winner);
   exit(1);
   return (true);
 }

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Sat Jun 24 15:12:20 2017 Martin Alais
+** Last update Mon Jun 26 11:58:11 2017 Martin Alais
 */
 
 #include <time.h>
@@ -62,7 +62,7 @@ void check_action_status(t_Server *server)
 			tmp->action->start_time = 0;
 			tmp->action->is_working = false;
 			if (tmp->action->is_leveling == true)
-	    	send_message(tmp->fd, "ko\n");
+	    		send_message(tmp->fd, "ko\n");
 			tmp->action->is_leveling = false;
 			send_answer(tmp);
 			if (tmp->isEgg == false)

@@ -1,11 +1,11 @@
 /*
-** take_object.c for  in /home/macdoy/Rendu/zappy/src/
+** take2.c for zappy.h in /home/alaism/dev/tek2/PSU/zappy/src/commande/
 **
-** Made by loic1.doyen@epitech.eu
-** Login   <loic1.doyen@epitech.eu@epitech.eu>
+** Made by Martin Alais
+** Login   <martin.alais@epitech.eu>
 **
-** Started on  Tue Jun 20 09:45:19 2017 loic1.doyen@epitech.eu
-** Last update Sat Jun 24 15:52:08 2017 Martin Alais
+** Started on  Mon Jun 26 13:05:37 2017 Martin Alais
+** Last update Mon Jun 26 13:06:27 2017 Martin Alais
 */
 
 #include "zappy.h"

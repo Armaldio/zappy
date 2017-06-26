@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Sun Jun 25 11:51:31 2017 Martin Alais
+## Last update Mon Jun 26 13:56:14 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -14,60 +14,65 @@ RM    =    rm -rf
 
 NAME    =    server
 
-SRC    =    src/main.c \
-			src/Player.c \
-			src/Server.c \
-			src/Socket.c \
-			src/basic_data.c \
-			src/Parser.c \
-			src/World.c \
-			src/commande.c \
-			src/mouvement.c \
-			src/take_object.c \
-			src/incantation.c \
-			src/Team_gestion.c \
-			src/commande2.c \
-			src/commande3.c \
-			src/server2.c \
-			src/Parser2.c \
-			src/take_object2.c \
-			src/action.c \
-			src/waiting_line.c \
-			src/command_look.c \
-			src/player_list.c \
-			src/player_life.c \
-			src/init_world2.c \
-			src/commande_look2.c \
-			src/update_function.c \
-			src/incantation2.c \
-			src/incantation3.c \
-			src/incantation4.c \
-			src/incantation5.c \
-			src/send_message.c \
-			src/command_egg.c \
-			src/command_end_gestion.c \
-			src/set_object.c \
-			src/set_object2.c \
-			src/parser_commande.c \
-			src/command_broadcast.c \
-			src/undefinded_to_graphic.c \
-			src/check_data_undefine.c \
+SRC    =	src/commande/broadcast.c \
+			src/commande/eject.c \
+			src/commande/exit.c \
+			src/commande/fork.c \
+			src/commande/forward.c \
+			src/commande/incantation.c \
+			src/commande/inventory.c \
+			src/commande/level1.c \
+			src/commande/level2.c \
+			src/commande/level3.c \
+			src/commande/level4.c \
+			src/commande/level5.c \
+			src/commande/level6.c \
+			src/commande/level7.c \
+			src/commande/look.c \
+			src/commande/look2.c \
+			src/commande/right_left.c \
+			src/commande/set.c \
+			src/commande/set2.c \
+			src/commande/take.c \
+			src/commande/take2.c \
+			src/commande/update_player_status.c \
+			src/event/eggs.c \
+			src/event/event2.c \
+			src/event/event3.c \
+			src/event/player_connection.c \
+			src/game/action.c \
+			src/game/basic_data.c \
+			src/game/egg2.c \
+			src/game/Eggs.c \
+			src/game/end_game.c \
+			src/game/graphic.c \
+			src/game/init_world2.c \
+			src/game/main.c \
+			src/game/manage_answer.c \
+			src/game/parser_commande.c \
+			src/game/Parser.c \
+			src/game/Parser2.c \
+			src/game/player_life.c \
+			src/game/player_list.c \
+			src/game/Player.c \
+			src/game/send_message.c \
+			src/game/Server.c \
+			src/game/server2.c \
+			src/game/Socket.c \
+			src/game/undefine.c \
+			src/game/update_function.c \
+			src/game/waiting_line.c \
+			src/game/World.c \
+			src/graphic/bct_pnw.c \
 			src/graphic/commande_graphic.c \
 			src/graphic/msz_sgt.c \
 			src/graphic/parser.c \
-			src/graphic/bct_pnw.c \
-			src/graphic/tna.c \
 			src/graphic/ppo_plv_pin.c \
-			src/Eggs.c \
-			src/graphic/sst_update_time.c \
 			src/graphic/smg.c \
-			src/manage_answer.c \
-			src/connection_graphic.c \
-			src/connection_undefine.c \
-			src/event/player_connection.c \
-			src/egg2.c \
-			src/event/event2.c \
-			src/event/event3.c \
+			src/graphic/sst_update_time.c \
+			src/graphic/tna.c \
+			src/team/Team_gestion.c \
+			src/team/team_status.c \
 
 FLAGS    =    -Iinclude
 
