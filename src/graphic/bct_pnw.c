@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:29:47 2017 Martin Alais
-** Last update Sat Jun 24 11:37:55 2017 Martin Alais
+** Last update Mon Jun 26 14:14:11 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -15,7 +15,7 @@ void commande_bct2(t_Server *server, int x, int y, t_graphic *player)
 {
 	char data[100];
 	memset(data, '\0', 100);
-	sprintf(data, "btc %d %d %d %d %d %d %d %d %d\n", x, y,
+	sprintf(data, "bct %d %d %d %d %d %d %d %d %d\n", x, y,
 	server->world->map[x][y]->food, server->world->map[x][y]->linemate,
 	server->world->map[x][y]->deraumere, server->world->map[x][y]->sibur,
 	server->world->map[x][y]->mendiane, server->world->map[x][y]->phiras,
