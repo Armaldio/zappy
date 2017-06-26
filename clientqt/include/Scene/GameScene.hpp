@@ -22,6 +22,7 @@ namespace zappy {
         sf::Texture _tileTextures[10];
         sf::Texture _matTextures[10];
         sf::Texture _characterTexture;
+        sf::Texture _eggTexture;
         sf::RectangleShape _recShape;
         sf::Vector2f _ratio;
 

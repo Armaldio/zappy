@@ -36,6 +36,7 @@ void zappy::GameScene::loadRessources() {
         _matTextures[6].loadFromFile("assets/items.png", sf::IntRect(6 * 34, 15 * 34, 32, 32));
 
         _characterTexture.loadFromFile("assets/items.png", sf::IntRect(5 * 34, 26 * 34, 32, 32));
+        _eggTexture.loadFromFile("assets/items.png", sf::IntRect(6 * 34, 26 * 34, 32, 32));
 
         _recShape.setFillColor(sf::Color::Green);
         _initialized = true;
@@ -45,6 +46,7 @@ void zappy::GameScene::loadRessources() {
 
 void zappy::GameScene::zoomViewAt(sf::Vector2i pixel, sf::RenderWindow& window, float zoom)
 {
+    std::cout << "view zoom: " << zoom << std::endl;
     const sf::Vector2f beforeCoord{ window.mapPixelToCoords(pixel) };
     sf::View view{ window.getView() };
     view.zoom(zoom);
@@ -129,6 +131,20 @@ void zappy::GameScene::draw() {
         player->characterShape.setOrigin({squareSize / 2, squareSize / 2});
         player->characterShape.setTexture(&_characterTexture);
         _renderWindow->draw(player->characterShape);
+    }
+
+    auto &eggs = _game->getEggs();
+    for (auto egg : eggs) {
+        const auto realPosition = egg->getPosition();
+        const sf::Vector2f pos(((realPosition.x) * _ratio.x + 1 * realPosition.x + _ratio.x / 2),
+                              ((realPosition.y) * _ratio.y + 1 * realPosition.y + _ratio.y / 2));
+
+        const float squareSize = _ratio.x / 2;
+        egg->corpShape.setPosition(pos);
+        egg->corpShape.setSize({squareSize, squareSize});
+        egg->corpShape.setOrigin({squareSize / 2, squareSize / 2});
+        egg->corpShape.setTexture(&_characterTexture);
+        _renderWindow->draw(egg->corpShape);
     }
 }
 

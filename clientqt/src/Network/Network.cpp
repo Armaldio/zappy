@@ -53,6 +53,10 @@ void zappy::Network::closeConnection() {
         _readerThread->join();
     if (_writerThread)
         _writerThread->join();
+    delete(_readerThread);
+    delete(_writerThread);
+    _readerThread = nullptr;
+    _writerThread = nullptr;
 }
 
 zappy::TCPSocket &zappy::Network::getSocket() {

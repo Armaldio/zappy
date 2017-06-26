@@ -17,6 +17,9 @@
 namespace zappy {
     class Player {
     private:
+        unsigned int _id;
+        int _level;
+        int _orientation;
         Inventaire *_inventaire;
         sf::Vector2f _pos;
 
@@ -25,7 +28,7 @@ namespace zappy {
         sf::RectangleShape characterShape;
 
     public:
-        Player(unsigned int x, unsigned int y);
+        Player(unsigned int id, int level, int orientation, unsigned int x, unsigned int y);
 
         virtual ~Player();
 
@@ -34,6 +37,18 @@ namespace zappy {
         const sf::Vector2f & getPosition() const;
 
         void setPosition(sf::Vector2f const& pos);
+
+        const std::string &get_name() const;
+
+        void set_name(const std::string &_name);
+
+        int getOrientation() const;
+
+        void setOrientation(int _orientation);
+
+        int getLevel() const;
+
+        void setLevel(int _level);
     };
 }
 

@@ -36,13 +36,17 @@ void MainWindow::on_quitButton_pressed()
     auto network = zappy::Network::get_instance_ptr();
 
     if (_isSession) {
+        ui->logsBrowser->clear();
         ui->quitButton->setText("Close");
         ui->statusConnectionLabel->setText("Network: closed");
-        network->closeConnection();
         _isSession = false;
-        // sceneManager->runScene("splashScreen");
-        // sceneManager->unloadRessources();
-        // sceneManager->loadRessources();
+        network->getIncoming().enqueue(new std::string("Graphic Exit!"));
+        network->closeConnection();
+        _runnerThread->join();
+        delete(_runnerThread);
+        sceneManager->runScene("splashScreen");
+        sceneManager->unloadRessources();
+        sceneManager->loadRessources();
     } else {
         close();
     }
@@ -71,7 +75,6 @@ void MainWindow::on_connectionButton_pressed()
     else
     {
         network->closeConnection();
-        _runnerThread->join();
         ui->statusConnectionLabel->setText("Network: failed");
     }
 }
@@ -93,6 +96,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 void MainWindow::_runner() {
     std::string *command = nullptr;
     auto network = zappy::Network::get_instance_ptr();
+
     while (_isSession) {
         command = network->getIncoming().dequeue();
         emit logIsupdated(command);

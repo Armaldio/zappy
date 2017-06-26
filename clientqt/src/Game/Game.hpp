@@ -15,17 +15,21 @@
 #include <map>
 #include <functional>
 #include <QtCore/QVector>
+#include <QtCore/QMap>
 #include "Player.hpp"
 #include "Tile.hpp"
 #include "Singleton.hpp"
 #include "Team.hpp"
+#include "Egg.hpp"
 
 namespace zappy {
     class Game : public zappy::Singleton<Game> {
     private:
-        std::vector<Player *> _players;
-        std::vector<Tile *> _tiles;
+        QMap<unsigned int, Player *> _players;
+        QMap<unsigned int, Egg *> _eggs;
         QVector<Team> _teams;
+        QVector<Tile *> _tiles;
+
         std::map<std::string, std::function<void(const std::string &)>> _functions;
         unsigned int _width;
         unsigned int _heigth;
@@ -94,11 +98,11 @@ namespace zappy {
 
         void destroyMap();
 
-        void addPlayer(Player *player);
+        QMap<unsigned int, Player *> &getPlayers();
 
-        std::vector<Player *> &getPlayers();
+        QMap<unsigned int, Egg *> &getEggs();
 
-        std::vector<Tile *> &getTiles();
+        QVector<Tile *> &getTiles();
 
         bool isMapped() const;
 

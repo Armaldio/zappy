@@ -43,10 +43,6 @@ zappy::Game::~Game() {
     destroyMap();
 }
 
-void zappy::Game::addPlayer(zappy::Player *player) {
-    _players.push_back(player);
-}
-
 void zappy::Game::createMap(unsigned int width, unsigned int height) {
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height; ++j) {
@@ -63,7 +59,10 @@ void zappy::Game::destroyMap() {
         delete(tile);
     for (auto player : _players)
         delete(player);
+    for (auto egg : _eggs)
+        delete (egg);
     _teams.clear();
+    _eggs.clear();
     _players.clear();
     _tiles.clear();
     _heigth = 0;
@@ -71,10 +70,11 @@ void zappy::Game::destroyMap() {
     _isMapped = false;
 }
 
-std::vector<zappy::Player *> &zappy::Game::getPlayers() {
+QMap<unsigned int, zappy::Player *> &zappy::Game::getPlayers() {
     return _players;
 }
-std::vector<zappy::Tile *> &zappy::Game::getTiles() {
+
+QVector<zappy::Tile *> &zappy::Game::getTiles() {
     return _tiles;
 }
 
@@ -132,23 +132,112 @@ void zappy::Game::function_tna(const std::string &name) {
     _teams.push_back({QString(name.c_str())});
 }
 
-void zappy::Game::function_pnw(const std::string &) {
-    std::cout << "called::function_pnw" << std::endl;
+/**
+ * "pnw #n X Y O L N\n"
+ * @param buffer
+ */
+void zappy::Game::function_pnw(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+    int x;
+    int y;
+    int orientation;
+    int level;
+    std::string team;
+
+    ss >> player_id >> x >> y >> orientation >> level >> team;
+
+    _players[player_id] = new Player(player_id, level, orientation, x, y);
 }
 
-void zappy::Game::function_ppo(const std::string &) {
-    std::cout << "called::function_ppo" << std::endl;
+/**
+ * "ppo #n X Y O\n"
+ * @param buffer
+ */
+void zappy::Game::function_ppo(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    int x;
+    int y;
+
+    ss >> x >> y;
+
+    if (ss.fail())
+        throw GameException("ppo error");
+
+    auto *player = _players[player_id];
+    player->setPosition({(float) x, (float) y});
 }
 
-void zappy::Game::function_plv(const std::string &) {
-    std::cout << "called::function_plv" << std::endl;
+/**
+ * "plv #n L\n"
+ * @param buffer
+ */
+void zappy::Game::function_plv(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    int level;
+
+    ss >> level;
+
+    if (ss.fail())
+        throw GameException("plv error");
+
+    auto *player = _players[player_id];
+    player->setLevel(level);
 }
 
-void zappy::Game::function_pin(const std::string &) {
-    std::cout << "called::function_pin" << std::endl;
+/**
+ * "pin #n X Y q q q q q q q\n"
+ * @param buffer
+ */
+void zappy::Game::function_pin(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    if (_players.find(player_id) == _players.end())
+        throw GameException("Player not found");
+
+    int x;
+    int y;
+
+    ss >> x >> y;
+
+    auto *player = _players[player_id];
+    auto *inventaire = _players[player_id]->getInventaire();
+
+    player->setPosition({(float) x, (float) y});
+
+    int quantity;
+    for (int i = 0; i < 7; ++i) {
+        ss >> quantity;
+        if (ss.fail() || quantity < 0)
+            throw GameException("function_bct invalid quantity " + std::to_string(quantity) + " at id: " + std::to_string(i));
+        inventaire->setMaterial((const Inventaire::TypeMaterial) i, quantity);
+    }
 }
 
-void zappy::Game::function_pex(const std::string &) {
+void zappy::Game::function_pex(const std::string &buffer) {
     std::cout << "called::function_pex" << std::endl;
 }
 
@@ -176,8 +265,19 @@ void zappy::Game::function_pgt(const std::string &) {
     std::cout << "called::function_pgt" << std::endl;
 }
 
-void zappy::Game::function_pdi(const std::string &) {
-    std::cout << "called::function_pdi" << std::endl;
+void zappy::Game::function_pdi(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    if (ss.fail())
+        throw GameException("Pex error id: " + std::to_string(player_id));
+
+    _players.remove(player_id);
 }
 
 void zappy::Game::function_enw(const std::string &) {
@@ -253,5 +353,9 @@ bool zappy::Game::isFail() const {
 
 const QVector<zappy::Team> &zappy::Game::getTeams() const {
     return _teams;
+}
+
+QMap<unsigned int, zappy::Egg *> &zappy::Game::getEggs() {
+    return _eggs;
 }
 
