@@ -1,15 +1,14 @@
 /*
-** command_egg.c for zappy in /home/hammouche/Documents/PSU_2016/zappy/src/
+** eggs.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/event/
 **
-** Made by hamza hammouche
-** Login   <hamza.hammouche@epitech.eu>
+** Made by Martin Alais
+** Login   <martin.alais@epitech.eu>
 **
-** Started on  Thu Jun 22 18:51:56 2017 hamza hammouche
-** Last update Sat Jun 24 19:13:27 2017 hamza hammouche
+** Started on  Mon Jun 26 12:23:18 2017 Martin Alais
+** Last update Mon Jun 26 12:23:38 2017 Martin Alais
 */
 
 #include "zappy.h"
-#include "Incantation.h"
 
 void	send_message_enw(t_graphic *head, t_Player *p, int idOeuf)
 {

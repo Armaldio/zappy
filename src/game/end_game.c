@@ -1,16 +1,14 @@
 /*
-** zappy.c for zappy in /home/hammouche/Documents/PSU_2016/zappy/src/
+** end_game.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/game/
 **
-** Made by hamza hammouche
-** Login   <hamza.hammouche@epitech.eu>
+** Made by Martin Alais
+** Login   <martin.alais@epitech.eu>
 **
-** Started on  Wed Jun 21 16:09:52 2017 hamza hammouche
-** Last update Mon Jun 26 11:40:40 2017 hamza hammouche
+** Started on  Mon Jun 26 12:24:38 2017 Martin Alais
+** Last update Mon Jun 26 12:25:01 2017 Martin Alais
 */
 
 #include "zappy.h"
-#include "Team.h"
-#include "Incantation.h"
 
 t_team	*check_team_win(t_Server *serv)
 {

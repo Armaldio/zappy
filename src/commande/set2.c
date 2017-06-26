@@ -1,11 +1,11 @@
 /*
-** set_object.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/
+** set2.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/commande/
 **
 ** Made by Martin Alais
 ** Login   <martin.alais@epitech.eu>
 **
-** Started on  Thu Jun 22 12:01:41 2017 Martin Alais
-** Last update Sat Jun 24 16:02:51 2017 Martin Alais
+** Started on  Mon Jun 26 13:36:03 2017 Martin Alais
+** Last update Mon Jun 26 13:36:34 2017 Martin Alais
 */
 
 #include "zappy.h"
