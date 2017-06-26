@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Mon Jun 26 15:36:47 2017 Martin Alais
+** Last update Mon Jun 26 19:12:23 2017 hamza hammouche
 */
 
 #include <time.h>
@@ -43,6 +43,17 @@ void check_order_player(t_Server *server)
 	}
 }
 
+void	add_default_team(t_Server *server)
+{
+  t_team *head;
+
+  head = add_team(NULL, "Team1");
+  head = add_team(head, "Team2");
+  head = add_team(head, "Team3");
+  head = add_team(head, "Team4");
+  server->list_teams = head;
+}
+
 int main(int ac, char **argv)
 {
 	t_Server *server;
@@ -52,6 +63,8 @@ int main(int ac, char **argv)
 	basic_init_server(server);
 	parser_data(server, ac, argv);
 	init_server(server);
+  if (server->list_teams == NULL)
+    add_default_team(server);
 	while (1)
 	{
 		manage_time(server);
