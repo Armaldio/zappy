@@ -38,22 +38,21 @@ module.exports = class Bot {
 
 	getState () {
 		let obj = {
-			"inventory     ": this.inventory,
-			"view          ": this.view,
-			"direction     ": this.direction,
-			"queue         ": this.queue,
-			"behaviour     ": this.behaviour,
-			"flux          ": this.flux,
-			"team          ": this.team,
-			"searchingFood ": this.searchingFood,
-			"clientNum     ": this.clientNum,
-			"mapSize       ": this.mapSize,
-			"lastCommand   ": this.lastCommand,
-			"totalCommands ": this.totalCommands,
-			"goesUp        ": this.goesUp,
-			"level         ": this.level,
-			"incantating "  : this.incantating,
-			"behaviour "    : this.behaviour,
+			"inventory"    : this.inventory,
+			"view"         : this.view,
+			"direction"    : this.direction,
+			"queue"        : this.queue,
+			"flux"         : this.flux,
+			"team"         : this.team,
+			"searchingFood": this.searchingFood,
+			"clientNum"    : this.clientNum,
+			"mapSize"      : this.mapSize,
+			"lastCommand"  : this.lastCommand,
+			"totalCommands": this.totalCommands,
+			"goesUp"       : this.goesUp,
+			"level"        : this.level,
+			"incantating"  : this.incantating,
+			"behaviour"    : this.behaviour,
 		};
 		return (obj);
 	}
@@ -102,7 +101,8 @@ module.exports = class Bot {
 			});
 		});
 
-		this.view[this.direction] = datas;
+		//this.view[this.direction] = datas;
+		this.view["here"] = datas;
 
 		if (datas[0].items && datas[0].items.length !== 0)
 			this.send("Take " + datas[0].items[0]);

@@ -6,6 +6,14 @@
 </head>
 <body>
 <div id="datas">
+    <div id="header"></div>
+    <br>
+    <div id="inventory"></div>
+    <br>
+    <div id="queue"></div>
+    <br>
+    <div id="other"></div>
+
 
 </div>
 </body>
@@ -13,48 +21,88 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <script src="/socket.io/socket.io.js"></script>
+<!--<script src="dist/index.js"></script>-->
+
 <script>
-	var socket = io('http://localhost:4244');
+	'use strict';
+
+	var socket = io('http://192.168.0.110:4244');
+
+    /*let data = {
+     'inventory'    : {
+     food     : 13,
+     linemate : 0,
+     deraumere: 0,
+     sibur    : 1,
+     mendiane : 1,
+     phiras   : 0,
+     thystame : 0
+     },
+     'view'         : {
+     up   : [[], [], [], []],
+     down : [],
+     left : [],
+     right: []
+     },
+     'direction'    : 'up',
+     'queue'        : ['Look'],
+     'behaviour'    : {
+     description: 'A default bot',
+     name       : 'Default'
+     },
+     'flux'         : '[ player, food sibur, food phiras, deraumere phiras ]\n',
+     'team'         : 'team1',
+     'searchingFood': false,
+     'clientNum'    : 0,
+     'mapSize'      : {
+     x: 0,
+     y: 10
+     },
+     'lastCommand'  : 'Inventory',
+     'totalCommands': 27,
+     'goesUp'       : 3,
+     'level'        : 1,
+     'incantating'  : false
+     };*/
 
 	socket.on('connect', function () {
 		console.log("Connected");
 
-		socket.emit('msg', "Hello")
+		socket.emit('msg', "Hello");
 	});
 
 	socket.on('message', function (data) {
 		console.log(data);
 
-        var $datas = $("#datas");
+		var $datas = $("#datas");
 
-        /*
-         "inventory     ": this.inventory,
-         "view          ": this.view,
-         "direction     ": this.direction,
-         "queue         ": this.queue,
-         "behaviour     ": this.behaviour,
-         "flux          ": this.flux,
-         "team          ": this.team,
-         "searchingFood ": this.searchingFood,
-         "clientNum     ": this.clientNum,
-         "mapSize       ": this.mapSize,
-         "lastCommand   ": this.lastCommand,
-         "totalCommands ": this.totalCommands,
-         "goesUp        ": this.goesUp,
-         "level         ": this.level,
-         "incantating "  : this.incantating,
-         "behaviour "    : this.behaviour,
-         */
+		console.log(data["behaviour"]);
 
-        /*var text = "";
-        $.each(data, function (key, value) {
-            console.log("Key : " , key, "value : " , value);
-            text =+ key + " : " + "\n";
-		});*/
+		$("#header").html('<h1>' + data["behaviour"].name + ' - ' + data.behaviour.description + '</h1>');
 
-        $datas.text(JSON.stringify(data, null, '\t'));
+		var str = '<ul>';
+		$.each(data.inventory, function (value, key) {
+			str += '<li>' + value + ' - ' + key + '</li>';
+		});
+		str += '</ul>';
+		$("#inventory").html(str);
+
+		str = "";
+		$.each(data, function (index, value) {
+			console.log(index, value);
+			if (index === "inventory" || index === "behaviour" || index === "queue") return;
+			str += index + ' : ' + JSON.stringify(value) + ' <br>';
+		});
+		$("#other").html(str);
+
+		str = "";
+		$.each(data.queue, function (index, value) {
+			str += value + '<br>';
+		});
+		$("#queue").html(str);
 	});
 
 	//socket.emit('my other event', {my: 'data'});
+	//# sourceMappingURL=index.js.map
 </script>
 </html>
