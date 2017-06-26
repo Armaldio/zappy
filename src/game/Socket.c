@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:14 2017 loic1.doyen@epitech.eu
-** Last update Fri Jun 23 17:02:15 2017 Martin Alais
+** Last update Mon Jun 26 16:29:05 2017 Martin Alais
 */
 
 #include "Socket.h"
@@ -74,7 +74,7 @@ void init_socket(t_Connection *connection)
 		 sizeof(int)) < 0)
     printf("setsockopt(SO_REUSEADDR) failed");
   if (connection->port == -1)
-    connection->port = 6666;
+    connection->port = 4242;
   connection->s_in.sin_family = AF_INET;
   connection->s_in.sin_port = htons(connection->port);
   connection->s_in.sin_addr.s_addr = INADDR_ANY;
