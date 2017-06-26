@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Wed Jun 21 16:09:52 2017 hamza hammouche
-** Last update Fri Jun 23 14:58:04 2017 Martin Alais
+** Last update Mon Jun 26 11:40:40 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -36,9 +36,9 @@ t_team	*check_team_win(t_Server *serv)
   return (NULL);
 }
 
-void send_winner(t_Player *head, t_team *winner)
+void send_winner(t_graphic *head, t_team *winner)
 {
-  t_Player *tmp;
+  t_graphic *tmp;
   char			buff[512];
 
   tmp = head;
@@ -56,7 +56,7 @@ bool end_game(t_Server *serv)
 
   if ((winner = check_team_win(serv)) == NULL)
     return (false);
-  send_winner(serv->list_player, winner);
+  send_winner(serv->list_graphic, winner);
   exit(1);
   return (true);
 }

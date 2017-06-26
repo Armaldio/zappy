@@ -5,21 +5,20 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Fri Jun 23 11:45:52 2017 hamza hammouche
-** Last update Fri Jun 23 11:49:11 2017 hamza hammouche
+** Last update Sat Jun 24 19:21:11 2017 hamza hammouche
 */
 
 #include "zappy.h"
 #include "Incantation.h"
 
-void	send_message_position(t_Player *head, int x, int y, char *msg)
+void	send_message_position(t_graphic *head, char *msg)
 {
-  t_Player *tmp;
+  t_graphic *tmp;
 
   tmp = head;
   while (tmp)
     {
-      if (tmp->pos.x == x && tmp->pos.y == y)
-				send_message(tmp->fd, msg);
+      send_message(tmp->fd, msg);
       tmp = tmp->next;
     }
 }

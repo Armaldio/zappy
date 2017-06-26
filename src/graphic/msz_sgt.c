@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:01:38 2017 Martin Alais
-** Last update Fri Jun 23 19:25:08 2017 Martin Alais
+** Last update Sat Jun 24 19:00:08 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -32,10 +32,16 @@ void commande_sgt(t_graphic *player, t_Server *server, char *data)
 	send_message(player->fd, data_send);
 }
 
-void send_message_death(int id, int fd)
+void send_message_death(t_graphic *head, int id)
 {
-    char buffer[512];
+  char buffer[512];
+  t_graphic *tmp;
 
   sprintf(buffer, "pdi %d\n", id);
-  send_message(fd, buffer);
+  tmp = head;
+  while (tmp)
+    {
+      send_message(tmp->fd, buffer);
+      tmp = tmp->next;
+    }
 }

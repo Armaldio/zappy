@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:08:42 2017 Martin Alais
-** Last update Sat Jun 24 15:46:18 2017 Martin Alais
+** Last update Sat Jun 24 19:22:05 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -93,7 +93,7 @@ void commande_incantation(int id, t_Server *server, char data)
       ptmp = ptmp->next;
     }
   strcat(buffer, "\n");
-  send_message_position(server->list_player, tmp->pos.x, tmp->pos.y, buffer);
+  send_message_position(server->list_graphic, buffer);
 }
 
 int command_take(int id, t_Server *server, char *data)
