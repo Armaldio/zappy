@@ -135,10 +135,6 @@ bot.client.on('data', (data) => {
 				console.log(chalk.green("[Receiving] " + bot.lastCommand + ' : ' + JSON.stringify(msg)));
 				//bot.output(bot.queue);
 
-				if (bot.totalCommands % 5 === 0) {
-					bot.send("Inventory");
-				}
-
 				if (bot.goesUp === bot.mapSize.y) {
 					bot.send("Right");
 					bot.send("Forward");
@@ -164,6 +160,10 @@ bot.client.on('data', (data) => {
 						bot.onRight();
 						break;
 
+					case "Left":
+						bot.onLeft();
+						break;
+
 					case "Set":
 						break;
 
@@ -180,12 +180,16 @@ bot.client.on('data', (data) => {
 						break;
 
 					case "Incantation":
-						if (bot.msg !== "ko") {
+						if (bot.msg === "ko") {
+							bot.queue.shift();
+						} else {
 							if (!bot.incantating)
 								bot.incantating = true;
 							else {
 								bot.level = bot.msg.replace("current level: ", "") * 1;
 								bot.queue.shift();
+								bot.incantating = false;
+								bot.onIncantation();
 							}
 						}
 						break;
