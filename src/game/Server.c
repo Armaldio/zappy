@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Sat Jun 24 16:14:04 2017 Martin Alais
+** Last update Mon Jun 26 16:26:06 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -88,6 +88,7 @@ void check_new_player(t_Server *server)
   a = accept(server->socket->fd,
 	     (struct sockaddr *)&server->socket->s_in_accept,
 	     &server->socket->s_in_size_accept);
+set_socket_statue(server->socket->fd, 1);
   t_Player *p = get_First_Player_Available(server->list_player);
   if (a != -1)
     {
@@ -106,5 +107,4 @@ void check_new_player(t_Server *server)
       else
 	  add_undefined(a, server);
     }
-  set_socket_statue(server->socket->fd, 1);
 }

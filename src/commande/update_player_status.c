@@ -5,15 +5,20 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Mon Jun 26 12:15:50 2017 Martin Alais
+** Last update Mon Jun 26 15:29:45 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Event.h"
 
-void check_data_undefine(t_undefined *tmp, char *data_recv,
+void check_data_undefine(int id, char *data_recv,
 	int a, t_Server *server)
 {
+	t_undefined *tmp;
+
+	tmp = server->list_undefined;
+	while (tmp && tmp->id != id)
+		tmp = tmp->next;
 	if (a == 0)
 	{
 		printf("Undefined with id %d disconected\n", tmp->id);

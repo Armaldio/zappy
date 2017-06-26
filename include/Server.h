@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Mon Jun 26 12:17:48 2017 Martin Alais
+** Last update Mon Jun 26 15:30:08 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -42,8 +42,6 @@ void send_message_item(t_Player *player, int, int nb);
 void send_message_take(t_Player *player, int, int nb);
 bool check_valide_team(char *team_name, t_Server *server,
 		       t_undefined *undefine);
-void check_data_undefine(t_undefined *tmp, char *data_recv,
-           			 int a, t_Server *server);
 bool end_game(t_Server *serv);
 void init_server(t_Server *server);
 void check_new_player(t_Server *server);
