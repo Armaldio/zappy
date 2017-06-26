@@ -109,8 +109,6 @@ bot.client.on('data', (data) => {
 
 		bot.flux = bot.flux.toLowerCase();
 
-		//console.log(chalk.green("[RAW] " + JSON.stringify(bot.flux)));
-
 		let msgs = bot.flux.split("\n").filter(v => v !== '');
 
 		msgs.forEach((msg) => {
@@ -120,11 +118,6 @@ bot.client.on('data', (data) => {
 				clients[0].emit('message', bot.getState());
 			}
 
-			/*if (msg === "ko") {
-			 console.log(chalk.red(`Command [${bot.queue[0]}] failed : ${msg}`));
-			 bot.queue.shift();
-			 }
-			 else */
 			if (bot.msg === "welcome")
 				bot.send(bot.team);
 			else if (bot.msg === "dead")
@@ -135,8 +128,7 @@ bot.client.on('data', (data) => {
 
 				bot.lastCommand = bot.queue[0];
 				if (bot.queue[0] !== bot.team &&
-					!bot.incantating) {
-
+					bot.queue[0] !== "Incantation") {
 					bot.lastCommand = bot.queue.shift();
 				}
 
@@ -191,8 +183,10 @@ bot.client.on('data', (data) => {
 						if (bot.msg !== "ko") {
 							if (!bot.incantating)
 								bot.incantating = true;
-							else
+							else {
 								bot.level = bot.msg.replace("current level: ", "") * 1;
+								bot.queue.shift();
+							}
 						}
 						break;
 

@@ -79,7 +79,9 @@ module.exports = class Bot {
 
 		// Format datas
 		datas.forEach((item, i) => {
-			let a    = item.split(' ');
+			let a    = item.split(' ').filter((el) => {
+				return (el !== "player");
+			});
 			datas[i] = {
 				"items" : a,
 				"length": a.length,
@@ -92,17 +94,18 @@ module.exports = class Bot {
 		 return (b.length - a.length);
 		 });*/
 
-		// Remove players
+		/*// Remove players
 		datas.forEach((item, i) => {
 			item.items.forEach((x, xi) => {
 				if (x === "player") {
 					datas[i].items.splice(xi, 1);
 				}
 			});
-		});
+		});*/
 
 		//this.view[this.direction] = datas;
-		this.view["here"] = datas;
+		this.view["here"] = datas[0];
+		this.view["up"] = datas[2];
 
 		if (datas[0].items && datas[0].items.length !== 0)
 			this.send("Take " + datas[0].items[0]);
@@ -158,8 +161,8 @@ module.exports = class Bot {
 		// ---
 
 		this.inventory = obj;
-
-		if (this.inventory["linemate"] >= 1) {
+		
+		if (this.inventory["linemate"] >= 1 && this.view["here"].length === 0) {
 			console.log("Player can rise to level 2 !");
 			this.startIncantation();
 		}
