@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:31:38 2017 Martin Alais
-** Last update Mon Jun 26 13:32:57 2017 Martin Alais
+** Last update Mon Jun 26 14:02:09 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -30,7 +30,6 @@ void help_init_level_7(t_Player **tmp2)
 	tmp2[3] = NULL;
 	tmp2[4] = NULL;
 }
-
 
 void level_up_7(t_Player **player, t_Server *server)
 {
