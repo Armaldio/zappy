@@ -5,18 +5,24 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Mon Jun 26 11:58:11 2017 Martin Alais
+** Last update Mon Jun 26 14:37:48 2017 hamza hammouche
 */
 
 #include <time.h>
 #include "zappy.h"
 
-void send_message_pie(t_Player *p, int r)
+void send_message_pie(t_graphic *head, t_Player *p)
 {
 	char buffer[512];
+  t_graphic	*tmp;
 
-  sprintf(buffer, "pie %d %d %d\n", p->pos.x, p->pos.y, r);
-  stok_answer(p, buffer);
+  sprintf(buffer, "pie %d %d %d\n", p->pos.x, p->pos.y, 1);
+  tmp = head;
+  while (tmp)
+    {
+      send_message(tmp->fd, buffer);
+      tmp = tmp->next;
+    }
 }
 
 void init_action(t_Player *player)
