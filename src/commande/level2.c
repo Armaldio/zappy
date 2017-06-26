@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:14:33 2017 Martin Alais
-** Last update Mon Jun 26 13:19:15 2017 Martin Alais
+** Last update Mon Jun 26 16:27:20 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -38,7 +38,7 @@ int check_nbr_at_level(t_Server *server, int level)
 	return (nbr);
 }
 
-void level_up_2(t_Player *player)
+void level_up_2(t_Server *server, t_Player *player)
 {
 	player->inventaire->linemate -= 1;
 	player->inventaire->deraumere -= 1;
@@ -46,6 +46,7 @@ void level_up_2(t_Player *player)
 	player->action->is_leveling = false;
 	player->level = 3;
 	printf("Player %d reach level 3!\n", player->id);
+  event_endI(server, player);
 }
 
 void incan_2(t_Server *server, t_Player *player)
@@ -61,8 +62,8 @@ void incan_2(t_Server *server, t_Player *player)
 			tmp = tmp->next;
 		if (is_ready_to_up_2(tmp, player) == true)
 		{
-			level_up_2(tmp);
-			level_up_2(player);
+			level_up_2(server, tmp);
+			level_up_2(server, player);
 			stok_answer(tmp, "ok\n");
 			stok_answer(player, "ok\n");
 		}

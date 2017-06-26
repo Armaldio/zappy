@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Mon Jun 26 12:13:58 2017 Martin Alais
+** Last update Mon Jun 26 15:57:52 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -18,9 +18,10 @@
 
 void parser_data(t_Server *server, int ac, char **argv);
 int	parser_team(t_Server *serv, char **argv, int a);
+void	event_endI(t_Server *server, t_Player *player);
 int parser_commande(int id, t_Server *server, char *data);
 void send_message_death(t_graphic *, int);
-void send_message_pie(t_Player *p, int r);
+void send_message_pie(t_graphic *, t_Player *p);
 void	send_message_ebo(t_Player *p, int idOeuf);
 void	send_message_enw(t_graphic *head, t_Player *p, int idOeuf);
 void	send_message_position(t_graphic *, char *msg);
@@ -49,6 +50,7 @@ void ini_waiting_line(t_Player *player);
 void update_player_life(t_Server *server);
 void check_player_death(t_Server *server);
 void my_add_player(t_Server *server, int fd);
+void	event_endI(t_Server *server, t_Player *player);
 int		my_add_player_id(t_Server *server, int fd);
 void my_delete_player(t_Server *server, int id);
 void init_case2(t_Map *tmp);
@@ -74,6 +76,12 @@ int get_eggs_id(t_Server *server);
 void my_init_eggs(t_Player *, int id, t_Server *server, int father_id);
 int my_add_eggs(t_Server *server, t_Player *player);
 t_Player *get_eggs(int id, t_Player *head);
-void check_data_undefine(t_undefined *, char *, int a, t_Server *server);
+void check_data_undefine(int, char *, int a, t_Server *server);
+void add_to_line(t_Player *tmp, char *data_recv, int a, t_Server *server);
+void my_poll(t_Server *server);
+int poll_nbr_fd2(t_Server *server);
+void complete_struct2(t_Server *server, void *poll_fd, int nbr);
+bool send_for_graphic(t_Server *server, int fd, char *data_recv);
+bool send_for_undefine(t_Server *server, int fd, char *data_recv);
 
 #endif /* !ZAPPY_MAIN_H_ */

@@ -5,66 +5,12 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Sat Jun 24 12:50:38 2017 hamza hammouche
+** Last update Mon Jun 26 15:36:47 2017 Martin Alais
 */
 
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"
-
-void check_undefine(t_Server *server)
-{
-	int a;
-	char data_recv[4096];
-	struct timeval tv;
-	t_undefined *tmp;
-	fd_set rfds;
-
-	tmp = server->list_undefined;
-	memset(data_recv, '\0', 4096);
-	while (tmp != NULL)
-	{
-		FD_ZERO(&rfds);
-		FD_SET(tmp->fd, &rfds);
-		tv.tv_sec = 0;
-		tv.tv_usec = 300;
-		a = select(tmp->fd + 1, &rfds, NULL, NULL, &tv);
-		if (a != 0)
-		{
-			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
-			check_data_undefine(tmp, data_recv, a, server);
-			memset(data_recv, '\0', 4096);
-		}
-		tmp = tmp->next;
-	}
-}
-
-void check_graphique(t_Server *server)
-{
-	int a;
-	char data_recv[4096];
-	struct timeval tv;
-	t_graphic *tmp;
-	fd_set rfds;
-
-	tmp = server->list_graphic;
-	memset(data_recv, '\0', 4096);
-	while (tmp != NULL)
-	{
-		FD_ZERO(&rfds);
-		FD_SET(tmp->fd, &rfds);
-		tv.tv_sec = 0;
-		tv.tv_usec = 300;
-		a = select(tmp->fd + 1, &rfds, NULL, NULL, &tv);
-		if (a != 0)
-		{
-			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
-			graphic_parser(tmp->id, server, data_recv);
-			memset(data_recv, '\0', 4096);
-		}
-		tmp = tmp->next;
-	}
-}
 
 void	manage_time(t_Server *server)
 {
@@ -111,12 +57,10 @@ int main(int ac, char **argv)
 		manage_time(server);
 		check_new_player(server);
 		check_order_player(server);
-		check_data_player(server);
 		check_action_status(server);
 		check_player_death(server);
 		check_player_leveling(server);
-		check_undefine(server);
-		check_graphique(server);
+		my_poll(server);
 	}
 	return (0);
 }

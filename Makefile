@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Mon Jun 26 13:56:14 2017 Martin Alais
+## Last update Mon Jun 26 15:51:57 2017 hamza hammouche
 ##
 
 CC    =    gcc -g
@@ -39,6 +39,7 @@ SRC    =	src/commande/broadcast.c \
 			src/event/eggs.c \
 			src/event/event2.c \
 			src/event/event3.c \
+			src/event/end_incantation.c \
 			src/event/player_connection.c \
 			src/game/action.c \
 			src/game/basic_data.c \
@@ -55,6 +56,8 @@ SRC    =	src/commande/broadcast.c \
 			src/game/player_life.c \
 			src/game/player_list.c \
 			src/game/Player.c \
+			src/game/poll.c \
+			src/game/poll2.c \
 			src/game/send_message.c \
 			src/game/Server.c \
 			src/game/server2.c \

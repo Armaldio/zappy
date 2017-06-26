@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:38:41 2017 Martin Alais
-** Last update Mon Jun 26 13:42:27 2017 Martin Alais
+** Last update Mon Jun 26 15:54:43 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -78,6 +78,7 @@ void delete_undefine(t_Server *server, int id)
 	{
 		if (tmp->id == id)
 		{
+			printf("Undefine with id %d deleted\n", tmp->id);
 			if (last == NULL)
 				server->list_undefined = tmp->next;
 			else

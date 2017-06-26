@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:37:32 2017 Martin Alais
-** Last update Mon Jun 26 13:37:54 2017 Martin Alais
+** Last update Mon Jun 26 15:54:30 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -52,6 +52,7 @@ void delete_graphic(t_Server *server, int id)
 	{
 		if (tmp->id == id)
 		{
+			printf("Graphic with id %d deleted\n", tmp->id);
 			if (last == NULL)
 				server->list_graphic = tmp->next;
 			else

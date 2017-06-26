@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:28:30 2017 Martin Alais
-** Last update Mon Jun 26 13:29:54 2017 Martin Alais
+** Last update Mon Jun 26 16:34:16 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -53,6 +53,7 @@ void level_up_5(t_Player **player, t_Server *server)
 		player[a]->action->is_leveling = false;
 		player[a]->level = 6;
 		printf("Player %d reach level 6!\n", player[a]->id);
+    event_endI(server, player[a]);
 		stok_answer(player[a], "ok\n");
 		a += 1;
 	}
@@ -78,6 +79,7 @@ void incan_5(t_Server *server, t_Player *player)
 			player->action->is_leveling = false;
 			player->level = 6;
 			printf("Player %d reach level 6!\n", player->id);
+	    event_endI(server, player);
 			stok_answer(player, "ok\n");
 			level_up_5(tmp2, server);
 			free(tmp2);
