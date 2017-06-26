@@ -14,11 +14,11 @@
 #include "include/Scene/GameScene.hpp"
 
 zappy::GameScene::GameScene(sf::RenderWindow *renderWindow, const std::string &name)
-        : Scene(renderWindow, name), _map(nullptr),
+        : Scene(renderWindow, name), /* _map(nullptr), */
           _lastX(0), _lastY(0), _lastDiffX(0), _lastDiffY(0), _zoomAmount(1.1f), _currentZoom(1.0f) {
     _ratio.x = 0;
     _ratio.y = 0;
-    _map = nullptr;
+    _game = zappy::Game::get_instance_ptr();
 }
 
 void zappy::GameScene::loadRessources() {
@@ -57,7 +57,7 @@ void zappy::GameScene::zoomViewAt(sf::Vector2i pixel, sf::RenderWindow& window, 
 
 
 void zappy::GameScene::unloadRessources() {
-
+    _initialized = 0;
 }
 
 void zappy::GameScene::update(sf::Event const &event) {
@@ -90,13 +90,14 @@ void zappy::GameScene::update(sf::Event const &event) {
 }
 
 void zappy::GameScene::draw() {
-    if (_map == nullptr)
+    if (!_game->isMapped())
         return;
-    auto &blocks = _map->getTiles();
+
+    auto &blocks = _game->getTiles();
 
     for (auto block : blocks) {
-        const sf::Vector2f pos(((block->getPos().x) * _ratio.x + 1 * block->getPos().x),
-                               ((block->getPos().y) * _ratio.y + 1 * block->getPos().y));
+        const sf::Vector2f pos(((block->getPosition().x) * _ratio.x + 1 * block->getPosition().x),
+                               ((block->getPosition().y) * _ratio.y + 1 * block->getPosition().y));
         block->rectangleShape.setPosition(pos);
         block->rectangleShape.setSize(_ratio);
         block->rectangleShape.setFillColor(sf::Color::White);
@@ -104,9 +105,9 @@ void zappy::GameScene::draw() {
         _renderWindow->draw(block->rectangleShape);
 
         const float sizeSquare = _ratio.x / 12.f;
-        const auto materials = block->getAllMat();
-        for (int i = 0; i < block->getNbMat(); ++i) {
-            if (materials[i] == 0)
+        const auto inventaire = block->getInventaire();
+        for (int i = 0; i < 7; ++i) {
+            if (inventaire->getMaterial((const Inventaire::TypeMaterial) i) == 0)
                 continue;
             block->matShape[i].setPosition(pos.x + 10 + (i % 5) * (sizeSquare + 10),
                                            pos.y + sizeSquare + ((int)(i / 5)) * (sizeSquare + 10));
@@ -116,10 +117,10 @@ void zappy::GameScene::draw() {
         }
     }
 
-    auto &players = _map->getPlayers();
+    auto &players = _game->getPlayers();
     for (auto player : players) {
         const auto inventaire = player->getInventaire();
-        const auto realPosition = inventaire->getPos();
+        const auto realPosition = player->getPosition();
         const sf::Vector2f pos(((realPosition.x) * _ratio.x + 1 * realPosition.x + _ratio.x / 2),
                                ((realPosition.y) * _ratio.y + 1 * realPosition.y + _ratio.y / 2));
         const float squareSize = _ratio.x / 2;

@@ -19,11 +19,10 @@ zappy::SplashScene::~SplashScene() {
 }
 
 void zappy::SplashScene::loadRessources() {
+    _circleShape.setRadius(10);
+    _circleShape.setPosition(10, 10);
+
     if (!_initialized) {
-        _circleShape.setRadius(10);
-        _circleShape.setPosition(10, 10);
-
-
         if (!_font.loadFromFile("assets/arial.ttf"))
         {
             // error...

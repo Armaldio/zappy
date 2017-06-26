@@ -3,21 +3,28 @@
 //Filename:    Player.cpp
 //-----------------------------------------------------------------------------
 //
-// Created by bonett_w on 6/20/17.
+// Created by bonett_w on 6/23/17.
 //-----------------------------------------------------------------------------
 //
 
-#include "Game/Player.hpp"
+#include "Player.hpp"
 
-zappy::Player::Player(const sf::Vector2f &position) : _inventaire(new Inventaire(position)) {
-
+zappy::Player::Player(unsigned int x, unsigned int y) : _pos(x, y) {
+    _inventaire = new Inventaire();
 }
 
 zappy::Player::~Player() {
-    if (_inventaire)
-        delete(_inventaire);
+    delete (_inventaire);
 }
 
-Inventaire *zappy::Player::getInventaire() const {
+zappy::Inventaire *zappy::Player::getInventaire() {
     return _inventaire;
+}
+
+const sf::Vector2f &zappy::Player::getPosition() const {
+    return _pos;
+}
+
+void zappy::Player::setPosition(sf::Vector2f const &pos) {
+    _pos = pos;
 }

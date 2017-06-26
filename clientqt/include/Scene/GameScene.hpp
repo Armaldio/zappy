@@ -10,14 +10,15 @@
 #ifndef CLIENTQT_GAMESCENE_HPP
 #define CLIENTQT_GAMESCENE_HPP
 
-#include <Game/Map.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <src/Game/Game.hpp>
 #include "Scene.hpp"
 
 namespace zappy {
     class GameScene : public Scene {
+
     private:
-        Map *_map;
+        zappy::Game *_game;
         sf::Texture _tileTextures[10];
         sf::Texture _matTextures[10];
         sf::Texture _characterTexture;

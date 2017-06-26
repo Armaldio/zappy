@@ -12,6 +12,8 @@
 #include <QApplication>
 #include <QFrame>
 #include <MainWindow.hpp>
+#include <sstream>
+#include <iostream>
 
 int main(int ac, char **av)
 {

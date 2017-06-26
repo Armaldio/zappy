@@ -3,31 +3,38 @@
 //Filename:    Player.hpp
 //-----------------------------------------------------------------------------
 //
-// Created by bonett_w on 6/20/17.
+// Created by bonett_w on 6/23/17.
 //-----------------------------------------------------------------------------
 //
 
 #ifndef CLIENTQT_PLAYER_HPP
 #define CLIENTQT_PLAYER_HPP
 
-
-#include <Game/Inventaire.hpp>
+#include <SFML/System.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include "Inventaire.hpp"
 
 namespace zappy {
     class Player {
-    public:
-        sf::RectangleShape characterShape;
-    protected:
+    private:
         Inventaire *_inventaire;
+        sf::Vector2f _pos;
+
     public:
-        Player(const sf::Vector2f &position = {0, 0});
+        // gui
+        sf::RectangleShape characterShape;
+
+    public:
+        Player(unsigned int x, unsigned int y);
 
         virtual ~Player();
 
-        Inventaire *getInventaire() const;
+        Inventaire *getInventaire();
+
+        const sf::Vector2f & getPosition() const;
+
+        void setPosition(sf::Vector2f const& pos);
     };
 }
-
 
 #endif //CLIENTQT_PLAYER_HPP
