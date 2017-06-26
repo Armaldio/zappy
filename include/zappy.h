@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Mon Jun 26 11:45:36 2017 hamza hammouche
+** Last update Mon Jun 26 12:13:58 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -74,5 +74,6 @@ int get_eggs_id(t_Server *server);
 void my_init_eggs(t_Player *, int id, t_Server *server, int father_id);
 int my_add_eggs(t_Server *server, t_Player *player);
 t_Player *get_eggs(int id, t_Player *head);
+void check_data_undefine(t_undefined *, char *, int a, t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Sat Jun 24 14:34:13 2017 Martin Alais
+** Last update Mon Jun 26 13:55:40 2017 Martin Alais
 */
 
 #include "Graphic.h"
@@ -31,8 +31,8 @@ int get_size_commmande(char *str)
 
 int parser_commande2(int id, t_Server *server, char *data)
 {
-	char	*mcommand[] = {"Eject", "POS", "Broadcast", "Inventory", NULL};
-	void	*mfunction_ptr[] = {command_eject, command_pos,
+	char	*mcommand[] = {"Eject", "Broadcast", "Inventory", NULL};
+	void	*mfunction_ptr[] = {command_eject,
   command_broadcast, command_inventory, NULL};
 	void	(*fct_ptr)(int, t_Server *, char *);
 	int		a;

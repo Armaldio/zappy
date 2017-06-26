@@ -1,11 +1,11 @@
 /*
-** set_object2.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/
+** set.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/commande/
 **
 ** Made by Martin Alais
 ** Login   <martin.alais@epitech.eu>
 **
-** Started on  Thu Jun 22 12:06:35 2017 Martin Alais
-** Last update Sat Jun 24 16:03:29 2017 Martin Alais
+** Started on  Mon Jun 26 13:35:18 2017 Martin Alais
+** Last update Mon Jun 26 13:35:53 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -45,4 +45,32 @@ void set_food(int id, t_Server *server)
 	}
 	else
 		stok_answer(tmp, "ko\n");
+}
+
+int command_set(int id, t_Server *server, char *data)
+{
+	t_Player *tmp;
+	char *all_stone[] = {"linemate", "deraumere", "sibur",
+	"mendiane", "phiras", "thystane", "food", NULL};
+	void	*mfunction_ptr[] = {set_linemate, set_deraumere,
+	set_sibur, set_mendiane, set_phiras, set_thystane, NULL};
+	void	(*fct_ptr)(int id, t_Server *);
+	int a;
+
+	a = 0;
+	data += 4;
+	tmp = get_Player(id, server->list_player);
+	start_action(server, tmp, 7);
+	while (all_stone[a])
+	{
+		if (strncmp(all_stone[a], data, strlen(all_stone[a])) == 0)
+		{
+			fct_ptr = mfunction_ptr[a];
+			fct_ptr(id, server);
+			return (0);
+		}
+		a += 1;
+	}
+  stok_answer(tmp, "ko\n");
+	return (0);
 }

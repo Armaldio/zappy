@@ -1,15 +1,15 @@
 /*
-** mouvement.c for  in /home/macdoy/Rendu/zappy/src/
+** forward.c for zappy in /home/alaism/dev/tek2/PSU/zappy/src/commande/
 **
-** Made by loic1.doyen@epitech.eu
-** Login   <loic1.doyen@epitech.eu@epitech.eu>
+** Made by Martin Alais
+** Login   <martin.alais@epitech.eu>
 **
-** Started on  Tue Jun 20 09:44:49 2017 loic1.doyen@epitech.eu
-** Last update Fri Jun 23 15:45:56 2017 Martin Alais
+** Started on  Mon Jun 26 13:00:57 2017 Martin Alais
+** Last update Mon Jun 26 13:02:18 2017 Martin Alais
 */
 
 #include "zappy.h"
-#include "mouvement.h"
+#include "Event.h"
 
 void go_left(t_Server *server, int id, bool send)
 {
@@ -69,4 +69,22 @@ void go_up(t_Server *server, int id, bool send)
 		tmp->pos.y = server->world->width - 1;
 	if (send)
 		stok_answer(tmp, "OK\n");
+}
+
+void commande_forward(int id, t_Server *server, char *data)
+{
+	t_Player *tmp;
+
+	(void) data;
+  tmp = get_Player(id, server->list_player);
+	start_action(server, tmp, 7);
+	if (tmp->gaze == UP)
+		go_up(server, id, true);
+	else if (tmp->gaze == DOWN)
+		go_down(server, id, true);
+	else if (tmp->gaze == RIGHT)
+		go_right(server, id, true);
+	else
+		go_left(server, id, true);
+	event_ppo(server, tmp);
 }
