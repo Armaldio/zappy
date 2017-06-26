@@ -45,6 +45,10 @@ const yargs = require('yargs').options({
 		alias   : 'h',
 		describe: 'machine is the name of the machine; localhost by default',
 		default : 'localhost'
+	},
+	'browser'  : {
+		alias   : 'b',
+		describe: 'specify the port for communication to the browser'
 	}
 }).demandOption(['port', 'name'], 'Please provide both port and name arguments')
 							  .help().argv;
@@ -52,34 +56,38 @@ const yargs = require('yargs').options({
 //TODO Check errors !
 
 /**
- * COmmunication with client ---------------------------------------------------
+ * Communication with client ---------------------------------------------------
  */
-const app = require('http').createServer(handler);
-const io  = require('socket.io')(app);
 
-app.listen(4244);
+console.log("Browser : ", yargs.browser);
+if (yargs.browser !== "default") {
+	const app = require('http').createServer(handler);
+	const io  = require('socket.io')(app);
 
-function handler (req, res) {
-	fs.readFile(__dirname + '/index.html',
-		function (err, data) {
-			if (err) {
-				res.writeHead(500);
-				return res.end('Error loading index.html');
-			}
+	app.listen(yargs.browser);
 
-			res.writeHead(200);
-			res.end(data);
+	function handler (req, res) {
+		fs.readFile(__dirname + '/index.html',
+			function (err, data) {
+				if (err) {
+					res.writeHead(500);
+					return res.end('Error loading index.html');
+				}
+
+				res.writeHead(200);
+				res.end(data);
+			});
+	}
+
+	io.on('connection', function (socket) {
+		console.log("New client connected");
+		clients.push(socket);
+
+		socket.on('msg', function (msg) {
+			console.log("New message from client : " + msg);
 		});
-}
-
-io.on('connection', function (socket) {
-	console.log("New client connected");
-	clients.push(socket);
-
-	socket.on('msg', function (msg) {
-		console.log("New message from client : " + msg);
 	});
-});
+}
 
 /**
  * End --------------------------------------------------------------------
@@ -108,8 +116,9 @@ bot.client.on('data', (data) => {
 		msgs.forEach((msg) => {
 			bot.msg = msg;
 
-			if (clients.length > 0)
+			if (clients.length > 0) {
 				clients[0].emit('message', bot.getState());
+			}
 
 			/*if (msg === "ko") {
 			 console.log(chalk.red(`Command [${bot.queue[0]}] failed : ${msg}`));
@@ -161,6 +170,9 @@ bot.client.on('data', (data) => {
 
 					case "Right":
 						bot.onRight();
+						break;
+
+					case "Set":
 						break;
 
 					case bot.team:
