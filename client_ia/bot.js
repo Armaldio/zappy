@@ -28,6 +28,56 @@ module.exports = class Bot {
 		this.totalCommands = 0;
 		this.goesUp        = 0;
 		this.level         = 1;
+		this.lv            = {
+			2: {
+				"player"  : 1,
+				"linemate": 1
+			},
+			3: {
+				"player"   : 2,
+				"linemate" : 1,
+				"deraumere": 1,
+				"sibur"    : 1
+			},
+			4: {
+				"player"  : 2,
+				"linemate": 2,
+				"phiras"  : 2,
+				"sibur"   : 1
+			},
+			5: {
+				"player"   : 4,
+				"linemate" : 1,
+				"deraumere": 1,
+				"phiras"   : 1,
+				"sibur"    : 2
+			},
+			6: {
+				"player"   : 4,
+				"linemate" : 1,
+				"deraumere": 2,
+				"phiras"   : 0,
+				"sibur"    : 1,
+				"mendiane" : 3
+			},
+			7: {
+				"player"   : 6,
+				"linemate" : 1,
+				"deraumere": 2,
+				"sibur"    : 3,
+				"mendiane" : 0,
+				"phiras"   : 1,
+			},
+			8: {
+				"player"   : 6,
+				"linemate" : 2,
+				"deraumere": 2,
+				"sibur"    : 2,
+				"mendiane" : 2,
+				"phiras"   : 2,
+				"thystame" : 1
+			},
+		};
 
 		this.incantating = false;
 
@@ -58,6 +108,7 @@ module.exports = class Bot {
 	}
 
 	send (cmd) {
+		//TODO send ony when last command is received
 		if (this.queue.length >= 10) {
 			console.log(chalk.red("Sorry, no more than 10 commands in the queue"));
 			return false;
@@ -79,38 +130,29 @@ module.exports = class Bot {
 
 		// Format datas
 		datas.forEach((item, i) => {
-			let a    = item.split(' ').filter((el) => {
+			let onFloor = item.split(' ').filter((el) => {
 				return (el !== "player");
 			});
+
+			let players = item.split(' ').filter((el) => {
+				return (el === "player");
+			});
+
 			datas[i] = {
-				"items" : a,
-				"length": a.length,
-				"case"  : i
+				"items"  : onFloor,
+				"length" : onFloor.length,
+				"players": players.length,
+				"case"   : i
 			};
 		});
 
-		/* // Sort datas
-		 datas.sort((a, b) => {
-		 return (b.length - a.length);
-		 });*/
-
-		/*// Remove players
-		datas.forEach((item, i) => {
-			item.items.forEach((x, xi) => {
-				if (x === "player") {
-					datas[i].items.splice(xi, 1);
-				}
-			});
-		});*/
-
-		//this.view[this.direction] = datas;
 		this.view["here"] = datas[0];
-		this.view["up"] = datas[2];
+		this.view["up"]   = datas[2];
 
-		if (datas[0].items && datas[0].items.length !== 0)
-			this.send("Take " + datas[0].items[0]);
+		if (this.view["here"].items && this.view["here"].items.length !== 0)
+			this.send("Take " + this.view["here"].items[0]);
 		else
-			this.send("Forward");
+			this.send("Inventory");
 	}
 
 	onTake () {
@@ -126,13 +168,18 @@ module.exports = class Bot {
 	}
 
 	onRight () {
-		if (this.msg === "ok")
-			this.send("Forward");
+		/*if (this.msg === "ok")
+			this.send("Forward");*/
+	}
+
+	onLeft() {
+	/*	if (this.msg === "ok")
+			this.send("Forward");*/
 	}
 
 	onIncantation () {
-		this.output("Incantation done");
-		this.output("Elevation message : " + this.msg);
+		this.output("Incantation done, now level " + this.level);
+		this.send("Look");
 	}
 
 	onTeam () {
@@ -161,11 +208,51 @@ module.exports = class Bot {
 		// ---
 
 		this.inventory = obj;
-		
-		if (this.inventory["linemate"] >= 1 && this.view["here"].length === 0) {
-			console.log("Player can rise to level 2 !");
-			this.startIncantation();
+
+		/*
+		 elevation nb of players linemate deraumere sibur mendiane phiras thystame
+		 1->2      1             1        0         0     0        0      0
+		 2->3      2             1        1         1     0        0      0
+		 3->4      2             2        0         1     0        2      0
+		 4->5      4             1        1         2     0        1      0
+		 5->6      4             1        2         1     3        0      0
+		 6->7      6             1        2         3     0        1      0
+		 7->8      6             2        2         2     2        2      1
+		 */
+
+		//The case is empty
+		if (this.view["here"].length === 0) {
+			if (this.canIncantation()) {
+				this.startIncantation();
+			}
+			else {
+				this.send("Forward");
+			}
 		}
+		else
+			this.send("Forward");
+	}
+
+	canIncantation () {
+
+		let bool = true;
+		Object.keys(this.lv[this.level + 1]).forEach(key => {
+
+			//if (requirement to pass level) is in (inventory)
+
+			if (key === "player") {
+				if (this.view["here"].players !== this.lv[this.level + 1][key]) {
+					bool = false;
+					//console.log("Not enough players : " + this.view["here"].players + " vs " + this.lv[this.level + 1][key]);
+				}
+			} else if (this.inventory[key] === undefined ||
+					   this.inventory[key] < this.lv[this.level + 1][key]) {
+				//console.log("Not enough ressources : (" + key + ") " + this.inventory[key] + " vs " + this.lv[this.level + 1][key]);
+				bool = false;
+			}
+		});
+
+		return (bool);
 	}
 
 	/**
@@ -184,7 +271,20 @@ module.exports = class Bot {
 	}
 
 	startIncantation () {
-		this.send("Set linemate");
+		this.output("Starting incantation");
+
+		let bool = true;
+		Object.keys(this.lv[this.level + 1]).forEach(key => {
+			/*console.log("Key : " + key);
+			 console.log(this.lv[this.level + 1][key]);*/
+
+			for (let i = 0; i < this.lv[this.level + 1][key]; i++) {
+				if (key !== "player")
+					this.send("Set " + key);
+			}
+
+		});
+
 		this.send("Incantation");
 	}
 };
