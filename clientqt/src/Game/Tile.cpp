@@ -11,6 +11,7 @@
 
 zappy::Tile::Tile(unsigned int x, unsigned int y) : _pos(x, y) {
     _inventaire = new Inventaire();
+    _isHighlighted = false;
 }
 
 zappy::Tile::~Tile() {
@@ -27,4 +28,16 @@ const sf::Vector2f &zappy::Tile::getPosition() const {
 
 void zappy::Tile::setPosition(const sf::Vector2f &pos) {
     Tile::_pos = pos;
+}
+
+void zappy::Tile::togleHighlight() {
+    _isHighlighted = !_isHighlighted;
+}
+
+bool zappy::Tile::isHilghlighted() const {
+    return _isHighlighted;
+}
+
+void zappy::Tile::setHightlight(bool value) {
+    _isHighlighted = value;
 }

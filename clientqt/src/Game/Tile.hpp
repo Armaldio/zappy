@@ -20,6 +20,7 @@ namespace zappy {
     private:
         Inventaire *_inventaire;
         sf::Vector2f _pos;
+        bool _isHighlighted;
 
     public:
         // gui
@@ -37,6 +38,12 @@ namespace zappy {
         const sf::Vector2f &getPosition() const;
 
         void setPosition(const sf::Vector2f &_pos);
+
+        void setHightlight(bool value);
+
+        void togleHighlight();
+
+        bool isHilghlighted() const;
     };
 }
 

@@ -104,10 +104,10 @@ void zappy::Game::function_bct(const std::string &buffer) {
     int x;
     int y;
 
+    ss >> y;
     ss >> x;
     if (ss.fail() || x >= _width || x < 0)
         throw GameException("function_bct invalid x");
-    ss >> y;
     if (ss.fail() || y >= _heigth || y < 0)
         throw GameException("function_bct invalid y");
     int quantity;
@@ -119,6 +119,7 @@ void zappy::Game::function_bct(const std::string &buffer) {
                             + " position = " + std::to_string(position)
                             + " max_id = " + std::to_string(_heigth * _width));
 
+    // _tiles[position]->setHightlight(false);
     auto *inventaire = _tiles[position]->getInventaire();
     for (int i = 0; i < 7; ++i) {
         ss >> quantity;
@@ -261,8 +262,21 @@ void zappy::Game::function_pdr(const std::string &) {
     std::cout << "called::function_pdr" << std::endl;
 }
 
-void zappy::Game::function_pgt(const std::string &) {
-    std::cout << "called::function_pgt" << std::endl;
+void zappy::Game::function_pgt(const std::string &buffer) {
+   std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    auto *player = _players[player_id];
+
+    const auto position = player->getPosition();
+    auto *block = _tiles[_width * position.y + position.x];
+
+    block->togleHighlight();
 }
 
 void zappy::Game::function_pdi(const std::string &buffer) {

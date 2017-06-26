@@ -102,7 +102,10 @@ void zappy::GameScene::draw() {
                                ((block->getPosition().y) * _ratio.y + 1 * block->getPosition().y));
         block->rectangleShape.setPosition(pos);
         block->rectangleShape.setSize(_ratio);
-        block->rectangleShape.setFillColor(sf::Color::White);
+        if (block->isHilghlighted())
+            block->rectangleShape.setFillColor(sf::Color::Red);
+        else
+            block->rectangleShape.setFillColor(sf::Color::White);
         block->rectangleShape.setTexture(&_tileTextures[1]);
         _renderWindow->draw(block->rectangleShape);
 

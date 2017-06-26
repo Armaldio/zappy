@@ -52,14 +52,14 @@
           <item>
            <widget class="QLineEdit" name="hostEdit">
             <property name="text">
-             <string>Host</string>
+             <string>127.0.0.1</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="portEdit">
             <property name="text">
-             <string>Port</string>
+             <string>4242</string>
             </property>
            </widget>
           </item>
