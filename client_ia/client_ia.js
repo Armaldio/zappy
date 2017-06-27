@@ -118,17 +118,26 @@ bot.client.on('data', (data) => {
 				clients[0].emit('message', bot.getState());
 			}
 
+			//Wild messages appear
 			if (bot.msg === "welcome")
 				bot.send(bot.team);
 			else if (bot.msg === "dead")
 				console.log(chalk.red("You are dead"));
-			else {
+			else if (bot.msg === "elevation underway") {
+				bot.incantating = true;
+				bot.output("Incantation started");
+			}
+			else if (bot.msg.match(/current level: (.*)/g)) {
+				bot.level = bot.msg.replace("current level: ", "") * 1;
+				bot.queue.shift();
+				bot.incantating = false;
+				bot.onIncantation();
+			} else {
 
 				//When no errors if command is XXX
 
 				bot.lastCommand = bot.queue[0];
-				if (bot.queue[0] !== bot.team &&
-					bot.queue[0] !== "Incantation") {
+				if (bot.queue[0] !== bot.team) {
 					bot.lastCommand = bot.queue.shift();
 				}
 
@@ -180,18 +189,6 @@ bot.client.on('data', (data) => {
 						break;
 
 					case "Incantation":
-						if (bot.msg === "ko") {
-							bot.queue.shift();
-						} else {
-							if (!bot.incantating)
-								bot.incantating = true;
-							else {
-								bot.level = bot.msg.replace("current level: ", "") * 1;
-								bot.queue.shift();
-								bot.incantating = false;
-								bot.onIncantation();
-							}
-						}
 						break;
 
 					case "Inventory":
