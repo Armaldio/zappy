@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 27 13:42:19 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 27 13:45:02 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -13,8 +13,7 @@
 
 static char message[4096];
 
-static char *to_print[] =
-{
+static char *to_print[] = {
   " food",
   "",
   "",
