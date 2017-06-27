@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:04:19 2017 hamza hammouche
-** Last update Thu Jun 22 12:32:16 2017 hamza hammouche
+** Last update Tue Jun 27 15:16:34 2017 hamza hammouche
 */
 
 #include "Team.h"
@@ -59,6 +59,7 @@ t_team *add_team(t_team *head, char *name)
     tmp = tmp->next;
   new->nbMember = 0;
   new->id = tmp->id + 1;
+  new->next = NULL;
   tmp->next = new;
   return (head);
 }
