@@ -21,6 +21,7 @@ namespace zappy {
         Inventaire *_inventaire;
         sf::Vector2f _pos;
         bool _isHighlighted;
+        bool _isBusy;
 
     public:
         // gui
@@ -44,6 +45,11 @@ namespace zappy {
         void togleHighlight();
 
         bool isHilghlighted() const;
+
+
+        bool isBusy() const;
+
+        void setBusy(bool occuped);
     };
 }
 

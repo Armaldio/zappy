@@ -112,3 +112,13 @@ void MainWindow::on_updated_log(const std::string *command) {
     game->fexecute(*command);
     delete(command);
 }
+
+void MainWindow::on_changeTimeButton_pressed()
+{
+    auto network = zappy::Network::get_instance_ptr();
+
+    if (_isSession) {
+        const std::string changeTime("sst " + ui->timeEdit->text().toStdString() + "\n");
+        network->send(changeTime);
+    }
+}

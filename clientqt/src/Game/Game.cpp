@@ -44,13 +44,13 @@ zappy::Game::~Game() {
 }
 
 void zappy::Game::createMap(unsigned int width, unsigned int height) {
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++j) {
-            _tiles.push_back(new Tile((unsigned int) i, (unsigned int) j));
-        }
-    }
+    const unsigned int total = width * height;
     _heigth = height;
     _width = width;
+
+    for (unsigned int i = 0; i < total; ++i) {
+        _tiles.push_back(new Tile(i % _width, i / width));
+    }
     _isMapped = true;
 }
 
@@ -96,6 +96,10 @@ void zappy::Game::function_msz(const std::string &buffer) {
     _isMapped = true;
 }
 
+/**
+ * "bct X Y q q q q q q q\n"
+ * @param buffer
+ */
 void zappy::Game::function_bct(const std::string &buffer) {
     std::stringstream ss;
 
@@ -104,10 +108,11 @@ void zappy::Game::function_bct(const std::string &buffer) {
     int x;
     int y;
 
-    ss >> y;
     ss >> x;
     if (ss.fail() || x >= _width || x < 0)
         throw GameException("function_bct invalid x");
+
+    ss >> y;
     if (ss.fail() || y >= _heigth || y < 0)
         throw GameException("function_bct invalid y");
     int quantity;
@@ -119,8 +124,11 @@ void zappy::Game::function_bct(const std::string &buffer) {
                             + " position = " + std::to_string(position)
                             + " max_id = " + std::to_string(_heigth * _width));
 
-    // _tiles[position]->setHightlight(false);
-    auto *inventaire = _tiles[position]->getInventaire();
+    auto block = _tiles[position];
+    // _tiles[position]->setPosition({x, y});
+    block->setBusy(false);
+
+    auto inventaire = _tiles[position]->getInventaire();
     for (int i = 0; i < 7; ++i) {
         ss >> quantity;
         if (ss.fail() || quantity < 0)
@@ -176,7 +184,17 @@ void zappy::Game::function_ppo(const std::string &buffer) {
         throw GameException("ppo error");
 
     auto *player = _players[player_id];
+
+    const auto positionStart = player->getPosition();
+    auto *blockStart = _tiles[_width * positionStart.y + positionStart.x];
+    blockStart->setHightlight(false);
+
     player->setPosition({(float) x, (float) y});
+
+    const auto position = player->getPosition();
+    auto *block = _tiles[_width * position.y + position.x];
+
+    block->setHightlight(true);
 }
 
 /**
@@ -226,8 +244,7 @@ void zappy::Game::function_pin(const std::string &buffer) {
 
     auto *player = _players[player_id];
     auto *inventaire = _players[player_id]->getInventaire();
-
-    player->setPosition({(float) x, (float) y});
+    // player->setPosition({(float) x, (float) y});
 
     int quantity;
     for (int i = 0; i < 7; ++i) {
@@ -271,12 +288,13 @@ void zappy::Game::function_pgt(const std::string &buffer) {
 
     ss >> player_id;
 
+
     auto *player = _players[player_id];
 
     const auto position = player->getPosition();
     auto *block = _tiles[_width * position.y + position.x];
 
-    block->togleHighlight();
+    block->setBusy(true);
 }
 
 void zappy::Game::function_pdi(const std::string &buffer) {

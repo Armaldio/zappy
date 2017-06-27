@@ -12,6 +12,7 @@
 zappy::Tile::Tile(unsigned int x, unsigned int y) : _pos(x, y) {
     _inventaire = new Inventaire();
     _isHighlighted = false;
+    _isBusy = false;
 }
 
 zappy::Tile::~Tile() {
@@ -40,4 +41,12 @@ bool zappy::Tile::isHilghlighted() const {
 
 void zappy::Tile::setHightlight(bool value) {
     _isHighlighted = value;
+}
+
+bool zappy::Tile::isBusy() const {
+    return _isBusy;
+}
+
+void zappy::Tile::setBusy(bool busy) {
+    Tile::_isBusy = busy;
 }

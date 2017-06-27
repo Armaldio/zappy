@@ -26,6 +26,7 @@ void zappy::GameScene::loadRessources() {
         _tileTextures[0].loadFromFile("assets/ground.png", sf::IntRect(32, 32, 32, 32));
         _tileTextures[1].loadFromFile("assets/ground.png", sf::IntRect(64, 32, 32, 32));
         _tileTextures[2].loadFromFile("assets/ground.png", sf::IntRect(128, 32, 32, 32));
+        _tileTextures[3].loadFromFile("assets/ground.png", sf::IntRect(5 * 32, 32, 32, 32));
 
         _matTextures[0].loadFromFile("assets/items.png", sf::IntRect(0 * 34, 15 * 34, 32, 32));
         _matTextures[1].loadFromFile("assets/items.png", sf::IntRect(1 * 34, 15 * 34, 32, 32));
@@ -102,11 +103,16 @@ void zappy::GameScene::draw() {
                                ((block->getPosition().y) * _ratio.y + 1 * block->getPosition().y));
         block->rectangleShape.setPosition(pos);
         block->rectangleShape.setSize(_ratio);
+
         if (block->isHilghlighted())
             block->rectangleShape.setFillColor(sf::Color::Red);
         else
             block->rectangleShape.setFillColor(sf::Color::White);
-        block->rectangleShape.setTexture(&_tileTextures[1]);
+
+        if (block->isBusy())
+            block->rectangleShape.setTexture(&_tileTextures[3]);
+        else
+            block->rectangleShape.setTexture(&_tileTextures[1]);
         _renderWindow->draw(block->rectangleShape);
 
         const float sizeSquare = _ratio.x / 12.f;

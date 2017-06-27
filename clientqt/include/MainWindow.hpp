@@ -31,6 +31,8 @@ private slots:
 
     void on_updated_log(const std::string *);
 
+    void on_changeTimeButton_pressed();
+
 signals:
     void logIsupdated(const std::string *);
 
