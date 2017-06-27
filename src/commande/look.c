@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 27 11:54:41 2017 loic1.doyen@epitech.eu
+** Last update Tue Jun 27 13:42:19 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -13,34 +13,48 @@
 
 static char message[4096];
 
-void	t_backward(t_Player *tmp, int i, int y, t_Server *server)
+static char *to_print[] =
 {
-  int	x;
-  int	j;
+  " food",
+  "",
+  "",
+  " linemate",
+  " deraumere",
+  " sibur",
+  " mendiane",
+  " phiras",
+  " thystane"
+};
+
+void		t_backward(t_Player *tmp, int i, int y, t_Server *server)
+{
+  int		x;
+  int		j;
+  int		it;
+  t_Mapu	 *current;
 
   x = ((tmp->pos.x - i + y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y - y) + server->world->width) % server->world->width;
-  if (server->world->map[x][j]->food >= 1)
-    strcat(message, " food");
-  if (server->world->map[x][j]->deraumere >= 1)
-    strcat(message, " deraumere");
-  if (server->world->map[x][j]->linemate >= 1)
-    strcat(message, " linemate");
-  if (server->world->map[x][j]->mendiane >= 1)
-    strcat(message, " mendiane");
-  if (server->world->map[x][j]->phiras >= 1)
-    strcat(message, " phiras");
-  if (server->world->map[x][j]->sibur >= 1)
-    strcat(message, " sibur");
-  if (server->world->map[x][j]->thystane >= 1)
-    strcat(message, " thystane");
+  current = (t_Mapu *)server->world->map[x][j];
+  it = 0;
+  while (it < 9)
+    {
+      if (it != 2 && it != 3)
+	{
+	  if (current->tab[it] >= 1)
+	    strcat(message, to_print[it]);
+	}
+      it++;
+    }
   if (i != tmp->level * 2 && strcat(message, ",")) {};
 }
 
-void	t_forward(t_Player *tmp, int i, int y, t_Server *server)
+void		t_forward(t_Player *tmp, int i, int y, t_Server *server)
 {
-  int	x;
-  int	j;
+  int		x;
+  int		j;
+  int		it;
+  t_Mapu	*current;
 
   if (tmp->gaze == DOWN)
     {
@@ -49,51 +63,49 @@ void	t_forward(t_Player *tmp, int i, int y, t_Server *server)
     }
   x = ((tmp->pos.x + i - y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y + y) + server->world->width) % server->world->width;
-  if (server->world->map[x][j]->food >= 1)
-    strcat(message, " food");
-  if (server->world->map[x][j]->deraumere >= 1)
-    strcat(message, " deraumere");
-  if (server->world->map[x][j]->linemate >= 1)
-    strcat(message, " linemate");
-  if (server->world->map[x][j]->mendiane >= 1)
-    strcat(message, " mendiane");
-  if (server->world->map[x][j]->phiras >= 1)
-    strcat(message, " phiras");
-  if (server->world->map[x][j]->sibur >= 1)
-    strcat(message, " sibur");
-  if (server->world->map[x][j]->thystane >= 1)
-    strcat(message, " thystane");
+  current = (t_Mapu *)server->world->map[x][j];
+  it = 0;
+  while (it < 9)
+    {
+      if (it != 2 && it != 3)
+	{
+	  if (current->tab[it] >= 1)
+	    strcat(message, to_print[it]);
+	}
+      it++;
+    }
   if (i != tmp->level * 2 && strcat(message, ",")) {};
 }
 
-void	t_right(t_Player *tmp, int i, int y, t_Server *server)
+void		t_right(t_Player *tmp, int i, int y, t_Server *server)
 {
-  int	x;
-  int	j;
+  int		x;
+  int		j;
+  int		it;
+  t_Mapu 	*current;
 
   x = ((tmp->pos.x + y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y - i + y) + server->world->width) % server->world->width;
-  if (server->world->map[x][j]->food >= 1)
-    strcat(message, " food");
-  if (server->world->map[x][j]->deraumere >= 1)
-    strcat(message, " deraumere");
-  if (server->world->map[x][j]->linemate >= 1)
-    strcat(message, " linemate");
-  if (server->world->map[x][j]->mendiane >= 1)
-    strcat(message, " mendiane");
-  if (server->world->map[x][j]->phiras >= 1)
-    strcat(message, " phiras");
-  if (server->world->map[x][j]->sibur >= 1)
-    strcat(message, " sibur");
-  if (server->world->map[x][j]->thystane >= 1)
-    strcat(message, " thystane");
+  current = (t_Mapu *)server->world->map[x][j];
+  it = 0;
+  while (it < 9)
+    {
+      if (it != 2 && it != 3)
+	{
+	  if (current->tab[it] >= 1)
+	    strcat(message, to_print[it]);
+	}
+      it++;
+    }
   if (i != tmp->level * 2 && strcat(message, ",")) {};
 }
 
-void	t_left(t_Player *tmp, int i, int y, t_Server *server)
+void		t_left(t_Player *tmp, int i, int y, t_Server *server)
 {
-  int	x;
-  int	j;
+  int		x;
+  int		j;
+  int		it;
+  t_Mapu	*current;
 
   if (tmp->gaze == RIGHT)
     {
@@ -102,20 +114,17 @@ void	t_left(t_Player *tmp, int i, int y, t_Server *server)
     }
   x = ((tmp->pos.x + i - y) + server->world->height) % server->world->height;
   j = ((tmp->pos.y - y) + server->world->width) % server->world->width;
-  if (server->world->map[x][j]->food >= 1)
-    strcat(message, " food");
-  if (server->world->map[x][j]->deraumere >= 1)
-    strcat(message, " deraumere");
-  if (server->world->map[x][j]->linemate >= 1)
-    strcat(message, " linemate");
-  if (server->world->map[x][j]->mendiane >= 1)
-    strcat(message, " mendiane");
-  if (server->world->map[x][j]->phiras >= 1)
-    strcat(message, " phiras");
-  if (server->world->map[x][j]->sibur >= 1)
-    strcat(message, " sibur");
-  if (server->world->map[x][j]->thystane >= 1)
-    strcat(message, " thystane");
+  current = (t_Mapu *)server->world->map[x][j];
+  it = 0;
+  while (it < 9)
+    {
+      if (it != 2 && it != 3)
+	{
+	  if (current->tab[it] >= 1)
+	    strcat(message, to_print[it]);
+	}
+      it++;
+    }
   if (i != tmp->level * 2 && strcat(message, ",")) {};
 }
 
