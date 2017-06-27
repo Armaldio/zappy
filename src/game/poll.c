@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 14:29:52 2017 Martin Alais
-** Last update Mon Jun 26 16:25:50 2017 Martin Alais
+** Last update Tue Jun 27 16:09:26 2017 hamza hammouche
 */
 
 #include <poll.h>
@@ -94,7 +94,7 @@ void my_poll(t_Server *server)
 
 	max = poll_nbr_fd(server) + 1;
 	nbr = 0;
-	poll_fd = malloc(sizeof(struct pollfd) * max);
+	poll_fd = my_malloc(sizeof(struct pollfd) * max);
 	complete_struct(server, poll_fd);
 	poll(poll_fd, max, 500);
 	while (nbr < max)

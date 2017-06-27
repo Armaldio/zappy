@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:04:19 2017 hamza hammouche
-** Last update Tue Jun 27 15:16:34 2017 hamza hammouche
+** Last update Tue Jun 27 16:56:57 2017 hamza hammouche
 */
 
 #include "Team.h"
@@ -46,6 +46,11 @@ t_team *add_team(t_team *head, char *name)
   t_team *new;
   t_team *tmp;
 
+  if (strcmp(name, "GRAPHIC") == 0)
+    {
+      write(2, "[Error] Can't use team name \"GRAPHIC\"\n", 38);
+      exit(1);
+    }
   if (head == NULL)
     return (create_team(name));
   if ((new = malloc(sizeof(t_team))) == NULL)
