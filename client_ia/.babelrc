@@ -1,7 +1,7 @@
 {
   "presets": ["env"],
   "ignore": [
-    "client_ia.js",
+    "zappy_ai.js",
     "bot.js"
   ]
 }
