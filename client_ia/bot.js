@@ -243,7 +243,7 @@ module.exports = class Bot {
 			if (key === "player") {
 				if (this.view["here"].players !== this.lv[this.level + 1][key]) {
 					bool = false;
-					//console.log("Not enough players : " + this.view["here"].players + " vs " + this.lv[this.level + 1][key]);
+					console.log("Not enough players : " + this.view["here"].players + " vs " + this.lv[this.level + 1][key]);
 				}
 			} else if (this.inventory[key] === undefined ||
 					   this.inventory[key] < this.lv[this.level + 1][key]) {

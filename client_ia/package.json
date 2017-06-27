@@ -2,11 +2,12 @@
   "name": "client_ia",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "bin": "client_ia.js",
+  "main": "client_ia.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node client_ia.js -p 4242 -n team1",
-    "compile": "node_modules/nexe/bin/nexe"
+    "compile": "pkg ."
   },
   "author": "",
   "license": "ISC",
