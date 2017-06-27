@@ -52,14 +52,14 @@
           <item>
            <widget class="QLineEdit" name="hostEdit">
             <property name="text">
-             <string>Host</string>
+             <string>127.0.0.1</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="portEdit">
             <property name="text">
-             <string>Port</string>
+             <string>4242</string>
             </property>
            </widget>
           </item>
@@ -67,6 +67,13 @@
            <widget class="QPushButton" name="connectionButton">
             <property name="text">
              <string>Connection</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -79,7 +86,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Network : Failure</string>
+             <string>Network : ...</string>
             </property>
            </widget>
           </item>
@@ -89,6 +96,34 @@
              <string>Network Logs:</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="bottomMargin">
+             <number>10</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="timeEdit">
+              <property name="text">
+               <string>100</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="changeTimeButton">
+              <property name="text">
+               <string>Time</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QTextBrowser" name="logsBrowser">
@@ -112,16 +147,10 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="0" column="0">
          <widget class="QFrame" name="renderFrame">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
           <property name="minimumSize">
            <size>
-            <width>747</width>
-            <height>523</height>
+            <width>0</width>
+            <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -134,7 +163,7 @@ p, li { white-space: pre-wrap; }
            <cursorShape>WhatsThisCursor</cursorShape>
           </property>
           <property name="autoFillBackground">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -143,7 +172,7 @@ p, li { white-space: pre-wrap; }
            <enum>QFrame::Plain</enum>
           </property>
           <property name="lineWidth">
-           <number>0</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -152,7 +181,7 @@ p, li { white-space: pre-wrap; }
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="widget">
          <attribute name="title">
@@ -160,7 +189,27 @@ p, li { white-space: pre-wrap; }
          </attribute>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
-           <widget class="QTableWidget" name="teamsTable"/>
+           <widget class="QTableWidget" name="teamsTable">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="tabKeyNavigation">
+             <bool>true</bool>
+            </property>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Members</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -170,7 +219,51 @@ p, li { white-space: pre-wrap; }
          </attribute>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
-           <widget class="QTableWidget" name="PlayersTable"/>
+           <widget class="QTableWidget" name="PlayersTable">
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Nourriture</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Linemate</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Deraumere</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Sibur</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Mendiane</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Phiras</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Thystame</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -180,7 +273,58 @@ p, li { white-space: pre-wrap; }
          </attribute>
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
-           <widget class="QTableWidget" name="RessourcesTable"/>
+           <widget class="QTableWidget" name="RessourcesTable">
+            <column>
+             <property name="text">
+              <string>ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>X</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Y</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Nourriture</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Linemate</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Deraumere</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Sibur</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Mendiane</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>New Column</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Thystame</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>

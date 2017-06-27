@@ -1,89 +1,97 @@
 //
 //-----------------------------------------------------------------------------
-//Filename:    Invetaire.cpp
+//Filename:    Inventaire.cpp
 //-----------------------------------------------------------------------------
 //
-// Created by bonett_w on 6/20/17.
+// Created by bonett_w on 6/23/17.
 //-----------------------------------------------------------------------------
 //
 
 #include "Inventaire.hpp"
 
-const sf::Vector2i &Invetaire::get_pos() const {
-    return _pos;
+zappy::Inventaire::Inventaire() {
+    for (int i = 0; i < 7; ++i) {
+        _materials[i] = 0;
+    }
 }
 
-void Invetaire::setPos(const sf::Vector2i &_pos) {
-    Invetaire::_pos = _pos;
-}
-
-int Invetaire::getNourriture() const {
-    return _nourriture;
-}
-
-void Invetaire::setNourriture(int _nourriture) {
-    Invetaire::_nourriture = _nourriture;
-}
-
-int Invetaire::getLinemate() const {
-    return _linemate;
-}
-
-void Invetaire::setLinemate(int _linemate) {
-    Invetaire::_linemate = _linemate;
-}
-
-int Invetaire::getDeraumere() const {
-    return _deraumere;
-}
-
-void Invetaire::setDeraumere(int _deraumere) {
-    Invetaire::_deraumere = _deraumere;
-}
-
-int Invetaire::getSibur() const {
-    return _sibur;
-}
-
-void Invetaire::setSibur(int _sibur) {
-    Invetaire::_sibur = _sibur;
-}
-
-int Invetaire::getMendiane() const {
-    return _mendiane;
-}
-
-void Invetaire::setMendiane(int _mendiane) {
-    Invetaire::_mendiane = _mendiane;
-}
-
-int Invetaire::getPhiras() const {
-    return _phiras;
-}
-
-void Invetaire::setPhiras(int _phiras) {
-    Invetaire::_phiras = _phiras;
-}
-
-int Invetaire::getThystame() const {
-    return _thystame;
-}
-
-void Invetaire::setThystame(int _thystame) {
-    Invetaire::_thystame = _thystame;
-}
-
-Invetaire::Invetaire() : _deraumere(0),
-                         _linemate(0),
-                         _mendiane(0),
-                         _nourriture(0),
-                         _phiras(0),
-                         _pos(0, 0),
-                         _sibur(0),
-                         _thystame(0) {
+zappy::Inventaire::~Inventaire() {
 
 }
 
-Invetaire::~Invetaire() {
+zappy::Inventaire::Inventaire(const zappy::Inventaire &other) {
+    for (int i = 0; i < 7; ++i) {
+        _materials[i] = other._materials[i];
+    }
+}
 
+zappy::Inventaire &zappy::Inventaire::operator=(const zappy::Inventaire &other) {
+    for (int i = 0; i < 7; ++i) {
+        _materials[i] = other._materials[i];
+    }
+    return *this;
+}
+
+int zappy::Inventaire::getMaterial(const zappy::Inventaire::TypeMaterial type) {
+    return _materials[type];
+}
+
+int zappy::Inventaire::getNourriture(void) const {
+    return _materials[Nourriture];
+}
+
+int zappy::Inventaire::getLinemate(void) const {
+    return _materials[Linemate];
+}
+
+int zappy::Inventaire::getDeraumere(void) const {
+    return _materials[Deraumere];
+}
+
+int zappy::Inventaire::getSibur(void) const {
+    return _materials[Sibur];
+}
+
+int zappy::Inventaire::getMendiane(void) const {
+    return _materials[Mendiane];
+}
+
+int zappy::Inventaire::getPhiras(void) const {
+    return _materials[Phiras];
+}
+
+int zappy::Inventaire::getThystame(void) const {
+    return _materials[Thystame];
+}
+
+void zappy::Inventaire::setNourriture(int value) {
+    _materials[Nourriture] = value;
+}
+
+void zappy::Inventaire::setLinemate(int value) {
+    _materials[Linemate] = value;
+}
+
+void zappy::Inventaire::setDeraumere(int value) {
+    _materials[Deraumere] = value;
+}
+
+void zappy::Inventaire::setSibur(int value) {
+    _materials[Sibur] = value;
+}
+
+void zappy::Inventaire::setMendiane(int value) {
+    _materials[Mendiane] = value;
+}
+
+void zappy::Inventaire::setPhiras(int value) {
+    _materials[Phiras] = value;
+}
+
+void zappy::Inventaire::setThystame(int value) {
+    _materials[Thystame] = value;
+}
+
+void zappy::Inventaire::setMaterial(const zappy::Inventaire::TypeMaterial type, const int value) {
+    _materials[type] = value;
 }

@@ -5,11 +5,13 @@
 }
 
 @test "basic connection" {
-  run bash -c "echo 'Exit' | netcat 127.0.0.1 6666"
+  skip
+  run bash -c "(echo 'team1'\nsleep 1\necho 'Exit') | netcat 127.0.0.1 6666"
   [ "$output" = "WELCOME" ]
 }
 
-@test "basic connection" {
+@test "multiple connection" {
+  skip
   run bash -c "echo 'Exit' | netcat 127.0.0.1 6666"
   [ "$output" = "WELCOME" ]
   run bash -c "echo 'Exit' | netcat 127.0.0.1 6666"

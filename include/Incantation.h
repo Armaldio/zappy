@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:49 2017 Martin Alais
-** Last update Wed Jun 21 17:50:07 2017 Martin Alais
+** Last update Mon Jun 26 16:29:00 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_INCANTATION_H_
@@ -31,11 +31,11 @@ t_Player **get_list_level_5(t_Server *server, t_Player *player);
 t_Player **get_list_level_6(t_Server *server, t_Player *player);
 t_Player **get_list_level_7(t_Server *server, t_Player *player);
 
-void level_up_2(t_Player *player);
-void level_up_3(t_Player *player);
-void level_up_4(t_Player **player);
-void level_up_5(t_Player **player);
-void level_up_6(t_Player **player);
-void level_up_7(t_Player **player);
+void level_up_2(t_Server *, t_Player *player);
+void level_up_3(t_Server *, t_Player *player);
+void level_up_4(t_Player **player, t_Server *);
+void level_up_5(t_Player **player, t_Server *);
+void level_up_6(t_Player **player, t_Server *);
+void level_up_7(t_Player **player, t_Server *);
 
 #endif /* !ZAPPY_INCANTATION_H_ */

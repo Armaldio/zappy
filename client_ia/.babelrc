@@ -1,0 +1,7 @@
+{
+  "presets": ["env"],
+  "ignore": [
+    "client_ia.js",
+    "bot.js"
+  ]
+}

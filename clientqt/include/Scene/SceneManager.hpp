@@ -10,7 +10,7 @@
 #ifndef CLIENTQT_SCENEMANAGER_HPP
 #define CLIENTQT_SCENEMANAGER_HPP
 
-#include <include/Scene/Scene.hpp>
+#include <Scene/Scene.hpp>
 #include <vector>
 #include "Singleton.hpp"
 
@@ -33,7 +33,9 @@ namespace zappy {
 
         void unloadAllRessources();
 
-        void update();
+        void update(sf::Event const &event);
+
+        void resize(unsigned int width, unsigned int height);
 
         void draw();
 

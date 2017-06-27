@@ -19,22 +19,21 @@ zappy::SplashScene::~SplashScene() {
 }
 
 void zappy::SplashScene::loadRessources() {
+    _circleShape.setRadius(10);
+    _circleShape.setPosition(10, 10);
+
     if (!_initialized) {
-        _circleShape.setRadius(10);
-        _circleShape.setPosition(10, 10);
-
-
-        if (!_font.loadFromFile("arial.ttf"))
+        if (!_font.loadFromFile("assets/arial.ttf"))
         {
             // error...
         }
         _title.setFont(_font);
         _title.setCharacterSize(120);
         _title.setStyle(sf::Text::Regular);
-        _title.setFillColor(sf::Color(0, 255, 255));
+        _title.setFillColor(sf::Color(255, 0, 10));
         _title.setString("Zappy");
         _initialized = true;
-        resize();
+        resize(_renderWindow->getSize().x, _renderWindow->getSize().y);
     }
 }
 
@@ -42,11 +41,11 @@ void zappy::SplashScene::unloadRessources() {
     _initialized = false;
 }
 
-void zappy::SplashScene::update() {
-    static int b = 0;
-
-    b = (b + 255 / 60) % 255;
-    _circleShape.setFillColor(sf::Color(0, b, 0));
+void zappy::SplashScene::update(sf::Event const &event) {
+    _fadeColor = (sf::Uint16) (_fadeColor + 10) % 5100;
+    const sf::Uint16 color = (_fadeColor > 2550) ? 2550 - (_fadeColor % 2550) : _fadeColor;
+    _circleShape.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
+    _title.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
 }
 
 void zappy::SplashScene::draw() {
@@ -54,7 +53,13 @@ void zappy::SplashScene::draw() {
     _renderWindow->draw(_title);
 }
 
-void zappy::SplashScene::resize() {
+void zappy::SplashScene::resize(unsigned int width, unsigned int height) {
+    _renderWindow->setSize({width, height});
+
+    const sf::FloatRect titleBound = _title.getLocalBounds();
+    _title.setOrigin(titleBound.left + titleBound.width / 2.0f,
+                     titleBound.top + titleBound.height / 2.0f);
+
     _title.setPosition(_renderWindow->getSize().x / 2,
                        _renderWindow->getSize().y / 2);
 }

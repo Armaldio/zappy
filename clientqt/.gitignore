@@ -51,3 +51,4 @@ compile_commands.json
 CTestTestfile.cmake
 cmake-build-debug
 *.user
+*.autosave

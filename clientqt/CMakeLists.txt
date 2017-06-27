@@ -48,14 +48,40 @@ set(SOURCE_FILES
         src/QSFML/KeyConverter.cpp
         include/QSFML/KeyConverter.hpp
         src/MainWindow.cpp
-        include/MainWindow.hpp src/Scene/SceneManager.cpp include/Scene/SceneManager.hpp src/Scene/Scene.cpp include/Scene/Scene.hpp src/Scene/SplashScene.cpp include/Scene/SplashScene.hpp include/Singleton.hpp src/Game/Inventaire.cpp include/Inventaire.hpp src/Scene/GameScene.cpp include/Scene/GameScene.hpp src/Game/Player.cpp include/Game/Player.hpp src/Game/Map.cpp include/Game/Map.hpp)
+        include/MainWindow.hpp
+        src/Scene/SceneManager.cpp
+        include/Scene/SceneManager.hpp
+        src/Scene/Scene.cpp
+        include/Scene/Scene.hpp
+        src/Scene/SplashScene.cpp
+        include/Scene/SplashScene.hpp
+        include/Singleton.hpp
+        include/Game/Inventaire.hpp
+        src/Scene/GameScene.cpp
+        include/Scene/GameScene.hpp
+        src/Network/TCPSocket.cpp
+        include/Network/TCPSocket.hpp
+        src/Network/Network.cpp
+        include/Network/Network.hpp
+        include/Network/SafeQueue.hpp
+        include/Game/GameExeception.hpp
+        src/Game/Inventaire.cpp
+        src/Game/Inventaire.hpp
+        src/Game/Player.cpp
+        src/Game/Player.hpp
+        src/Game/Tile.cpp
+        src/Game/Tile.hpp
+        src/Game/Game.cpp
+        src/Game/Game.hpp
+        src/Game/Team.cpp
+        src/Game/Team.hpp src/Game/Egg.cpp src/Game/Egg.hpp)
 
 qt5_wrap_ui(UI_SRC src/UI/MainWindow.ui)
 
-add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES} ${UI_SRC} ${MOC_SRCS} ${RES_SOURCES} ${UI_HEADERS})
-
 # Includes directory
 include_directories(${CMAKE_BINARY_DIR} ${SFML_INCLUDE_DIR} "include")
+
+add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES} ${UI_SRC} ${MOC_SRCS} ${RES_SOURCES} ${UI_HEADERS})
 
 # Linkage
 # build it (link libraries)
@@ -66,3 +92,5 @@ target_link_libraries(${EXECUTABLE_NAME} Threads::Threads)
 if (UNIX)
     target_link_libraries(${EXECUTABLE_NAME} "-lX11")
 endif(UNIX)
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR} COMPONENT copyAssets)
