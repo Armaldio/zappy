@@ -28,6 +28,7 @@ module.exports = class Bot {
 		this.totalCommands = 0;
 		this.goesUp        = 0;
 		this.level         = 1;
+		this.turning       = false;
 		this.lv            = {
 			2: {
 				"player"  : 1,
@@ -78,6 +79,7 @@ module.exports = class Bot {
 				"thystame" : 1
 			},
 		};
+		this.inactivity    = 0;
 
 		this.incantating = false;
 
@@ -123,12 +125,11 @@ module.exports = class Bot {
 			return false;
 		}
 
-		this.queue.push(cmd.split(/(\\n)| /g)[0]);
-		this.totalCommands++;
-
 		this.client.write(cmd + "\n", () => {
 			console.log(chalk.blue("[Sending] " + cmd));
-			//this.output(this.queue);
+			this.queue.push(cmd.split(/(\\n)| /g)[0]);
+			this.output(this.queue);
+			this.totalCommands++;
 		});
 	}
 
@@ -161,8 +162,10 @@ module.exports = class Bot {
 		this.view["here"] = datas[0];
 		this.view["up"]   = datas[2];
 
-		if (this.view["here"].items && this.view["here"].items.length !== 0)
-			this.send("Take " + this.view["here"].items[0]);
+		if (this.view["here"].items && this.view["here"].items.length !== 0) {
+			if (!this.willMove())
+				this.send("Take " + this.view["here"].items[0]);
+		}
 		else
 			this.send("Inventory");
 	}
@@ -173,7 +176,7 @@ module.exports = class Bot {
 	}
 
 	onForward () {
-		if (this.msg === "ok") {
+		if (this.msg === "ok" && !this.turning) {
 			this.send("Look");
 			this.goesUp++;
 		}
@@ -181,16 +184,19 @@ module.exports = class Bot {
 
 	onRight () {
 		/*if (this.msg === "ok")
-			this.send("Forward");*/
+		 this.send("Forward");*/
 	}
 
-	onLeft() {
-	/*	if (this.msg === "ok")
-			this.send("Forward");*/
+	onLeft () {
+		if (this.turning)
+			this.turning = false;
+		/*	if (this.msg === "ok")
+		 this.send("Forward");*/
 	}
 
 	onIncantation () {
 		this.output("Incantation done, now level " + this.level);
+		this.send("Fork");
 		this.send("Look");
 	}
 
@@ -298,5 +304,14 @@ module.exports = class Bot {
 		});
 
 		this.send("Incantation");
+	}
+
+	willMove () {
+		let move = false;
+		this.queue.forEach((cmd) => {
+			if (cmd === "Left" || cmd === "Right" || cmd === "Forward")
+				move = true;
+		});
+		return (move);
 	}
 };

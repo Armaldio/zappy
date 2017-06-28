@@ -18,11 +18,11 @@ const net    = require('net');
 const client = new net.Socket();
 
 /* File system */
-const fs     = require("fs");
-const path   = require('path');
+const fs   = require("fs");
+const path = require('path');
 
 /* Colors */
-const chalk  = require('chalk');
+const chalk = require('chalk');
 
 /* Custom modules */
 const Bot = require("./bot.js");
@@ -141,8 +141,7 @@ bot.client.on('data', (data) => {
 			else if (bot.msg === "elevation underway") {
 				bot.incantating = true;
 				bot.output("Incantation started");
-			}
-			else if (bot.msg.match(/current level: (.*)/g)) {
+			} else if (bot.msg.match(/current level: (.*)/g)) {
 				bot.level = bot.msg.replace("current level: ", "") * 1;
 				bot.queue.shift();
 				bot.incantating = false;
@@ -159,14 +158,6 @@ bot.client.on('data', (data) => {
 				console.log(chalk.green("[Receiving] " + bot.lastCommand + ' : ' + JSON.stringify(msg)));
 				//bot.output(bot.queue);
 
-				// Change direction
-				if (bot.goesUp === bot.mapSize.y) {
-					bot.send("Right");
-					bot.send("Forward");
-					bot.send("Left");
-					bot.goesUp = 0;
-				}
-
 				switch (bot.lastCommand) {
 
 					case "Look":
@@ -175,6 +166,10 @@ bot.client.on('data', (data) => {
 
 					case "Take":
 						bot.onTake();
+						break;
+
+					case "Fork":
+						bot.output("A new player will be available soon");
 						break;
 
 					case "Forward":
@@ -214,6 +209,15 @@ bot.client.on('data', (data) => {
 					default:
 						console.log(chalk.red(`Command [${bot.lastCommand}] not supported by client`));
 				}
+
+				// Change direction
+				if (bot.goesUp === bot.mapSize.y) {
+					bot.turning = true;
+					bot.send("Right");
+					bot.send("Forward");
+					bot.send("Left");
+					bot.goesUp = 0;
+				}
 			}
 		});
 
@@ -232,3 +236,15 @@ bot.client.on('end', function () {
 bot.client.on('error', (err) => {
 	console.log(chalk.red("Error : ", err.code));
 });
+
+setInterval(() => {
+	if (bot.inactivity > 3) {
+		bot.send("Look");
+		bot.inactivity = 0;
+	}
+	if (bot.queue.length === 0)
+		bot.inactivity++;
+	else
+		bot.inactivity = 0;
+
+}, 1000);
