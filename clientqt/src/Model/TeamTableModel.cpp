@@ -8,7 +8,7 @@
 //
 
 #include <iostream>
-#include "TeamTableModel.hpp"
+#include "include/Model/TeamTableModel.hpp"
 
 TeamTableModel::TeamTableModel(QObject *parent) : QAbstractTableModel(parent) {
 

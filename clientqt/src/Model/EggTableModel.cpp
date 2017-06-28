@@ -8,7 +8,7 @@
 //
 
 #include <include/Game/Player.hpp>
-#include "EggTableModel.hpp"
+#include "include/Model/EggTableModel.hpp"
 
 EggTableModel::EggTableModel(QObject *parent) : QAbstractTableModel(parent) {
 

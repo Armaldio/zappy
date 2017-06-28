@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 //
 
-#include "PlayerTableModel.hpp"
+#include "include/Model/PlayerTableModel.hpp"
 
 PlayerTableModel::PlayerTableModel(QObject *parent) : QAbstractTableModel(parent) {
 

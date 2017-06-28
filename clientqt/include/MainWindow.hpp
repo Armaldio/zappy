@@ -5,10 +5,10 @@
 #include <QMainWindow>
 #include <thread>
 #include <QtWidgets/QTableWidgetItem>
-#include <src/Model/TeamTableModel.hpp>
-#include <src/Model/PlayerTableModel.hpp>
-#include <src/Model/TileTableModel.hpp>
-#include <src/Model/EggTableModel.hpp>
+#include <include/Model/TeamTableModel.hpp>
+#include <include/Model/PlayerTableModel.hpp>
+#include <include/Model/TileTableModel.hpp>
+#include <include/Model/EggTableModel.hpp>
 
 namespace Ui {
     class MainWindow;

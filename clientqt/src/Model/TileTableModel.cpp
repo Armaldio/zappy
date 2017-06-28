@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 //
 
-#include "TileTableModel.hpp"
+#include "include/Model/TileTableModel.hpp"
 
 TileTableModel::TileTableModel(QObject *parent) : QAbstractTableModel(parent) {
 

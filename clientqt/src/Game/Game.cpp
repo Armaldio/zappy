@@ -404,7 +404,18 @@ void zappy::Game::function_eht(const std::string &buffer) {
  * @param buffer
  */
 void zappy::Game::function_ebo(const std::string &buffer) {
-    std::cout << "called::function_ebo" << std::endl;
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int egg_id;
+
+    ss >> egg_id;
+
+    if (ss.fail()) throw GameException("Ebo error parsing");
+    if (_eggs.find(egg_id) == _eggs.end()) throw GameException("Ebo error egg_id");
+
+    _eggs[egg_id]->setLinked(true);
 }
 
 void zappy::Game::function_sgt(const std::string &buffer) {
@@ -418,12 +429,22 @@ void zappy::Game::function_sgt(const std::string &buffer) {
         throw GameException("sgt error: " + buffer);
 }
 
-void zappy::Game::function_seg(const std::string &) {
+/**
+ * Fin du jeu. L’équipe donnée remporte la partie.
+ * "seg N\n"
+ * @param buffer
+ */
+void zappy::Game::function_seg(const std::string &buffer) {
     std::cout << "called::function_seg" << std::endl;
 }
 
-void zappy::Game::function_smg(const std::string &) {
-    std::cout << "called::function_smg" << std::endl;
+/**
+ * Message du serveur.
+ * "smg M\n"
+ * @param buffer
+ */
+void zappy::Game::function_smg(const std::string &buffer) {
+    _vMessages << buffer.c_str();
 }
 
 void zappy::Game::function_suc(const std::string &) {
@@ -483,4 +504,8 @@ QVector<zappy::Egg *> &zappy::Game::getEggs() {
 
 QVector<zappy::Tile *> &zappy::Game::getTiles() {
     return _vTiles;
+}
+
+QStringList &zappy::Game::getMessages() {
+    return _vMessages;
 }

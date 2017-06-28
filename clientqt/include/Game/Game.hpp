@@ -32,6 +32,7 @@ namespace zappy {
         QVector<Player *> _vPlayers;
         QVector<Tile *> _vTiles;
         QVector<Egg *> _vEggs;
+        QStringList _vMessages;
 
         std::map<std::string, std::function<void(const std::string &)>> _functions;
         unsigned int _width;
@@ -108,6 +109,8 @@ namespace zappy {
         QVector<Tile *> &getTiles();
 
         QVector<Team *> &getTeams();
+
+        QStringList &getMessages();
 
         bool isMapped() const;
 

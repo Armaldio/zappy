@@ -194,8 +194,14 @@ p, li { white-space: pre-wrap; }
       </item>
       <item>
        <widget class="QTabWidget" name="tabWidget">
+        <property name="tabShape">
+         <enum>QTabWidget::Rounded</enum>
+        </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
+        </property>
+        <property name="documentMode">
+         <bool>false</bool>
         </property>
         <widget class="QWidget" name="TeamsTab">
          <attribute name="title">
@@ -259,6 +265,16 @@ p, li { white-space: pre-wrap; }
              <bool>true</bool>
             </attribute>
            </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="MessageTab">
+         <attribute name="title">
+          <string>Messages</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <widget class="QTableView" name="messagesTable"/>
           </item>
          </layout>
         </widget>
