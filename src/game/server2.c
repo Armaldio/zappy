@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Tue Jun 27 15:48:24 2017 hamza hammouche
+** Last update Wed Jun 28 14:24:27 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -15,7 +15,7 @@
 
 void basic_init_server(t_Server *server)
 {
-	server->list_player = my_malloc(sizeof(t_Player));
+	server->list_player = NULL;
 	server->socket = my_malloc(sizeof(t_Connection));
 	server->world = my_malloc(sizeof(t_World));
 	server->list_teams = NULL;
