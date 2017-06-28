@@ -5,21 +5,24 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:31:38 2017 Martin Alais
-** Last update Mon Jun 26 16:26:02 2017 hamza hammouche
+** Last update Wed Jun 28 13:24:56 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Incantation.h"
 
-void healp_incan_7(t_Player *player)
+int *build_tab_7()
 {
-	player->inventaire->linemate -= 2;
-	player->inventaire->deraumere -= 2;
-	player->inventaire->sibur -= 2;
-	player->inventaire->mendiane -= 2;
-	player->inventaire->phiras -= 2;
-	player->inventaire->thystane -= 2;
-	player->action->is_leveling = false;
+	int *tab;
+	tab = malloc(sizeof(int) * 7);
+	tab[0] = 0;
+	tab[1] = 2;
+	tab[2] = 2;
+	tab[3] = 2;
+	tab[4] = 2;
+	tab[5] = 2;
+	tab[6] = 1;
+	return (tab);
 }
 
 void help_init_level_7(t_Player **tmp2)
@@ -29,29 +32,6 @@ void help_init_level_7(t_Player **tmp2)
 	tmp2[2] = NULL;
 	tmp2[3] = NULL;
 	tmp2[4] = NULL;
-}
-
-void level_up_7(t_Player **player, t_Server *server)
-{
-	int a;
-
-	(void)server;
-	a = 0;
-	while (a < 5)
-	{
-		player[a]->inventaire->linemate -= 2;
-		player[a]->inventaire->deraumere -= 2;
-		player[a]->inventaire->sibur -= 2;
-		player[a]->inventaire->mendiane -= 2;
-		player[a]->inventaire->phiras -= 2;
-		player[a]->inventaire->thystane -= 2;
-		player[a]->action->is_leveling = false;
-		player[a]->level = 8;
-		printf("Player %d reach level 8!\n", player[a]->id);
-    event_endI(server, player[a]);
-		stok_answer(player[a], "ok\n");
-		a += 1;
-	}
 }
 
 t_Player **get_list_level_7(t_Server *server, t_Player *player)
@@ -67,10 +47,7 @@ t_Player **get_list_level_7(t_Server *server, t_Player *player)
 	while (tmp)
 	{
 		if (tmp->id != player->id && tmp->action->is_leveling == true &&
-			tmp->level == 7 && a < 5 && tmp->inventaire->linemate >= 2 &&
-			tmp->inventaire->deraumere >= 2 && tmp->inventaire->sibur >= 2 &&
-			tmp->inventaire->mendiane >= 2 && tmp->inventaire->phiras >= 2 &&
-			tmp->inventaire->thystane >= 1)
+			tmp->level == 7 && a < 5)
 		{
 			tmp2[a] = tmp;
 			a += 1;
@@ -82,25 +59,23 @@ t_Player **get_list_level_7(t_Server *server, t_Player *player)
 
 void incan_7(t_Server *server, t_Player *player)
 {
-	t_Player *tmp;
 	t_Player **tmp2;
 
-	tmp = server->list_player;
-	if (tmp->inventaire->linemate >= 2 && tmp->inventaire->deraumere >= 2 &&
-		tmp->inventaire->sibur >= 2 && tmp->inventaire->mendiane >= 2 &&
-		tmp->inventaire->phiras >= 2 && tmp->inventaire->thystane >= 1)
-	if (check_nbr_at_level(server, 7) >= 4)
+	if (compare_tab(build_tab(server, player), build_tab_7()) &&
+		nbr_case_rdy(server, player) == 6)
+	if (check_nbr_at_level(server, player, 7) >= 6)
 	{
 		tmp2 = get_list_level_7(server, player);
 		if (tmp2[0] != NULL && tmp2[1] != NULL &&
 			tmp2[2] != NULL && tmp2[3] != NULL && tmp2[4] != NULL)
 		{
-			healp_incan_7(player);
-			player->level = 8;
-			printf("Player %d reach level 8!\n", player->id);
-	    event_endI(server, player);
-			stok_answer(player, "ok\n");
-			level_up_7(tmp2, server);
+			player->action->is_leveling = false;
+			tmp2[0]->action->is_leveling = false;
+			tmp2[1]->action->is_leveling = false;
+			tmp2[2]->action->is_leveling = false;
+			tmp2[3]->action->is_leveling = false;
+			tmp2[4]->action->is_leveling = false;
+			complete_struct6(tmp2, player);
 			free(tmp2);
 		}
 	}

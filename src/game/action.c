@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Mon Jun 26 14:37:48 2017 hamza hammouche
+** Last update Tue Jun 27 16:50:08 2017 Martin Alais
 */
 
 #include <time.h>
@@ -31,7 +31,16 @@ void init_action(t_Player *player)
 	player->action->end_time = 0;
 	player->action->is_leveling = false;
 	player->action->is_working = false;
+	player->action->try_level_up = false;
 	player->action->start_time = 0;
+	player->action->friend_list = my_malloc(sizeof(int) * 7);
+	player->action->friend_list[0] = 0;
+	player->action->friend_list[1] = 0;
+	player->action->friend_list[2] = 0;
+	player->action->friend_list[3] = 0;
+	player->action->friend_list[4] = 0;
+	player->action->friend_list[5] = 0;
+	player->action->friend_list[6] = 0;
 }
 
 void start_action(t_Server *server, t_Player *player, int action_time)
@@ -67,9 +76,8 @@ void check_action_status(t_Server *server)
 			tmp->action->end_time = 0;
 			tmp->action->start_time = 0;
 			tmp->action->is_working = false;
-			if (tmp->action->is_leveling == true)
-	    		send_message(tmp->fd, "ko\n");
-			tmp->action->is_leveling = false;
+			if (tmp->action->try_level_up == true)
+	    		send_to_level_up(tmp, server);
 			send_answer(tmp);
 			if (tmp->isEgg == false)
 				printf("Player %d terminated an action\n", tmp->id);

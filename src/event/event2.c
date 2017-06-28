@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 16:00:16 2017 Martin Alais
-** Last update Sun Jun 25 11:47:20 2017 Martin Alais
+** Last update Wed Jun 28 13:35:50 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -46,21 +46,6 @@ void event_eject(t_Server *server, t_Player *player)
 	while (graphic)
 	{
 		send_message(graphic->fd, buffer2);
-		graphic = graphic->next;
-	}
-}
-
-void event_eject2(t_Server *server, t_Player *player)
-{
-	t_graphic *graphic;
-	char buffer2[100];
-
-	memset(buffer2, '\0', 100);
-	sprintf(buffer2, "ppo %d\n", player->id);
-	graphic = server->list_graphic;
-	while (graphic)
-	{
-		commande_ppo(graphic, server, buffer2);
 		graphic = graphic->next;
 	}
 }

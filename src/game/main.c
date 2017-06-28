@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Tue Jun 27 15:11:29 2017 hamza hammouche
+** Last update Tue Jun 27 19:09:44 2017 Martin Alais
 */
 
 #include <time.h>
@@ -75,6 +75,7 @@ int main(int ac, char **argv)
 		check_player_death(server);
 		check_player_leveling(server);
 		my_poll(server);
+		end_game(server);
 	}
 	return (0);
 }

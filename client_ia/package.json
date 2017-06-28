@@ -5,6 +5,7 @@
   "bin": "zappy_ai.js",
   "main": "zappy_ai.js",
   "scripts": {
+    "test": "./node_modules/.bin/xo",
     "start": "node zappy_ai.js -p 4242 -n team1",
     "compile": "pkg . --out-path bin"
   },
@@ -20,9 +21,13 @@
     "jquery": "^3.2.1",
     "nexe": "^1.1.2",
     "socket.io": "^2.0.3",
+    "xo": "^0.18.2",
     "yargs": "^8.0.2"
   },
   "pkg": {
     "assets": "behaviours/**/*"
+  },
+  "xo": {
+    "ignore": [ "www/**/*" ]
   }
 }

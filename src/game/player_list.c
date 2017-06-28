@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Fri Jun 23 18:54:51 2017 Martin Alais
+** Last update Wed Jun 28 14:28:08 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -54,27 +54,20 @@ void my_add_player(t_Server *server, int fd)
 		tmp->next = new;
 }
 
-int	my_add_player_id(t_Server *server, int fd)
+void	my_free_player(t_Player *tmp)
 {
-  t_Player *tmp;
-  t_Player *new;
-
-  new = my_malloc(sizeof(t_Player));
-  tmp = server->list_player;
-  if (server->list_player != NULL)
+  if (tmp->inventaire != NULL)
+    free(tmp->inventaire);
+  if (tmp->waiting_line != NULL && tmp->waiting_line->line != NULL)
     {
-      while (tmp->next != NULL)
-	tmp = tmp->next;
+      free(tmp->waiting_line->line);
+      free(tmp->waiting_line);
     }
-  if (server->list_player == NULL)
-    my_init_player(new, fd, 1, server);
-  else
-    my_init_player(new, fd, tmp->id + 1, server);
-  if (server->list_player == NULL)
-    server->list_player = new;
-  else
-    tmp->next = new;
-  return (new->id);
+  if (tmp->action != NULL && tmp->action->friend_list != NULL)
+    {
+      free(tmp->action->friend_list);
+      free(tmp->action);
+    }
 }
 
 void my_delete_player(t_Server *server, int id)
@@ -96,6 +89,7 @@ void my_delete_player(t_Server *server, int id)
 	    	server->list_player = tmp->next;
 	  	else
 	    	last->next = tmp->next;
+	  	my_free_player(tmp);
 			free(tmp);
 			return;
 		}

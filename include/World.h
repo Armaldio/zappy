@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 18:59:02 2017 Martin Alais
-** Last update Tue Jun 27 13:31:05 2017 loic1.doyen@epitech.eu
+** Last update Wed Jun 28 13:45:13 2017 Martin Alais
 */
 
 #ifndef ZAPPY_WORLD_H_
@@ -49,6 +49,5 @@ typedef struct	s_World
 
 void basic_init_world(t_World * world);
 void init_world(t_World * world);
-void print_world(t_World *world);
 
 #endif /* !ZAPPY_WORLD_H_ */

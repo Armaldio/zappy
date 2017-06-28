@@ -5,12 +5,25 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:30:03 2017 Martin Alais
-** Last update Mon Jun 26 16:25:41 2017 hamza hammouche
+** Last update Wed Jun 28 13:24:47 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Incantation.h"
 
+int *build_tab_6()
+{
+	int *tab;
+	tab = malloc(sizeof(int) * 7);
+	tab[0] = 0;
+	tab[1] = 1;
+	tab[2] = 2;
+	tab[3] = 3;
+	tab[4] = 0;
+	tab[5] = 1;
+	tab[6] = 0;
+	return (tab);
+}
 t_Player **get_list_level_6(t_Server *server, t_Player *player)
 {
 	t_Player **tmp2;
@@ -28,9 +41,7 @@ t_Player **get_list_level_6(t_Server *server, t_Player *player)
 	while (tmp)
 	{
 		if (tmp->id != player->id && tmp->action->is_leveling == true &&
-			tmp->level == 6 && a < 5 && tmp->inventaire->linemate >= 1 &&
-			tmp->inventaire->deraumere >= 2 && tmp->inventaire->sibur >= 3 &&
-			tmp->inventaire->phiras >= 1)
+			tmp->level == 6 && a < 5)
 		{
 			tmp2[a] = tmp;
 			a += 1;
@@ -40,51 +51,69 @@ t_Player **get_list_level_6(t_Server *server, t_Player *player)
 	return (tmp2);
 }
 
-void level_up_6(t_Player **player, t_Server *server)
+void complete_struct6bis(t_Player **tmp2, t_Player *player, int a, int b)
 {
-	int a;
+	int c;
 
-  (void)server;
-	a = 0;
 	while (a < 5)
 	{
-		player[a]->inventaire->linemate -= 1;
-		player[a]->inventaire->deraumere -= 2;
-		player[a]->inventaire->sibur -= 3;
-		player[a]->inventaire->phiras -= 1;
-		player[a]->action->is_leveling = false;
-		player[a]->level = 7;
-		printf("Player %d reach level 7!\n", player[a]->id);
-		event_endI(server, player[a]);
-		stok_answer(player[a], "ok\n");
+		b = 0;
+		c = 0;
+		while (b < 5)
+		{
+			if (b == 0)
+			{
+				tmp2[a]->action->friend_list[b] = player->id;
+				b += 1;
+			}
+			else if (c != a)
+			{
+				tmp2[a]->action->friend_list[b] = tmp2[c]->id;
+				c += 1;
+				b += 1;
+			}
+			else
+				c += 1;
+		}
 		a += 1;
 	}
 }
 
+void complete_struct6(t_Player **tmp2, t_Player *player)
+{
+	int a;
+	int b;
+
+	a = 0;
+	while (a < 5)
+	{
+		player->action->friend_list[a] = tmp2[a]->id;
+		a += 1;
+	}
+	a = 0;
+	b = 0;
+	complete_struct6bis(tmp2, player, a, b);
+}
+
 void incan_6(t_Server *server, t_Player *player)
 {
-	t_Player *tmp;
 	t_Player **tmp2;
 
-	tmp = server->list_player;
-	if (tmp->inventaire->linemate >= 1 && tmp->inventaire->deraumere >= 2 &&
-		tmp->inventaire->sibur >= 3 && tmp->inventaire->phiras >= 1)
-	if (check_nbr_at_level(server, 6) >= 6)
+	if (compare_tab(build_tab_6(), build_tab(server, player)) &&
+	nbr_case_rdy(server, player) == 6)
+	if (check_nbr_at_level(server, player, 6) >= 6)
 	{
 		tmp2 = get_list_level_6(server, player);
 		if (tmp2[0] != NULL && tmp2[1] != NULL &&
 			tmp2[2] != NULL && tmp2[3] != NULL && tmp2[4] != NULL)
 		{
-			player->inventaire->linemate -= 1;
-			player->inventaire->deraumere -= 2;
-			player->inventaire->sibur -= 3;
-			player->inventaire->phiras -= 1;
 			player->action->is_leveling = false;
-			player->level = 7;
-			printf("Player %d reach level 7!\n", player->id);
-	    event_endI(server, player);
-			stok_answer(player, "ok\n");
-			level_up_6(tmp2, server);
+			tmp2[0]->action->is_leveling = false;
+			tmp2[1]->action->is_leveling = false;
+			tmp2[2]->action->is_leveling = false;
+			tmp2[3]->action->is_leveling = false;
+			tmp2[4]->action->is_leveling = false;
+			complete_struct6(tmp2, player);
 			free(tmp2);
 		}
 	}
