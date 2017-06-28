@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _teamTable(parent),
+    _playerTable(parent),
+    _eggTable(parent),
+    _tileTable(parent),
     _firstShow(false),
     _isSession(false),
     _runnerThread(nullptr),
@@ -22,9 +25,13 @@ MainWindow::MainWindow(QWidget *parent) :
     setFixedSize(1024, 768);
     ui->renderFrame->show();
     ui->teamsTable->setModel(&_teamTable);
+    ui->playersTable->setModel(&_playerTable);
+    ui->eggsTable->setModel(&_eggTable);
+    ui->tilesTable->setModel(&_tileTable);
 
     zappy::SceneManager::get_instance_ptr()->loadAllRessources();
     connect(this, SIGNAL(logIsupdated(const std::string *)), this, SLOT(on_updated_log(const std::string *)));
+    initLogsBrowser();
 }
 
 MainWindow::~MainWindow()
@@ -39,7 +46,7 @@ void MainWindow::on_quitButton_pressed()
     auto network = zappy::Network::get_instance_ptr();
 
     if (_isSession) {
-        ui->logsBrowser->clear();
+        initLogsBrowser();
         ui->quitButton->setText("Close");
         ui->statusConnectionLabel->setText("Network: closed");
         _isSession = false;
@@ -111,9 +118,15 @@ void MainWindow::on_updated_log(const std::string *command) {
         return;
 
     auto game = zappy::Game::get_instance_ptr();
-    ui->logsBrowser->append(command->c_str());
-    game->fexecute(*command);
-    _teamTable.addElements(game->getTeams());
+    const QString qs_command(command->c_str());
+    if (game->fexecute(*command))
+        ui->logsBrowser->append(format_server.arg(qs_command));
+    else
+        ui->logsBrowser->append(format_error.arg(qs_command));
+    _teamTable.setElements(game->getTeams());
+    _playerTable.setElements(game->getPlayers());
+    _tileTable.setElements(game->getTiles());
+    _eggTable.setElements(game->getEggs());
     delete(command);
 }
 
@@ -123,7 +136,12 @@ void MainWindow::on_changeTimeButton_pressed()
 
     if (_isSession) {
         const std::string changeTime("sst " + ui->timeEdit->text().toStdString() + "\n");
-        ui->logsBrowser->append(QString("GUI:: ") + QString("sst ") + ui->timeEdit->text());
+        const QString qs_command("sst" + ui->timeEdit->text());
+        ui->logsBrowser->append(format_client.arg(qs_command));
         network->send(changeTime);
     }
+}
+
+void MainWindow::initLogsBrowser() {
+    ui->logsBrowser->clear();
 }

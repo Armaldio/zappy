@@ -49,33 +49,30 @@ void zappy::Game::createMap(unsigned int width, unsigned int height) {
     _width = width;
 
     for (unsigned int i = 0; i < total; ++i) {
-        _tiles.push_back(new Tile(i % _width, i / width));
+        _vTiles.push_back(new Tile(i % _width, i / width));
     }
     _isMapped = true;
 }
 
 void zappy::Game::destroyMap() {
-    for (auto tile : _tiles)
+    for (auto tile : _vTiles)
         delete(tile);
     for (auto player : _players)
         delete(player);
-    for (auto egg : _eggs)
+    for (auto egg : _vEggs)
         delete (egg);
-    _teams.clear();
-    _eggs.clear();
+    for (auto team : _vTeams)
+        delete (team);
+    _vTeams.clear();
+    _vEggs.clear();
+    _vPlayers.clear();
+    _vTiles.clear();
     _players.clear();
-    _tiles.clear();
+    _eggs.clear();
+    _teams.clear();
     _heigth = 0;
     _width = 0;
     _isMapped = false;
-}
-
-QMap<unsigned int, zappy::Player *> &zappy::Game::getPlayers() {
-    return _players;
-}
-
-QVector<zappy::Tile *> &zappy::Game::getTiles() {
-    return _tiles;
 }
 
 void zappy::Game::function_msz(const std::string &buffer) {
@@ -124,11 +121,11 @@ void zappy::Game::function_bct(const std::string &buffer) {
                             + " position = " + std::to_string(position)
                             + " max_id = " + std::to_string(_heigth * _width));
 
-    auto block = _tiles[position];
-    // _tiles[position]->setPosition({x, y});
+    auto block = _vTiles[position];
+    // _vTiles[position]->setPosition({x, y});
     block->setBusy(false);
 
-    auto inventaire = _tiles[position]->getInventaire();
+    auto inventaire = _vTiles[position]->getInventaire();
     for (int i = 0; i < 7; ++i) {
         ss >> quantity;
         if (ss.fail() || quantity < 0)
@@ -140,7 +137,8 @@ void zappy::Game::function_bct(const std::string &buffer) {
 void zappy::Game::function_tna(const std::string &name) {
     Team *team = new Team();
     team->teamName = name.c_str();
-    _teams.push_back(team);
+    _vTeams.push_back(team);
+    _teams[name] = team;
 }
 
 /**
@@ -157,12 +155,22 @@ void zappy::Game::function_pnw(const std::string &buffer) {
     int y;
     int orientation;
     int level;
-    std::string team;
+    std::string teamName;
 
-    ss >> player_id >> x >> y >> orientation >> level >> team;
+    ss >> player_id >> x >> y >> orientation >> level >> teamName;
 
     orientation--;
-    _players[player_id] = new Player(player_id, level, orientation % 4, x, y);
+
+    Player *player = new Player(player_id, level, orientation % 4, x, y);
+    Team *team = _teams[teamName];
+
+    // add new player
+    _vPlayers.push_back(player);
+    _players[player_id] = player;
+
+    // add in the team
+    team->players.push_back(player);
+    player->setTeam(team);
 }
 
 /**
@@ -190,14 +198,14 @@ void zappy::Game::function_ppo(const std::string &buffer) {
     auto *player = _players[player_id];
 
     const auto positionStart = player->getPosition();
-    auto *blockStart = _tiles[_width * positionStart.y + positionStart.x];
+    auto *blockStart = _vTiles[_width * positionStart.y + positionStart.x];
     blockStart->setHightlight(false);
 
     player->setPosition({(float) x, (float) y});
     player->setOrientation(orientation % 4);
 
     const auto position = player->getPosition();
-    auto *block = _tiles[_width * position.y + position.x];
+    auto *block = _vTiles[_width * position.y + position.x];
 
     block->setHightlight(true);
 
@@ -309,7 +317,7 @@ void zappy::Game::function_pgt(const std::string &buffer) {
     auto *player = _players[player_id];
 
     const auto position = player->getPosition();
-    auto *block = _tiles[_width * position.y + position.x];
+    auto *block = _vTiles[_width * position.y + position.x];
 
     player->setCollecting(true);
 
@@ -328,18 +336,74 @@ void zappy::Game::function_pdi(const std::string &buffer) {
     if (ss.fail())
         throw GameException("Pex error id: " + std::to_string(player_id));
 
+    Player *player = _players[player_id];
+    Team *team = player->getTeam();
+
+    team->players.removeOne(player);
+    _vPlayers.removeOne(player);
     _players.remove(player_id);
+    delete(player);
 }
 
-void zappy::Game::function_enw(const std::string &) {
-    std::cout << "called::function_enw" << std::endl;
+/**
+ * L’œuf a été pondu sur la case par le joueur.
+ * "enw #e #n X Y\n"
+ * @param buffer
+ */
+void zappy::Game::function_enw(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int egg_id;
+    unsigned int player_id;
+
+    int x;
+    int y;
+
+    ss >> egg_id >> player_id >> x >> y;
+
+    if (ss.fail()) throw GameException("Enw error parsing");
+
+    Player *player = _players[player_id];
+
+    Egg *egg = new Egg(egg_id, player, x, y);
+    _vEggs.push_back(egg);
+    _eggs[egg_id] = egg;
 }
 
-void zappy::Game::function_eht(const std::string &) {
+/**
+ * L’œuf éclot.
+ * "eht #e\n"
+ * @param buffer
+ */
+void zappy::Game::function_eht(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int egg_id;
+
+    ss >> egg_id;
+
+    if (ss.fail()) throw GameException("Eht error parsing");
+
+    if (_eggs.find(egg_id) == _eggs.end()) throw GameException("Eht error egg_id");
+
+    Egg *egg = _eggs[egg_id];
+    _eggs.remove(egg_id);
+    _vEggs.removeOne(egg);
+    delete(egg);
+
     std::cout << "called::function_eht" << std::endl;
 }
 
-void zappy::Game::function_ebo(const std::string &) {
+/**
+ * Un joueur s’est connecté pour l’œuf.
+ * "ebo #e\n"
+ * @param buffer
+ */
+void zappy::Game::function_ebo(const std::string &buffer) {
     std::cout << "called::function_ebo" << std::endl;
 }
 
@@ -405,11 +469,18 @@ bool zappy::Game::isFail() const {
     return _isFail;
 }
 
-const QVector<zappy::Team *> &zappy::Game::getTeams() const {
-    return _teams;
+QVector<zappy::Team *> &zappy::Game::getTeams() {
+    return _vTeams;
 }
 
-QMap<unsigned int, zappy::Egg *> &zappy::Game::getEggs() {
-    return _eggs;
+QVector<zappy::Player *> &zappy::Game::getPlayers() {
+    return _vPlayers;
 }
 
+QVector<zappy::Egg *> &zappy::Game::getEggs() {
+    return _vEggs;
+}
+
+QVector<zappy::Tile *> &zappy::Game::getTiles() {
+    return _vTiles;
+}

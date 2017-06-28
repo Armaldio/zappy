@@ -27,8 +27,11 @@ namespace zappy {
     private:
         QMap<unsigned int, Player *> _players;
         QMap<unsigned int, Egg *> _eggs;
-        QVector<Team *> _teams;
-        QVector<Tile *> _tiles;
+        QMap<std::string , Team *> _teams;
+        QVector<Team *> _vTeams;
+        QVector<Player *> _vPlayers;
+        QVector<Tile *> _vTiles;
+        QVector<Egg *> _vEggs;
 
         std::map<std::string, std::function<void(const std::string &)>> _functions;
         unsigned int _width;
@@ -98,17 +101,18 @@ namespace zappy {
 
         void destroyMap();
 
-        QMap<unsigned int, Player *> &getPlayers();
+        QVector<Player *> &getPlayers();
 
-        QMap<unsigned int, Egg *> &getEggs();
+        QVector<Egg *> &getEggs();
 
         QVector<Tile *> &getTiles();
+
+        QVector<Team *> &getTeams();
 
         bool isMapped() const;
 
         bool isFail() const;
 
-        const QVector<Team *> &getTeams() const;
     };
 }
 

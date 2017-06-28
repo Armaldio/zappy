@@ -6,6 +6,9 @@
 #include <thread>
 #include <QtWidgets/QTableWidgetItem>
 #include <src/Model/TeamTableModel.hpp>
+#include <src/Model/PlayerTableModel.hpp>
+#include <src/Model/TileTableModel.hpp>
+#include <src/Model/EggTableModel.hpp>
 
 namespace Ui {
     class MainWindow;
@@ -20,9 +23,15 @@ public:
     ~MainWindow();
 
 protected:
+    QString format_server = "<span style=\"display:block; font-size:8pt; font-weight:600; color:green;\">%1</span>";
+    QString format_client = "<span style=\"display:block; font-size:8pt; font-weight:600; color:yellow;\">%1</span>";
+    QString format_error = "<span style=\"display:block; font-size:8pt; font-weight:600; color:red;\">%1</span>";
+
     void paintEvent(QPaintEvent *event) override;
 
     void resizeEvent(QResizeEvent *event) override;
+
+    void initLogsBrowser();
 
 private slots:
 
@@ -46,6 +55,9 @@ private:
     std::thread *_runnerThread;
     void _runner();
     TeamTableModel _teamTable;
+    PlayerTableModel _playerTable;
+    TileTableModel _tileTable;
+    EggTableModel _eggTable;
 };
 
 #endif // MAINWINDOW_H

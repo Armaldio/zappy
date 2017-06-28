@@ -15,7 +15,7 @@ TeamTableModel::TeamTableModel(QObject *parent) : QAbstractTableModel(parent) {
 }
 
 Qt::ItemFlags TeamTableModel::flags(const QModelIndex &index) const {
-    if (index.column() == TEAM)
+    if (index.column() == TEAM_NAME)
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }
@@ -45,13 +45,19 @@ QVariant TeamTableModel::data(const QModelIndex &index, int role) const {
     {
         case Qt::DisplayRole:
         case Qt::EditRole:
-            if (index.column() == TEAM)
+            if (index.column() == TEAM_NAME)
             {
                 return _team[index.row()]->teamName;
             }
-            else if (index.column() == PLAYERS && _team[index.row()]->players.size())
+            else if (index.column() == PLAYERS)
             {
-                return _team[index.row()]->players[0]->getId();
+                if (_team[index.row()]->players.size() == 0)
+                    return QString("Empty...");
+
+                QString members;
+                for (auto member : _team[index.row()]->players)
+                    members.push_back(QString::number(member->getId()) + ",");
+                return members;
             }
             break;
     }
@@ -64,7 +70,7 @@ QVariant TeamTableModel::headerData(int section, Qt::Orientation orientation, in
     {
         switch (section)
         {
-            case TEAM:
+            case TEAM_NAME:
                 return trUtf8("Name");
                 break;
             case PLAYERS:
@@ -84,7 +90,7 @@ bool TeamTableModel::setData(const QModelIndex &index, const QVariant &value, in
     return QAbstractItemModel::setData(index, value, role);
 }
 
-void TeamTableModel::addElements(const QVector<zappy::Team *> &teams) {
+void TeamTableModel::setElements(const QVector<zappy::Team *> &teams) {
     beginResetModel();
     endResetModel();
     _team.clear();

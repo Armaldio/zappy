@@ -74,7 +74,7 @@ set(SOURCE_FILES
         src/Game/Game.cpp
         include/Game/Game.hpp
         src/Game/Team.cpp
-        include/Game/Team.hpp src/Game/Egg.cpp include/Game/Egg.hpp src/Game/Animation.cpp include/Game/Animation.hpp src/Model/TeamTableModel.cpp src/Model/TeamTableModel.hpp)
+        include/Game/Team.hpp src/Game/Egg.cpp include/Game/Egg.hpp src/Game/Animation.cpp include/Game/Animation.hpp src/Model/TeamTableModel.cpp src/Model/TeamTableModel.hpp src/Model/PlayerTableModel.cpp src/Model/PlayerTableModel.hpp src/Model/EggTableModel.cpp src/Model/EggTableModel.hpp src/Model/TileTableModel.cpp src/Model/TileTableModel.hpp)
 
 qt5_wrap_ui(UI_SRC src/UI/MainWindow.ui)
 

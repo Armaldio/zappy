@@ -13,20 +13,22 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include "Player.hpp"
 
 namespace zappy {
     class Egg {
     private:
         sf::Vector2f _pos;
         unsigned int _id;
-        unsigned int _player_id;
+        Player *_player;
+        bool _isLinked;
 
     public:
         // GUI
         sf::RectangleShape corpShape;
 
     public:
-        Egg(unsigned int id, unsigned player_id, int x, int y);
+        Egg(unsigned int id, Player * player, int x, int y);
 
         virtual ~Egg();
 
@@ -38,9 +40,13 @@ namespace zappy {
 
         void setId(unsigned int _id);
 
-        unsigned int getPlayerId() const;
+        Player * getPlayer() const;
 
-        void setPlayerId(unsigned int _player_id);
+        void setPlayer(Player *player);
+
+        const bool isLinked() const;
+
+        void setLinked(bool value);
 
     };
 }

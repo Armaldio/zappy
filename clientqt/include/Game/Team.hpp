@@ -12,9 +12,11 @@
 
 
 #include <QtCore/QVector>
-#include "Player.hpp"
+
 
 namespace zappy {
+    class Player;
+
     struct Team {
         QString teamName;
         QVector<Player *> players;

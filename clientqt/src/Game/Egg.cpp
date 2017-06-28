@@ -25,18 +25,26 @@ void zappy::Egg::setId(unsigned int _id) {
     Egg::_id = _id;
 }
 
-unsigned int zappy::Egg::getPlayerId() const {
-    return _player_id;
+zappy::Player * zappy::Egg::getPlayer() const {
+    return _player;
 }
 
-void zappy::Egg::setPlayerId(unsigned int _player_id) {
-    Egg::_player_id = _player_id;
+void zappy::Egg::setPlayer(Player *player) {
+    Egg::_player = player;
 }
 
-zappy::Egg::Egg(unsigned int id, unsigned player_id, int x, int y) : _pos(x, y), _id(id), _player_id(player_id) {
+zappy::Egg::Egg(unsigned int id, Player * player, int x, int y) : _pos(x, y), _id(id), _player(player) {
 
 }
 
 zappy::Egg::~Egg() {
 
+}
+
+const bool zappy::Egg::isLinked() const {
+    return _isLinked;
+}
+
+void zappy::Egg::setLinked(bool value) {
+    _isLinked = value;
 }

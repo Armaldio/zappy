@@ -66,3 +66,11 @@ unsigned int zappy::Player::getId() const {
 void zappy::Player::setId(unsigned int id) {
     Player::_id = id;
 }
+
+zappy::Team *zappy::Player::getTeam() const {
+    return _team;
+}
+
+void zappy::Player::setTeam(zappy::Team *team) {
+    Player::_team = team;
+}
