@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:28:30 2017 Martin Alais
-** Last update Wed Jun 28 14:28:29 2017 Martin Alais
+** Last update Wed Jun 28 20:46:58 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -63,6 +63,10 @@ void complete_struct5(t_Player **tmp2, t_Player *player)
 	tmp2[2]->action->friend_list[0] = player->id;
 	tmp2[2]->action->friend_list[1] = tmp2[0]->id;
 	tmp2[2]->action->friend_list[2] = tmp2[1]->id;
+	send_message(player->fd, "ok\n");
+	send_message(tmp2[0]->fd, "Elevation Underway\n");
+	send_message(tmp2[1]->fd, "Elevation Underway\n");
+	send_message(tmp2[2]->fd, "Elevation Underway\n");
 }
 
 void incan_5(t_Server *server, t_Player *player)
@@ -70,8 +74,7 @@ void incan_5(t_Server *server, t_Player *player)
 	t_Player **tmp2;
 
 	if (compare_tab(build_tab_5(), build_tab(server, player)) &&
-	nbr_case_rdy(server, player) == 4)
-	if (check_nbr_at_level(server, player, 5) >= 4)
+	check_nbr_at_level(server, player, 5) == 4)
 	{
 		tmp2 = get_list_level_5(server, player);
 		if (tmp2[0] != NULL && tmp2[1] != NULL && tmp2[2] != NULL)
@@ -82,6 +85,12 @@ void incan_5(t_Server *server, t_Player *player)
 			tmp2[2]->action->is_leveling = false;
 			complete_struct5(tmp2, player);
 			free (tmp2);
+			return ;
 		}
+		else
+			return (clean_player4(player));
 	}
+	else if (incan_4bis(server, player) == false)
+		return ;
+	clean_player4(player);
 }

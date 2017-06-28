@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 28 11:16:34 2017 Martin Alais
-** Last update Wed Jun 28 12:27:31 2017 Martin Alais
+** Last update Wed Jun 28 20:49:05 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -47,7 +47,7 @@ void valide_level5(t_Server *server, t_Player *player)
 			server->list_player);
 		player2->level = 6;
 		printf("Player %d reach level 6!\n", player2->id);
-		stok_answer(player2, "ok\n");
+		send_message(player2->fd, "Curent level: 6\n");
 		a += 1;
 	}
 	event_endI(server, player);

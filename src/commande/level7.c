@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:31:38 2017 Martin Alais
-** Last update Wed Jun 28 14:22:21 2017 Martin Alais
+** Last update Wed Jun 28 21:29:01 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -74,7 +74,7 @@ void incan_7(t_Server *server, t_Player *player)
 			tmp2[2]->action->is_leveling = false;
 			tmp2[3]->action->is_leveling = false;
 			tmp2[4]->action->is_leveling = false;
-			complete_struct6(tmp2, player);
+			complete_struct6(tmp2, player, true);
 			free(tmp2);
 		}
 	}

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Wed Jun 28 19:22:08 2017 Martin Alais
+** Last update Wed Jun 28 21:17:28 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -98,12 +98,14 @@ void end_level4(t_Server *server, t_Player *player);
 void end_level5(t_Server *server, t_Player *player);
 void end_level6(t_Server *server, t_Player *player);
 void end_level7(t_Server *server, t_Player *player);
-void complete_struct6(t_Player **tmp2, t_Player *player);
+void complete_struct6(t_Player **tmp2, t_Player *player, bool);
 bool error_level_6(t_Player *player, t_Server *server);
 void invalide_level6(t_Server *server, t_Player *player);
 void reset_level6(t_Player *player);
 void set_incan2(t_Player *player, t_Player *tmp);
 t_Player **get_list_level_4(t_Server *server, t_Player *player);
 bool error_level_4(t_Player *player, t_Server *server);
+void clean_player4(t_Player *player);
+bool incan_4bis(t_Server *server, t_Player *player);
 
 #endif /* !ZAPPY_MAIN_H_ */

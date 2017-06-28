@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Wed Jun 28 19:21:50 2017 Martin Alais
+## Last update Wed Jun 28 21:35:35 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -34,6 +34,7 @@ SRC    =	src/commande/broadcast.c \
 			src/commande/level5_end.c \
 			src/commande/level6.c \
 			src/commande/level6_end.c \
+			src/commande/level6_end2.c \
 			src/commande/level7.c \
 			src/commande/level7_end.c \
 			src/commande/look.c \
