@@ -24,7 +24,7 @@ zappy::RenderCanvas::~RenderCanvas() {
     OnDestroy();
 }
 
-void zappy::RenderCanvas::OnUpdate() {
+void zappy::RenderCanvas::OnUpdate(sf::Clock &clock) {
     sf::RenderWindow::clear(sf::Color(0, 0, 0));
 
     sf::Event event;
@@ -43,7 +43,7 @@ void zappy::RenderCanvas::OnUpdate() {
                 break;
         }
     }
-    zappy::SceneManager::get_instance_ptr()->draw();
+    zappy::SceneManager::get_instance_ptr()->draw(clock.restart());
 }
 
 void zappy::RenderCanvas::OnInit() {

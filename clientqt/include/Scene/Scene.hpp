@@ -32,7 +32,7 @@ namespace zappy {
 
         virtual void update(sf::Event const &event) = 0;
 
-        virtual void draw() = 0;
+        virtual void draw(const sf::Time &elapsedTime) = 0;
 
         virtual void resize(unsigned int width, unsigned int height) = 0;
 

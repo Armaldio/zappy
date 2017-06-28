@@ -12,6 +12,7 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <include/Game/Animation.hpp>
 #include "Inventaire.hpp"
 
 namespace zappy {
@@ -22,10 +23,13 @@ namespace zappy {
         int _orientation;
         Inventaire *_inventaire;
         sf::Vector2f _pos;
+        bool _isCollecting;
 
     public:
         // gui
         sf::RectangleShape characterShape;
+        AnimatedSprite animatedSprite;
+        AnimatedSprite animatedLoading;
 
     public:
         Player(unsigned int id, int level, int orientation, unsigned int x, unsigned int y);
@@ -38,10 +42,6 @@ namespace zappy {
 
         void setPosition(sf::Vector2f const& pos);
 
-        const std::string &get_name() const;
-
-        void set_name(const std::string &_name);
-
         int getOrientation() const;
 
         void setOrientation(int _orientation);
@@ -49,6 +49,10 @@ namespace zappy {
         int getLevel() const;
 
         void setLevel(int _level);
+
+        void setCollecting(bool value);
+
+        bool isCollecting() const;
     };
 }
 

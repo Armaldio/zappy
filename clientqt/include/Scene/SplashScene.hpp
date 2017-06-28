@@ -37,7 +37,7 @@ namespace zappy {
 
         void update(sf::Event const &event) override;
 
-        void draw() override;
+        void draw(const sf::Time &elapsedTime) override;
 
     };
 }

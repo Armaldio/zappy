@@ -86,6 +86,10 @@ module.exports = class Bot {
 		console.log(`Loading bot <${chalk.blue(this.behaviour.name)}> [${chalk.green(this.behaviour.description)}]`);
 	}
 
+	/**
+	 * Get full state of the bot
+	 * @returns {{inventory: ({}|*), view: ({up: Array, down: Array, left: Array, right: Array}|*), direction: string, queue: Array, flux: string, team: string, searchingFood: boolean, clientNum: (number|*), mapSize: ({}|*), lastCommand: string, totalCommands: number, goesUp: number, level: number, incantating: boolean, behaviour: (*|{})}}
+	 */
 	getState () {
 		let obj = {
 			"inventory"    : this.inventory,
@@ -107,6 +111,11 @@ module.exports = class Bot {
 		return (obj);
 	}
 
+	/**
+	 * Send a command to the server
+	 * @param cmd
+	 * @returns {boolean}
+	 */
 	send (cmd) {
 		//TODO send ony when last command is received
 		if (this.queue.length >= 10) {
@@ -123,6 +132,9 @@ module.exports = class Bot {
 		});
 	}
 
+	/**
+	 * Triggered when look is successful
+	 */
 	onLook () {
 		let datas = this.flux.replace('\n', '').replace(/[\[\]]/g, '').split(',').map((x) => {
 			return x.trim();
@@ -278,11 +290,11 @@ module.exports = class Bot {
 			/*console.log("Key : " + key);
 			 console.log(this.lv[this.level + 1][key]);*/
 
+			// Set each needed object on the ground
 			for (let i = 0; i < this.lv[this.level + 1][key]; i++) {
 				if (key !== "player")
 					this.send("Set " + key);
 			}
-
 		});
 
 		this.send("Incantation");

@@ -7,13 +7,14 @@
 //-----------------------------------------------------------------------------
 //
 
-#include "Player.hpp"
+#include "include/Game/Player.hpp"
 
 zappy::Player::Player(unsigned int id, int level, int orientation, unsigned int x, unsigned int y) :
         _pos(x, y),
         _level(level),
         _orientation(orientation),
-        _id(id)
+        _id(id),
+        animatedLoading(sf::microseconds(5))
 {
     _inventaire = new Inventaire();
 }
@@ -48,4 +49,12 @@ int zappy::Player::getLevel() const {
 
 void zappy::Player::setLevel(int _level) {
     Player::_level = _level;
+}
+
+void zappy::Player::setCollecting(bool value) {
+    _isCollecting = value;
+}
+
+bool zappy::Player::isCollecting() const {
+    return _isCollecting;
 }

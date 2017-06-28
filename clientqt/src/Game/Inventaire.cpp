@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 //
 
-#include "Inventaire.hpp"
+#include "include/Game/Inventaire.hpp"
 
 zappy::Inventaire::Inventaire() {
     for (int i = 0; i < 7; ++i) {

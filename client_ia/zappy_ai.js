@@ -13,12 +13,18 @@ const stones = [
 
 let clients = [];
 
+/* Sockets */
 const net    = require('net');
 const client = new net.Socket();
+
+/* File system */
 const fs     = require("fs");
 const path   = require('path');
+
+/* Colors */
 const chalk  = require('chalk');
 
+/* Custom modules */
 const Bot = require("./bot.js");
 
 client.setEncoding('utf8');
@@ -59,7 +65,6 @@ const yargs = require('yargs').options({
  * Communication with client ---------------------------------------------------
  */
 
-console.log("Browser : ", yargs.browser);
 if (yargs.browser !== "default") {
 	const app = require('http').createServer(handler);
 	const io  = require('socket.io')(app);
@@ -93,7 +98,7 @@ if (yargs.browser !== "default") {
  * End --------------------------------------------------------------------
  */
 
-
+/* New bot */
 let bot    = new Bot(yargs.behaviour);
 bot.team   = yargs.name;
 bot.client = client;
@@ -103,24 +108,34 @@ bot.client.connect(yargs.port, yargs.machine, () => {
 });
 
 bot.client.on('data', (data) => {
+	// When data received, add it to the flux
 	bot.flux += data;
 
+	// if flux is completed (\n), proceed to commands
 	if (data[data.length - 1] === '\n') {
 
+		// make all lowercase so we can write all in lowercase
 		bot.flux = bot.flux.toLowerCase();
 
+		// sometimes we receive multiple commands in one request (aka xxx\nxxx\n) so
+		// we split \n and remove empty elements
 		let msgs = bot.flux.split("\n").filter(v => v !== '');
 
+		// so for each command we receive
 		msgs.forEach((msg) => {
 			bot.msg = msg;
 
+			// if browser clients are connected, send it the state of the bot
 			if (clients.length > 0) {
 				clients[0].emit('message', bot.getState());
 			}
 
 			//Wild messages appear
+			// TODO refactor
 			if (bot.msg === "welcome")
 				bot.send(bot.team);
+			else if (bot.msg === "ko")
+				bot.send("Look");
 			else if (bot.msg === "dead")
 				console.log(chalk.red("You are dead"));
 			else if (bot.msg === "elevation underway") {
@@ -144,6 +159,7 @@ bot.client.on('data', (data) => {
 				console.log(chalk.green("[Receiving] " + bot.lastCommand + ' : ' + JSON.stringify(msg)));
 				//bot.output(bot.queue);
 
+				// Change direction
 				if (bot.goesUp === bot.mapSize.y) {
 					bot.send("Right");
 					bot.send("Forward");

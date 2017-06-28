@@ -3,74 +3,71 @@
 //Filename:    Inventaire.hpp
 //-----------------------------------------------------------------------------
 //
-// Created by bonett_w on 6/20/17.
+// Created by bonett_w on 6/23/17.
 //-----------------------------------------------------------------------------
 //
 
-#ifndef CLIENTQT_BOX_HPP
-#define CLIENTQT_BOX_HPP
+#ifndef CLIENTQT_ARESSOURCES_HPP
+#define CLIENTQT_ARESSOURCES_HPP
 
 
-#include <SFML/System/Vector2.hpp>
+namespace zappy {
+    class Inventaire {
+    protected:
+        int _materials[7];
 
-class Inventaire {
-protected:
-    static const int _nbMat = 7;
-    sf::Vector2f _pos;
-    int _returnAllmat[_nbMat];
+    public:
+        enum TypeMaterial {
+            Nourriture = 0,
+            Linemate,
+            Deraumere,
+            Sibur,
+            Mendiane,
+            Phiras,
+            Thystame
+        };
 
-public:
-    enum MAT {
-        NOURRITURE = 0,
-        LINEMATE,
-        DERAUMERE,
-        SIBUR,
-        MENDIANE,
-        PHIRAS,
-        THYSTAME
+        Inventaire();
+
+        virtual ~Inventaire();
+
+        Inventaire(const Inventaire & other);
+
+        Inventaire &operator=(const Inventaire & other);
+
+        int getMaterial(const TypeMaterial type);
+
+        void setMaterial(const TypeMaterial type, const int value);
+
+        int getNourriture(void) const;
+
+        int getLinemate(void) const;
+
+        int getDeraumere(void) const;
+
+        int getSibur(void) const;
+
+        int getMendiane(void) const;
+
+        int getPhiras(void) const;
+
+        int getThystame(void) const;
+
+        void setNourriture(int value);
+
+        void setLinemate(int value);
+
+        void setDeraumere(int value);
+
+        void setSibur(int value);
+
+        void setMendiane(int value);
+
+        void setPhiras(int value);
+
+        void setThystame(int value);
     };
+}
 
 
-    Inventaire(const sf::Vector2f & position = {0, 0});
-
-    virtual ~Inventaire();
-
-    const sf::Vector2f &getPos() const;
-
-    void setPos(const sf::Vector2f &_pos);
-
-    int getNourriture() const;
-
-    void setNourriture(int _nourriture);
-
-    int getLinemate() const;
-
-    void setLinemate(int _linemate);
-
-    int getDeraumere() const;
-
-    void setDeraumere(int _deraumere);
-
-    int getSibur() const;
-
-    void setSibur(int _sibur);
-
-    int getMendiane() const;
-
-    void setMendiane(int _mendiane);
-
-    int getPhiras() const;
-
-    void setPhiras(int _phiras);
-
-    int getThystame() const;
-
-    void setThystame(int _thystame);
-
-    const int *getAllMat() const;
-
-    int getNbMat() const;
-};
-
-
-#endif //CLIENTQT_BOX_HPP
+#endif //CLIENTQT_ARESSOURCES_HPP

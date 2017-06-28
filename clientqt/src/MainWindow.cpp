@@ -3,7 +3,7 @@
 #include <Scene/SceneManager.hpp>
 #include <Network/Network.hpp>
 #include <iostream>
-#include <src/Game/Game.hpp>
+#include <include/Game/Game.hpp>
 #include <include/Scene/GameScene.hpp>
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
@@ -119,6 +119,7 @@ void MainWindow::on_changeTimeButton_pressed()
 
     if (_isSession) {
         const std::string changeTime("sst " + ui->timeEdit->text().toStdString() + "\n");
+        ui->logsBrowser->append(QString("GUI:: ") + QString("sst ") + ui->timeEdit->text());
         network->send(changeTime);
     }
 }

@@ -66,15 +66,15 @@ set(SOURCE_FILES
         include/Network/SafeQueue.hpp
         include/Game/GameExeception.hpp
         src/Game/Inventaire.cpp
-        src/Game/Inventaire.hpp
+        include/Game/Inventaire.hpp
         src/Game/Player.cpp
-        src/Game/Player.hpp
+        include/Game/Player.hpp
         src/Game/Tile.cpp
-        src/Game/Tile.hpp
+        include/Game/Tile.hpp
         src/Game/Game.cpp
-        src/Game/Game.hpp
+        include/Game/Game.hpp
         src/Game/Team.cpp
-        src/Game/Team.hpp src/Game/Egg.cpp src/Game/Egg.hpp)
+        include/Game/Team.hpp src/Game/Egg.cpp include/Game/Egg.hpp src/Game/Animation.cpp include/Game/Animation.hpp)
 
 qt5_wrap_ui(UI_SRC src/UI/MainWindow.ui)
 

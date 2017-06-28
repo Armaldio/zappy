@@ -11,7 +11,7 @@
 #include <include/Network/Network.hpp>
 #include <sstream>
 #include <include/Game/GameExeception.hpp>
-#include "Game.hpp"
+#include "include/Game/Game.hpp"
 
 zappy::Game::Game() : _heigth(0), _width(0), _isMapped(false), _serverTime(100), _isFail(false) {
     _functions.insert(std::make_pair("msz", std::bind(&zappy::Game::function_msz, this, std::placeholders::_1)));
@@ -159,7 +159,8 @@ void zappy::Game::function_pnw(const std::string &buffer) {
 
     ss >> player_id >> x >> y >> orientation >> level >> team;
 
-    _players[player_id] = new Player(player_id, level, orientation, x, y);
+    orientation--;
+    _players[player_id] = new Player(player_id, level, orientation % 4, x, y);
 }
 
 /**
@@ -177,12 +178,13 @@ void zappy::Game::function_ppo(const std::string &buffer) {
 
     int x;
     int y;
+    int orientation;
 
-    ss >> x >> y;
+    ss >> x >> y >> orientation;
+    orientation--;
 
     if (ss.fail())
         throw GameException("ppo error");
-
     auto *player = _players[player_id];
 
     const auto positionStart = player->getPosition();
@@ -190,11 +192,14 @@ void zappy::Game::function_ppo(const std::string &buffer) {
     blockStart->setHightlight(false);
 
     player->setPosition({(float) x, (float) y});
+    player->setOrientation(orientation % 4);
 
     const auto position = player->getPosition();
     auto *block = _tiles[_width * position.y + position.x];
 
     block->setHightlight(true);
+
+    player->setCollecting(false);
 }
 
 /**
@@ -275,8 +280,18 @@ void zappy::Game::function_pfk(const std::string &) {
     std::cout << "called::function_pfk" << std::endl;
 }
 
-void zappy::Game::function_pdr(const std::string &) {
-    std::cout << "called::function_pdr" << std::endl;
+void zappy::Game::function_pdr(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    if (ss.fail()) throw GameException("pdr error");
+    if (_players.find(player_id) == _players.end()) throw GameException("pdr error invalid player_id");
+    _players[player_id]->setCollecting(true);
 }
 
 void zappy::Game::function_pgt(const std::string &buffer) {
@@ -293,6 +308,8 @@ void zappy::Game::function_pgt(const std::string &buffer) {
 
     const auto position = player->getPosition();
     auto *block = _tiles[_width * position.y + position.x];
+
+    player->setCollecting(true);
 
     block->setBusy(true);
 }
@@ -365,7 +382,10 @@ bool zappy::Game::fexecute(const std::string &command) {
     native.push_back(command[1]);
     native.push_back(command[2]);
     if (_functions.find(native) != _functions.end()) {
-        _functions[native](command.substr(4));
+        if (command.size() > 3)
+            _functions[native](command.substr(4));
+        else
+            _functions[native](command);
         return true;
     }
     return false;

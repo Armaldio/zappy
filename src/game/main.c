@@ -47,7 +47,8 @@ void	add_default_team(t_Server *server)
 {
   t_team *head;
 
-  head = add_team(NULL, "Team1");
+  head = NULL;
+  head = add_team(head, "Team1");
   head = add_team(head, "Team2");
   head = add_team(head, "Team3");
   head = add_team(head, "Team4");

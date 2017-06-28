@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Mon Jun 26 19:08:44 2017 hamza hammouche
+** Last update Tue Jun 27 15:48:24 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -42,6 +42,7 @@ void init_server(t_Server *server)
 {
 	init_socket(server->socket);
 
+  server->socket->s_in_size_accept = sizeof(server->socket->s_in_accept);
 	server->list_player = NULL;
 	server->list_graphic = NULL;
 	server->list_undefined = NULL;

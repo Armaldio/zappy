@@ -50,7 +50,7 @@ QPaintEngine *qsf::QSFMLCanvas::paintEngine() const {
 }
 
 void qsf::QSFMLCanvas::paintEvent(QPaintEvent *event) {
-    OnUpdate();
+    OnUpdate(_clock);
 
     sf::RenderWindow::display();
 }
@@ -69,12 +69,13 @@ void qsf::QSFMLCanvas::showEvent(QShowEvent *event) {
     }
 }
 
-void qsf::QSFMLCanvas::OnUpdate() {
+void qsf::QSFMLCanvas::OnUpdate(sf::Clock &clock) {
     sf::RenderWindow::clear(sf::Color(0, 0, 0));
+    clock.restart();
 }
 
 void qsf::QSFMLCanvas::OnInit() {
-
+    _clock.restart();
 }
 
 void qsf::QSFMLCanvas::OnDestroy() {

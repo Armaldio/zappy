@@ -1,13 +1,12 @@
 {
-  "name": "client_ia",
+  "name": "zappy_ai",
   "version": "1.0.0",
   "description": "",
-  "bin": "client_ia.js",
-  "main": "client_ia.js",
+  "bin": "zappy_ai.js",
+  "main": "zappy_ai.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node client_ia.js -p 4242 -n team1",
-    "compile": "pkg ."
+    "start": "node zappy_ai.js -p 4242 -n team1",
+    "compile": "pkg . --out-path bin"
   },
   "author": "",
   "license": "ISC",
@@ -23,19 +22,7 @@
     "socket.io": "^2.0.3",
     "yargs": "^8.0.2"
   },
-  "nexe": {
-    "input": ".",
-    "output": "zappy_ai^$",
-    "temp": "src",
-    "browserify": {
-      "requires": [],
-      "excludes": [],
-      "paths": []
-    },
-    "runtime": {
-      "framework": "node",
-      "js-flags": "--use_strict",
-      "ignoreFlags": true
-    }
+  "pkg": {
+    "assets": "behaviours/**/*"
   }
 }

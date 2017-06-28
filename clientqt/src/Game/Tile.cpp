@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 //
 
-#include "Tile.hpp"
+#include "include/Game/Tile.hpp"
 
 zappy::Tile::Tile(unsigned int x, unsigned int y) : _pos(x, y) {
     _inventaire = new Inventaire();
