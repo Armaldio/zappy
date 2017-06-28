@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:33:49 2017 Martin Alais
-** Last update Fri Jun 23 16:05:09 2017 Martin Alais
+** Last update Wed Jun 28 14:06:25 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -57,7 +57,7 @@ int parser_width(t_Server *server, char **argv, int a)
 		exit(1);
 	}
 	nbr = atoi(argv[a + 1]);
-	if (nbr < 1)
+	if (nbr < 10 || nbr > 30)
 	{
 		printf("[Error] wrong argument after -x\n");
 		exit(1);
@@ -75,7 +75,7 @@ int parser_height(t_Server *server, char **argv, int a)
 		exit(1);
 	}
 	nbr = atoi(argv[a + 1]);
-	if (nbr < 1)
+	if (nbr < 10 || nbr > 30)
 	{
 		printf("[Error] wrong argument after -y\n");
 		exit(1);
