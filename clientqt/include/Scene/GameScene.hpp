@@ -11,7 +11,8 @@
 #define CLIENTQT_GAMESCENE_HPP
 
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <src/Game/Game.hpp>
+#include <include/Game/Game.hpp>
+#include <include/Game/Animation.hpp>
 #include "Scene.hpp"
 
 namespace zappy {
@@ -22,6 +23,7 @@ namespace zappy {
         sf::Texture _tileTextures[10];
         sf::Texture _matTextures[10];
         sf::Texture _characterTexture;
+        sf::Texture _loadingTexture;
         sf::Texture _eggTexture;
         sf::RectangleShape _recShape;
         sf::Vector2f _ratio;
@@ -29,13 +31,23 @@ namespace zappy {
         sf::View _cameraView;
         sf::View _gameView;
 
+        zappy::Animation _walkingAnimation[4];
+        zappy::Animation _loadingAnimation;
+
         int _lastX;
         int _lastY;
         int _lastDiffX;
         int _lastDiffY;
 
-        float _zoomAmount;
+        sf::Vector2f _currentCenter;
+        sf::Vector2f _targetCenter;
+        float _targetZoom;
         float _currentZoom;
+        float _previousZoom;
+        bool _zooming;
+
+        float _lerpFactor;
+
 
     public:
         GameScene(sf::RenderWindow *renderWindow, const std::string &name);
@@ -46,12 +58,13 @@ namespace zappy {
 
         void update(sf::Event const &event) override;
 
-        void draw() override;
+        void draw(const sf::Time &elapsedTime) override;
 
         void resize(unsigned int width, unsigned int height) override;
 
         void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom);
 
+        float lerp(float value, float start, float end);
     };
 };
 

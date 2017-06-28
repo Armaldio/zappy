@@ -21,7 +21,7 @@ namespace zappy {
         virtual ~RenderCanvas();
 
     protected:
-        void OnUpdate() override;
+        void OnUpdate(sf::Clock &clock) override;
 
         void OnInit() override;
 

@@ -43,7 +43,7 @@ namespace qsf {
 
         virtual void mouseMoveEvent(QMouseEvent *event);
 
-        virtual void OnUpdate();
+        virtual void OnUpdate(sf::Clock &clock);
 
         virtual void OnInit();
 
@@ -53,6 +53,7 @@ namespace qsf {
 
     protected:
         QTimer _timer;
+        sf::Clock _clock;
         bool _initialized;
         std::vector<sf::Event> _sfEvents;
     };

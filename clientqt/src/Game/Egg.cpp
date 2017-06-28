@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 //
 
-#include "Egg.hpp"
+#include "include/Game/Egg.hpp"
 
 const sf::Vector2f &zappy::Egg::getPosition() const {
     return _pos;

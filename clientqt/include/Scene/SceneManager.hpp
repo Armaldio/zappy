@@ -37,7 +37,7 @@ namespace zappy {
 
         void resize(unsigned int width, unsigned int height);
 
-        void draw();
+        void draw(const sf::Time &elapsedTime);
 
         Scene *getCurrentScene();
 

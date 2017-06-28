@@ -78,7 +78,7 @@ void zappy::Network::_writer() {
             buffer = _outgoing.dequeue();
             if (buffer && (*buffer) != "local_exit") {
                 _socket.send(*buffer);
-                std::cout << "send :" << *buffer << std::endl;
+                // std::cout << "send :" << *buffer << std::endl;
             }
     }
 }
@@ -103,9 +103,9 @@ void zappy::Network::_reader() {
                 if (ret > 0) {
                     stream << buf;
 
-                    std::cout << "buffer: " <<  buf << std::endl;
+                    // std::cout << "buffer: " <<  buf << std::endl;
                     while (std::getline(stream, buf,'\n') && !stream.eof()) {
-                        std::cout << "current buffer: " <<  buf << std::endl;
+                        // std::cout << "current buffer: " <<  buf << std::endl;
                         _incoming.enqueue(new std::string(buf));
                     }
                     if (stream.eof() && buf.size() > 0) {

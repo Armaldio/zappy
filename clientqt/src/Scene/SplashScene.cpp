@@ -48,7 +48,7 @@ void zappy::SplashScene::update(sf::Event const &event) {
     _title.setFillColor(sf::Color((sf::Uint8) (color / 10), 0, 0));
 }
 
-void zappy::SplashScene::draw() {
+void zappy::SplashScene::draw(const sf::Time &elapsedTime) {
     _renderWindow->draw(_circleShape);
     _renderWindow->draw(_title);
 }

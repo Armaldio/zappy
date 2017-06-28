@@ -30,8 +30,8 @@ void zappy::SceneManager::update(sf::Event const &event) {
     _currentScene->update(event);
 }
 
-void zappy::SceneManager::draw() {
-    _currentScene->draw();
+void zappy::SceneManager::draw(const sf::Time &elapsedTime) {
+    _currentScene->draw(elapsedTime);
 }
 
 zappy::Scene *zappy::SceneManager::getCurrentScene() {
