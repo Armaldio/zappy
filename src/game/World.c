@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:26 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 22 16:53:54 2017 Martin Alais
+** Last update Wed Jun 28 15:37:14 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -15,18 +15,18 @@ t_Map *init_case()
   t_Map *tmp;
 
   tmp = malloc(sizeof(t_Map));
-  tmp->deraumere = 0;
-  if (rand() % 3 == 0)
-    tmp->deraumere = 1;
-  tmp->linemate = 0;
-  if (rand() % 3 == 0)
-    tmp->linemate = 1;
+  tmp->deraumere = 1;
+  // if (rand() % 3 == 0)
+  //   tmp->deraumere = 1;
+  tmp->linemate = 1;
+  // if (rand() % 3 == 0)
+  //   tmp->linemate = 1;
   tmp->mendiane = 0;
-  if (rand() % 3 == 0)
-    tmp->mendiane = 1;
+  // if (rand() % 3 == 0)
+  //   tmp->mendiane = 1;
   tmp->phiras = 0;
-  if (rand() % 3 == 0)
-    tmp->phiras = 1;
+  // if (rand() % 3 == 0)
+  //   tmp->phiras = 1;
 	init_case2(tmp);
   return (tmp);
 }
