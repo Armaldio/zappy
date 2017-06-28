@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Wed Jun 28 13:47:44 2017 Martin Alais
+** Last update Wed Jun 28 14:28:08 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -54,6 +54,22 @@ void my_add_player(t_Server *server, int fd)
 		tmp->next = new;
 }
 
+void	my_free_player(t_Player *tmp)
+{
+  if (tmp->inventaire != NULL)
+    free(tmp->inventaire);
+  if (tmp->waiting_line != NULL && tmp->waiting_line->line != NULL)
+    {
+      free(tmp->waiting_line->line);
+      free(tmp->waiting_line);
+    }
+  if (tmp->action != NULL && tmp->action->friend_list != NULL)
+    {
+      free(tmp->action->friend_list);
+      free(tmp->action);
+    }
+}
+
 void my_delete_player(t_Server *server, int id)
 {
 	t_Player *tmp;
@@ -73,6 +89,7 @@ void my_delete_player(t_Server *server, int id)
 	    	server->list_player = tmp->next;
 	  	else
 	    	last->next = tmp->next;
+	  	my_free_player(tmp);
 			free(tmp);
 			return;
 		}
