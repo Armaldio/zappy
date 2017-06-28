@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:14:33 2017 Martin Alais
-** Last update Wed Jun 28 10:51:45 2017 Martin Alais
+** Last update Wed Jun 28 13:32:52 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -86,7 +86,7 @@ void end_level2(t_Server *server, t_Player *player)
 	{
 		event_endI(server, player);
 		stok_answer(player, "ko\n");
-		stok_answer(player2, "ok\n");
+		stok_answer(player2, "ko\n");
 	}
 	reset_level2(player, player2);
 }
