@@ -17,9 +17,12 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->controlled = true;
   new->isEgg = false;
   new->is_connected = true;
-  new->pos = get_spaw_pos(server);
+  // new->pos = get_spaw_pos(server);
+  //
+  new->pos.x = 0;
+  new->pos.y = 0;
   new->gaze = UP;
-  new->level = 1;
+  new->level = 2;
   init_inventaire(new, server);
   init_action(new);
   ini_waiting_line(new);

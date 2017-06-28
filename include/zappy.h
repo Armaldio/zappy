@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Wed Jun 28 13:52:04 2017 Martin Alais
+** Last update Wed Jun 28 21:17:28 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -83,9 +83,11 @@ void end_level1(t_Server *server, t_Player *player);
 void end_level2(t_Server *server, t_Player *player);
 void send_to_level_up(t_Player *player, t_Server *server);
 int *build_tab(t_Server *server, t_Player *player);
-bool compare_tab(int *tab, int *tab2);
+bool compare_tab(int *, int *tab2);
+int *build_tab_3();
 int *build_tab_4();
 int *build_tab_5();
+int *build_tab_2();
 int *build_tab_6();
 int *build_tab_7();
 int nbr_case(t_Server *server, t_Player *player);
@@ -96,9 +98,14 @@ void end_level4(t_Server *server, t_Player *player);
 void end_level5(t_Server *server, t_Player *player);
 void end_level6(t_Server *server, t_Player *player);
 void end_level7(t_Server *server, t_Player *player);
-void complete_struct6(t_Player **tmp2, t_Player *player);
+void complete_struct6(t_Player **tmp2, t_Player *player, bool);
 bool error_level_6(t_Player *player, t_Server *server);
 void invalide_level6(t_Server *server, t_Player *player);
 void reset_level6(t_Player *player);
+void set_incan2(t_Player *player, t_Player *tmp);
+t_Player **get_list_level_4(t_Server *server, t_Player *player);
+bool error_level_4(t_Player *player, t_Server *server);
+void clean_player4(t_Player *player);
+bool incan_4bis(t_Server *server, t_Player *player);
 
 #endif /* !ZAPPY_MAIN_H_ */

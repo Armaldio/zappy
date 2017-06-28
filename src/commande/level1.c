@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:12:47 2017 Martin Alais
-** Last update Wed Jun 28 10:50:31 2017 Martin Alais
+** Last update Wed Jun 28 15:30:00 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -45,13 +45,18 @@ void incan_1(t_Server *server, t_Player *player)
 {
 	if (compare_tab(build_tab_1(), build_tab(server, player)) == true &&
 		nbr_case(server, player) == 1)
-		player->action->is_leveling = false;
+		{
+			send_message(player->fd, "ok\n");
+		}
+	else
+		send_message(player->fd, "ko\n");
+	player->action->is_leveling = false;
 }
 
 void end_level1(t_Server *server, t_Player *player)
 {
 	if (compare_tab(build_tab_1(), build_tab(server, player)) == true &&
-		nbr_case(server, player) == 1 && player->action->is_leveling == false)
+		nbr_case(server, player) == 1)
 		{
 			server->world->map[player->pos.x][player->pos.y]->linemate = 0;
 			player->level = 2;
