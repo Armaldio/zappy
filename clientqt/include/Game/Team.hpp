@@ -12,11 +12,13 @@
 
 
 #include <QtCore/QVector>
-#include "Player.hpp"
+
 
 namespace zappy {
+    class Player;
+
     struct Team {
-        const QString teamName;
+        QString teamName;
         QVector<Player *> players;
     };
 }

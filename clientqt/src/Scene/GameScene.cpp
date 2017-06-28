@@ -72,7 +72,7 @@ void zappy::GameScene::loadRessources() {
         _tileTextures[0].loadFromFile("assets/ground.png", sf::IntRect(32, 32, 32, 32));
         _tileTextures[1].loadFromFile("assets/ground.png", sf::IntRect(64, 32, 32, 32));
         _tileTextures[2].loadFromFile("assets/ground.png", sf::IntRect(128, 32, 32, 32));
-        _tileTextures[3].loadFromFile("assets/ground.png", sf::IntRect(5 * 32, 32, 32, 32));
+        _tileTextures[3].loadFromFile("assets/ground.png", sf::IntRect(5 * 32, 3 * 32, 32, 32));
 
         _matTextures[0].loadFromFile("assets/items.png", sf::IntRect(0 * 34, 15 * 34, 32, 32));
         _matTextures[1].loadFromFile("assets/items.png", sf::IntRect(1 * 34, 15 * 34, 32, 32));
@@ -162,9 +162,13 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
 
     auto &blocks = _game->getTiles();
 
+    const int offsetTile = 0;
+    const int offsetMat = 5;
+    const int matByline = 4;
+
     for (auto block : blocks) {
-        const sf::Vector2f pos(((block->getPosition().x) * _ratio.x + 1 * block->getPosition().x),
-                               ((block->getPosition().y) * _ratio.y + 1 * block->getPosition().y));
+        const sf::Vector2f pos(((block->getPosition().x) * _ratio.x + offsetTile * block->getPosition().x),
+                               ((block->getPosition().y) * _ratio.y + offsetTile * block->getPosition().y));
         block->rectangleShape.setPosition(pos);
         block->rectangleShape.setSize(_ratio);
 
@@ -174,18 +178,18 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
             block->rectangleShape.setFillColor(sf::Color::White);
 
         if (block->isBusy())
-            block->rectangleShape.setTexture(&_tileTextures[3]);
-        else
             block->rectangleShape.setTexture(&_tileTextures[1]);
+        else
+            block->rectangleShape.setTexture(&_tileTextures[3]);
         _renderWindow->draw(block->rectangleShape);
 
-        const float sizeSquare = _ratio.x / 12.f;
+        const float sizeSquare = _ratio.x / 6.f;
         const auto inventaire = block->getInventaire();
         for (int i = 0; i < 7; ++i) {
             if (inventaire->getMaterial((const Inventaire::TypeMaterial) i) == 0)
                 continue;
-            block->matShape[i].setPosition(pos.x + 10 + (i % 5) * (sizeSquare + 10),
-                                           pos.y + sizeSquare + ((int) (i / 5)) * (sizeSquare + 10));
+            block->matShape[i].setPosition(pos.x + offsetMat + (i % matByline) * (sizeSquare + offsetMat),
+                                           pos.y + sizeSquare + ((int) (i / matByline)) * (sizeSquare + offsetMat));
             block->matShape[i].setSize(sf::Vector2f(sizeSquare, sizeSquare));
             block->matShape[i].setTexture(&_matTextures[i]);
             _renderWindow->draw(block->matShape[i]);
@@ -196,8 +200,8 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
     for (auto player : players) {
         const auto inventaire = player->getInventaire();
         const auto realPosition = player->getPosition();
-        const sf::Vector2f pos(((realPosition.x) * _ratio.x + 1 * realPosition.x + _ratio.x / 2),
-                               ((realPosition.y) * _ratio.y + 1 * realPosition.y + _ratio.y / 2));
+        const sf::Vector2f pos(((realPosition.x) * _ratio.x + offsetTile * realPosition.x + _ratio.x / 2),
+                               ((realPosition.y) * _ratio.y + offsetTile * realPosition.y + _ratio.y / 2));
         const float squareSize = _ratio.x / 2;
         if (player->isCollecting()) {
             // Player
@@ -234,8 +238,8 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
     auto &eggs = _game->getEggs();
     for (auto egg : eggs) {
         const auto realPosition = egg->getPosition();
-        const sf::Vector2f pos(((realPosition.x) * _ratio.x + 1 * realPosition.x + _ratio.x / 2),
-                               ((realPosition.y) * _ratio.y + 1 * realPosition.y + _ratio.y / 2));
+        const sf::Vector2f pos(((realPosition.x) * _ratio.x + offsetTile * realPosition.x + _ratio.x / 2),
+                               ((realPosition.y) * _ratio.y + offsetTile * realPosition.y + _ratio.y / 2));
 
         const float squareSize = _ratio.x / 2;
         egg->corpShape.setPosition(pos);
@@ -248,9 +252,9 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
 
 void zappy::GameScene::resize(unsigned int width, unsigned int height) {
     _ratio.x = _renderWindow->getSize().x;
-    _ratio.x /= 4;
+    _ratio.x /= 2;
     _ratio.y = _renderWindow->getSize().y;
-    _ratio.y /= 4;
+    _ratio.y /= 2;
     _recShape.setSize(_ratio);
     _cameraView.setSize(_renderWindow->getSize().x, _renderWindow->getSize().y);
     _cameraView.setCenter(_renderWindow->getSize().x, _renderWindow->getSize().y);

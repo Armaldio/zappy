@@ -14,10 +14,12 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <include/Game/Animation.hpp>
 #include "Inventaire.hpp"
+#include "Team.hpp"
 
 namespace zappy {
     class Player {
     private:
+        Team *_team;
         unsigned int _id;
         int _level;
         int _orientation;
@@ -53,6 +55,14 @@ namespace zappy {
         void setCollecting(bool value);
 
         bool isCollecting() const;
+
+        unsigned int getId() const;
+
+        void setId(unsigned int _id);
+
+        Team *getTeam() const;
+
+        void setTeam(Team *team);
     };
 }
 
