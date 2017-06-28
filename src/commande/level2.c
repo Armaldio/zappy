@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:14:33 2017 Martin Alais
-** Last update Wed Jun 28 16:47:02 2017 Martin Alais
+** Last update Wed Jun 28 17:32:18 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -57,6 +57,12 @@ void send_else_level2(t_Server *server, t_Player *player)
 	sprintf(data, "Current level: %d\n", player2->level);
 	stok_answer(player, "ko\n");
 	send_message(player2->fd, data);
+}
+
+void set_incan2(t_Player *player, t_Player *tmp)
+{
+	player->action->is_leveling = false;
+	tmp->action->is_leveling = false;
 }
 
 void end_level2(t_Server *server, t_Player *player)
