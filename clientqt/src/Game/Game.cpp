@@ -138,7 +138,9 @@ void zappy::Game::function_bct(const std::string &buffer) {
 }
 
 void zappy::Game::function_tna(const std::string &name) {
-    _teams.push_back({QString(name.c_str())});
+    Team *team = new Team();
+    team->teamName = name.c_str();
+    _teams.push_back(team);
 }
 
 /**
@@ -403,7 +405,7 @@ bool zappy::Game::isFail() const {
     return _isFail;
 }
 
-const QVector<zappy::Team> &zappy::Game::getTeams() const {
+const QVector<zappy::Team *> &zappy::Game::getTeams() const {
     return _teams;
 }
 

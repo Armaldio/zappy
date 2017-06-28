@@ -11,6 +11,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    _teamTable(parent),
     _firstShow(false),
     _isSession(false),
     _runnerThread(nullptr),
@@ -20,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setFixedSize(1024, 768);
     ui->renderFrame->show();
+    ui->teamsTable->setModel(&_teamTable);
+
     zappy::SceneManager::get_instance_ptr()->loadAllRessources();
     connect(this, SIGNAL(logIsupdated(const std::string *)), this, SLOT(on_updated_log(const std::string *)));
 }
@@ -110,6 +113,7 @@ void MainWindow::on_updated_log(const std::string *command) {
     auto game = zappy::Game::get_instance_ptr();
     ui->logsBrowser->append(command->c_str());
     game->fexecute(*command);
+    _teamTable.addElements(game->getTeams());
     delete(command);
 }
 

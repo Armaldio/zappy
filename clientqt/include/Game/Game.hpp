@@ -27,7 +27,7 @@ namespace zappy {
     private:
         QMap<unsigned int, Player *> _players;
         QMap<unsigned int, Egg *> _eggs;
-        QVector<Team> _teams;
+        QVector<Team *> _teams;
         QVector<Tile *> _tiles;
 
         std::map<std::string, std::function<void(const std::string &)>> _functions;
@@ -108,7 +108,7 @@ namespace zappy {
 
         bool isFail() const;
 
-        const QVector<Team> &getTeams() const;
+        const QVector<Team *> &getTeams() const;
     };
 }
 

@@ -58,3 +58,11 @@ void zappy::Player::setCollecting(bool value) {
 bool zappy::Player::isCollecting() const {
     return _isCollecting;
 }
+
+unsigned int zappy::Player::getId() const {
+    return _id;
+}
+
+void zappy::Player::setId(unsigned int id) {
+    Player::_id = id;
+}

@@ -53,6 +53,10 @@ namespace zappy {
         void setCollecting(bool value);
 
         bool isCollecting() const;
+
+        unsigned int getId() const;
+
+        void setId(unsigned int _id);
     };
 }
 

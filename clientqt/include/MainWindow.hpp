@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <thread>
 #include <QtWidgets/QTableWidgetItem>
+#include <src/Model/TeamTableModel.hpp>
 
 namespace Ui {
     class MainWindow;
@@ -44,7 +45,7 @@ private:
     bool _isSession;
     std::thread *_runnerThread;
     void _runner();
-    QVector<QTableWidgetItem *> _teamItems;
+    TeamTableModel _teamTable;
 };
 
 #endif // MAINWINDOW_H

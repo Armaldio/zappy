@@ -16,7 +16,7 @@
 
 namespace zappy {
     struct Team {
-        const QString teamName;
+        QString teamName;
         QVector<Player *> players;
     };
 }
