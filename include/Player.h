@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Tue Jun 27 16:03:46 2017 Martin Alais
+** Last update Wed Jun 28 13:41:44 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -83,12 +83,8 @@ typedef struct	s_graphic
 	struct s_graphic *next;
 }			t_graphic;
 
-int				get_Player_size(t_Player *head);
 t_Player		*get_Player(int id, t_Player *head);
-t_Player		*init_player();
 t_Player		*get_First_Player_Available(t_Player *head);
-
 t_Player	*get_Egg(int id, t_Player *head);
-int	get_New_EggID(t_Player *head);
 
 #endif /* !ZAPPY_PLAYER_H_ */

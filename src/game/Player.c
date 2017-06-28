@@ -5,26 +5,10 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:35:13 2017 hamza hammouche
-** Last update Fri Jun 23 14:54:26 2017 hamza hammouche
+** Last update Wed Jun 28 13:41:04 2017 Martin Alais
 */
 
 #include "Player.h"
-
-int				get_Player_size(t_Player *head)
-{
-  int			i;
-  t_Player		*tmp;
-
-  i = 0;
-  tmp = head->next;
-  while (tmp)
-    {
-      tmp = tmp->next;
-      if (tmp->isEgg == false)
-	i++;
-    }
-  return (i);
-}
 
 t_Player		*get_First_Player_Available(t_Player *head)
 {
@@ -70,19 +54,4 @@ int	get_New_PlayerID(t_Player *head)
       tmp = tmp->next;
     }
   return (last);
-}
-
-t_Player	*init_player()
-{
-	t_Player *player_list;
-
-	player_list = malloc(sizeof(t_Player));
-	player_list->next = NULL;
-	player_list->is_connected = false;
-	player_list->fd = -1;
-	player_list->id = 1;
-	player_list->pos.x = -1;
-	player_list->pos.y = -1;
-  player_list->isGraphic = false;
-	return (player_list);
 }

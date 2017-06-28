@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Wed Jun 28 13:17:21 2017 Martin Alais
+** Last update Wed Jun 28 13:52:04 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -22,8 +22,6 @@ void	event_endI(t_Server *server, t_Player *player);
 int parser_commande(int id, t_Server *server, char *data);
 void send_message_death(t_graphic *, int);
 void send_message_pie(t_graphic *, t_Player *p);
-void	send_message_ebo(t_Player *p, int idOeuf);
-void	send_message_enw(t_graphic *head, t_Player *p, int idOeuf);
 void	send_message_position(t_graphic *, char *msg);
 void commande_forward(int id, t_Server *server, char *data);
 void commande_right(int id, t_Server *server, char *data);
@@ -51,7 +49,6 @@ void update_player_life(t_Server *server);
 void check_player_death(t_Server *server);
 void my_add_player(t_Server *server, int fd);
 void	event_endI(t_Server *server, t_Player *player);
-int		my_add_player_id(t_Server *server, int fd);
 void my_delete_player(t_Server *server, int id);
 void init_case2(t_Map *tmp);
 void start_look(t_Server *server, t_Player *tmp, char *data);
@@ -60,7 +57,6 @@ void check_player_leveling(t_Server *server);
 int command_set(int id, t_Server *server, char *data);
 void exit_client(int id, t_Server *server, char *data);
 void command_eject(int id, t_Server *server, char *data);
-void command_pos(int id, t_Server *server, char *data);
 void command_inventory(int id, t_Server *server, char *data);
 bool graphic_parser(int id, t_Server *server, char *data);
 int get_size_commmande(char *str);

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Fri Jun 23 18:54:51 2017 Martin Alais
+** Last update Wed Jun 28 13:47:44 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -52,29 +52,6 @@ void my_add_player(t_Server *server, int fd)
 		server->list_player = new;
 	else
 		tmp->next = new;
-}
-
-int	my_add_player_id(t_Server *server, int fd)
-{
-  t_Player *tmp;
-  t_Player *new;
-
-  new = my_malloc(sizeof(t_Player));
-  tmp = server->list_player;
-  if (server->list_player != NULL)
-    {
-      while (tmp->next != NULL)
-	tmp = tmp->next;
-    }
-  if (server->list_player == NULL)
-    my_init_player(new, fd, 1, server);
-  else
-    my_init_player(new, fd, tmp->id + 1, server);
-  if (server->list_player == NULL)
-    server->list_player = new;
-  else
-    tmp->next = new;
-  return (new->id);
 }
 
 void my_delete_player(t_Server *server, int id)
