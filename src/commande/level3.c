@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:19:36 2017 Martin Alais
-** Last update Wed Jun 28 10:52:57 2017 Martin Alais
+** Last update Wed Jun 28 14:28:52 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -27,8 +27,7 @@ int *build_tab_3()
 
 bool	is_ready_to_up_3(t_Player *tmp, t_Player *player)
 {
-	if (tmp->id != player->id && tmp->action->is_leveling == true &&
-		tmp->level == 3)
+	if (tmp->id != player->id && tmp->level == 3)
 		return (true);
 	return (false);
 }

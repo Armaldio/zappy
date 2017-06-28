@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 27 13:01:36 2017 Martin Alais
-** Last update Wed Jun 28 10:50:26 2017 Martin Alais
+** Last update Wed Jun 28 14:21:35 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -65,8 +65,7 @@ int nbr_case_rdy(t_Server *server, t_Player *player)
 	tmp = server->list_player;
 	while (tmp)
 	{
-		if (tmp->pos.x == player->pos.x &&  tmp->pos.y == player->pos.y
-			&& tmp->action->is_leveling == true)
+		if (tmp->pos.x == player->pos.x &&  tmp->pos.y == player->pos.y)
 			nbr += 1;
 		tmp = tmp->next;
 	}

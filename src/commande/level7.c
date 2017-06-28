@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:31:38 2017 Martin Alais
-** Last update Wed Jun 28 13:24:56 2017 Martin Alais
+** Last update Wed Jun 28 14:22:21 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -46,8 +46,7 @@ t_Player **get_list_level_7(t_Server *server, t_Player *player)
 	tmp = server->list_player;
 	while (tmp)
 	{
-		if (tmp->id != player->id && tmp->action->is_leveling == true &&
-			tmp->level == 7 && a < 5)
+		if (tmp->id != player->id && tmp->level == 7 && a < 5)
 		{
 			tmp2[a] = tmp;
 			a += 1;
