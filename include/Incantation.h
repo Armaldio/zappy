@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:49 2017 Martin Alais
-** Last update Mon Jun 26 16:29:00 2017 hamza hammouche
+** Last update Tue Jun 27 14:29:55 2017 Martin Alais
 */
 
 #ifndef ZAPPY_INCANTATION_H_
@@ -21,7 +21,6 @@ void incan_5(t_Server *server, t_Player *player);
 void incan_6(t_Server *server, t_Player *player);
 void incan_7(t_Server *server, t_Player *player);
 
-int check_nbr_at_level(t_Server *server, int level);
 void healp_incan_7(t_Player *player);
 void help_init_level_7(t_Player **tmp);
 bool	is_ready_to_up_2(t_Player *tmp, t_Player *player);

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Mon Jun 26 15:57:52 2017 hamza hammouche
+** Last update Wed Jun 28 13:17:21 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -28,7 +28,7 @@ void	send_message_position(t_graphic *, char *msg);
 void commande_forward(int id, t_Server *server, char *data);
 void commande_right(int id, t_Server *server, char *data);
 void commande_left(int id, t_Server *server, char *data);
-void commande_incantation(int id, t_Server *server, char data);
+void commande_incantation(int id, t_Server *server, char *data);
 void	command_fork(int id, t_Server *server, char *data);
 void	command_hatch(int id, t_Server *server, char *data);
 void	command_bloom(int id, t_Server *server, char *data);
@@ -83,5 +83,26 @@ int poll_nbr_fd2(t_Server *server);
 void complete_struct2(t_Server *server, void *poll_fd, int nbr);
 bool send_for_graphic(t_Server *server, int fd, char *data_recv);
 bool send_for_undefine(t_Server *server, int fd, char *data_recv);
+void end_level1(t_Server *server, t_Player *player);
+void end_level2(t_Server *server, t_Player *player);
+void send_to_level_up(t_Player *player, t_Server *server);
+int *build_tab(t_Server *server, t_Player *player);
+bool compare_tab(int *tab, int *tab2);
+int *build_tab_4();
+int *build_tab_5();
+int *build_tab_6();
+int *build_tab_7();
+int nbr_case(t_Server *server, t_Player *player);
+int nbr_case_rdy(t_Server *server, t_Player *player);
+int check_nbr_at_level(t_Server *server, t_Player *player, int level);
+void end_level3(t_Server *server, t_Player *player);
+void end_level4(t_Server *server, t_Player *player);
+void end_level5(t_Server *server, t_Player *player);
+void end_level6(t_Server *server, t_Player *player);
+void end_level7(t_Server *server, t_Player *player);
+void complete_struct6(t_Player **tmp2, t_Player *player);
+bool error_level_6(t_Player *player, t_Server *server);
+void invalide_level6(t_Server *server, t_Player *player);
+void reset_level6(t_Player *player);
 
 #endif /* !ZAPPY_MAIN_H_ */

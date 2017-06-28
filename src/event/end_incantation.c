@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:23:19 2017 hamza hammouche
-** Last update Mon Jun 26 15:52:47 2017 hamza hammouche
+** Last update Tue Jun 27 12:55:04 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -39,7 +39,7 @@ void	send_message_plv(t_graphic *head, t_Player *hlist, t_Player *p)
 	  		if (ptmp->pos.x == p->pos.x && ptmp->pos.y == p->pos.y)
 	    	{
           memset(buffer, '\0', 200);
-          sprintf(buffer, "plv %d %d", ptmp->id, ptmp->level);
+          sprintf(buffer, "plv %d %d\n", ptmp->id, ptmp->level);
   	  		send_message(tmp->fd, buffer);
 	    	}
 	  		ptmp = ptmp->next;
