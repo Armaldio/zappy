@@ -1,34 +1,27 @@
 //
 //-----------------------------------------------------------------------------
-//Filename:    EggTableModel.hpp
+//Filename:    MessageTableModel.hpp
 //-----------------------------------------------------------------------------
 //
 // Created by bonett_w on 6/28/17.
 //-----------------------------------------------------------------------------
 //
 
-#ifndef CLIENTQT_EGGTABLEMODEL_HPP
-#define CLIENTQT_EGGTABLEMODEL_HPP
+#ifndef CLIENTQT_MESSAGETABLEMODEL_HPP
+#define CLIENTQT_MESSAGETABLEMODEL_HPP
 
 
-#include <include/Game/Egg.hpp>
-#include <QtCore/QArgument>
 #include <QtCore/QAbstractTableModel>
 
-class EggTableModel : public QAbstractTableModel {
-    Q_OBJECT
+class MessageTableModel : public QAbstractTableModel {
+Q_OBJECT
 public:
     enum Columns {
-        ID,
-        X,
-        Y,
-        PLAYER_LINKED,
-        ID_PLAYER,
-        TEAM
+        MESSAGE,
     };
-    static const int columnsCount = 6;
+    static const int columnsCount = 1;
 
-    explicit EggTableModel(QObject *parent = 0);
+    explicit MessageTableModel(QObject *parent = 0);
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -38,11 +31,11 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::DisplayRole);
 
-    void setElements(const QVector<zappy::Egg *> &teams);
+    void setElements(const QStringList &elements);
 
 private:
-    QVector<zappy::Egg *> _eggs;
+    QStringList _messages;
 };
 
 
-#endif //CLIENTQT_EGGTABLEMODEL_HPP
+#endif //CLIENTQT_MESSAGETABLEMODEL_HPP

@@ -9,6 +9,7 @@
 #include <include/Model/PlayerTableModel.hpp>
 #include <include/Model/TileTableModel.hpp>
 #include <include/Model/EggTableModel.hpp>
+#include <include/Model/MessageTableModel.hpp>
 
 namespace Ui {
     class MainWindow;
@@ -58,6 +59,7 @@ private:
     PlayerTableModel _playerTable;
     TileTableModel _tileTable;
     EggTableModel _eggTable;
+    MessageTableModel _messageTable;
 };
 
 #endif // MAINWINDOW_H

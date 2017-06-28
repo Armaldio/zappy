@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _playerTable(parent),
     _eggTable(parent),
     _tileTable(parent),
+    _messageTable(parent),
     _firstShow(false),
     _isSession(false),
     _runnerThread(nullptr),
@@ -28,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->playersTable->setModel(&_playerTable);
     ui->eggsTable->setModel(&_eggTable);
     ui->tilesTable->setModel(&_tileTable);
+    ui->messagesTable->setModel(&_messageTable);
 
     zappy::SceneManager::get_instance_ptr()->loadAllRessources();
     connect(this, SIGNAL(logIsupdated(const std::string *)), this, SLOT(on_updated_log(const std::string *)));
@@ -127,6 +129,7 @@ void MainWindow::on_updated_log(const std::string *command) {
     _playerTable.setElements(game->getPlayers());
     _tileTable.setElements(game->getTiles());
     _eggTable.setElements(game->getEggs());
+    _messageTable.setElements(game->getMessages());
     delete(command);
 }
 
