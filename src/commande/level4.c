@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:26:53 2017 Martin Alais
-** Last update Wed Jun 28 19:21:34 2017 Martin Alais
+** Last update Thu Jun 29 15:34:26 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -73,7 +73,7 @@ void complete_struct4(t_Player **tmp2, t_Player *player)
 	tmp2[2]->action->friend_list[0] = player->fd;
 	tmp2[2]->action->friend_list[1] = tmp2[0]->fd;
 	tmp2[2]->action->friend_list[2] = tmp2[1]->fd;
-	send_message(player->fd, "ok\n");
+	send_message(player->fd, "Elevation Underway\n");
 	send_message(tmp2[0]->fd, "Elevation Underway\n");
 	send_message(tmp2[1]->fd, "Elevation Underway\n");
 	send_message(tmp2[2]->fd, "Elevation Underway\n");

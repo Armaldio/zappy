@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 28 16:36:53 2017 Martin Alais
-** Last update Wed Jun 28 17:44:24 2017 Martin Alais
+** Last update Thu Jun 29 15:33:34 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -80,7 +80,7 @@ void incan_2(t_Server *server, t_Player *player)
 			set_incan2(player, tmp);
 			player->action->friend_list[0] = tmp->id;
 			tmp->action->friend_list[0] = player->id;
-			send_message(player->fd, "ok\n");
+			send_message(player->fd, "Elevation Underway\n");
 			send_message(tmp->fd, "Elevation Underway\n");
 			return ;
 		}

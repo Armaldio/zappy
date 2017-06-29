@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:12:47 2017 Martin Alais
-** Last update Wed Jun 28 15:30:00 2017 Martin Alais
+** Last update Thu Jun 29 15:33:23 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -46,7 +46,7 @@ void incan_1(t_Server *server, t_Player *player)
 	if (compare_tab(build_tab_1(), build_tab(server, player)) == true &&
 		nbr_case(server, player) == 1)
 		{
-			send_message(player->fd, "ok\n");
+			send_message(player->fd, "Elevation Underway\n");
 		}
 	else
 		send_message(player->fd, "ko\n");
@@ -62,7 +62,7 @@ void end_level1(t_Server *server, t_Player *player)
 			player->level = 2;
 			printf("Player %d reach level 2!\n", player->id);
 	    	event_endI(server, player);
-			stok_answer(player, "ok\n");
+			stok_answer(player, "Elevation Underway\n");
 		}
 		else
 		{

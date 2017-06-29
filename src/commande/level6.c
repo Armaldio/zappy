@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:30:03 2017 Martin Alais
-** Last update Wed Jun 28 21:35:02 2017 Martin Alais
+** Last update Thu Jun 29 15:34:48 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -81,7 +81,7 @@ void complete_struct6(t_Player **tmp2, t_Player *player, bool status)
 	b = 0;
 	complete_struct6bis(tmp2, player, a, b);
 	if (status)
-		send_message(player->fd, "ok\n");
+		send_message(player->fd, "Elevation Underway\n");
 	else
 		send_message(player->fd, "ko\n");
 }
