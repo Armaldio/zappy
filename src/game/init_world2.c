@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 17:33:43 2017 Martin Alais
-** Last update Thu Jun 29 15:05:03 2017 Martin Alais
+** Last update Thu Jun 29 15:07:35 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -28,6 +28,6 @@ void add_rand_food(t_Server *server)
 
 	x = rand() % server->world->width;
 	y = rand() % server->world->height;
-	server->world->map[x][y] += 1;
+	server->world->map[x][y] += rand() % 2;
 	send_message_bct_pos(server, server->list_graphic, x, y);
 }
