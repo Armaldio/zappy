@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 27 13:01:36 2017 Martin Alais
-** Last update Wed Jun 28 14:21:35 2017 Martin Alais
+** Last update Thu Jun 29 15:19:39 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -29,7 +29,7 @@ bool compare_tab(int *tab, int *tab2)
 {
 	int nbr;
 
-	nbr = 0;
+	nbr = 1;
 	while (nbr < 7)
 	{
 		if (tab[nbr] != tab2[nbr])
