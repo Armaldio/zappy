@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Thu Jun 29 12:04:23 2017 Martin Alais
+** Last update Thu Jun 29 13:57:24 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -49,8 +49,6 @@ void init_server(t_Server *server)
 	server->list_graphic = NULL;
 	server->list_undefined = NULL;
 	init_world(server->world);
-	server->time = 0;
-	server->fake_time = tvTime.tv_usec / 1000;
 	server->tmp_time = 0;
 }
 
