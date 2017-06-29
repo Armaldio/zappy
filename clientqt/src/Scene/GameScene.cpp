@@ -29,39 +29,40 @@ void zappy::GameScene::loadRessources() {
     if (!_initialized) {
 
 
-        if (!_characterTexture.loadFromFile("assets/character.png"))
+        if (!_characterTexture.loadFromFile("assets/characters.png"))
             throw GameException("Failed to load player spritesheet!");
         if (!_loadingTexture.loadFromFile("assets/loading.png"))
             throw GameException("Failed to load player spritesheet!");
 
+        for (int i = 0; i < 4; ++i) {
         // Down
-        _walkingAnimation[0].setSpriteSheet(_characterTexture);
-        _walkingAnimation[0].addFrame(sf::IntRect(32, 0, 32, 32));
-        _walkingAnimation[0].addFrame(sf::IntRect(64, 0, 32, 32));
-        _walkingAnimation[0].addFrame(sf::IntRect(32, 0, 32, 32));
-        _walkingAnimation[0].addFrame(sf::IntRect( 0, 0, 32, 32));
+        _walkingAnimation[0 + (i * 4)].setSpriteSheet(_characterTexture);
+        _walkingAnimation[0 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 0, 32, 32));
+        _walkingAnimation[0 + (i * 4)].addFrame(sf::IntRect(64 + (i * 96), 0, 32, 32));
+        _walkingAnimation[0 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 0, 32, 32));
+        _walkingAnimation[0 + (i * 4)].addFrame(sf::IntRect( 0 + (i * 96), 0, 32, 32));
 
         // Left
-        _walkingAnimation[3].setSpriteSheet(_characterTexture);
-        _walkingAnimation[3].addFrame(sf::IntRect(32, 32, 32, 32));
-        _walkingAnimation[3].addFrame(sf::IntRect(64, 32, 32, 32));
-        _walkingAnimation[3].addFrame(sf::IntRect(32, 32, 32, 32));
-        _walkingAnimation[3].addFrame(sf::IntRect( 0, 32, 32, 32));
+        _walkingAnimation[3 + (i * 4)].setSpriteSheet(_characterTexture);
+        _walkingAnimation[3 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 32, 32, 32));
+        _walkingAnimation[3 + (i * 4)].addFrame(sf::IntRect(64 + (i * 96), 32, 32, 32));
+        _walkingAnimation[3 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 32, 32, 32));
+        _walkingAnimation[3 + (i * 4)].addFrame(sf::IntRect( 0 + (i * 96), 32, 32, 32));
 
         // Right
-        _walkingAnimation[1].setSpriteSheet(_characterTexture);
-        _walkingAnimation[1].addFrame(sf::IntRect(32, 64, 32, 32));
-        _walkingAnimation[1].addFrame(sf::IntRect(64, 64, 32, 32));
-        _walkingAnimation[1].addFrame(sf::IntRect(32, 64, 32, 32));
-        _walkingAnimation[1].addFrame(sf::IntRect( 0, 64, 32, 32));
+        _walkingAnimation[1 + (i * 4)].setSpriteSheet(_characterTexture);
+        _walkingAnimation[1 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 64, 32, 32));
+        _walkingAnimation[1 + (i * 4)].addFrame(sf::IntRect(64 + (i * 96), 64, 32, 32));
+        _walkingAnimation[1 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 64, 32, 32));
+        _walkingAnimation[1 + (i * 4)].addFrame(sf::IntRect( 0 + (i * 96), 64, 32, 32));
 
         // Up
-        _walkingAnimation[2].setSpriteSheet(_characterTexture);
-        _walkingAnimation[2].addFrame(sf::IntRect(32, 96, 32, 32));
-        _walkingAnimation[2].addFrame(sf::IntRect(64, 96, 32, 32));
-        _walkingAnimation[2].addFrame(sf::IntRect(32, 96, 32, 32));
-        _walkingAnimation[2].addFrame(sf::IntRect( 0, 96, 32, 32));
-
+        _walkingAnimation[2 + (i * 4)].setSpriteSheet(_characterTexture);
+        _walkingAnimation[2 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 96, 32, 32));
+        _walkingAnimation[2 + (i * 4)].addFrame(sf::IntRect(64 + (i * 96), 96, 32, 32));
+        _walkingAnimation[2 + (i * 4)].addFrame(sf::IntRect(32 + (i * 96), 96, 32, 32));
+        _walkingAnimation[2 + (i * 4)].addFrame(sf::IntRect( 0 + (i * 96), 96, 32, 32));
+        }
         // Loading
         _loadingAnimation.setSpriteSheet(_loadingTexture);
         for (int i = 0; i < 3240; i += 135) {
@@ -172,12 +173,12 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
         block->rectangleShape.setPosition(pos);
         block->rectangleShape.setSize(_ratio);
 
-        if (block->isHilghlighted())
+        if (block->isHilghlighted() && _game->isDebug())
             block->rectangleShape.setFillColor(sf::Color::Red);
         else
             block->rectangleShape.setFillColor(sf::Color::White);
 
-        if (block->isBusy())
+        if (block->isBusy() && _game->isDebug())
             block->rectangleShape.setTexture(&_tileTextures[1]);
         else
             block->rectangleShape.setTexture(&_tileTextures[3]);
@@ -203,9 +204,14 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
         const sf::Vector2f pos(((realPosition.x) * _ratio.x + offsetTile * realPosition.x + _ratio.x / 2),
                                ((realPosition.y) * _ratio.y + offsetTile * realPosition.y + _ratio.y / 2));
         const float squareSize = _ratio.x / 2;
+        unsigned int teamId = 0;
+        if (player->getTeam())
+            teamId = (player->getTeam()->uniqid % 4) * 4;
+
         if (player->isCollecting()) {
             // Player
-            player->animatedSprite.play(_walkingAnimation[player->getOrientation() % 4]);
+            player->animatedSprite.play(_walkingAnimation[(player->getOrientation() % 4) + teamId]);
+
             player->animatedSprite.setPosition(pos);
             player->animatedSprite.setOrigin({squareSize / 2, squareSize / 2});
             player->animatedSprite.setSize({squareSize, squareSize});
@@ -223,7 +229,7 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
         }
         else {
             // Player
-            player->animatedSprite.play(_walkingAnimation[player->getOrientation() % 4]);
+            player->animatedSprite.play(_walkingAnimation[(player->getOrientation() % 4) + teamId]);
             player->animatedSprite.setPosition(pos);
             player->animatedSprite.setOrigin({squareSize / 2, squareSize / 2});
             player->animatedSprite.setSize({squareSize, squareSize});
@@ -245,7 +251,7 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
         egg->corpShape.setPosition(pos);
         egg->corpShape.setSize({squareSize, squareSize});
         egg->corpShape.setOrigin({squareSize / 2, squareSize / 2});
-        egg->corpShape.setTexture(&_characterTexture);
+        egg->corpShape.setTexture(&_eggTexture);
         _renderWindow->draw(egg->corpShape);
     }
 }

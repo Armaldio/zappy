@@ -2,6 +2,7 @@
   "presets": ["env"],
   "ignore": [
     "zappy_ai.js",
+    "zappy_ai_neural.js",
     "bot.js"
   ]
 }

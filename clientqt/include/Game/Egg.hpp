@@ -21,7 +21,7 @@ namespace zappy {
         sf::Vector2f _pos;
         unsigned int _id;
         Player *_player;
-        bool _isLinked;
+        bool _isHatch;
 
     public:
         // GUI
@@ -44,9 +44,9 @@ namespace zappy {
 
         void setPlayer(Player *player);
 
-        const bool isLinked() const;
+        const bool isHatch() const;
 
-        void setLinked(bool value);
+        void setHatches(bool value);
 
     };
 }

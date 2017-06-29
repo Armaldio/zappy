@@ -5,6 +5,9 @@
 #include <iostream>
 #include <include/Game/Game.hpp>
 #include <include/Scene/GameScene.hpp>
+#include <include/Game/GameExeception.hpp>
+#include <QtWidgets/QMessageBox>
+#include <QtCore/QPropertyAnimation>
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 
@@ -15,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _playerTable(parent),
     _eggTable(parent),
     _tileTable(parent),
+    _messageTable(parent),
     _firstShow(false),
     _isSession(false),
     _runnerThread(nullptr),
@@ -28,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->playersTable->setModel(&_playerTable);
     ui->eggsTable->setModel(&_eggTable);
     ui->tilesTable->setModel(&_tileTable);
+    ui->messagesTable->setModel(&_messageTable);
 
     zappy::SceneManager::get_instance_ptr()->loadAllRessources();
     connect(this, SIGNAL(logIsupdated(const std::string *)), this, SLOT(on_updated_log(const std::string *)));
@@ -118,15 +123,40 @@ void MainWindow::on_updated_log(const std::string *command) {
         return;
 
     auto game = zappy::Game::get_instance_ptr();
+
+    game->setDebug(ui->debugcheckBox->checkState());
+
     const QString qs_command(command->c_str());
-    if (game->fexecute(*command))
-        ui->logsBrowser->append(format_server.arg(qs_command));
-    else
+
+    try {
+
+        if (game->fexecute(*command))
+            ui->logsBrowser->append(format_server.arg(qs_command));
+        else
+            ui->logsBrowser->append(format_error.arg(qs_command));
+
+        _teamTable.setElements(game->getTeams());
+        _playerTable.setElements(game->getPlayers());
+        _tileTable.setElements(game->getTiles());
+        _eggTable.setElements(game->getEggs());
+        _messageTable.setElements(game->getMessages());
+    } catch (GameException &e) {
         ui->logsBrowser->append(format_error.arg(qs_command));
-    _teamTable.setElements(game->getTeams());
-    _playerTable.setElements(game->getPlayers());
-    _tileTable.setElements(game->getTiles());
-    _eggTable.setElements(game->getEggs());
+        QMessageBox msgBox;
+        QString message;
+        message = "GameException: ";
+        message +=  e.what();
+        msgBox.setText(message);
+        msgBox.setInformativeText("Do you want continue ?");
+        msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Cancel);
+        int ret = msgBox.exec();
+        switch (ret) {
+            case QMessageBox::Cancel:
+                on_quitButton_pressed();
+                break;
+        }
+    }
     delete(command);
 }
 
@@ -144,4 +174,26 @@ void MainWindow::on_changeTimeButton_pressed()
 
 void MainWindow::initLogsBrowser() {
     ui->logsBrowser->clear();
+}
+
+void MainWindow::on_saveLogButton_clicked()
+{
+
+}
+
+void MainWindow::on_debugcheckBox_stateChanged(int arg1)
+{
+    auto game = zappy::Game::get_instance_ptr();
+
+    game->setDebug(ui->debugcheckBox->checkState());
+}
+
+void MainWindow::on_audiocheckBox_stateChanged(int arg1)
+{
+
+}
+
+void MainWindow::on_hideBoardcheckBox_stateChanged(int arg1)
+{
+
 }

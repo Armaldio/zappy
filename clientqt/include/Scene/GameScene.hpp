@@ -31,7 +31,7 @@ namespace zappy {
         sf::View _cameraView;
         sf::View _gameView;
 
-        zappy::Animation _walkingAnimation[4];
+        zappy::Animation _walkingAnimation[16];
         zappy::Animation _loadingAnimation;
 
         int _lastX;

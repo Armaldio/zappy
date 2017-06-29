@@ -25,6 +25,7 @@ module.exports = class Bot {
 		this.clientNum     = -1;
 		this.mapSize       = {};
 		this.lastCommand   = '';
+		this.oldCommands   = [];
 		this.dead          = false;
 		this.totalCommands = 0;
 		this.goesUp        = 0;
@@ -84,6 +85,22 @@ module.exports = class Bot {
 
 		this.incantationStep = 0;
 		this.incantating     = false;
+		this.trainDatas = [];
+
+		this.commands = [
+			"Forward",
+			"Right",
+			"Left",
+			"Look",
+			"Inventory",
+			"Broadcast",
+			"Connect_nbr",
+			"Fork",
+			"Eject",
+			"Take",
+			"Set",
+			"Incantation",
+		];
 
 		this.behaviour = JSON.parse(fs.readFileSync(path.join(__dirname, 'behaviours', behaviour + '.json'), 'utf8'));
 
@@ -133,10 +150,16 @@ module.exports = class Bot {
 			} else {
 				console.log(chalk.blue('[Sending] ' + cmd));
 				this.queue.push(cmd.split(/(\\n)| /g)[0]);
+				this.oldCommands.push(cmd.split(/(\\n)| /g)[0]);
 				this.output(this.queue);
 				this.totalCommands++;
 			}
 		});
+	}
+
+	getCommandIndex (cmd) {
+		console.log("Cmd : ", cmd);
+		return (this.commands.indexOf(cmd) / this.commands.length);
 	}
 
 	/**
@@ -327,6 +350,7 @@ module.exports = class Bot {
 		for (let i = 0; i < c; i++) {
 			this.send(dir);
 		}
+		this.send("Forward");
 	}
 
 	willMove () {

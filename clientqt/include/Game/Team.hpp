@@ -20,6 +20,7 @@ namespace zappy {
     struct Team {
         QString teamName;
         QVector<Player *> players;
+        unsigned int uniqid;
     };
 }
 

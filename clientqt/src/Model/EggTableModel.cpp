@@ -47,6 +47,14 @@ QVariant EggTableModel::data(const QModelIndex &index, int role) const {
                 case ID_PLAYER:
                     return QString::number(player->getId());
                     break;
+                case HATCH:
+                    return egg->isHatch() ? QString("TRUE") : QString("FALSE");
+                    break;
+                case TEAM:
+                    if (player)
+                        return player->getTeam()->teamName;
+                    return QString("Unknown");
+                    break;
                 case X:
                     return QString::number(egg->getPosition().x);
                     break;
@@ -66,10 +74,16 @@ QVariant EggTableModel::headerData(int section, Qt::Orientation orientation, int
         switch ((Columns)section)
         {
             case ID:
-                return trUtf8("Id");
+                return trUtf8("ID");
                 break;
             case ID_PLAYER:
-                return trUtf8("Id_Player");
+                return trUtf8("PLAYER_ID");
+                break;
+            case HATCH:
+                return trUtf8("HATCH");
+                break;
+            case TEAM:
+                return trUtf8("TEAM");
                 break;
             case X:
                 return trUtf8("X");
