@@ -271,7 +271,7 @@ void zappy::Game::function_pin(const std::string &buffer) {
     for (int i = 0; i < 7; ++i) {
         ss >> quantity;
         if (ss.fail() || quantity < 0)
-            throw GameException("function_bct invalid quantity " + std::to_string(quantity) + " at id: " + std::to_string(i));
+            throw GameException("function_pin invalid quantity " + std::to_string(quantity) + " at id: " + std::to_string(i));
         inventaire->setMaterial((const Inventaire::TypeMaterial) i, quantity);
     }
 }
