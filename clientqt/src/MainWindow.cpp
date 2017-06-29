@@ -5,6 +5,8 @@
 #include <iostream>
 #include <include/Game/Game.hpp>
 #include <include/Scene/GameScene.hpp>
+#include <include/Game/GameExeception.hpp>
+#include <QtWidgets/QMessageBox>
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 
@@ -120,16 +122,36 @@ void MainWindow::on_updated_log(const std::string *command) {
         return;
 
     auto game = zappy::Game::get_instance_ptr();
-    const QString qs_command(command->c_str());
-    if (game->fexecute(*command))
-        ui->logsBrowser->append(format_server.arg(qs_command));
-    else
-        ui->logsBrowser->append(format_error.arg(qs_command));
-    _teamTable.setElements(game->getTeams());
-    _playerTable.setElements(game->getPlayers());
-    _tileTable.setElements(game->getTiles());
-    _eggTable.setElements(game->getEggs());
-    _messageTable.setElements(game->getMessages());
+
+    try {
+        const QString qs_command(command->c_str());
+
+        if (game->fexecute(*command))
+            ui->logsBrowser->append(format_server.arg(qs_command));
+        else
+            ui->logsBrowser->append(format_error.arg(qs_command));
+
+        _teamTable.setElements(game->getTeams());
+        _playerTable.setElements(game->getPlayers());
+        _tileTable.setElements(game->getTiles());
+        _eggTable.setElements(game->getEggs());
+        _messageTable.setElements(game->getMessages());
+    } catch (GameException &e) {
+        QMessageBox msgBox;
+        QString message;
+        message = "GameException: ";
+        message +=  e.what();
+        msgBox.setText(message);
+        msgBox.setInformativeText("Do you want continue ?");
+        msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Cancel);
+        int ret = msgBox.exec();
+        switch (ret) {
+            case QMessageBox::Cancel:
+                on_quitButton_pressed();
+                break;
+        }
+    }
     delete(command);
 }
 

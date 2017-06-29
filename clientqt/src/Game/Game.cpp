@@ -413,7 +413,7 @@ void zappy::Game::function_ebo(const std::string &buffer) {
     ss >> egg_id;
 
     if (ss.fail()) throw GameException("Ebo error parsing");
-    if (_eggs.find(egg_id) == _eggs.end()) throw GameException("Ebo error egg_id");
+    if (_eggs.find(egg_id) == _eggs.end()) throw GameException("Ebo error egg_id: " + std::to_string(egg_id));
 
     _eggs[egg_id]->setLinked(true);
 }
