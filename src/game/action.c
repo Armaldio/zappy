@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Thu Jun 29 12:31:56 2017 Martin Alais
+** Last update Thu Jun 29 12:49:51 2017 Martin Alais
 */
 
 #include <time.h>
@@ -54,7 +54,7 @@ void start_action(t_Server *server, t_Player *player, int action_time)
 	player->action->start_time = server->tmp_time;
 	player->action->end_time = player->action->start_time
 	+ (action_time / server->f);
-	printf("action start at %lf and end at %lf", player->action->start_time, player->action->end_time);
+	printf("Start action at %lf and end at %lf\n", player->action->start_time, player->action->end_time);
 	player->action->is_working = true;
 	player->action->is_leveling = false;
 	if (player->isEgg == false)
@@ -72,7 +72,6 @@ void check_action_status(t_Server *server)
 	tmp = server->list_player;
 	while (tmp)
 	{
-		printf("start_time : %lf end time: %lf\n", tmp->action->start_time, tmp->action->end_time);
 		if (tmp->action->start_time > tmp->action->end_time)
 		{
 			tmp->action->end_time = 0;
@@ -102,9 +101,7 @@ void action_update_time(t_Server *server, double elapsed_time)
 	{
 		if (tmp->action->is_working == true)
 		{
-			printf("Updating start time: %lf with : %lf\n", tmp->action->start_time, elapsed_time);
 			tmp->action->start_time += elapsed_time;
-			printf("NEW start time: %lf\n", tmp->action->start_time);
 		}
 		tmp = tmp->next;
 	}
