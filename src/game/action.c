@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Thu Jun 29 12:49:51 2017 Martin Alais
+** Last update Thu Jun 29 13:33:34 2017 Martin Alais
 */
 
 #include <time.h>
@@ -96,7 +96,6 @@ void action_update_time(t_Server *server, double elapsed_time)
 	tmp = server->list_player;
 	if (elapsed_time < 0)
 		return;
-	// printf("Elapsed time: %lf\n", elapsed_time);
 	while (tmp)
 	{
 		if (tmp->action->is_working == true)
