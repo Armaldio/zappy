@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Thu Jun 29 13:33:34 2017 Martin Alais
+** Last update Thu Jun 29 14:24:23 2017 Martin Alais
 */
 
 #include <time.h>
@@ -54,7 +54,6 @@ void start_action(t_Server *server, t_Player *player, int action_time)
 	player->action->start_time = server->tmp_time;
 	player->action->end_time = player->action->start_time
 	+ (action_time / server->f);
-	printf("Start action at %lf and end at %lf\n", player->action->start_time, player->action->end_time);
 	player->action->is_working = true;
 	player->action->is_leveling = false;
 	if (player->isEgg == false)

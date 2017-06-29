@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 29 12:13:26 2017 Martin Alais
+** Last update Thu Jun 29 14:36:56 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -14,6 +14,7 @@
 #include "Team.h"
 #include "mouvement.h"
 #include <sys/time.h>
+#include <poll.h>
 
 # define DEBUG 0
 
@@ -108,5 +109,11 @@ t_Player **get_list_level_4(t_Server *server, t_Player *player);
 bool error_level_4(t_Player *player, t_Server *server);
 void clean_player4(t_Player *player);
 bool incan_4bis(t_Server *server, t_Player *player);
+void complete_struct(t_Server *server, struct pollfd *poll_fd);
+int poll_nbr_fd(t_Server *server);
+int get_nbr_del(char *str, char del);
+void free_tab(char **tab);
+void str_tab_2(char **res, char *str, char del);
+void str_to_word_tab(char *str, char del, t_Player *tmp3, t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */

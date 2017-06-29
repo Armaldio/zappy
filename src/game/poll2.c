@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 16:06:09 2017 Martin Alais
-** Last update Mon Jun 26 16:24:30 2017 Martin Alais
+** Last update Thu Jun 29 14:33:12 2017 Martin Alais
 */
 
 #include <poll.h>
@@ -88,4 +88,31 @@ bool send_for_undefine(t_Server *server, int fd, char *data_recv)
 		tmp2 = tmp2->next;
 	}
 	return (false);
+}
+
+void str_to_word_tab(char *str, char del, t_Player *tmp3, t_Server *server)
+{
+	char **res;
+	int nbr_ite;
+	int a;
+
+	a = 0;
+	nbr_ite = get_nbr_del(str, del);
+	res = my_malloc(sizeof(char *) * (nbr_ite + 1));
+	while (a < nbr_ite)
+	{
+		res[a] = my_malloc(sizeof(char) * (strlen(str) + 5));
+		memset(res[a], '\0', strlen(str) + 5);
+		a += 1;
+	}
+	res[a] = NULL;
+	str_tab_2(res, str, del);
+	a = 0;
+	while (res[a])
+	{
+		if (res[a][0] != '\0')
+			add_to_line(tmp3, res[a], a, server);
+		a += 1;
+	}
+	free_tab(res);
 }
