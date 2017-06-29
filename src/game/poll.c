@@ -5,61 +5,50 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 14:29:52 2017 Martin Alais
-** Last update Tue Jun 27 18:29:14 2017 hamza hammouche
+** Last update Thu Jun 29 14:40:21 2017 Martin Alais
 */
 
 #include <poll.h>
 #include "zappy.h"
 
-int poll_nbr_fd(t_Server *server)
+void str_tab_2(char **res, char *str, char del)
 {
-	int nbr;
-	t_graphic *tmp;
-	t_undefined *tmp2;
+	int a;
+	int b;
+	int c;
 
-	nbr = 0;
-	tmp = server->list_graphic;
-	tmp2 = server->list_undefined;
-
-	while (tmp)
+	b = 0;
+	a = 0;
+	c = 0;
+	while (str[a])
 	{
-		nbr += 1;
-		tmp = tmp->next;
+		if (str[a] == del)
+		{
+			res[b][c] = '\n';
+			res[b][c + 1] = '\0';
+			c = 0;
+			b += 1;
+		}
+		else
+		{
+			res[b][c] = str[a];
+			c += 1;
+		}
+		a += 1;
 	}
-	while (tmp2)
-	{
-		nbr += 1;
-		tmp2 = tmp2->next;
-	}
-	nbr += poll_nbr_fd2(server);
-	return (nbr);
 }
 
-void complete_struct(t_Server *server, struct pollfd *poll_fd)
+void free_tab(char **tab)
 {
-	t_graphic *tmp;
-	t_undefined *tmp2;
+	int a;
 
-	int nbr;
-
-	nbr = 0;
-	tmp = server->list_graphic;
-	tmp2 = server->list_undefined;
-	while (tmp)
+	a = 0;
+	while (tab[a])
 	{
-		poll_fd[nbr].fd = tmp->fd;
-		poll_fd[nbr].events = POLLIN;
-		nbr += 1;
-		tmp = tmp->next;
+		free(tab[a]);
+		a += 1;
 	}
-	while (tmp2)
-	{
-		poll_fd[nbr].fd = tmp2->fd;
-		poll_fd[nbr].events = POLLIN;
-		nbr += 1;
-		tmp2 = tmp2->next;
-	}
-	complete_struct2(server, poll_fd, nbr);
+	free(tab);
 }
 
 void send_to_struct(t_Server *server, int fd)
@@ -79,7 +68,7 @@ void send_to_struct(t_Server *server, int fd)
 		if (tmp3->fd == fd && tmp3->controlled == true)
 		{
 			a = recv(tmp3->fd, data_recv, 4095, MSG_DONTWAIT);
-			add_to_line(tmp3, data_recv, a, server);
+			str_to_word_tab(data_recv, a, tmp3, server);
 			return ;
 		}
 		tmp3 = tmp3->next;
@@ -105,7 +94,7 @@ void my_poll(t_Server *server)
       i++;
     }
 	complete_struct(server, poll_fd);
-	poll(poll_fd, max, 500);
+	poll(poll_fd, max, 50);
 	while (nbr < max)
 	{
 		if (poll_fd[nbr].revents == POLLIN)

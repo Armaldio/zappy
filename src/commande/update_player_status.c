@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Thu Jun 29 10:50:52 2017 Martin Alais
+** Last update Thu Jun 29 14:58:37 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -23,6 +23,7 @@ void spawn_food(t_Server *server)
 		while (y < server->world->height)
 		{
 			server->world->map[x][y]->food = rand() % 3;
+	  	send_message_bct_pos(server, server->list_graphic, x, y);
 			y += 1;
 		}
 		x += 1;

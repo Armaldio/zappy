@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:23:19 2017 hamza hammouche
-** Last update Tue Jun 27 12:55:04 2017 Martin Alais
+** Last update Thu Jun 29 14:57:04 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -20,6 +20,18 @@ void	send_message_bct(t_Server *serv, t_graphic *head, t_Player *player)
   while (tmp)
     {
       commande_bct2(serv, player->pos.x, player->pos.y, tmp);
+      tmp = tmp->next;
+    }
+}
+
+void	send_message_bct_pos(t_Server *serv, t_graphic *head, int x, int y)
+{
+  t_graphic	*tmp;
+
+  tmp = head;
+  while (tmp)
+    {
+      commande_bct2(serv, x, y, tmp);
       tmp = tmp->next;
     }
 }

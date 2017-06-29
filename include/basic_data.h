@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:53 2017 Martin Alais
-** Last update Fri Jun 23 14:10:30 2017 Martin Alais
+** Last update Thu Jun 29 10:53:19 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_BASIC_H_
@@ -23,6 +23,6 @@ typedef struct	s_Position
 
 void print(int fd, char *str);
 void *my_malloc(size_t size);
-int my_safe_div(int nbr1, int nbr2);
+double my_safe_div(double nbr1, double nbr2);
 
 #endif /* !ZAPPY_BASIC_H_ */

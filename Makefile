@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Wed Jun 28 21:35:35 2017 Martin Alais
+## Last update Thu Jun 29 14:37:31 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -67,6 +67,7 @@ SRC    =	src/commande/broadcast.c \
 			src/game/Player.c \
 			src/game/poll.c \
 			src/game/poll2.c \
+			src/game/poll3.c \
 			src/game/send_message.c \
 			src/game/Server.c \
 			src/game/server2.c \
