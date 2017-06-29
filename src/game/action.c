@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Thu Jun 29 14:24:23 2017 Martin Alais
+** Last update Thu Jun 29 16:44:24 2017 Martin Alais
 */
 
 #include <time.h>
@@ -28,6 +28,8 @@ void send_message_pie(t_graphic *head, t_Player *p)
 void init_action(t_Player *player)
 {
 	player->action = my_malloc(sizeof(t_action));
+	player->action->data_to_send = malloc(sizeof(char) * 4096);
+	memset(player->action->data_to_send, '\0', 4095);
 	player->action->end_time = 0;
 	player->action->is_leveling = false;
 	player->action->is_working = false;
