@@ -7,6 +7,7 @@
   "scripts": {
     "test": "./node_modules/.bin/xo",
     "start": "node zappy_ai.js -p 4242 -n team1",
+    "start-neural": "node zappy_ai_neural.js -p 4242 -n team1 -t",
     "compile": "pkg . --out-path bin"
   },
   "author": "",
@@ -16,6 +17,7 @@
     "@types/yargs": "^6.6.0",
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.5.2",
+    "brain.js": "^1.0.0-rc.3",
     "chalk": "^1.1.3",
     "electron": "^1.6.11",
     "jquery": "^3.2.1",
@@ -28,6 +30,8 @@
     "assets": "behaviours/**/*"
   },
   "xo": {
-    "ignore": [ "www/**/*" ]
+    "ignore": [
+      "www/**/*"
+    ]
   }
 }

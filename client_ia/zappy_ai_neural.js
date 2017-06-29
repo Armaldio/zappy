@@ -2,15 +2,6 @@
  * Created by goinau_q on 21/06/17.
  */
 
-/* const stones = [
- "linemate",
- "deraumere",
- "sibur",
- "mendiane",
- "phiras",
- "thystame"
- ]; */
-
 const clients = [];
 
 /* Sockets */
@@ -27,6 +18,9 @@ const chalk = require('chalk');
 
 /* Custom modules */
 const Bot = require('./bot.js');
+
+const brain  = require('brain.js');
+const neural = new brain.NeuralNetwork();
 
 client.setEncoding('utf8');
 
@@ -53,11 +47,16 @@ const yargs = require('yargs').options({
 		describe: 'machine is the name of the machine; localhost by default',
 		default : 'localhost'
 	},
+	train    : {
+		alias   : 't',
+		describe: 'Whether to train or to run the neural network',
+		default : false
+	},
 	browser  : {
 		alias   : 'b',
 		describe: 'specify the port for communication to the browser'
 	}
-}).demandOption(['port', 'name'], 'Please provide both port and name arguments')
+}).demandOption(['port', 'name', 'train'], 'Please provide both port and name arguments')
 							  .help().argv;
 
 // TODO Check errors !
@@ -104,6 +103,17 @@ const bot  = new Bot(yargs.behaviour);
 bot.team   = yargs.name;
 bot.client = client;
 
+if (fs.existsSync("neuralDatas.json")) {
+	neural.fromJSON(JSON.parse(fs.readFileSync("neuralDatas.json", 'utf8')));
+	console.log("Old configuraton loaded");
+}
+else {
+	if (yargs.train === false) {
+		console.log("Sorry, you must train the bot before");
+		return;
+	}
+}
+
 bot.client.connect(yargs.port, yargs.machine, () => {
 	console.log('Client connected');
 });
@@ -130,15 +140,47 @@ bot.client.on('data', data => {
 				clients[0].emit('message', bot.getState());
 			}
 
+			/**
+			 * NEURAL
+			 */
+			if (yargs.train) {
+				let cmd = bot.getCommandIndex(bot.queue[0]);
+				let food = bot.inventory["food"];
+
+				console.log();
+				if (cmd > 0 && !isNaN(food)) {
+					let t = {
+						input : {
+							cmd: cmd,
+						},
+						output: {
+							inventory: food / 400,
+							level    : bot.level / 8
+						}
+					};
+					bot.trainDatas.push(t);
+					console.log("Training with command ", cmd, " and output ", food, bot.level);
+					console.log("Result : ", t);
+				}
+			}
+			else {
+				let output = neural.run({
+					cmd: bot.queue[0]
+				});
+
+				console.log("Output : ", output);
+			}
+			//return;
+
 			// Wild messages appear
 			// TODO refactor
 			if (bot.msg === 'welcome') {
 				bot.send(bot.team);
 			} else if (bot.msg.startsWith('message')) {
 				let broadcast = bot.msg.replace("message");
-				let split = broadcast.split(',');
+				let split     = broadcast.split(',');
 
-				broadcast = split[1];
+				broadcast  = split[1];
 				let tileID = split[0];
 
 			} else if (bot.msg === 'ko') {
@@ -146,20 +188,20 @@ bot.client.on('data', data => {
 				if (bot.queue[0] !== 'Incantation') {
 					bot.lastCommand = bot.queue.shift();
 					bot.output(bot.lastCommand + ' : ko');
-					bot.goRandomDir();
-					console.log("Next command : " + bot.queue[0]);
+					bot.send('Look');
 				} else if (bot.incantationStep === 0) {
-					bot.queue.shift();
-					//bot.incantationStep = 1;
-					bot.send("Look");
+					bot.incantationStep = 1;
 				} else if (bot.incantationStep === 1) {
 					bot.queue.shift();
 					bot.incantationStep = 0;
+					bot.goRandomDir();
 					bot.send("Look");
 				}
 			} else if (bot.msg === 'dead') {
 				bot.dead = true;
-				console.log(chalk.red('You are dead'));
+				console.log(chalk.red('You are dead, saving training datas'));
+				neural.train(bot.trainDatas);
+				fs.writeFileSync("neuralDatas.json", JSON.stringify(neural.toJSON()), "utf8");
 			} else if (bot.msg === 'elevation underway') {
 				bot.incantating = true;
 				bot.output('Incantation started');
@@ -256,6 +298,8 @@ bot.client.on('close', () => {
 });
 
 bot.client.on('end', () => {
+	neural.train(bot.trainDatas);
+	fs.writeFileSync("neuralDatas.json", JSON.stringify(neural.toJSON()), "utf8");
 	console.log(chalk.red('Disconnected from server'));
 });
 
