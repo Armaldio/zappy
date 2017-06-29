@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 29 15:38:25 2017 loic1.doyen@epitech.eu
+** Last update Thu Jun 29 16:06:11 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -151,7 +151,7 @@ int		command_look(int id, t_Server *server, char *data)
 	}
       y++;
     }
-  strcat(message, " ]\n");
+  strcat(message, " ]\n\0");
   stok_answer(tmp, message);
   return (0);
 }
