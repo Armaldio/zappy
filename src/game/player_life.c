@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Thu Jun 29 12:13:14 2017 Martin Alais
+** Last update Thu Jun 29 12:34:42 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -14,6 +14,8 @@ void		update_player_life(t_Server *server, double elapsed_time)
 {
   t_Player	*tmp;
 
+	if (elapsed_time < 0)
+		return; 
   tmp = server->list_player;
   while (tmp)
     {
