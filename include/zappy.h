@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Wed Jun 28 21:17:28 2017 Martin Alais
+** Last update Thu Jun 29 11:36:05 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -13,6 +13,7 @@
 
 #include "Team.h"
 #include "mouvement.h"
+#include <sys/time.h>
 
 # define DEBUG 0
 

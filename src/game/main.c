@@ -5,18 +5,63 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Tue Jun 27 19:09:44 2017 Martin Alais
+** Last update Thu Jun 29 12:09:32 2017 Martin Alais
 */
 
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"
+#include <sys/time.h>
+
+long getMicrotime(){
+    struct timeval currentTime;
+    gettimeofday(&currentTime, NULL);
+    return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
+}
+
+double get_micro(double data)
+{
+	while (data > 1)
+		data -= 1;
+	return (data);
+}
 
 void	manage_time(t_Server *server)
 {
-  time_t	now;
-  struct tm	*tm;
+	time_t	now;
+	struct tm	*tm;
 
+	struct timeval tvTime;
+
+	gettimeofday(&tvTime, NULL);
+
+	int iTotal_seconds = tvTime.tv_sec;
+	struct tm *ptm = localtime((const time_t *) & iTotal_seconds);
+
+	int iHour = ptm->tm_hour;;
+	int iMinute = ptm->tm_min;
+	int iSecond = ptm->tm_sec;
+	int iMilliSec = tvTime.tv_usec / 1000;
+	int iMicroSec = tvTime.tv_usec;
+
+	double time_time = tvTime.tv_usec / 1000000;
+	double res_all = server->fake_time - time_time;
+
+	// printf("Time: %d %d %d %d %d\n", iHour, iMinute, iSecond, iMilliSec, iMicroSec);
+	// printf("localtime: %d\n", server->fake_time);
+	// printf("CALC : %lf %lf", server->fake_time, time_time);
+	double tmp;
+
+	tmp = (double)iMilliSec / 1000;
+	// printf("Time Elapsed: %lf\n",  tmp);
+
+	printf("comapring %lf and %lf\n", tmp, get_micro(server->tmp_time));
+	if (tmp < get_micro(server->tmp_time))
+		printf("New second\n");
+
+	server->tmp_time += (tmp - get_micro(server->tmp_time));
+
+	// server->fake_time += tmp;
   now = time(0);
   if ((tm = localtime (&now)) == NULL)
     printf ("Error extracting time, no changes\n");
@@ -25,8 +70,8 @@ void	manage_time(t_Server *server)
       server->fake_time = tm->tm_sec;
       server->time++;
       printf("Elapsed time since start : %ds\n", server->time);
-	  action_update_time(server);
-	  update_player_life(server);
+   	action_update_time(server);
+   	update_player_life(server);
     }
 }
 

@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:59:53 2017 hamza hammouche
-** Last update Thu Jun 29 10:55:08 2017 hamza hammouche
+** Last update Thu Jun 29 12:00:45 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SERVER_H_
@@ -34,7 +34,8 @@ typedef struct	s_Server
   double		f;
   int		nbClientMax;
   int		time;
-  int		fake_time;
+  double	fake_time;
+  double	tmp_time;
 }			t_Server;
 
 bool check_valide_team(char *team_name, t_Server *server,
