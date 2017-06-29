@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 14:29:52 2017 Martin Alais
-** Last update Thu Jun 29 14:40:21 2017 Martin Alais
+** Last update Thu Jun 29 16:01:42 2017 hamza hammouche
 */
 
 #include <poll.h>
@@ -75,6 +75,12 @@ void send_to_struct(t_Server *server, int fd)
 	}
 }
 
+void free_poll_fd(struct pollfd *poll_fd)
+{
+  if (poll_fd != NULL)
+    free(poll_fd);
+}
+
 void my_poll(t_Server *server)
 {
 	struct pollfd *poll_fd;
@@ -101,4 +107,5 @@ void my_poll(t_Server *server)
 			send_to_struct(server, poll_fd[nbr].fd);
 		nbr += 1;
 	}
+  free_poll_fd(poll_fd);
 }
