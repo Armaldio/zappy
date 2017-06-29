@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 29 14:41:11 2017 Martin Alais
+** Last update Thu Jun 29 14:57:45 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -24,6 +24,7 @@ void	event_endI(t_Server *server, t_Player *player);
 int parser_commande(int id, t_Server *server, char *data);
 void send_message_death(t_graphic *, int);
 void send_message_pie(t_graphic *, t_Player *p);
+void	send_message_bct_pos(t_Server *serv, t_graphic *head, int x, int y);
 void	send_message_position(t_graphic *, char *msg);
 void commande_forward(int id, t_Server *server, char *data);
 void commande_right(int id, t_Server *server, char *data);
