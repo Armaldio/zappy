@@ -34,7 +34,6 @@ QVariant EggTableModel::data(const QModelIndex &index, int role) const {
 
     const zappy::Egg * egg = _eggs[index.row()];
     const zappy::Player * player = _eggs[index.row()]->getPlayer();
-    const zappy::Team * team = player->getTeam();
 
     switch (role)
     {
@@ -52,7 +51,9 @@ QVariant EggTableModel::data(const QModelIndex &index, int role) const {
                     return egg->isLinked() ? QString("TRUE") : QString("FALSE");
                     break;
                 case TEAM:
-                    return team->teamName;
+                    if (player)
+                        return player->getTeam()->teamName;
+                    return QString("Unknown");
                     break;
                 case X:
                     return QString::number(egg->getPosition().x);

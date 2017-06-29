@@ -335,11 +335,14 @@ void zappy::Game::function_pdi(const std::string &buffer) {
 
     if (ss.fail())
         throw GameException("Pex error id: " + std::to_string(player_id));
+    if (_players.find(player_id) == _players.end())
+        throw GameException("Pex invalid player_id: " + std::to_string(player_id));
 
     Player *player = _players[player_id];
     Team *team = player->getTeam();
 
-    team->players.removeOne(player);
+    if (team)
+        team->players.removeOne(player);
     _vPlayers.removeOne(player);
     _players.remove(player_id);
     delete(player);
@@ -364,6 +367,7 @@ void zappy::Game::function_enw(const std::string &buffer) {
     ss >> egg_id >> player_id >> x >> y;
 
     if (ss.fail()) throw GameException("Enw error parsing");
+    if (_players.find(player_id) == _players.end()) throw GameException("Enw error player_id");
 
     Player *player = _players[player_id];
 

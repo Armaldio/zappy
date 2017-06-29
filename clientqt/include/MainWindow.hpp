@@ -25,7 +25,7 @@ public:
 
 protected:
     QString format_server = "<span style=\"display:block; font-size:8pt; font-weight:600; color:green;\">%1</span>";
-    QString format_client = "<span style=\"display:block; font-size:8pt; font-weight:600; color:yellow;\">%1</span>";
+    QString format_client = "<span style=\"display:block; font-size:8pt; font-weight:600; color:orange;\">%1</span>";
     QString format_error = "<span style=\"display:block; font-size:8pt; font-weight:600; color:red;\">%1</span>";
 
     void paintEvent(QPaintEvent *event) override;

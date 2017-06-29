@@ -56,7 +56,9 @@ QVariant PlayerTableModel::data(const QModelIndex &index, int role) const {
                     return QString("Unknown");
                     break;
                 case TEAM:
-                    return player->getTeam()->teamName;
+                    if (player->getTeam())
+                        return player->getTeam()->teamName;
+                    return QString("Unknown");
                     break;
                 case NOURRITURE:
                     return QString::number(inventaire->getNourriture());

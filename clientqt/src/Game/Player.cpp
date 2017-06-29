@@ -14,6 +14,7 @@ zappy::Player::Player(unsigned int id, int level, int orientation, unsigned int 
         _level(level),
         _orientation(orientation),
         _id(id),
+        _team(nullptr),
         animatedLoading(sf::microseconds(5))
 {
     _inventaire = new Inventaire();

@@ -126,8 +126,9 @@ void MainWindow::on_updated_log(const std::string *command) {
 
     game->setDebug(ui->debugcheckBox->checkState());
 
+    const QString qs_command(command->c_str());
+
     try {
-        const QString qs_command(command->c_str());
 
         if (game->fexecute(*command))
             ui->logsBrowser->append(format_server.arg(qs_command));
@@ -140,6 +141,7 @@ void MainWindow::on_updated_log(const std::string *command) {
         _eggTable.setElements(game->getEggs());
         _messageTable.setElements(game->getMessages());
     } catch (GameException &e) {
+        ui->logsBrowser->append(format_error.arg(qs_command));
         QMessageBox msgBox;
         QString message;
         message = "GameException: ";
