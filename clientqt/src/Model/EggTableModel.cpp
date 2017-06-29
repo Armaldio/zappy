@@ -47,8 +47,8 @@ QVariant EggTableModel::data(const QModelIndex &index, int role) const {
                 case ID_PLAYER:
                     return QString::number(player->getId());
                     break;
-                case PLAYER_LINKED:
-                    return egg->isLinked() ? QString("TRUE") : QString("FALSE");
+                case HATCH:
+                    return egg->isHatch() ? QString("TRUE") : QString("FALSE");
                     break;
                 case TEAM:
                     if (player)
@@ -79,8 +79,8 @@ QVariant EggTableModel::headerData(int section, Qt::Orientation orientation, int
             case ID_PLAYER:
                 return trUtf8("PLAYER_ID");
                 break;
-            case PLAYER_LINKED:
-                return trUtf8("LINKED");
+            case HATCH:
+                return trUtf8("HATCH");
                 break;
             case TEAM:
                 return trUtf8("TEAM");

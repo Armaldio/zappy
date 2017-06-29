@@ -22,7 +22,7 @@ public:
         ID,
         X,
         Y,
-        PLAYER_LINKED,
+        HATCH,
         ID_PLAYER,
         TEAM
     };

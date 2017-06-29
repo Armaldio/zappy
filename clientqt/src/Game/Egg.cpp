@@ -41,10 +41,10 @@ zappy::Egg::~Egg() {
 
 }
 
-const bool zappy::Egg::isLinked() const {
-    return _isLinked;
+const bool zappy::Egg::isHatch() const {
+    return _isHatch;
 }
 
-void zappy::Egg::setLinked(bool value) {
-    _isLinked = value;
+void zappy::Egg::setHatches(bool value) {
+    _isHatch = value;
 }

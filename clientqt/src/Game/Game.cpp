@@ -13,7 +13,7 @@
 #include <include/Game/GameExeception.hpp>
 #include "include/Game/Game.hpp"
 
-zappy::Game::Game() : _heigth(0), _width(0), _isMapped(false), _serverTime(100), _isFail(false) {
+zappy::Game::Game() : _heigth(0), _width(0), _isMapped(false), _serverTime(100), _isFail(false), _uniquidTeam(0) {
     _functions.insert(std::make_pair("msz", std::bind(&zappy::Game::function_msz, this, std::placeholders::_1)));
     _functions.insert(std::make_pair("tna", std::bind(&zappy::Game::function_tna, this, std::placeholders::_1)));
     _functions.insert(std::make_pair("pnw", std::bind(&zappy::Game::function_pnw, this, std::placeholders::_1)));
@@ -73,6 +73,7 @@ void zappy::Game::destroyMap() {
     _heigth = 0;
     _width = 0;
     _isMapped = false;
+    _uniquidTeam = 0;
 }
 
 void zappy::Game::function_msz(const std::string &buffer) {
@@ -136,6 +137,8 @@ void zappy::Game::function_bct(const std::string &buffer) {
 
 void zappy::Game::function_tna(const std::string &name) {
     Team *team = new Team();
+    team->uniqid = _uniquidTeam;
+    _uniquidTeam++;
     team->teamName = name.c_str();
     _vTeams.push_back(team);
     _teams[name] = team;
@@ -162,6 +165,9 @@ void zappy::Game::function_pnw(const std::string &buffer) {
     orientation--;
 
     Player *player = new Player(player_id, level, orientation % 4, x, y);
+
+    if (_teams.find(teamName) == _teams.end()) throw GameException("Pnw error invalid teamName");
+
     Team *team = _teams[teamName];
 
     // add new player
@@ -394,12 +400,7 @@ void zappy::Game::function_eht(const std::string &buffer) {
 
     if (_eggs.find(egg_id) == _eggs.end()) throw GameException("Eht error egg_id");
 
-    Egg *egg = _eggs[egg_id];
-    _eggs.remove(egg_id);
-    _vEggs.removeOne(egg);
-    delete(egg);
-
-    std::cout << "called::function_eht" << std::endl;
+    _eggs[egg_id]->setHatches(true);
 }
 
 /**
@@ -419,7 +420,10 @@ void zappy::Game::function_ebo(const std::string &buffer) {
     if (ss.fail()) throw GameException("Ebo error parsing");
     if (_eggs.find(egg_id) == _eggs.end()) throw GameException("Ebo error egg_id: " + std::to_string(egg_id));
 
-    _eggs[egg_id]->setLinked(true);
+    Egg *egg = _eggs[egg_id];
+    _eggs.remove(egg_id);
+    _vEggs.removeOne(egg);
+    delete(egg);
 }
 
 void zappy::Game::function_sgt(const std::string &buffer) {
