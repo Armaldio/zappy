@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 10:39:15 2017 Martin Alais
-** Last update Fri Jun 23 19:30:57 2017 Martin Alais
+** Last update Thu Jun 29 10:58:26 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -47,5 +47,5 @@ void commande_sst(t_graphic *player, t_Server *server, char *data2)
 	}
 	server->f = new_time;
 	commande_sgt(player, server, data2);
-	printf("server time update to %d\n", server->f);
+	printf("server time update to %f\n", server->f);
 }

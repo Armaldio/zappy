@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:01:38 2017 Martin Alais
-** Last update Sat Jun 24 19:00:08 2017 hamza hammouche
+** Last update Thu Jun 29 10:57:54 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -28,7 +28,7 @@ void commande_sgt(t_graphic *player, t_Server *server, char *data)
 
 	(void) data;
 	memset(data_send, '\0', 100);
-	sprintf(data_send, "sgt %d\n", server->f);
+	sprintf(data_send, "sgt %f\n", server->f);
 	send_message(player->fd, data_send);
 }
 

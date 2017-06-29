@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 14:29:52 2017 Martin Alais
-** Last update Tue Jun 27 18:29:14 2017 hamza hammouche
+** Last update Thu Jun 29 10:58:46 2017 hamza hammouche
 */
 
 #include <poll.h>
@@ -105,7 +105,7 @@ void my_poll(t_Server *server)
       i++;
     }
 	complete_struct(server, poll_fd);
-	poll(poll_fd, max, 500);
+	poll(poll_fd, max, 50);
 	while (nbr < max)
 	{
 		if (poll_fd[nbr].revents == POLLIN)
