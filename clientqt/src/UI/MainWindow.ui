@@ -202,7 +202,6 @@ p, li { white-space: pre-wrap; }
           <property name="lineWidth">
            <number>1</number>
           </property>
-          <zorder>tabWidget</zorder>
          </widget>
         </item>
        </layout>
@@ -213,7 +212,7 @@ p, li { white-space: pre-wrap; }
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>0</number>
         </property>
         <property name="documentMode">
          <bool>false</bool>
@@ -312,20 +311,6 @@ p, li { white-space: pre-wrap; }
               <widget class="QCheckBox" name="debugcheckBox">
                <property name="text">
                 <string>Debug Mode</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="hideBoardcheckBox">
-               <property name="text">
-                <string>Hide Board</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="audiocheckBox">
-               <property name="text">
-                <string>Audio Mode</string>
                </property>
               </widget>
              </item>

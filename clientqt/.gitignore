@@ -52,3 +52,4 @@ CTestTestfile.cmake
 cmake-build-debug
 *.user
 *.autosave
+build

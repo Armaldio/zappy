@@ -18,6 +18,7 @@
 namespace zappy {
     class Egg {
     private:
+        std::string _team;
         sf::Vector2f _pos;
         unsigned int _id;
         Player *_player;
@@ -47,6 +48,8 @@ namespace zappy {
         const bool isHatch() const;
 
         void setHatches(bool value);
+
+        const std::string &getTeamName() const;
 
     };
 }

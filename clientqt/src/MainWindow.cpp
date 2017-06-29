@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->eggsTable->setModel(&_eggTable);
     ui->tilesTable->setModel(&_tileTable);
     ui->messagesTable->setModel(&_messageTable);
+    ui->tabWidget->setCurrentIndex(0);
 
     zappy::SceneManager::get_instance_ptr()->loadAllRessources();
     connect(this, SIGNAL(logIsupdated(const std::string *)), this, SLOT(on_updated_log(const std::string *)));

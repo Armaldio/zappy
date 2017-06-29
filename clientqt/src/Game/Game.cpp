@@ -271,7 +271,7 @@ void zappy::Game::function_pin(const std::string &buffer) {
     for (int i = 0; i < 7; ++i) {
         ss >> quantity;
         if (ss.fail() || quantity < 0)
-            throw GameException("function_bct invalid quantity " + std::to_string(quantity) + " at id: " + std::to_string(i));
+            throw GameException("function_pin invalid quantity " + std::to_string(quantity) + " at id: " + std::to_string(i));
         inventaire->setMaterial((const Inventaire::TypeMaterial) i, quantity);
     }
 }
@@ -373,9 +373,11 @@ void zappy::Game::function_enw(const std::string &buffer) {
     ss >> egg_id >> player_id >> x >> y;
 
     if (ss.fail()) throw GameException("Enw error parsing");
-    if (_players.find(player_id) == _players.end()) throw GameException("Enw error player_id");
 
-    Player *player = _players[player_id];
+    Player *player = nullptr;
+
+    if (_players.find(player_id) == _players.end())
+        player = _players[player_id];
 
     Egg *egg = new Egg(egg_id, player, x, y);
     _vEggs.push_back(egg);

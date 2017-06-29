@@ -25,16 +25,11 @@ void zappy::Egg::setId(unsigned int _id) {
     Egg::_id = _id;
 }
 
-zappy::Player * zappy::Egg::getPlayer() const {
-    return _player;
-}
-
-void zappy::Egg::setPlayer(Player *player) {
-    Egg::_player = player;
-}
-
 zappy::Egg::Egg(unsigned int id, Player * player, int x, int y) : _pos(x, y), _id(id), _player(player) {
-
+    if (player)
+        _team = player->getTeam()->teamName.toStdString();
+    else
+        _team = "Unknown";
 }
 
 zappy::Egg::~Egg() {
@@ -47,4 +42,16 @@ const bool zappy::Egg::isHatch() const {
 
 void zappy::Egg::setHatches(bool value) {
     _isHatch = value;
+}
+
+zappy::Player *zappy::Egg::getPlayer() const {
+    return _player;
+}
+
+void zappy::Egg::setPlayer(zappy::Player *player) {
+    _player = player;
+}
+
+const std::string &zappy::Egg::getTeamName() const {
+    return _team;
 }
