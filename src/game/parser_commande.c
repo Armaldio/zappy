@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 29 12:51:38 2017 Martin Alais
+** Last update Thu Jun 29 15:02:39 2017 Martin Alais
 */
 
 #include "Graphic.h"
@@ -65,7 +65,7 @@ int parser_commande(int id, t_Server *serv, char *data)
   if (data == NULL)
     return (0);
   a = 0;
-  printf("Starting to execute commande: %s\n", data);
+  add_rand_food(serv);
   while (mcommand[a])
     {
 		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)

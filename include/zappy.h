@@ -116,5 +116,6 @@ int get_nbr_del(char *str, char del);
 void free_tab(char **tab);
 void str_tab_2(char **res, char *str, char del);
 void str_to_word_tab(char *str, int, t_Player *tmp3, t_Server *server);
+void add_rand_food(t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */
