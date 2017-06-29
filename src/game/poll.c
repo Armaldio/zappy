@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 14:29:52 2017 Martin Alais
-** Last update Thu Jun 29 14:34:11 2017 Martin Alais
+** Last update Thu Jun 29 14:40:21 2017 Martin Alais
 */
 
 #include <poll.h>
@@ -68,7 +68,7 @@ void send_to_struct(t_Server *server, int fd)
 		if (tmp3->fd == fd && tmp3->controlled == true)
 		{
 			a = recv(tmp3->fd, data_recv, 4095, MSG_DONTWAIT);
-			str_to_word_tab(data_recv, '\n', tmp3, server);
+			str_to_word_tab(data_recv, a, tmp3, server);
 			return ;
 		}
 		tmp3 = tmp3->next;

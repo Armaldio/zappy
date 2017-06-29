@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 29 14:36:56 2017 Martin Alais
+** Last update Thu Jun 29 14:41:11 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -114,6 +114,6 @@ int poll_nbr_fd(t_Server *server);
 int get_nbr_del(char *str, char del);
 void free_tab(char **tab);
 void str_tab_2(char **res, char *str, char del);
-void str_to_word_tab(char *str, char del, t_Player *tmp3, t_Server *server);
+void str_to_word_tab(char *str, int, t_Player *tmp3, t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */

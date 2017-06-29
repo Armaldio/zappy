@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 16:06:09 2017 Martin Alais
-** Last update Thu Jun 29 14:33:12 2017 Martin Alais
+** Last update Thu Jun 29 14:40:48 2017 Martin Alais
 */
 
 #include <poll.h>
@@ -90,14 +90,14 @@ bool send_for_undefine(t_Server *server, int fd, char *data_recv)
 	return (false);
 }
 
-void str_to_word_tab(char *str, char del, t_Player *tmp3, t_Server *server)
+void str_to_word_tab(char *str, int status, t_Player *tmp3, t_Server *server)
 {
 	char **res;
 	int nbr_ite;
 	int a;
 
 	a = 0;
-	nbr_ite = get_nbr_del(str, del);
+	nbr_ite = get_nbr_del(str, '\n');
 	res = my_malloc(sizeof(char *) * (nbr_ite + 1));
 	while (a < nbr_ite)
 	{
@@ -106,12 +106,12 @@ void str_to_word_tab(char *str, char del, t_Player *tmp3, t_Server *server)
 		a += 1;
 	}
 	res[a] = NULL;
-	str_tab_2(res, str, del);
+	str_tab_2(res, str, '\n');
 	a = 0;
 	while (res[a])
 	{
 		if (res[a][0] != '\0')
-			add_to_line(tmp3, res[a], a, server);
+			add_to_line(tmp3, res[a], status, server);
 		a += 1;
 	}
 	free_tab(res);
