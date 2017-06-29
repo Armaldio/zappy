@@ -5,20 +5,18 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 17:33:43 2017 Martin Alais
-** Last update Wed Jun 28 15:37:20 2017 Martin Alais
+** Last update Thu Jun 29 10:48:06 2017 Martin Alais
 */
 
 #include "zappy.h"
 
 void init_case2(t_Map *tmp)
 {
-	tmp->sibur = 1;
-    // if (rand() % 3 == 0)
-    //   tmp->sibur = 1;
-    tmp->thystane = 0;
-    // if (rand() % 3 == 0)
-    //   tmp->thystane = 1;
+	tmp->sibur = 0;
+    if (rand() % 3 == 0)
+      tmp->sibur = 1;
+    tmp->thystane = 1;
+    if (rand() % 10 == 0)
+      tmp->thystane = 1;
     tmp->food = 0;
-    // if (rand() % 2 == 0)
-    //   tmp->food = 1;
 }
