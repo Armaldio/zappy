@@ -39,12 +39,15 @@ namespace zappy {
         int _lastDiffX;
         int _lastDiffY;
 
+        sf::Vector2f _sizePixelsMap;
+
         sf::Vector2f _currentCenter;
         sf::Vector2f _targetCenter;
         float _targetZoom;
         float _currentZoom;
         float _previousZoom;
         bool _zooming;
+        bool _autoCenter;
 
         float _lerpFactor;
 
@@ -65,6 +68,8 @@ namespace zappy {
         void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom);
 
         float lerp(float value, float start, float end);
+
+        void setAutoCenter(bool value);
     };
 };
 

@@ -525,3 +525,11 @@ bool zappy::Game::isDebug() const {
 void zappy::Game::setDebug(bool value) {
     _isDebug = value;
 }
+
+unsigned int zappy::Game::getWidth() const {
+    return _width;
+}
+
+unsigned int zappy::Game::getHeigth() const {
+    return _heigth;
+}

@@ -17,7 +17,7 @@
 #include "include/Game/Animation.hpp"
 
 zappy::GameScene::GameScene(sf::RenderWindow *renderWindow, const std::string &name)
-        : Scene(renderWindow, name), /* _map(nullptr), */
+        : Scene(renderWindow, name), _autoCenter(false), /* _map(nullptr), */
           _lastX(0), _lastY(0), _lastDiffX(0), _lastDiffY(0), _targetZoom(0),
           _currentZoom(0), _previousZoom(0), _zooming(false), _lerpFactor(0.1f) {
     _ratio.x = 0;
@@ -167,6 +167,16 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
     const int offsetMat = 5;
     const int matByline = 4;
 
+    _sizePixelsMap.x = (_ratio.x + offsetTile) * _game->getWidth();
+    _sizePixelsMap.y = (_ratio.y + offsetTile) * _game->getHeigth();
+
+    if (_autoCenter) {
+        _autoCenter = false;
+        _cameraView.setSize(_sizePixelsMap.x * 1.1f, _sizePixelsMap.y * 1.1f);
+        _cameraView.setCenter(_sizePixelsMap.x / 2, _sizePixelsMap.y / 2);
+        _targetCenter = _cameraView.getCenter();
+    }
+
     for (auto block : blocks) {
         const sf::Vector2f pos(((block->getPosition().x) * _ratio.x + offsetTile * block->getPosition().x),
                                ((block->getPosition().y) * _ratio.y + offsetTile * block->getPosition().y));
@@ -270,4 +280,8 @@ void zappy::GameScene::resize(unsigned int width, unsigned int height) {
 
 float zappy::GameScene::lerp(float value, float start, float end) {
     return start + (end - start) * value;
+}
+
+void zappy::GameScene::setAutoCenter(bool value) {
+    _autoCenter = value;
 }

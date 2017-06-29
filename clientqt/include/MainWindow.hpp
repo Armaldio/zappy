@@ -52,6 +52,8 @@ private slots:
 
     void on_hideBoardcheckBox_stateChanged(int arg1);
 
+    void on_autoCenterButton_clicked();
+
 signals:
     void logIsupdated(const std::string *);
 

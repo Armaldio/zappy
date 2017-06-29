@@ -85,7 +85,10 @@ void MainWindow::on_connectionButton_pressed()
         _runnerThread = new std::thread(&MainWindow::_runner, this);
         sceneManager->loadAllRessources();
         sceneManager->runScene("gameScene");
-
+        if (sceneManager->getCurrentScene()->getName() == "gameScene") {
+            zappy::GameScene * gameScene = static_cast<zappy::GameScene *>(sceneManager->getCurrentScene());
+            gameScene->setAutoCenter(true);
+        }
     }
     else
     {
@@ -196,4 +199,14 @@ void MainWindow::on_audiocheckBox_stateChanged(int arg1)
 void MainWindow::on_hideBoardcheckBox_stateChanged(int arg1)
 {
 
+}
+
+void MainWindow::on_autoCenterButton_clicked()
+{
+    auto sceneManager = zappy::SceneManager::get_instance_ptr();
+
+    if (sceneManager->getCurrentScene()->getName() == "gameScene") {
+        zappy::GameScene * gameScene = static_cast<zappy::GameScene *>(sceneManager->getCurrentScene());
+        gameScene->setAutoCenter(true);
+    }
 }

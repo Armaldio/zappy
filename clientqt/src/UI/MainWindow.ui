@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="3,1">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="3,0">
       <item>
        <layout class="QGridLayout" name="gridLayout_2" columnstretch="3,1">
         <property name="sizeConstraint">
@@ -202,6 +202,7 @@ p, li { white-space: pre-wrap; }
           <property name="lineWidth">
            <number>1</number>
           </property>
+          <zorder>tabWidget</zorder>
          </widget>
         </item>
        </layout>
@@ -302,24 +303,52 @@ p, li { white-space: pre-wrap; }
          </attribute>
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
-           <widget class="QCheckBox" name="debugcheckBox">
-            <property name="text">
-             <string>Debug Mode</string>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Mode</string>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QCheckBox" name="debugcheckBox">
+               <property name="text">
+                <string>Debug Mode</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="hideBoardcheckBox">
+               <property name="text">
+                <string>Hide Board</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="audiocheckBox">
+               <property name="text">
+                <string>Audio Mode</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QCheckBox" name="audiocheckBox">
-            <property name="text">
-             <string>Audio Mode</string>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>View</string>
             </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="hideBoardcheckBox">
-            <property name="text">
-             <string>Hide Board</string>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QPushButton" name="autoCenterButton">
+               <property name="text">
+                <string>AutoCenter</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>

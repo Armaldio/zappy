@@ -41,6 +41,10 @@ namespace zappy {
         unsigned int _uniquidTeam;
         bool _isMapped;
         bool _isDebug;
+    public:
+        unsigned int getWidth() const;
+
+        unsigned int getHeigth() const;
 
     private:
         bool _isFail;
