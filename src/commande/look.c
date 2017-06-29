@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:55:27 2017 loic1.doyen@epitech.eu
-** Last update Tue Jun 27 13:45:02 2017 loic1.doyen@epitech.eu
+** Last update Thu Jun 29 15:23:54 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -38,7 +38,7 @@ void		t_backward(t_Player *tmp, int i, int y, t_Server *server)
   it = 0;
   while (it < 9)
     {
-      if (it != 2 && it != 3)
+      if (it != 1 && it != 2)
 	{
 	  if (current->tab[it] >= 1)
 	    strcat(message, to_print[it]);
@@ -66,7 +66,7 @@ void		t_forward(t_Player *tmp, int i, int y, t_Server *server)
   it = 0;
   while (it < 9)
     {
-      if (it != 2 && it != 3)
+      if (it != 1 && it != 2)
 	{
 	  if (current->tab[it] >= 1)
 	    strcat(message, to_print[it]);
@@ -89,7 +89,7 @@ void		t_right(t_Player *tmp, int i, int y, t_Server *server)
   it = 0;
   while (it < 9)
     {
-      if (it != 2 && it != 3)
+      if (it != 1 && it != 2)
 	{
 	  if (current->tab[it] >= 1)
 	    strcat(message, to_print[it]);
@@ -117,7 +117,7 @@ void		t_left(t_Player *tmp, int i, int y, t_Server *server)
   it = 0;
   while (it < 9)
     {
-      if (it != 2 && it != 3)
+      if (it != 1 && it != 2)
 	{
 	  if (current->tab[it] >= 1)
 	    strcat(message, to_print[it]);
