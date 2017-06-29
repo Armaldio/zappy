@@ -5,11 +5,29 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Mon Jun 26 15:29:45 2017 Martin Alais
+** Last update Thu Jun 29 10:50:52 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Event.h"
+
+void spawn_food(t_Server *server)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < server->world->width)
+	{
+		y = 0;
+		while (y < server->world->height)
+		{
+			server->world->map[x][y]->food = rand() % 3;
+			y += 1;
+		}
+		x += 1;
+	}
+}
 
 void check_data_undefine(int id, char *data_recv,
 	int a, t_Server *server)
@@ -50,6 +68,7 @@ void undefined_to_player(t_Server *server, t_undefined *undefine, t_team *team)
 	my_add_player(server, undefine->fd);
 	tmp = get_last_player(server);
 	printf("Undefine %d become Player %d !\n", undefine->id, tmp->id);
+	spawn_food(server);
 	get_player_team(tmp, team->name, server);
 	delete_undefine(server, undefine->id);
 	event_new_player(server, tmp);

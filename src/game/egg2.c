@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 15:12:52 2017 Martin Alais
-** Last update Sat Jun 24 15:13:20 2017 Martin Alais
+** Last update Thu Jun 29 11:11:00 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -57,6 +57,7 @@ int my_add_eggs(t_Server *server, t_Player *player)
 	eggs_id = get_eggs_id(server);
 	new = malloc(sizeof(t_Player));
 	my_init_eggs(new, eggs_id, server, player->id);
+	new->teamId = player->teamId;
 	last = server->list_player;
 	while (last->next != NULL)
 		last = last->next;

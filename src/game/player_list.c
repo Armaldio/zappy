@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Wed Jun 28 14:28:08 2017 hamza hammouche
+** Last update Thu Jun 29 10:52:45 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -22,7 +22,7 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->pos.x = 0;
   new->pos.y = 0;
   new->gaze = UP;
-  new->level = 2;
+  new->level = 1;
   init_inventaire(new, server);
   init_action(new);
   ini_waiting_line(new);
