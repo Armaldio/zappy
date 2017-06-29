@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 29 11:36:05 2017 Martin Alais
+** Last update Thu Jun 29 12:13:26 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -42,11 +42,11 @@ int parser_freq(t_Server *server, char **argv, int a);
 void init_action(t_Player *player);
 void start_action(t_Server *server, t_Player *player, int action_time);
 void check_action_status(t_Server *server);
-void action_update_time(t_Server *server);
+void action_update_time(t_Server *server, double elapsed_time);
 char *get_data_from_line(t_Player *player);
 int add_data_in_line(t_Player * player, char *order);
 void ini_waiting_line(t_Player *player);
-void update_player_life(t_Server *server);
+void update_player_life(t_Server *server, double elapsed_time);
 void check_player_death(t_Server *server);
 void my_add_player(t_Server *server, int fd);
 void	event_endI(t_Server *server, t_Player *player);

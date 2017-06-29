@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Thu Jun 29 12:09:32 2017 Martin Alais
+** Last update Thu Jun 29 12:31:46 2017 Martin Alais
 */
 
 #include <time.h>
@@ -55,24 +55,26 @@ void	manage_time(t_Server *server)
 	tmp = (double)iMilliSec / 1000;
 	// printf("Time Elapsed: %lf\n",  tmp);
 
-	printf("comapring %lf and %lf\n", tmp, get_micro(server->tmp_time));
+	// printf("comapring %lf and %lf\n", tmp, get_micro(server->tmp_time));
 	if (tmp < get_micro(server->tmp_time))
 		printf("New second\n");
 
+		action_update_time(server, (tmp - get_micro(server->tmp_time)));
+		update_player_life(server, (tmp - get_micro(server->tmp_time)));
 	server->tmp_time += (tmp - get_micro(server->tmp_time));
 
 	// server->fake_time += tmp;
-  now = time(0);
-  if ((tm = localtime (&now)) == NULL)
-    printf ("Error extracting time, no changes\n");
-  if (tm->tm_sec != server->fake_time)
-    {
-      server->fake_time = tm->tm_sec;
-      server->time++;
-      printf("Elapsed time since start : %ds\n", server->time);
-   	action_update_time(server);
-   	update_player_life(server);
-    }
+  // now = time(0);
+  // if ((tm = localtime (&now)) == NULL)
+  //   printf ("Error extracting time, no changes\n");
+  // if (tm->tm_sec != server->fake_time)
+  //   {
+  //     server->fake_time = tm->tm_sec;
+  //     server->time++;
+  //     printf("Elapsed time since start : %ds\n", server->time);
+  //
+
+    // }
 }
 
 void check_order_player(t_Server *server)

@@ -5,12 +5,12 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Tue Jun 27 20:37:53 2017 hamza hammouche
+** Last update Thu Jun 29 12:13:14 2017 Martin Alais
 */
 
 #include "zappy.h"
 
-void		update_player_life(t_Server *server)
+void		update_player_life(t_Server *server, double elapsed_time)
 {
   t_Player	*tmp;
 
@@ -18,7 +18,7 @@ void		update_player_life(t_Server *server)
   while (tmp)
     {
       if (!tmp->isEgg && tmp->waitingTeam == false)
-	tmp->life_time += 1;
+	tmp->life_time += elapsed_time;
       tmp = tmp->next;
     }
 }
