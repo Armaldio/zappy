@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 28 11:16:34 2017 Martin Alais
-** Last update Wed Jun 28 20:49:05 2017 Martin Alais
+** Last update Thu Jun 29 15:51:37 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -40,7 +40,7 @@ void valide_level5(t_Server *server, t_Player *player)
 	server->world->map[player->pos.x][player->pos.y]->mendiane = 0;
 	player->level = 6;
 	printf("Player %d reach level 6!\n", player->id);
-	stok_answer(player, "ok\n");
+	stok_answer(player, "Current level: 6\n");
 	while (a < 3)
 	{
 		player2 = get_Player(player->action->friend_list[a],
