@@ -5,29 +5,43 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Tue Jun 27 19:09:44 2017 Martin Alais
+** Last update Thu Jun 29 12:44:28 2017 Martin Alais
 */
 
 #include <time.h>
 #include "zappy.h"
 #include "Server.h"
+#include <sys/time.h>
+
+long getMicrotime(){
+    struct timeval currentTime;
+    gettimeofday(&currentTime, NULL);
+    return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
+}
+
+double get_micro(double data)
+{
+	while (data > 1)
+		data -= 1;
+	return (data);
+}
 
 void	manage_time(t_Server *server)
 {
-  time_t	now;
-  struct tm	*tm;
+	struct timeval tvTime;
 
-  now = time(0);
-  if ((tm = localtime (&now)) == NULL)
-    printf ("Error extracting time, no changes\n");
-  if (tm->tm_sec != server->fake_time)
-    {
-      server->fake_time = tm->tm_sec;
-      server->time++;
-      printf("Elapsed time since start : %ds\n", server->time);
-	  action_update_time(server);
-	  update_player_life(server);
-    }
+	gettimeofday(&tvTime, NULL);
+
+	int iMilliSec = tvTime.tv_usec / 1000;
+	double tmp;
+
+	tmp = (double)iMilliSec / 1000;
+	if (tmp < get_micro(server->tmp_time))
+		printf("New second\n");
+
+	action_update_time(server, (tmp - get_micro(server->tmp_time)));
+	update_player_life(server, (tmp - get_micro(server->tmp_time)));
+	server->tmp_time += (tmp - get_micro(server->tmp_time));
 }
 
 void check_order_player(t_Server *server)

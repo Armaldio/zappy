@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Wed Jun 28 21:17:28 2017 Martin Alais
+** Last update Thu Jun 29 14:41:11 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -13,6 +13,8 @@
 
 #include "Team.h"
 #include "mouvement.h"
+#include <sys/time.h>
+#include <poll.h>
 
 # define DEBUG 0
 
@@ -41,11 +43,11 @@ int parser_freq(t_Server *server, char **argv, int a);
 void init_action(t_Player *player);
 void start_action(t_Server *server, t_Player *player, int action_time);
 void check_action_status(t_Server *server);
-void action_update_time(t_Server *server);
+void action_update_time(t_Server *server, double elapsed_time);
 char *get_data_from_line(t_Player *player);
 int add_data_in_line(t_Player * player, char *order);
 void ini_waiting_line(t_Player *player);
-void update_player_life(t_Server *server);
+void update_player_life(t_Server *server, double elapsed_time);
 void check_player_death(t_Server *server);
 void my_add_player(t_Server *server, int fd);
 void	event_endI(t_Server *server, t_Player *player);
@@ -107,5 +109,11 @@ t_Player **get_list_level_4(t_Server *server, t_Player *player);
 bool error_level_4(t_Player *player, t_Server *server);
 void clean_player4(t_Player *player);
 bool incan_4bis(t_Server *server, t_Player *player);
+void complete_struct(t_Server *server, struct pollfd *poll_fd);
+int poll_nbr_fd(t_Server *server);
+int get_nbr_del(char *str, char del);
+void free_tab(char **tab);
+void str_tab_2(char **res, char *str, char del);
+void str_to_word_tab(char *str, int, t_Player *tmp3, t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Tue Jun 27 16:50:08 2017 Martin Alais
+** Last update Thu Jun 29 14:24:23 2017 Martin Alais
 */
 
 #include <time.h>
@@ -51,7 +51,7 @@ void start_action(t_Server *server, t_Player *player, int action_time)
 	now = time(0);
 	if ((tm = localtime (&now)) == NULL)
 		printf ("Error extracting time, no changes\n");
-	player->action->start_time = tm->tm_sec;
+	player->action->start_time = server->tmp_time;
 	player->action->end_time = player->action->start_time
 	+ (action_time / server->f);
 	player->action->is_working = true;
@@ -88,15 +88,19 @@ void check_action_status(t_Server *server)
 	}
 }
 
-void action_update_time(t_Server *server)
+void action_update_time(t_Server *server, double elapsed_time)
 {
 	t_Player *tmp;
 
 	tmp = server->list_player;
+	if (elapsed_time < 0)
+		return;
 	while (tmp)
 	{
 		if (tmp->action->is_working == true)
-			tmp->action->start_time += 1;
+		{
+			tmp->action->start_time += elapsed_time;
+		}
 		tmp = tmp->next;
 	}
 }

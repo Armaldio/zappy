@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:23:23 2017 Martin Alais
-** Last update Fri Jun 23 14:16:23 2017 Martin Alais
+** Last update Thu Jun 29 10:52:53 2017 hamza hammouche
 */
 
 #include "basic_data.h"
@@ -30,7 +30,7 @@ void *my_malloc(size_t size)
 	return (ptr);
 }
 
-int my_safe_div(int nbr1, int nbr2)
+double my_safe_div(double nbr1, double nbr2)
 {
 	if (nbr2 == 0)
 		return (nbr1);

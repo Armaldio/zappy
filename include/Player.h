@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Wed Jun 28 13:41:44 2017 Martin Alais
+** Last update Thu Jun 29 10:54:59 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -25,8 +25,8 @@ typedef struct	s_waiting_line
 
 typedef struct	s_action
 {
-	int start_time;
-	int end_time;
+	double start_time;
+	double end_time;
 	bool is_working;
 	bool is_leveling;
 	int *friend_list;
@@ -48,8 +48,8 @@ typedef struct	s_Inventaire
 typedef struct		s_Player
 {
   t_Position		pos;
-  int				death_time;
-  int				life_time;
+  double				death_time;
+  double				life_time;
   int				level;
   int				teamId;
   bool	isGraphic;
