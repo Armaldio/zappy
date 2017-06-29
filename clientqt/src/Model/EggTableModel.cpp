@@ -51,9 +51,7 @@ QVariant EggTableModel::data(const QModelIndex &index, int role) const {
                     return egg->isHatch() ? QString("TRUE") : QString("FALSE");
                     break;
                 case TEAM:
-                    if (player)
-                        return player->getTeam()->teamName;
-                    return QString("Unknown");
+                    return QString(egg->getTeamName().c_str());
                     break;
                 case X:
                     return QString::number(egg->getPosition().x);
