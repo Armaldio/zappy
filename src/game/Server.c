@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Wed Jun 28 13:43:34 2017 Martin Alais
+** Last update Thu Jun 29 11:08:13 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -72,7 +72,7 @@ set_socket_statue(server->socket->fd, 1);
 	  p->controlled = true;
 	  p->fd = a;
 	  event_conection_for_eggs(server, p);
-	  p->id = get_new_id(server);
+	  p->id = get_new_id(server) + 1;
 	  event_new_player(server, p);
 	  return ;
 	}
