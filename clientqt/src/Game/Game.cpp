@@ -509,3 +509,11 @@ QVector<zappy::Tile *> &zappy::Game::getTiles() {
 QStringList &zappy::Game::getMessages() {
     return _vMessages;
 }
+
+bool zappy::Game::isDebug() const {
+    return _isDebug;
+}
+
+void zappy::Game::setDebug(bool value) {
+    _isDebug = value;
+}

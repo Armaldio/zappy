@@ -39,6 +39,7 @@ namespace zappy {
         unsigned int _heigth;
         unsigned int _serverTime;
         bool _isMapped;
+        bool _isDebug;
 
     private:
         bool _isFail;
@@ -115,6 +116,10 @@ namespace zappy {
         bool isMapped() const;
 
         bool isFail() const;
+
+        bool isDebug() const;
+
+        void setDebug(bool value);
 
     };
 }

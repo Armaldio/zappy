@@ -172,12 +172,12 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
         block->rectangleShape.setPosition(pos);
         block->rectangleShape.setSize(_ratio);
 
-        if (block->isHilghlighted())
+        if (block->isHilghlighted() && _game->isDebug())
             block->rectangleShape.setFillColor(sf::Color::Red);
         else
             block->rectangleShape.setFillColor(sf::Color::White);
 
-        if (block->isBusy())
+        if (block->isBusy() && _game->isDebug())
             block->rectangleShape.setTexture(&_tileTextures[1]);
         else
             block->rectangleShape.setTexture(&_tileTextures[3]);

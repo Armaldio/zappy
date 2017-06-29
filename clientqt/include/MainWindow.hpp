@@ -44,6 +44,14 @@ private slots:
 
     void on_changeTimeButton_pressed();
 
+    void on_saveLogButton_clicked();
+
+    void on_debugcheckBox_stateChanged(int arg1);
+
+    void on_audiocheckBox_stateChanged(int arg1);
+
+    void on_hideBoardcheckBox_stateChanged(int arg1);
+
 signals:
     void logIsupdated(const std::string *);
 

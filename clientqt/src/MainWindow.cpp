@@ -7,6 +7,7 @@
 #include <include/Scene/GameScene.hpp>
 #include <include/Game/GameExeception.hpp>
 #include <QtWidgets/QMessageBox>
+#include <QtCore/QPropertyAnimation>
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 
@@ -123,6 +124,8 @@ void MainWindow::on_updated_log(const std::string *command) {
 
     auto game = zappy::Game::get_instance_ptr();
 
+    game->setDebug(ui->debugcheckBox->checkState());
+
     try {
         const QString qs_command(command->c_str());
 
@@ -169,4 +172,26 @@ void MainWindow::on_changeTimeButton_pressed()
 
 void MainWindow::initLogsBrowser() {
     ui->logsBrowser->clear();
+}
+
+void MainWindow::on_saveLogButton_clicked()
+{
+
+}
+
+void MainWindow::on_debugcheckBox_stateChanged(int arg1)
+{
+    auto game = zappy::Game::get_instance_ptr();
+
+    game->setDebug(ui->debugcheckBox->checkState());
+}
+
+void MainWindow::on_audiocheckBox_stateChanged(int arg1)
+{
+
+}
+
+void MainWindow::on_hideBoardcheckBox_stateChanged(int arg1)
+{
+
 }
