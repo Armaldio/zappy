@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 10:39:15 2017 Martin Alais
-** Last update Thu Jun 29 10:58:26 2017 hamza hammouche
+** Last update Fri Jun 30 16:32:42 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -35,7 +35,7 @@ void commande_sst(t_graphic *player, t_Server *server, char *data2)
 	new_time = atoi(data2);
 	if (new_time <= 1)
 	{
-		send_message(player->fd, "sbp\n");
+		send_message_graphic(player, "sbp\n");
 		return ;
 	}
 	while (tmp)

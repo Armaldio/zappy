@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 18:05:16 2017 Martin Alais
-** Last update Fri Jun 30 09:36:30 2017 hamza hammouche
+** Last update Fri Jun 30 16:32:18 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,14 +21,14 @@ void commande_ppo(t_graphic *player, t_Server *server, char *data2)
 	id = atoi(data2);
 	if (id <= 0)
 	{
-		send_message(player->fd, "sbp\n");
+		send_message_graphic(player, "sbp\n");
 		return ;
 	}
 	tmp = get_Player(id, server->list_player);
 	memset(data, '\0', 100);
 	sprintf(data, "ppo %d %d %d %d\n", tmp->id,
 	tmp->pos.x, tmp->pos.y, tmp->gaze + 1);
-	send_message(player->fd, data);
+	send_message_graphic(player, data);
 }
 
 void commande_plv(t_graphic *player, t_Server *server, char *data2)
@@ -41,13 +41,13 @@ void commande_plv(t_graphic *player, t_Server *server, char *data2)
 	id = atoi(data2);
 	if (id <= 0)
 	{
-		send_message(player->fd, "sbp\n");
+		send_message_graphic(player, "sbp\n");
 		return ;
 	}
 	tmp = get_Player(id, server->list_player);
 	memset(data, '\0', 100);
 	sprintf(data, "plv %d %d\n", tmp->id, tmp->level);
-	send_message(player->fd, data);
+	send_message_graphic(player, data);
 }
 
 void commande_pin(t_graphic *player, t_Server *server, char *data2)
@@ -60,7 +60,7 @@ void commande_pin(t_graphic *player, t_Server *server, char *data2)
 	id = atoi(data2);
 	if (id <= 0)
 	{
-		send_message(player->fd, "sbp\n");
+		send_message_graphic(player, "sbp\n");
 		return ;
 	}
 	tmp = get_Player(id, server->list_player);
@@ -70,7 +70,7 @@ void commande_pin(t_graphic *player, t_Server *server, char *data2)
 	tmp->inventaire->linemate, tmp->inventaire->deraumere,
 	tmp->inventaire->sibur, tmp->inventaire->mendiane,
 	tmp->inventaire->phiras, tmp->inventaire->thystane);
-	send_message(player->fd, data);
+	send_message_graphic(player, data);
 }
 
 void	commande_pin_graph(t_graphic *head, t_Player *player)
@@ -85,9 +85,9 @@ void	commande_pin_graph(t_graphic *head, t_Player *player)
 	player->inventaire->linemate, player->inventaire->deraumere,
 	player->inventaire->sibur, player->inventaire->mendiane,
 	player->inventaire->phiras, player->inventaire->thystane);
-  while (tmp)
-    {
-			send_message(tmp->fd, data);
-      tmp = tmp->next;
-    }
+	while (tmp)
+	{
+		send_message_graphic(tmp, data);
+		tmp = tmp->next;
+	}
 }

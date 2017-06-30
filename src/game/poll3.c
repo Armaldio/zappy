@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 29 14:33:37 2017 Martin Alais
-** Last update Fri Jun 30 11:17:27 2017 hamza hammouche
+** Last update Fri Jun 30 15:23:41 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -89,6 +89,13 @@ void complete_struct(t_Server *server, struct pollfd *poll_fd)
 		tmp2 = tmp2->next;
 	}
 	complete_struct2(server, poll_fd, nbr);
+}
+
+void player_disconnected(t_Player *player, t_Server *server)
+{
+	player->is_connected = false;
+	printf("Player with id %d disconected\n", player->id);
+	my_delete_player(server, player->id);
 }
 
 int get_nbr_del(char *str, char del)

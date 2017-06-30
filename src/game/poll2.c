@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 16:06:09 2017 Martin Alais
-** Last update Thu Jun 29 14:40:48 2017 Martin Alais
+** Last update Fri Jun 30 16:00:54 2017 Martin Alais
 */
 
 #include <poll.h>
@@ -56,14 +56,18 @@ bool send_for_graphic(t_Server *server, int fd, char *data_recv)
 	{
 		if (tmp->fd == fd)
 		{
-			a = recv(tmp->fd, data_recv, 4095, MSG_DONTWAIT);
-			if (a == 0)
+			a = ucbuffer_fromfd(tmp->fd, tmp->read_buffer, 1024);
+			if (a <= 0)
 			{
 				printf("Graphic with id %d disconected\n", tmp->id);
 				delete_graphic(server, tmp->id);
+				return (false);
 			}
 			else
-				graphic_parser(tmp->id, server, data_recv);
+			{
+				ucbuffer_move(tmp->read_buffer, &tmp->read_buffer->tail, a);
+				complete_read_graphic(tmp, data_recv, server);
+			}
 			return (true);
 		}
 		tmp = tmp->next;
@@ -81,8 +85,15 @@ bool send_for_undefine(t_Server *server, int fd, char *data_recv)
 	{
 		if (tmp2->fd == fd)
 		{
-			a = recv(tmp2->fd, data_recv, 4095, MSG_DONTWAIT);
-			check_data_undefine(tmp2->id, data_recv, a, server);
+			a = ucbuffer_fromfd(tmp2->fd, tmp2->read_buffer, 1024);
+			if (a <= 0)
+			{
+				printf("Undefine with id %d disconected\n", tmp2->id);
+				delete_undefine(server, tmp2->id);
+				return (false);
+			}
+			ucbuffer_move(tmp2->read_buffer, &tmp2->read_buffer->tail, a);
+			complete_read_undefine(tmp2, data_recv, server);
 			return (true);
 		}
 		tmp2 = tmp2->next;
@@ -90,29 +101,25 @@ bool send_for_undefine(t_Server *server, int fd, char *data_recv)
 	return (false);
 }
 
-void str_to_word_tab(char *str, int status, t_Player *tmp3, t_Server *server)
+void complete_read(t_Player *tmp3, char *data_recv)
 {
-	char **res;
-	int nbr_ite;
 	int a;
 
-	a = 0;
-	nbr_ite = get_nbr_del(str, '\n');
-	res = my_malloc(sizeof(char *) * (nbr_ite + 1));
-	while (a < nbr_ite)
+	a = zappy_getline(tmp3->read_buffer, data_recv);
+	strcat(data_recv, "\n");
+	printf("%d: %s", tmp3->id, data_recv);
+	add_data_in_line(tmp3, data_recv);
+
+	memset(data_recv, '\0', 4095);
+	while (a > 0)
 	{
-		res[a] = my_malloc(sizeof(char) * (strlen(str) + 5));
-		memset(res[a], '\0', strlen(str) + 5);
-		a += 1;
+		a = zappy_getline(tmp3->read_buffer, data_recv);
+		if (a != 0)
+		{
+			strcat(data_recv, "\n");
+			printf("%d: %s", tmp3->id, data_recv);
+			add_data_in_line(tmp3, data_recv);
+			memset(data_recv, '\0', 4095);
+		}
 	}
-	res[a] = NULL;
-	str_tab_2(res, str, '\n');
-	a = 0;
-	while (res[a])
-	{
-		if (res[a][0] != '\0')
-			add_to_line(tmp3, res[a], status, server);
-		a += 1;
-	}
-	free_tab(res);
 }

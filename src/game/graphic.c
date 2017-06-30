@@ -5,14 +5,17 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:37:32 2017 Martin Alais
-** Last update Mon Jun 26 15:54:30 2017 Martin Alais
+** Last update Fri Jun 30 16:24:15 2017 Martin Alais
 */
 
 #include "zappy.h"
+#include "unix_cbuffer.h"
 
 void init_graphic(t_graphic *new, int fd, int id)
 {
 	new->fd = fd;
+	new->read_buffer = ucbuffer_new(4096);
+	new->write_buffer = ucbuffer_new(4096);
 	new->id = id;
 	new->next = NULL;
 }

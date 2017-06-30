@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Fri Jun 30 11:17:03 2017 hamza hammouche
+** Last update Fri Jun 30 16:25:58 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -81,8 +81,8 @@ int get_eggs_id(t_Server *server);
 void my_init_eggs(t_Player *, int id, t_Server *server, int father_id);
 int my_add_eggs(t_Server *server, t_Player *player);
 t_Player *get_eggs(int id, t_Player *head);
-void check_data_undefine(int, char *, int a, t_Server *server);
-void add_to_line(t_Player *tmp, char *data_recv, int a, t_Server *server);
+void check_data_undefine(int, char *, t_Server *server);
+void add_to_line(t_Player *tmp, char *data_recv, t_Server *server);
 void my_poll(t_Server *server);
 int poll_nbr_fd2(t_Server *server);
 void complete_struct2(t_Server *server, void *poll_fd, int nbr);
@@ -121,10 +121,16 @@ int poll_nbr_fd(t_Server *server);
 int get_nbr_del(char *str, char del);
 void free_tab(char **tab);
 void str_tab_2(char **res, char *str, char del);
-void str_to_word_tab(char *str, int, t_Player *tmp3, t_Server *server);
 void add_rand_food(t_Server *server);
 void	bonsoir(t_Player *tmp, t_point res, char **message);
 int	bonjour(t_Player *tmp, t_point res, char **message);
 void	ouais_fini(int id, char *message, char *data, t_Player **tmp);
+void player_disconnected(t_Player *player, t_Server *server);
+void complete_read(t_Player *tmp3, char *data_recv);
+void complete_read_graphic(t_graphic *tmp3, char *data_recv, t_Server *server);
+void complete_read_undefine(t_undefined *player, char *data_recv,
+	t_Server *server);
+bool send_message_undefine(t_undefined *player, char *msg);
+bool send_message_graphic(t_graphic *player, char *msg);
 
 #endif /* !ZAPPY_MAIN_H_ */

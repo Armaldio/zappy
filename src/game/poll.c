@@ -5,11 +5,12 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 14:29:52 2017 Martin Alais
-** Last update Fri Jun 30 11:17:19 2017 hamza hammouche
+** Last update Fri Jun 30 15:23:34 2017 Martin Alais
 */
 
 #include <poll.h>
 #include "zappy.h"
+#include "unix_cbuffer.h"
 
 void str_tab_2(char **res, char *str, char del)
 {
@@ -67,8 +68,13 @@ void send_to_struct(t_Server *server, int fd)
 	{
 		if (tmp3->fd == fd && tmp3->controlled == true)
 		{
-			a = recv(tmp3->fd, data_recv, 4095, MSG_DONTWAIT);
-			str_to_word_tab(data_recv, a, tmp3, server);
+			a = ucbuffer_fromfd(tmp3->fd, tmp3->read_buffer, 1024);
+			if (a == 0)
+				player_disconnected(tmp3, server);
+			if (a <= 0)
+				return ;
+			ucbuffer_move(tmp3->read_buffer, &tmp3->read_buffer->tail, a);
+			complete_read(tmp3, data_recv);
 			return ;
 		}
 		tmp3 = tmp3->next;

@@ -5,20 +5,23 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:38:41 2017 Martin Alais
-** Last update Mon Jun 26 15:54:43 2017 Martin Alais
+** Last update Fri Jun 30 16:30:16 2017 Martin Alais
 */
 
 #include "zappy.h"
 #include "Graphic.h"
 #include "Event.h"
+#include "unix_cbuffer.h"
 
 void init_undefine(t_undefined *new, int fd, int id)
 {
 	new->fd = fd;
 	new->id = id;
+	new->read_buffer = ucbuffer_new(4096);
+	new->write_buffer = ucbuffer_new(4096);
 	new->next = NULL;
 	printf("Undefine %d created\n", new->id);
-	send_message(fd, "WELCOME\n");
+	send_message_undefine(new, "WELCOME\n");
 }
 
 void add_undefined(int fd, t_Server *server)

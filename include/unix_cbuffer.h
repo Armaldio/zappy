@@ -5,7 +5,7 @@
 ** Login   <bonett_w@epitech.eu>
 **
 ** Started on  Fri Jun 30 09:59:35 2017 Walter Bonetti
-** Last update Fri Jun 30 12:10:52 2017 Walter Bonetti
+** Last update Fri Jun 30 14:32:29 2017 Martin Alais
 */
 
 #ifndef UNIX_CBUFFER
@@ -59,5 +59,9 @@ ssize_t	ucbuffer_write(t_ucbuffer *rb, const char *data, size_t size);
 ssize_t	ucbuffer_read(t_ucbuffer *rb, char *data, size_t size);
 ssize_t	ucbuffer_infd(int fd, t_ucbuffer *rb, size_t size);
 ssize_t ucbuffer_fromfd(int fd, t_ucbuffer *rb, size_t size);
+
+ssize_t    zappy_getline(t_ucbuffer *ucbuffer, char *buffer);
+
+ssize_t    zappy_ucbuffer_send(int fd, t_ucbuffer *rb);
 
 #endif /* end of include guard: UNIX_CBUFFER */

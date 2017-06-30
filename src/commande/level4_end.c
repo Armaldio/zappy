@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 28 11:10:39 2017 Martin Alais
-** Last update Thu Jun 29 15:51:01 2017 Martin Alais
+** Last update Fri Jun 30 16:20:42 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -28,7 +28,7 @@ void valide_level4(t_Server *server, t_Player *player)
 		player2 = get_Player(player->action->friend_list[a],
 			server->list_player);
 		player2->level = 5;
-		send_message(player2->fd, "Current level: 5\n");
+		send_message(player2, "Current level: 5\n");
 		printf("Player %d reach level 5!\n", player2->id);
 		a += 1;
 	}
@@ -45,7 +45,7 @@ void invalide_level4(t_Server *server, t_Player *player)
 	{
 		player2 = get_Player(player->action->friend_list[a],
 			server->list_player);
-		send_message(player2->fd, "Current level: 4\n");
+		send_message(player2, "Current level: 4\n");
 		a += 1;
 	}
 	stok_answer(player, "ko\n");

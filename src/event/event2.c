@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 16:00:16 2017 Martin Alais
-** Last update Thu Jun 29 16:17:03 2017 Martin Alais
+** Last update Fri Jun 30 16:27:32 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -28,7 +28,7 @@ void event_drop(t_Server *server, t_Player *player, int id_ressource)
 	sprintf(buffer3, "bct %d %d\n", player->pos.x, player->pos.y);
 	while (graphic)
 	{
-		send_message(graphic->fd, buffer);
+		send_message_graphic(graphic, buffer);
 		commande_pin(graphic, server, buffer2);
 		commande_btc(graphic, server, buffer3);
 		graphic = graphic->next;
@@ -45,7 +45,7 @@ void event_eject(t_Server *server, t_Player *player)
 	sprintf(buffer2, "pex %d\n", player->id);
 	while (graphic)
 	{
-		send_message(graphic->fd, buffer2);
+		send_message_graphic(graphic, buffer2);
 		graphic = graphic->next;
 	}
 }
@@ -60,7 +60,7 @@ void event_pfk(t_Server *server, t_Player *player)
 	graphic = server->list_graphic;
 	while (graphic)
 	{
-		send_message(graphic->fd, buffer2);
+		send_message_graphic(graphic, buffer2);
 		graphic = graphic->next;
 	}
 }
@@ -80,7 +80,7 @@ void event_enw(t_Server *server, int father, t_Player *player)
 	graphic = server->list_graphic;
 	while (graphic)
 	{
-		send_message(graphic->fd, buffer2);
+		send_message_graphic(graphic, buffer2);
 		graphic = graphic->next;
 	}
 }

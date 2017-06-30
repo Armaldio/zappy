@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:07:57 2017 Martin Alais
-** Last update Wed Jun 28 10:49:01 2017 Martin Alais
+** Last update Fri Jun 30 16:19:07 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -15,7 +15,7 @@ bool check_player_level(t_Player *player, char *data)
 	(void) data;
 	if (player->level >= 8)
     {
-  	  send_message(player->fd, "ko\n");
+  	  send_message(player, "ko\n");
   	  return (true);
     }
 	return (false);

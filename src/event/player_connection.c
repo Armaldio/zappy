@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 11:31:38 2017 Martin Alais
-** Last update Sat Jun 24 16:00:08 2017 Martin Alais
+** Last update Fri Jun 30 16:28:35 2017 Martin Alais
 */
 
 #include "Event.h"
@@ -35,7 +35,7 @@ void event_new_player(t_Server *server, t_Player *player)
 		player->pos.y, player->gaze + 1, player->level, team->name);
 	while (graphic)
 	{
-		send_message(graphic->fd, data);
+		send_message_graphic(graphic, data);
 		graphic = graphic->next;
 	}
 }
@@ -49,7 +49,7 @@ void event_conection_for_eggs(t_Server *server, t_Player *player)
 	sprintf(data, "ebo %d\n", player->id);
 	while (graphic)
 	{
-		send_message(graphic->fd, data);
+		send_message_graphic(graphic, data);
 		graphic = graphic->next;
 	}
 }
@@ -64,7 +64,7 @@ void event_ppo(t_Server *server, t_Player *player)
 	player->pos.x, player->pos.y, player->gaze + 1);
 	while (graphic)
 	{
-		send_message(graphic->fd, data);
+		send_message_graphic(graphic, data);
 		graphic = graphic->next;
 	}
 }
@@ -85,7 +85,7 @@ void event_take(t_Server *server, t_Player *player, int id_ressource)
 	sprintf(buffer3, "bct %d %d\n", player->pos.x, player->pos.y);
 	while (graphic)
 	{
-		send_message(graphic->fd, buffer);
+		send_message_graphic(graphic, buffer);
 		commande_pin(graphic, server, buffer2);
 		commande_btc(graphic, server, buffer3);
 		graphic = graphic->next;

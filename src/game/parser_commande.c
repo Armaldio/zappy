@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Fri Jun 30 11:06:36 2017 hamza hammouche
+** Last update Fri Jun 30 16:29:15 2017 Martin Alais
 */
 
 #include "Graphic.h"
@@ -16,7 +16,7 @@ void command_not_found(int id, t_Server *server)
   t_Player *tmp;
 
   tmp = get_Player(id, server->list_player);
-  send_message(tmp->fd, "ko\n");
+  send_message(tmp, "ko\n");
 }
 
 int get_size_commmande(char *str)

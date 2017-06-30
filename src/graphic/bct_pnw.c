@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 16:29:47 2017 Martin Alais
-** Last update Mon Jun 26 14:14:11 2017 Martin Alais
+** Last update Fri Jun 30 16:30:30 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -20,7 +20,7 @@ void commande_bct2(t_Server *server, int x, int y, t_graphic *player)
 	server->world->map[x][y]->deraumere, server->world->map[x][y]->sibur,
 	server->world->map[x][y]->mendiane, server->world->map[x][y]->phiras,
 	server->world->map[x][y]->thystane);
-	send_message(player->fd, data);
+	send_message_graphic(player, data);
 }
 
 void commande_pnw(t_Server *server, t_Player *player, t_graphic *graphic)
@@ -31,7 +31,7 @@ void commande_pnw(t_Server *server, t_Player *player, t_graphic *graphic)
 	team = get_team(server->list_teams, NULL, player->teamId);
 	sprintf(data, "pnw %d %d %d %d %d %s\n", player->id, player->pos.x,
 		player->pos.y, player->gaze + 1, player->level, team->name);
-	send_message(graphic->fd, data);
+	send_message_graphic(graphic, data);
 }
 
 char **init_res(char *data)

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Fri Jun 30 09:39:07 2017 hamza hammouche
+** Last update Fri Jun 30 16:29:21 2017 Martin Alais
 */
 
 #include "Graphic.h"
@@ -28,7 +28,7 @@ void		update_player_life(t_Server *server, double elapsed_time)
 void send_death_message(t_Server *server, t_Player *tmp)
 {
   send_message_death(server->list_graphic, tmp->id);
-  send_message(tmp->fd, "dead\n");
+  send_message(tmp, "dead\n");
   close(tmp->fd);
 }
 
