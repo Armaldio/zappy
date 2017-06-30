@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Fri Jun 30 16:26:17 2017 Martin Alais
+** Last update Fri Jun 30 17:20:27 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -61,6 +61,8 @@ void check_data_undefine(int id, char *data_recv, t_Server *server)
 	tmp = server->list_undefined;
 	while (tmp && tmp->id != id)
 		tmp = tmp->next;
+	if (tmp == NULL || tmp->id != id)
+		return ;
 	if (strcmp(data_recv, "GRAPHIC\n") == 0)
 		undefined_to_graphic(server, tmp);
 	else if (check_valide_team(data_recv, server, tmp) != true)

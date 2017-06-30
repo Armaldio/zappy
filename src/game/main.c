@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Thu Jun 29 12:44:28 2017 Martin Alais
+** Last update Fri Jun 30 17:21:56 2017 Martin Alais
 */
 
 #include <time.h>
@@ -36,9 +36,6 @@ void	manage_time(t_Server *server)
 	double tmp;
 
 	tmp = (double)iMilliSec / 1000;
-	if (tmp < get_micro(server->tmp_time))
-		printf("New second\n");
-
 	action_update_time(server, (tmp - get_micro(server->tmp_time)));
 	update_player_life(server, (tmp - get_micro(server->tmp_time)));
 	server->tmp_time += (tmp - get_micro(server->tmp_time));

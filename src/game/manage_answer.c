@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Fri Jun 23 14:40:46 2017 Martin Alais
-** Last update Fri Jun 30 16:29:09 2017 Martin Alais
+** Last update Fri Jun 30 17:21:33 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -22,8 +22,6 @@ void send_answer(t_Player *player)
 {
 	if (player->action->data_to_send[0] != '\0')
 	{
-		printf("Sending answer to %d with message: %s", player->fd,
-		player->action->data_to_send);
 		send_message(player, player->action->data_to_send);
 	}
 }

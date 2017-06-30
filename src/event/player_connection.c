@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 11:31:38 2017 Martin Alais
-** Last update Fri Jun 30 16:28:35 2017 Martin Alais
+** Last update Fri Jun 30 17:19:55 2017 Martin Alais
 */
 
 #include "Event.h"
@@ -29,6 +29,8 @@ void event_new_player(t_Server *server, t_Player *player)
 	t_graphic *graphic;
 
 	graphic = server->list_graphic;
+	if (graphic == NULL)
+		return ;
 	memset(data, '\0', 100);
 	team = get_team(server->list_teams, NULL, player->teamId);
 	sprintf(data, "pnw %d %d %d %d %d %s\n", player->id, player->pos.x,
