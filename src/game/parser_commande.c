@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:44:21 2017 Martin Alais
-** Last update Thu Jun 29 15:02:39 2017 Martin Alais
+** Last update Fri Jun 30 11:06:36 2017 hamza hammouche
 */
 
 #include "Graphic.h"
@@ -40,7 +40,7 @@ int parser_commande2(int id, t_Server *server, char *data)
   a = 0;
   while (mcommand[a])
     {
-      if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)
+      if (strncmp(mcommand[a], data, get_size_commmande(data) + 1) == 0)
 	{
 	  fct_ptr = mfunction_ptr[a];
 	  fct_ptr(id, server, data);
@@ -68,7 +68,7 @@ int parser_commande(int id, t_Server *serv, char *data)
   add_rand_food(serv);
   while (mcommand[a])
     {
-		if (strncmp(mcommand[a], data, get_size_commmande(data)) == 0)
+		if (strncmp(mcommand[a], data, get_size_commmande(data) + 1) == 0)
 		{
 			fct_ptr = mfunction_ptr[a];
 			fct_ptr(id, serv, data);

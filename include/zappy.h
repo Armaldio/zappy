@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Fri Jun 30 10:44:23 2017 loic1.doyen@epitech.eu
+** Last update Fri Jun 30 11:17:03 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -26,6 +26,7 @@ typedef struct    s_point {
 void parser_data(t_Server *server, int ac, char **argv);
 int	parser_team(t_Server *serv, char **argv, int a);
 void	event_endI(t_Server *server, t_Player *player);
+int	get_poll_timeout(t_Server *server);
 int parser_commande(int id, t_Server *server, char *data);
 void send_message_death(t_graphic *, int);
 void send_message_pie(t_graphic *, t_Player *p);

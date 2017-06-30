@@ -5,11 +5,40 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 29 14:33:37 2017 Martin Alais
-** Last update Thu Jun 29 14:34:54 2017 Martin Alais
+** Last update Fri Jun 30 11:17:27 2017 hamza hammouche
 */
 
 #include "zappy.h"
 #include <poll.h>
+
+int	get_poll_timeout(t_Server *server)
+{
+  t_Player *tmp;
+  double		min;
+  double		tmp_min;
+  int				res;
+
+  tmp = server->list_player;
+  res = 50;
+  if (tmp == NULL)
+    return (res);
+  min = -1;
+  while (tmp)
+    {
+      if (tmp->isEgg == false)
+			{
+	  		tmp_min = tmp->action->end_time - tmp->action->start_time;
+			  if (tmp_min < min)
+	    		min = tmp_min;
+			}
+      tmp = tmp->next;
+    }
+  if (min == -1)
+    res = 50;
+  else
+    res = (int)min * 1000;
+  return (res);
+}
 
 int poll_nbr_fd(t_Server *server)
 {
