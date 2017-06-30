@@ -6,8 +6,8 @@
   "main": "zappy_ai.js",
   "scripts": {
     "test": "./node_modules/.bin/xo",
-    "start": "node zappy_ai.js -p 4242 -n team1",
-    "start-neural": "node zappy_ai_neural.js -p 4242 -n team1 -t",
+    "start": "node zappy_ai.js -p 4242 -n Team1",
+    "start-neural": "node zappy_ai_neural.js -p 4242 -n Team1 -t",
     "compile": "pkg . --out-path bin"
   },
   "author": "",

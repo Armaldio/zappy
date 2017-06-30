@@ -135,27 +135,39 @@ bot.client.on('data', data => {
 			if (bot.msg === 'welcome') {
 				bot.send(bot.team);
 			} else if (bot.msg.startsWith('message')) {
-				let broadcast = bot.msg.replace("message");
-				let split = broadcast.split(',');
+				let broadcast = bot.msg.replace("message", "");
+				console.log("Broadcast : " + broadcast);
+				let split     = broadcast.split(',');
 
-				broadcast = split[1];
+				broadcast  = split[1].trim();
 				let tileID = split[0];
+
+
+				broadcast = broadcast.split(' ');
+
+				console.log(chalk.yellow(`Received broadcast : [${broadcast[0]}] [${broadcast[1]}] : ${tileID}`));
+				if (broadcast[0] === "waiting")
+					bot.aPlayerIsWaiting = broadcast[1] * 1; //To Number
+				else if (broadcast[0] === "stopped")
+					bot.aPlayerIsWaiting = -1;
 
 			} else if (bot.msg === 'ko') {
 				console.log('KO Queue : ' + bot.queue[0]);
-				if (bot.queue[0] !== 'Incantation') {
+				if (bot.queue[0] === 'Incantation') {
+					if (bot.incantationStep === 0) {
+						//bot.queue.shift();
+						bot.incantationStep = 1;
+						//bot.send("Look");
+					} else if (bot.incantationStep === 1) {
+						bot.queue.shift();
+						bot.incantationStep = 0;
+						bot.send("Look");
+					}
+				} else {
 					bot.lastCommand = bot.queue.shift();
 					bot.output(bot.lastCommand + ' : ko');
 					bot.goRandomDir();
 					console.log("Next command : " + bot.queue[0]);
-				} else if (bot.incantationStep === 0) {
-					bot.queue.shift();
-					//bot.incantationStep = 1;
-					bot.send("Look");
-				} else if (bot.incantationStep === 1) {
-					bot.queue.shift();
-					bot.incantationStep = 0;
-					bot.send("Look");
 				}
 			} else if (bot.msg === 'dead') {
 				bot.dead = true;
@@ -163,7 +175,9 @@ bot.client.on('data', data => {
 			} else if (bot.msg === 'elevation underway') {
 				bot.incantating = true;
 				bot.output('Incantation started');
+				bot.output('[Elevation underway] Going to level ' + (bot.level + 1));
 			} else if (bot.msg.match(/current level: (.*)/g)) {
+				bot.output('[Curent level]');
 				bot.level = Number(bot.msg.replace('current level: ', ''));
 				bot.queue.shift();
 				bot.incantating = false;
@@ -176,7 +190,7 @@ bot.client.on('data', data => {
 					bot.lastCommand = bot.queue.shift();
 				}
 
-				console.log(chalk.green('[Receiving] ' + bot.lastCommand + ' : ' + JSON.stringify(msg)));
+				console.log(chalk.green(bot.getDate() + ' [Receiving] ' + bot.lastCommand + ' : ' + JSON.stringify(msg)));
 				// Bot.output(bot.queue);
 
 				switch (bot.lastCommand) {
@@ -187,7 +201,6 @@ bot.client.on('data', data => {
 
 					case 'Broadcast':
 						console.log(bot.msg);
-						bot.output("Just waiting to know the tile");
 						break;
 
 					case 'Take':
@@ -263,7 +276,7 @@ bot.client.on('error', err => {
 	console.log(chalk.red('Error : ', err.code));
 });
 
-const interval = setInterval(() => {
+/*const interval = setInterval(() => {
 	if (bot.dead) {
 		clearInterval(interval);
 		return;
@@ -277,4 +290,4 @@ const interval = setInterval(() => {
 	} else {
 		bot.inactivity = 0;
 	}
-}, 1000);
+}, 1000);*/

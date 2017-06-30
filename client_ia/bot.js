@@ -8,30 +8,30 @@ const chalk = require('chalk');
 
 module.exports = class Bot {
 	constructor (behaviour) {
-		this.inventory     = {};
-		this.view          = {
+		this.inventory         = {};
+		this.view              = {
 			up   : [],
 			down : [],
 			left : [],
 			right: []
 		};
-		this.direction     = 'up';
-		this.queue         = [];
-		this.client        = {};
-		this.behaviour     = {};
-		this.flux          = '';
-		this.team          = '';
-		this.searchingFood = false;
-		this.clientNum     = -1;
-		this.mapSize       = {};
-		this.lastCommand   = '';
-		this.oldCommands   = [];
-		this.dead          = false;
-		this.totalCommands = 0;
-		this.goesUp        = 0;
-		this.level         = 1;
-		this.turning       = false;
-		this.lv            = {
+		this.direction         = 'up';
+		this.queue             = [];
+		this.client            = {};
+		this.behaviour         = {};
+		this.flux              = '';
+		this.team              = '';
+		this.searchingFood     = false;
+		this.clientNum         = -1;
+		this.mapSize           = {};
+		this.lastCommand       = '';
+		this.oldCommands       = [];
+		this.dead              = false;
+		this.totalCommands     = 0;
+		this.goesUp            = 0;
+		this.level             = 1;
+		this.turning           = false;
+		this.lv                = {
 			2: {
 				player  : 1,
 				linemate: 1
@@ -81,11 +81,14 @@ module.exports = class Bot {
 				thystame : 1
 			}
 		};
-		this.inactivity    = 0;
+		this.inactivity        = 0;
+		this.InventoryCallback = true;
 
-		this.incantationStep = 0;
-		this.incantating     = false;
-		this.trainDatas = [];
+		this.incantationStep              = 0;
+		this.incantating                  = false;
+		this.aPlayerIsWaiting             = -1;
+		this.trainDatas                   = [];
+		this.checkingRessourcesOnTheFloor = -1;
 
 		this.commands = [
 			"Forward",
@@ -105,6 +108,15 @@ module.exports = class Bot {
 		this.behaviour = JSON.parse(fs.readFileSync(path.join(__dirname, 'behaviours', behaviour + '.json'), 'utf8'));
 
 		console.log(`Loading bot <${chalk.blue(this.behaviour.name)}> [${chalk.green(this.behaviour.description)}]`);
+	}
+
+	getDate () {
+		let date = new Date;
+
+		let seconds = date.getSeconds();
+		let minutes = date.getMinutes();
+		let hour    = date.getHours();
+		return `[${hour}:${minutes}:${seconds}]`
 	}
 
 	/**
@@ -148,7 +160,7 @@ module.exports = class Bot {
 			if (cmd === undefined) {
 				console.log('COMMAND IS UNDEFINED !!!');
 			} else {
-				console.log(chalk.blue('[Sending] ' + cmd));
+				console.log(chalk.blue(this.getDate() + '[Sending] ' + cmd));
 				this.queue.push(cmd.split(/(\\n)| /g)[0]);
 				this.oldCommands.push(cmd.split(/(\\n)| /g)[0]);
 				this.output(this.queue);
@@ -189,13 +201,19 @@ module.exports = class Bot {
 		});
 
 		this.view.here = datas[0];
-		this.view.up   = datas[2];
+		console.log("players.length", datas[0].players);
+		this.view.up = datas[2];
 
 		if (this.view.here.items && this.view.here.items.length !== 0) {
-			if (!this.willMove() && this.view.here.players <= 1) {
+			if (!this.willMove() || this.view.here.players <= this.lv[this.level + 1].players) {
 				this.send('Take ' + this.view.here.items[0]);
 			} else {
-				this.goRandomDir();
+
+				//Here, check if enough materials
+				if (this.enoughResForIncantationOnTheFloor(this.view.here) && this.view.here.players <= this.lv[this.level + 1].players)
+					this.send("Incantation");
+				else
+					this.goRandomDir();
 			}
 		} else {
 			this.send('Inventory');
@@ -261,30 +279,76 @@ module.exports = class Bot {
 
 		this.inventory = obj;
 
-		/*
-		 Elevation nb of players linemate deraumere sibur mendiane phiras thystame
-		 1->2      1             1        0         0     0        0      0
-		 2->3      2             1        1         1     0        0      0
-		 3->4      2             2        0         1     0        2      0
-		 4->5      4             1        1         2     0        1      0
-		 5->6      4             1        2         1     3        0      0
-		 6->7      6             1        2         3     0        1      0
-		 7->8      6             2        2         2     2        2      1
-		 */
+		console.log("Inventory callback : " + this.InventoryCallback);
+		if (this.InventoryCallback) {
+			// The case contains no ressources
+			console.log("A player is waiting : " + this.aPlayerIsWaiting + " My level : " + this.level);
+			if (this.view.here.length === 0 && this.enoughResForIncantation() && this.aPlayerIsWaiting !== this.level) {
+				this.releaseRessources();
+				this.send("Broadcast Waiting " + this.level);
 
-		// The case is empty
-		if (this.view.here.length === 0) {
-			if (this.canIncantation()) {
-				this.startIncantation();
+				let int = setInterval(() => {
+					if (this.dead)
+						clearInterval(int);
+
+					if (this.enoughPlayersForIncantation()) {
+						this.InventoryCallback = true;
+						this.send("Broadcast stopped");
+						clearInterval(int);
+						this.send('Incantation');
+					} else {
+						if (this.inventory.food <= 10) {
+							this.send('Look');
+						} else {
+							console.log("Waiting for a player");
+							console.log("a player is already waiting : " + this.aPlayerIsWaiting);
+							this.InventoryCallback = false;
+							this.send("Inventory");
+						}
+					}
+				}, 1000);
+
 			} else {
 				this.send('Forward');
 			}
-		} else {
-			this.send('Forward');
 		}
 	}
 
-	canIncantation () {
+	enoughResForIncantationOnTheFloor (items) {
+		let bool = true;
+		Object.keys(this.lv[this.level + 1]).forEach(key => {
+			// If (requirement to pass level) is in (inventory)
+
+			if (key !== 'player') {
+				if (items.items[key] === undefined ||
+					items.items[key] * 1 < this.lv[this.level + 1][key]) {
+					console.log("Not enough ressources : (" + key + ") " + this.inventory[key] + " vs " + this.lv[this.level + 1][key]);
+					bool = false;
+				}
+			}
+		});
+
+		return (bool);
+	}
+
+	enoughResForIncantation () {
+		let bool = true;
+		Object.keys(this.lv[this.level + 1]).forEach(key => {
+			// If (requirement to pass level) is in (inventory)
+
+			if (key !== 'player') {
+				if (this.inventory[key] === undefined ||
+					this.inventory[key] < this.lv[this.level + 1][key]) {
+					// Console.log("Not enough ressources : (" + key + ") " + this.inventory[key] + " vs " + this.lv[this.level + 1][key]);
+					bool = false;
+				}
+			}
+		});
+
+		return (bool);
+	}
+
+	enoughPlayersForIncantation () {
 		let bool = true;
 		Object.keys(this.lv[this.level + 1]).forEach(key => {
 			// If (requirement to pass level) is in (inventory)
@@ -294,14 +358,24 @@ module.exports = class Bot {
 					bool = false;
 					console.log('Not enough players : ' + this.view.here.players + ' vs ' + this.lv[this.level + 1][key]);
 				}
-			} else if (this.inventory[key] === undefined ||
-					   this.inventory[key] < this.lv[this.level + 1][key]) {
-				// Console.log("Not enough ressources : (" + key + ") " + this.inventory[key] + " vs " + this.lv[this.level + 1][key]);
-				bool = false;
+				else
+					console.log("Enough plaeyrrrrrrrrrrrs");
 			}
 		});
 
 		return (bool);
+	}
+
+	releaseRessources () {
+		this.output('Releasing resources');
+
+		Object.keys(this.lv[this.level + 1]).forEach(key => {
+			for (let i = 0; i < this.lv[this.level + 1][key]; i++) {
+				if (key !== 'player') {
+					this.send('Set ' + key);
+				}
+			}
+		});
 	}
 
 	/**
@@ -318,24 +392,6 @@ module.exports = class Bot {
 		} else {
 			console.log(chalk.magenta(data));
 		}
-	}
-
-	startIncantation () {
-		this.output('Starting incantation');
-
-		Object.keys(this.lv[this.level + 1]).forEach(key => {
-			/* Console.log("Key : " + key);
-			 console.log(this.lv[this.level + 1][key]); */
-
-			// Set each needed object on the ground
-			for (let i = 0; i < this.lv[this.level + 1][key]; i++) {
-				if (key !== 'player') {
-					this.send('Set ' + key);
-				}
-			}
-		});
-
-		this.send('Incantation');
 	}
 
 	getRandomInt (min, max) {
