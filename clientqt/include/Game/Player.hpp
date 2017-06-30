@@ -13,6 +13,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <include/Game/Animation.hpp>
+#include <queue>
 #include "Inventaire.hpp"
 #include "Team.hpp"
 
@@ -32,8 +33,10 @@ namespace zappy {
     public:
         // gui
         sf::RectangleShape characterShape;
+        sf::RectangleShape textBackgroundShape;
         AnimatedSprite animatedSprite;
         AnimatedSprite animatedLoading;
+        std::vector<AnimatedText *> animatedTexts;
 
     public:
         Player(unsigned int id, int level, int orientation, unsigned int x, unsigned int y);
@@ -73,6 +76,8 @@ namespace zappy {
         Team *getTeam() const;
 
         void setTeam(Team *team);
+
+        void addMessage(const sf::String &message);
     };
 }
 

@@ -18,6 +18,9 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 namespace zappy {
     class Animation {
@@ -89,7 +92,33 @@ namespace zappy {
         sf::Vertex m_vertices[4];
 
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    };
 
+    class AnimatedText : public sf::Drawable {
+    public:
+        AnimatedText(const sf::String & string, const sf::Font &font, const sf::Time & time = sf::seconds(2.f));
+
+        virtual ~AnimatedText();
+
+        void setFont(const sf::Font &font);
+
+        void setPosition(const sf::Vector2f &vector2);
+
+    public:
+
+        void update(const sf::Time &elapsedTime);
+
+        bool isDead() const;
+
+    protected:
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+    private:
+        sf::Text m_text;
+        sf::RectangleShape m_back;
+        sf::Time m_maxTime;
+        sf::Time m_currentTime;
+        bool _isDead;
     };
 };
 

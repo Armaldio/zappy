@@ -185,7 +185,51 @@ namespace zappy {
         }
     }
 
+    AnimatedText::AnimatedText(const sf::String &string, const sf::Font &font, const sf::Time &time) : m_text(string, font), _isDead(false), m_maxTime(time) {
+        m_currentTime = sf::Time::Zero;
+        m_text.setCharacterSize(60);
+        m_text.setStyle(sf::Text::Regular);
+        m_text.setFillColor(sf::Color(255, 0, 10));
+
+        const sf::FloatRect titleBound = m_text.getLocalBounds();
+        m_text.setOrigin(titleBound.left + titleBound.width / 2.0f, titleBound.top + titleBound.height / 2.0f);
+        m_back.setOrigin(titleBound.left + titleBound.width / 2.0f, titleBound.top + titleBound.height / 2.0f);
+        m_back.setFillColor(sf::Color(255, 255, 255));
+    }
+
     void AnimatedSprite::setSize(const sf::Vector2f &size) {
         m_size = size;
+    }
+
+    AnimatedText::~AnimatedText() {
+
+    }
+
+    void AnimatedText::update(const sf::Time &elapsedTime) {
+        m_currentTime += elapsedTime;
+        if (m_currentTime > m_maxTime) {
+            _isDead = true;
+        }
+    }
+
+    bool AnimatedText::isDead() const {
+        return _isDead;
+    }
+
+    void AnimatedText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        target.draw(m_back, states);
+        target.draw(m_text, states);
+    }
+
+    void AnimatedText::setFont(const sf::Font &font) {
+        m_text.setFont(font);
+    }
+
+    void AnimatedText::setPosition(const sf::Vector2f &vector) {
+        m_text.setPosition(vector);
+        m_back.setPosition(vector);
+
+        const sf::FloatRect titleBound = m_text.getLocalBounds();
+        m_back.setSize({titleBound.left + titleBound.width + 40, titleBound.top + titleBound.height + 10});
     }
 }

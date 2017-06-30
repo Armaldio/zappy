@@ -55,3 +55,11 @@ void zappy::Egg::setPlayer(zappy::Player *player) {
 const std::string &zappy::Egg::getTeamName() const {
     return _team;
 }
+
+unsigned int zappy::Egg::getPlayerId() const {
+    return _player_id;
+}
+
+void zappy::Egg::setPlayerId(unsigned int value) {
+    _player_id = value;
+}

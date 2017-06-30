@@ -45,7 +45,7 @@ QVariant EggTableModel::data(const QModelIndex &index, int role) const {
                     return QString::number(egg->getId());
                     break;
                 case ID_PLAYER:
-                    return QString::number(player->getId());
+                    return QString::number(egg->getPlayerId());
                     break;
                 case HATCH:
                     return egg->isHatch() ? QString("TRUE") : QString("FALSE");

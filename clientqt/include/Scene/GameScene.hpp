@@ -27,6 +27,7 @@ namespace zappy {
         sf::Texture _eggTexture;
         sf::RectangleShape _recShape;
         sf::Vector2f _ratio;
+        sf::Font _font;
 
         sf::View _cameraView;
         sf::View _gameView;

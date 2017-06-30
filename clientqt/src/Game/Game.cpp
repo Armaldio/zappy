@@ -174,6 +174,8 @@ void zappy::Game::function_pnw(const std::string &buffer) {
     _vPlayers.push_back(player);
     _players[player_id] = player;
 
+    player->addMessage("Im ready to play");
+
     // add in the team
     team->players.push_back(player);
     player->setTeam(team);
@@ -276,12 +278,35 @@ void zappy::Game::function_pin(const std::string &buffer) {
     }
 }
 
+/**
+ * Un joueur expulse.
+ * "pex #n\n"
+ * @param buffer
+ */
 void zappy::Game::function_pex(const std::string &buffer) {
     std::cout << "called::function_pex" << std::endl;
 }
 
-void zappy::Game::function_pbc(const std::string &) {
-    std::cout << "called::function_pbc" << std::endl;
+/**
+ * Un joueur fait un broadcast.
+ * "pbc #n M\n"
+ * @param buffer
+ */
+void zappy::Game::function_pbc(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    if (ss.fail()) throw GameException("PBC error parsing");
+    if (_players.find(player_id) == _players.end()) throw GameException("PCB error player_id");
+
+    std::string message = ss.str();
+
+    _players[player_id]->addMessage(message);
 }
 
 /**
@@ -374,7 +399,6 @@ void zappy::Game::function_pgt(const std::string &buffer) {
 
     ss >> player_id;
 
-
     auto *player = _players[player_id];
 
     const auto position = player->getPosition();
@@ -438,6 +462,7 @@ void zappy::Game::function_enw(const std::string &buffer) {
 
 
     Egg *egg = new Egg(egg_id, player, x, y);
+    egg->setPlayerId(player_id);
     _vEggs.push_back(egg);
     _eggs[egg_id] = egg;
 }

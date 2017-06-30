@@ -94,3 +94,8 @@ void zappy::Player::setLaying(bool value) {
 bool zappy::Player::isLaying() const {
     return _isLaying;
 }
+
+void zappy::Player::addMessage(const sf::String &message) {
+    sf::Font font;
+    animatedTexts.push_back(new AnimatedText(message, font));
+}

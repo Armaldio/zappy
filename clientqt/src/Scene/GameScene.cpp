@@ -33,6 +33,9 @@ void zappy::GameScene::loadRessources() {
             throw GameException("Failed to load player spritesheet!");
         if (!_loadingTexture.loadFromFile("assets/loading.png"))
             throw GameException("Failed to load player spritesheet!");
+        if (!_font.loadFromFile("assets/arial.ttf"))
+            throw GameException("Failed to load player spritesheet!");
+
 
         for (int i = 0; i < 4; ++i) {
         // Down
@@ -249,6 +252,16 @@ void zappy::GameScene::draw(const sf::Time &elapsedTime) {
             _renderWindow->draw(player->animatedSprite);
         }
 
+        for (auto it = player->animatedTexts.begin(); it < player->animatedTexts.end(); ++it) {
+            (*it)->update(elapsedTime);
+            (*it)->setFont(_font);
+            sf::Vector2f newPosition(player->animatedSprite.getPosition());
+            newPosition.y -= 100;
+            (*it)->setPosition(newPosition);
+            _renderWindow->draw(*(*it));
+            if ((*it)->isDead())
+                player->animatedTexts.erase(it);
+        }
     }
 
     auto &eggs = _game->getEggs();

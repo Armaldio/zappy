@@ -21,6 +21,7 @@ namespace zappy {
         std::string _team;
         sf::Vector2f _pos;
         unsigned int _id;
+        unsigned int _player_id;
         Player *_player;
         bool _isHatch;
 
@@ -51,6 +52,9 @@ namespace zappy {
 
         const std::string &getTeamName() const;
 
+        void setPlayerId(unsigned int value);
+
+        unsigned int getPlayerId() const;
     };
 }
 
