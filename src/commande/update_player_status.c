@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Thu Jun 29 14:58:37 2017 hamza hammouche
+** Last update Fri Jun 30 16:01:43 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -30,26 +30,41 @@ void spawn_food(t_Server *server)
 	}
 }
 
-void check_data_undefine(int id, char *data_recv,
-	int a, t_Server *server)
+void complete_read_undefine(t_undefined *player, char *data_recv,
+	t_Server *server)
+{
+	int a;
+
+	a = zappy_getline(player->read_buffer, data_recv);
+	strcat(data_recv, "\n");
+	printf("%d: %s", player->id, data_recv);
+	check_data_undefine(player->id, data_recv, server);
+
+	memset(data_recv, '\0', 4095);
+	while (a > 0)
+	{
+		a = zappy_getline(player->read_buffer, data_recv);
+		if (a != 0)
+		{
+			strcat(data_recv, "\n");
+			printf("%d: %s", player->id, data_recv);
+			check_data_undefine(player->id, data_recv, server);
+			memset(data_recv, '\0', 4095);
+		}
+	}
+}
+
+void check_data_undefine(int id, char *data_recv, t_Server *server)
 {
 	t_undefined *tmp;
 
 	tmp = server->list_undefined;
 	while (tmp && tmp->id != id)
 		tmp = tmp->next;
-	if (a == 0)
-	{
-		printf("Undefined with id %d disconected\n", tmp->id);
-		delete_undefine(server, tmp->id);
-	}
-	else
-	{
-		if (strcmp(data_recv, "GRAPHIC\n") == 0)
-			undefined_to_graphic(server, tmp);
-		else if (check_valide_team(data_recv, server, tmp) != true)
-			send_message(tmp->fd, "ko\n");
-	}
+	if (strcmp(data_recv, "GRAPHIC\n") == 0)
+		undefined_to_graphic(server, tmp);
+	else if (check_valide_team(data_recv, server, tmp) != true)
+		send_message(tmp->fd, "ko\n");
 }
 
 t_Player *get_last_player(t_Server *server)

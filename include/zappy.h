@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Fri Jun 30 15:21:00 2017 Martin Alais
+** Last update Fri Jun 30 16:01:19 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -81,7 +81,7 @@ int get_eggs_id(t_Server *server);
 void my_init_eggs(t_Player *, int id, t_Server *server, int father_id);
 int my_add_eggs(t_Server *server, t_Player *player);
 t_Player *get_eggs(int id, t_Player *head);
-void check_data_undefine(int, char *, int a, t_Server *server);
+void check_data_undefine(int, char *, t_Server *server);
 void add_to_line(t_Player *tmp, char *data_recv, t_Server *server);
 void my_poll(t_Server *server);
 int poll_nbr_fd2(t_Server *server);
@@ -127,5 +127,8 @@ int	bonjour(t_Player *tmp, t_point res, char **message);
 void	ouais_fini(int id, char *message, char *data, t_Player **tmp);
 void player_disconnected(t_Player *player, t_Server *server);
 void complete_read(t_Player *tmp3, char *data_recv);
+void complete_read_graphic(t_graphic *tmp3, char *data_recv, t_Server *server);
+void complete_read_undefine(t_undefined *player, char *data_recv,
+	t_Server *server);
 
 #endif /* !ZAPPY_MAIN_H_ */
