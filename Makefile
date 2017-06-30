@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Thu Jun 29 14:37:31 2017 Martin Alais
+## Last update Fri Jun 30 10:45:19 2017 loic1.doyen@epitech.eu
 ##
 
 CC    =    gcc -g
@@ -15,6 +15,7 @@ RM    =    rm -rf
 NAME    =    server
 
 SRC    =	src/commande/broadcast.c \
+			src/commande/broadcast2.c \
 			src/commande/eject.c \
 			src/commande/exit.c \
 			src/commande/fork.c \

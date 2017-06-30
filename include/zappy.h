@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Thu Jun 29 14:57:45 2017 hamza hammouche
+** Last update Fri Jun 30 10:44:23 2017 loic1.doyen@epitech.eu
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -17,6 +17,11 @@
 #include <poll.h>
 
 # define DEBUG 0
+
+typedef struct    s_point {
+  int x;
+  int y;
+}            t_point;
 
 void parser_data(t_Server *server, int ac, char **argv);
 int	parser_team(t_Server *serv, char **argv, int a);
@@ -117,5 +122,8 @@ void free_tab(char **tab);
 void str_tab_2(char **res, char *str, char del);
 void str_to_word_tab(char *str, int, t_Player *tmp3, t_Server *server);
 void add_rand_food(t_Server *server);
+void	bonsoir(t_Player *tmp, t_point res, char **message);
+int	bonjour(t_Player *tmp, t_point res, char **message);
+void	ouais_fini(int id, char *message, char *data, t_Player **tmp);
 
 #endif /* !ZAPPY_MAIN_H_ */
