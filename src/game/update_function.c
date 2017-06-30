@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 21 13:32:36 2017 Martin Alais
-** Last update Fri Jun 30 10:04:43 2017 hamza hammouche
+** Last update Fri Jun 30 10:18:19 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -19,8 +19,6 @@ void check_update_level(t_Server *server, t_Player *player)
 
 	fct_ptr = mfunction_ptr[player->level - 1];
 	fct_ptr(server, player);
-  send_message_bct_pos(server, server->list_graphic, player->pos.x,
-		       player->pos.y);
 }
 
 void check_player_leveling(t_Server *server)
