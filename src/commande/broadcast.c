@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:36:04 2017 loic1.doyen@epitech.eu
-** Last update Fri Jun 30 10:43:57 2017 loic1.doyen@epitech.eu
+** Last update Fri Jun 30 10:47:16 2017 loic1.doyen@epitech.eu
 */
 
 #include "zappy.h"
@@ -66,7 +66,8 @@ int		command_broadcast(int id, t_Server *server, char *data)
 	sprintf(message, "message %d", (0 + tmp->gaze * 2) % 8 + 1);
       else if ((tmp->pos.x - res.x < 0 || res.x < 0) && tmp->pos.y - res.y > 0)
 	sprintf(message, "message %d", (1 + tmp->gaze * 2) % 8 + 1);
-      else if ((tmp->pos.x - res.x < 0 || res.x < 0) && tmp->pos.y - res.y == 0)
+      else if ((tmp->pos.x - res.x < 0 || res.x < 0) &&
+	       tmp->pos.y - res.y == 0)
 	sprintf(message, "message %d", (2 + tmp->gaze * 2) % 8 + 1);
       else if (k(tmp, res, &message));
       else
