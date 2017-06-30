@@ -284,16 +284,71 @@ void zappy::Game::function_pbc(const std::string &) {
     std::cout << "called::function_pbc" << std::endl;
 }
 
-void zappy::Game::function_pic(const std::string &) {
-    std::cout << "called::function_pic" << std::endl;
+/**
+ * Incantation
+ * "pic X Y L #n #n …\n"
+ * @param buffer
+ */
+void zappy::Game::function_pic(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    int x;
+    int y;
+    int level;
+    unsigned int player_id;
+
+    ss >> x >> y >> level;
+    std::string inum;
+    while (std::getline(ss, inum, ' ')) {
+        if (inum.size() == 0)
+            continue;
+        player_id = (unsigned int) std::strtoul(inum.c_str(), nullptr, 10);
+        std::cout << "current buffer: " << inum << std::endl;
+        if (_players.find(player_id) == _players.end())
+            throw GameException("Pic invalid player_id: " + std::to_string(player_id));
+        _players[player_id]->setIncantation(true);
+    }
 }
 
-void zappy::Game::function_pie(const std::string &) {
-    std::cout << "called::function_pie" << std::endl;
+/**
+ * Fin de l’incantation sur la case donnée avec le résultat R (0 ou 1).
+ * "pie X Y R\n"
+ * @param buffer
+ */
+void zappy::Game::function_pie(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    int x;
+    int y;
+    int ret;
+
+    ss >> x >> y >> ret;
+
+    if (ss.fail()) throw GameException("Pie error parsing");
 }
 
-void zappy::Game::function_pfk(const std::string &) {
-    std::cout << "called::function_pfk" << std::endl;
+/**
+ * Le joueur pond un œuf.
+ * "pfk #n\n"
+ * @param buffer
+ */
+void zappy::Game::function_pfk(const std::string &buffer) {
+    std::stringstream ss;
+
+    ss << buffer;
+
+    unsigned int player_id;
+
+    ss >> player_id;
+
+    if (_players.find(player_id) == _players.end())
+        throw GameException("Pfk error with player_id");
+
+    _players[player_id]->setLaying(true);
 }
 
 void zappy::Game::function_pdr(const std::string &buffer) {
@@ -376,8 +431,11 @@ void zappy::Game::function_enw(const std::string &buffer) {
 
     Player *player = nullptr;
 
-    if (_players.find(player_id) == _players.end())
+    if (_players.find(player_id) != _players.end()) {
         player = _players[player_id];
+        player->setLaying(false);
+    }
+
 
     Egg *egg = new Egg(egg_id, player, x, y);
     _vEggs.push_back(egg);
