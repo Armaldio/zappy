@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 27 13:01:36 2017 Martin Alais
-** Last update Thu Jun 29 15:19:39 2017 Martin Alais
+** Last update Fri Jun 30 10:06:20 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -80,4 +80,6 @@ void send_to_level_up(t_Player *player, t_Server *server)
 
 	fct_ptr = mfunction_ptr[player->level - 1];
 	fct_ptr(server, player);
+	send_message_bct_pos(server, server->list_graphic, player->pos.x,
+		       player->pos.y);
 }

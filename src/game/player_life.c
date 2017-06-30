@@ -5,10 +5,10 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 15:18:06 2017 Martin Alais
-** Last update Thu Jun 29 14:24:55 2017 Martin Alais
+** Last update Fri Jun 30 09:39:07 2017 hamza hammouche
 */
 
-#include "zappy.h"
+#include "Graphic.h"
 
 void		update_player_life(t_Server *server, double elapsed_time)
 {
@@ -47,6 +47,7 @@ void check_player_death(t_Server *server)
 			{
 				tmp->inventaire->food -= 1;
 				tmp->death_time += my_safe_div(126, server->f);
+	      commande_pin_graph(server->list_graphic, tmp);
 				printf("player %d eat food !\n", tmp->id);
 			}
 			else
