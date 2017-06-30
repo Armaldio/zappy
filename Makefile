@@ -5,7 +5,7 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Fri Jun 30 14:09:09 2017 Walter Bonetti
+## Last update Fri Jun 30 14:29:46 2017 Martin Alais
 ##
 
 CC    =    gcc -g
@@ -87,6 +87,7 @@ SRC    =	src/commande/broadcast.c \
 			src/graphic/tna.c \
 			src/team/Team_gestion.c \
 			src/team/team_status.c \
+			src/ucbuffer/ucbuffer.c \
 			src/ucbuffer/ucbuffer_init.c \
 			src/ucbuffer/ucbuffer_io.c \
 			src/ucbuffer/ucbuffer_clear.c \

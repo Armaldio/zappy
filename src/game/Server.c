@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Thu Jun 29 11:08:13 2017 Martin Alais
+** Last update Fri Jun 30 15:20:50 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -13,21 +13,6 @@
 #include "Socket.h"
 #include "zappy.h"
 #include "Event.h"
-
-void add_to_line(t_Player *tmp, char *data_recv, int a, t_Server *server)
-{
-	if (a == 0)
-	{
-		tmp->is_connected = false;
-		printf("Player with id %d disconected\n", tmp->id);
-		my_delete_player(server, tmp->id);
-	}
-	else
-	{
-		printf("%d: %s", tmp->id, data_recv);
-		add_data_in_line(tmp, data_recv);
-	}
-}
 
 int get_new_id(t_Server *server)
 {

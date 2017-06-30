@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Thu Jun 29 10:52:45 2017 Martin Alais
+** Last update Fri Jun 30 14:28:18 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -17,12 +17,11 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   new->controlled = true;
   new->isEgg = false;
   new->is_connected = true;
-  // new->pos = get_spaw_pos(server);
-  //
-  new->pos.x = 0;
-  new->pos.y = 0;
+  new->pos = get_spaw_pos(server);
   new->gaze = UP;
   new->level = 1;
+  new->write_buffer = ucbuffer_new(4096);
+  new->read_buffer = ucbuffer_new(4096);
   init_inventaire(new, server);
   init_action(new);
   ini_waiting_line(new);

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Thu Jun 29 16:43:42 2017 Martin Alais
+** Last update Fri Jun 30 14:24:54 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "basic_data.h"
+#include "unix_cbuffer.h"
 
 enum direction {UP, RIGHT, DOWN, LEFT};
 
@@ -57,6 +58,8 @@ typedef struct		s_Player
   t_Inventaire		*inventaire;
   t_action			*action;
   t_waiting_line	*waiting_line;
+  t_ucbuffer		*read_buffer;
+  t_ucbuffer		*write_buffer;
   int				fd;
   int				id;
   int 				id_eggs;
