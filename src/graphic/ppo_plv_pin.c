@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 18:05:16 2017 Martin Alais
-** Last update Sat Jun 24 15:44:16 2017 Martin Alais
+** Last update Fri Jun 30 09:36:30 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -71,4 +71,23 @@ void commande_pin(t_graphic *player, t_Server *server, char *data2)
 	tmp->inventaire->sibur, tmp->inventaire->mendiane,
 	tmp->inventaire->phiras, tmp->inventaire->thystane);
 	send_message(player->fd, data);
+}
+
+void	commande_pin_graph(t_graphic *head, t_Player *player)
+{
+  t_graphic	*tmp;
+  char			data[300];
+
+  tmp = head;
+	memset(data, '\0', 300);
+	sprintf(data, "pin %d %d %d %d %d %d %d %d %d %d\n",
+	player->id, player->inventaire->food, player->pos.x, player->pos.y,
+	player->inventaire->linemate, player->inventaire->deraumere,
+	player->inventaire->sibur, player->inventaire->mendiane,
+	player->inventaire->phiras, player->inventaire->thystane);
+  while (tmp)
+    {
+			send_message(tmp->fd, data);
+      tmp = tmp->next;
+    }
 }

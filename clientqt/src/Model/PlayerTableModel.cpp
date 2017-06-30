@@ -52,13 +52,21 @@ QVariant PlayerTableModel::data(const QModelIndex &index, int role) const {
                 case LEVEL:
                     return QString::number(player->getLevel());
                     break;
-                case ACTION:
-                    return QString("Unknown");
-                    break;
+                case ACTION: {
+                    QString actions;
+                    if (player->isCollecting())
+                        actions += ":COLLECTING";
+                    if (player->isIncantation())
+                        actions += ":INCANTATION";
+                    if (player->isLaying())
+                        actions += ":LAYING";
+                    return actions;
+                } break;
                 case TEAM:
                     if (player->getTeam())
                         return player->getTeam()->teamName;
-                    return QString("Unknown");
+                    else
+                        return QString("Unknown");
                     break;
                 case NOURRITURE:
                     return QString::number(inventaire->getNourriture());

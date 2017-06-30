@@ -26,6 +26,8 @@ namespace zappy {
         Inventaire *_inventaire;
         sf::Vector2f _pos;
         bool _isCollecting;
+        bool _isIncantation;
+        bool _isLaying;
 
     public:
         // gui
@@ -55,6 +57,14 @@ namespace zappy {
         void setCollecting(bool value);
 
         bool isCollecting() const;
+
+        void setIncantation(bool value);
+
+        bool isIncantation() const;
+
+        void setLaying(bool value);
+
+        bool isLaying() const;
 
         unsigned int getId() const;
 

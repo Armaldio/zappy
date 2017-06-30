@@ -15,6 +15,9 @@ zappy::Player::Player(unsigned int id, int level, int orientation, unsigned int 
         _orientation(orientation),
         _id(id),
         _team(nullptr),
+        _isCollecting(false),
+        _isIncantation(false),
+        _isLaying(false),
         animatedLoading(sf::microseconds(5))
 {
     _inventaire = new Inventaire();
@@ -74,4 +77,20 @@ zappy::Team *zappy::Player::getTeam() const {
 
 void zappy::Player::setTeam(zappy::Team *team) {
     Player::_team = team;
+}
+
+void zappy::Player::setIncantation(bool value) {
+    _isIncantation = value;
+}
+
+bool zappy::Player::isIncantation() const {
+    return _isIncantation;
+}
+
+void zappy::Player::setLaying(bool value) {
+    _isLaying = value;
+}
+
+bool zappy::Player::isLaying() const {
+    return _isLaying;
 }

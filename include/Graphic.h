@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:51:04 2017 Martin Alais
-** Last update Sat Jun 24 11:37:48 2017 Martin Alais
+** Last update Fri Jun 30 09:38:27 2017 hamza hammouche
 */
 
 #ifndef ZAPPY_GRAPHIC_H_
@@ -25,6 +25,7 @@ void commande_mct(t_graphic *player, t_Server *server, char *data);
 void commande_ppo(t_graphic *player, t_Server *server, char *data2);
 void commande_plv(t_graphic *player, t_Server *server, char *data2);
 void commande_pin(t_graphic *player, t_Server *server, char *data2);
+void	commande_pin_graph(t_graphic *head, t_Player *player);
 void commande_sst(t_graphic *player, t_Server *server, char *data2);
 void commande_smg(t_graphic *player, char *data);
 void commande_smg_all(t_Server *server, char *data);
