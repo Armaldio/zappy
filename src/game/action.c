@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 10:57:46 2017 Martin Alais
-** Last update Thu Jun 29 16:44:24 2017 Martin Alais
+** Last update Fri Jun 30 16:28:44 2017 Martin Alais
 */
 
 #include <time.h>
@@ -20,7 +20,7 @@ void send_message_pie(t_graphic *head, t_Player *p)
   tmp = head;
   while (tmp)
     {
-      send_message(tmp->fd, buffer);
+      send_message_graphic(tmp, buffer);
       tmp = tmp->next;
     }
 }

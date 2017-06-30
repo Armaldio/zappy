@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:44 2017 Martin Alais
-** Last update Fri Jun 30 15:52:34 2017 Martin Alais
+** Last update Fri Jun 30 16:23:37 2017 Martin Alais
 */
 
 #ifndef ZAPPY_PLAYER_H_
@@ -77,6 +77,7 @@ typedef struct	s_undefined
 	int fd;
 	int id;
 	t_ucbuffer *read_buffer;
+	t_ucbuffer *write_buffer;
 	struct s_undefined *next;
 }			t_undefined;
 
@@ -84,6 +85,7 @@ typedef struct	s_graphic
 {
 	int fd;
 	t_ucbuffer	*read_buffer;
+	t_ucbuffer *write_buffer;
 	int id;
 	struct s_graphic *next;
 }			t_graphic;

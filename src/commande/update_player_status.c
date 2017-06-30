@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Fri Jun 30 16:01:43 2017 Martin Alais
+** Last update Fri Jun 30 16:26:17 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -64,7 +64,7 @@ void check_data_undefine(int id, char *data_recv, t_Server *server)
 	if (strcmp(data_recv, "GRAPHIC\n") == 0)
 		undefined_to_graphic(server, tmp);
 	else if (check_valide_team(data_recv, server, tmp) != true)
-		send_message(tmp->fd, "ko\n");
+		send_message_undefine(tmp, "ko\n");
 }
 
 t_Player *get_last_player(t_Server *server)

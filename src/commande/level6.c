@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:30:03 2017 Martin Alais
-** Last update Thu Jun 29 15:34:48 2017 Martin Alais
+** Last update Fri Jun 30 16:22:08 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -74,16 +74,16 @@ void complete_struct6(t_Player **tmp2, t_Player *player, bool status)
 	while (a < 5)
 	{
 		player->action->friend_list[a] = tmp2[a]->id;
-		send_message(tmp2[a]->fd, "Elevation Underway\n");
+		send_message(tmp2[a], "Elevation Underway\n");
 		a += 1;
 	}
 	a = 0;
 	b = 0;
 	complete_struct6bis(tmp2, player, a, b);
 	if (status)
-		send_message(player->fd, "Elevation Underway\n");
+		send_message(player, "Elevation Underway\n");
 	else
-		send_message(player->fd, "ko\n");
+		send_message(player, "ko\n");
 }
 
 bool incan_6bis(t_Server *server, t_Player *player)

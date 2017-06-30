@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 28 19:20:52 2017 Martin Alais
-** Last update Wed Jun 28 19:21:38 2017 Martin Alais
+** Last update Fri Jun 30 16:20:53 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -22,7 +22,7 @@ void send_message_level4(char *data, t_Player *player, t_Server *server)
 		{
 			tmp = get_Player(player->action->friend_list[a],
 				server->list_player);
-			send_message(tmp->fd, data);
+			send_message(tmp, data);
 		}
 		a += 1;
 	}

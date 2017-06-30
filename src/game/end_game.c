@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:24:38 2017 Martin Alais
-** Last update Tue Jun 27 19:14:26 2017 Martin Alais
+** Last update Fri Jun 30 16:28:55 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -43,7 +43,7 @@ void send_winner(t_graphic *head, t_team *winner)
   while (tmp)
     {
       sprintf(buff, "seg %s\n", winner->name);
-      send_message(tmp->fd, buff);
+      send_message_graphic(tmp, buff);
       tmp = tmp->next;
     }
 }

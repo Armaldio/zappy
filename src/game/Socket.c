@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:14 2017 loic1.doyen@epitech.eu
-** Last update Mon Jun 26 16:29:05 2017 Martin Alais
+** Last update Fri Jun 30 16:42:06 2017 Martin Alais
 */
 
 #include "Socket.h"
@@ -14,6 +14,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "zappy.h"
+#include "unix_cbuffer.h"
 
 int set_socket_statue(int fd, int blocking)
 {
@@ -42,9 +44,14 @@ void init_socket2(t_Connection *connection){
 	}
 }
 
-bool send_message(int fd, char *msg)
+bool send_message(t_Player *player, char *msg)
 {
-	if (send(fd, msg, strlen(msg), MSG_DONTWAIT | MSG_NOSIGNAL) == -1)
+	int a;
+
+	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
+	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
+	a = zappy_ucbuffer_send(player->fd, player->write_buffer);
+	if (a <= 0)
 		return (false);
 	return (true);
 }

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:42 2017 Martin Alais
-** Last update Fri Jun 30 15:20:50 2017 Martin Alais
+** Last update Fri Jun 30 16:34:34 2017 Martin Alais
 */
 
 #include "Server.h"
@@ -32,9 +32,10 @@ int get_new_id(t_Server *server)
 
 void eggs_connection_message(int a, t_Player *p)
 {
-	send_message(a, "WELCOME\n");
+	(void) a;
+	send_message(p, "WELCOME\n");
   printf("Linking connection to player %d\n", p->id);
-	send_message(p->fd, "ok\n");
+	send_message(p, "ok\n");
 }
 
 void check_new_player(t_Server *server)
@@ -51,11 +52,11 @@ set_socket_statue(server->socket->fd, 1);
     {
       if (p != NULL)
 	{
+		p->fd = a;
 		eggs_connection_message(a, p);
 	  p->is_connected = true;
 	  p->isEgg = false;
 	  p->controlled = true;
-	  p->fd = a;
 	  event_conection_for_eggs(server, p);
 	  p->id = get_new_id(server) + 1;
 	  event_new_player(server, p);

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:28:30 2017 Martin Alais
-** Last update Thu Jun 29 15:34:31 2017 Martin Alais
+** Last update Fri Jun 30 16:21:48 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -63,10 +63,10 @@ void complete_struct5(t_Player **tmp2, t_Player *player)
 	tmp2[2]->action->friend_list[0] = player->id;
 	tmp2[2]->action->friend_list[1] = tmp2[0]->id;
 	tmp2[2]->action->friend_list[2] = tmp2[1]->id;
-	send_message(player->fd, "Elevation Underway\n");
-	send_message(tmp2[0]->fd, "Elevation Underway\n");
-	send_message(tmp2[1]->fd, "Elevation Underway\n");
-	send_message(tmp2[2]->fd, "Elevation Underway\n");
+	send_message(player, "Elevation Underway\n");
+	send_message(tmp2[0], "Elevation Underway\n");
+	send_message(tmp2[1], "Elevation Underway\n");
+	send_message(tmp2[2], "Elevation Underway\n");
 }
 
 void incan_5(t_Server *server, t_Player *player)

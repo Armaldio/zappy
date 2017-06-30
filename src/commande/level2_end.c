@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Wed Jun 28 16:36:53 2017 Martin Alais
-** Last update Thu Jun 29 15:33:34 2017 Martin Alais
+** Last update Fri Jun 30 16:19:41 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -34,7 +34,7 @@ bool	is_ready_to_up_2(t_Player *tmp, t_Player *player)
 void clean_player2(t_Player *player)
 {
 	player->action->is_leveling = false;
-	send_message(player->fd, "ko\n");
+	send_message(player, "ko\n");
 }
 
 bool incan_2bis(t_Server *server, t_Player *player)
@@ -52,8 +52,8 @@ bool incan_2bis(t_Server *server, t_Player *player)
 			tmp->action->is_leveling = false;
 			player->action->friend_list[0] = tmp->id;
 			tmp->action->friend_list[0] = player->id;
-			send_message(player->fd, "ko\n");
-			send_message(tmp->fd, "Elevation Underway\n");
+			send_message(player, "ko\n");
+			send_message(tmp, "Elevation Underway\n");
 			return (false);
 		}
 		else
@@ -80,8 +80,8 @@ void incan_2(t_Server *server, t_Player *player)
 			set_incan2(player, tmp);
 			player->action->friend_list[0] = tmp->id;
 			tmp->action->friend_list[0] = player->id;
-			send_message(player->fd, "Elevation Underway\n");
-			send_message(tmp->fd, "Elevation Underway\n");
+			send_message(player, "Elevation Underway\n");
+			send_message(tmp, "Elevation Underway\n");
 			return ;
 		}
 		else
@@ -90,5 +90,5 @@ void incan_2(t_Server *server, t_Player *player)
 	else if (incan_2bis(server, player) == false)
 		return;
 	player->action->is_leveling = false;
-	send_message(player->fd, "ko\n");
+	send_message(player, "ko\n");
 }

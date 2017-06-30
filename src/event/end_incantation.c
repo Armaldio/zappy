@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:23:19 2017 hamza hammouche
-** Last update Thu Jun 29 14:57:04 2017 hamza hammouche
+** Last update Fri Jun 30 16:26:38 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -52,7 +52,7 @@ void	send_message_plv(t_graphic *head, t_Player *hlist, t_Player *p)
 	    	{
           memset(buffer, '\0', 200);
           sprintf(buffer, "plv %d %d\n", ptmp->id, ptmp->level);
-  	  		send_message(tmp->fd, buffer);
+  	  		send_message_graphic(tmp, buffer);
 	    	}
 	  		ptmp = ptmp->next;
 			}

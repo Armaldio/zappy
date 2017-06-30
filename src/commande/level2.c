@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:14:33 2017 Martin Alais
-** Last update Thu Jun 29 15:49:54 2017 Martin Alais
+** Last update Fri Jun 30 16:19:56 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -56,7 +56,7 @@ void send_else_level2(t_Server *server, t_Player *player)
 	event_endI(server, player);
 	sprintf(data, "Current level: %d\n", player2->level);
 	stok_answer(player, "ko\n");
-	send_message(player2->fd, data);
+	send_message(player2, data);
 }
 
 void set_incan2(t_Player *player, t_Player *tmp)
@@ -86,7 +86,7 @@ void end_level2(t_Server *server, t_Player *player)
 		printf("Player %d reach level 3!\n", player2->id);
 		event_endI(server, player);
 		sprintf(data, "Current level: %d\n", player2->level);
-		send_message(player2->fd, data);
+		send_message(player2, data);
 		stok_answer(player, "Current level: 3\n");
 	}
 	else

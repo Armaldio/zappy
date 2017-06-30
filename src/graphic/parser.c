@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:50:27 2017 Martin Alais
-** Last update Sat Jun 24 15:57:17 2017 Martin Alais
+** Last update Fri Jun 30 16:31:07 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -48,6 +48,6 @@ bool graphic_parser(int id, t_Server *server, char *data)
 		}
 		a += 1;
 	}
-	send_message(tmp->fd, "suc\n");
+	send_message_graphic(tmp, "suc\n");
 	return (false);
 }

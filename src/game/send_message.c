@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Fri Jun 23 11:45:52 2017 hamza hammouche
-** Last update Sat Jun 24 19:21:11 2017 hamza hammouche
+** Last update Fri Jun 30 16:42:10 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -18,7 +18,31 @@ void	send_message_position(t_graphic *head, char *msg)
   tmp = head;
   while (tmp)
     {
-      send_message(tmp->fd, msg);
+      send_message_graphic(tmp, msg);
       tmp = tmp->next;
     }
+}
+
+bool send_message_undefine(t_undefined *player, char *msg)
+{
+	int a;
+
+	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
+	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
+	a = zappy_ucbuffer_send(player->fd, player->write_buffer);
+	if (a <= 0)
+		return (false);
+	return (true);
+}
+
+bool send_message_graphic(t_graphic *player, char *msg)
+{
+	int a;
+
+	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
+	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
+	a = zappy_ucbuffer_send(player->fd, player->write_buffer);
+	if (a <= 0)
+		return (false);
+	return (true);
 }

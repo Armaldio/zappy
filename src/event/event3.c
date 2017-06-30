@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sun Jun 25 11:47:58 2017 Martin Alais
-** Last update Sun Jun 25 11:49:19 2017 Martin Alais
+** Last update Fri Jun 30 16:27:56 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -21,7 +21,7 @@ void event_eht(t_Server *server, t_Player *player)
 	graphic = server->list_graphic;
 	while (graphic)
 	{
-		send_message(graphic->fd, buffer2);
+		send_message_graphic(graphic, buffer2);
 		graphic = graphic->next;
 	}
 }

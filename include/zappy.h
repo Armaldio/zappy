@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Fri Jun 30 16:01:19 2017 Martin Alais
+** Last update Fri Jun 30 16:25:58 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -130,5 +130,7 @@ void complete_read(t_Player *tmp3, char *data_recv);
 void complete_read_graphic(t_graphic *tmp3, char *data_recv, t_Server *server);
 void complete_read_undefine(t_undefined *player, char *data_recv,
 	t_Server *server);
+bool send_message_undefine(t_undefined *player, char *msg);
+bool send_message_graphic(t_graphic *player, char *msg);
 
 #endif /* !ZAPPY_MAIN_H_ */

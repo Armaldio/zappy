@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:07:44 2017 Martin Alais
-** Last update Mon Jun 26 12:11:10 2017 Martin Alais
+** Last update Fri Jun 30 16:18:33 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -16,22 +16,22 @@ void eject_player(t_Server *server, t_Player *player)
 	if (player->gaze == UP)
 	{
 		go_up(server, player->id, false);
-		send_message(player->fd, "eject: 1\n");
+		send_message(player, "eject: 1\n");
 	}
 	else if (player->gaze == DOWN)
 	{
 		go_down(server, player->id, false);
-		send_message(player->fd, "eject: 3\n");
+		send_message(player, "eject: 3\n");
 	}
 	else if (player->gaze == RIGHT)
 	{
 		go_right(server, player->id, false);
-		send_message(player->fd, "eject: 2\n");
+		send_message(player, "eject: 2\n");
 	}
 	else
 	{
 		go_left(server, player->id, false);
-		send_message(player->fd, "eject: 4\n");
+		send_message(player, "eject: 4\n");
 	}
 }
 

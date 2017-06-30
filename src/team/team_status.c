@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:18:48 2017 Martin Alais
-** Last update Mon Jun 26 12:59:36 2017 Martin Alais
+** Last update Fri Jun 30 16:33:03 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -36,15 +36,15 @@ bool	get_player_team(t_Player *player, char *data, t_Server *serv)
   if (player == NULL || player->waitingTeam == false)
     return (false);
   if ((tmp = get_team(serv->list_teams, data, -1)) == NULL)
-    return (send_message(player->fd, "ko\n"), true);
+    return (send_message(player, "ko\n"), true);
   if (serv->nbClientMax < tmp->nbMember + 1)
-    return (send_message(player->fd, "ko\n"), true);
+    return (send_message(player, "ko\n"), true);
   tmp->nbMember++;
   sprintf(buffer, "%d\n%d %d\n", serv->nbClientMax -
 	  tmp->nbMember,
 	  serv->world->width, serv->world->height);
   player->teamId = tmp->id;
   player->waitingTeam = false;
-  send_message(player->fd, buffer);
+  send_message(player, buffer);
   return (true);
 }

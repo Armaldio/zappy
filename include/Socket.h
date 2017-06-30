@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:10 2017 Martin Alais
-** Last update Mon Jun 19 19:24:53 2017 Martin Alais
+** Last update Fri Jun 30 16:17:15 2017 Martin Alais
 */
 
 #ifndef ZAPPY_SOCKET_H_
@@ -20,6 +20,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "basic_data.h"
+#include "Player.h"
 
 typedef struct	s_Connection
 {
@@ -35,6 +36,6 @@ typedef struct	s_Connection
 void init_socket(t_Connection *connection);
 void basic_init_socket(t_Connection *connection);
 int set_socket_statue(int fd, int blocking);
-bool send_message(int fd, char *msg);
+bool send_message(t_Player *player, char *msg);
 
 #endif /* !ZAPPY_SOCKET_H_ */
