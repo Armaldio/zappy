@@ -150,24 +150,22 @@ bot.client.on('data', data => {
 					bot.aPlayerIsWaiting = broadcast[1] * 1; //To Number
 				else if (broadcast[0] === "stopped")
 					bot.aPlayerIsWaiting = -1;
+				else if (broadcast[0] === "case")
+					bot.moveTo(tileID);
 
 			} else if (bot.msg === 'ko') {
-				console.log('KO Queue : ' + bot.queue[0]);
+				console.log('KO received for : ' + bot.queue[0]);
 				if (bot.queue[0] === 'Incantation') {
 					if (bot.incantationStep === 0) {
-						//bot.queue.shift();
 						bot.incantationStep = 1;
-						//bot.send("Look");
 					} else if (bot.incantationStep === 1) {
-						bot.queue.shift();
+						bot.lastCommand = bot.queue.shift();
 						bot.incantationStep = 0;
 						bot.send("Look");
 					}
 				} else {
 					bot.lastCommand = bot.queue.shift();
-					bot.output(bot.lastCommand + ' : ko');
 					bot.goRandomDir();
-					console.log("Next command : " + bot.queue[0]);
 				}
 			} else if (bot.msg === 'dead') {
 				bot.dead = true;

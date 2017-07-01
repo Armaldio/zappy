@@ -6,7 +6,8 @@ const fs    = require('fs');
 const path  = require('path');
 const chalk = require('chalk');
 
-module.exports = class Bot {
+module.exports = class Bot
+{
 	constructor (behaviour) {
 		this.inventory         = {};
 		this.view              = {
@@ -86,6 +87,7 @@ module.exports = class Bot {
 
 		this.incantationStep              = 0;
 		this.incantating                  = false;
+		this.waiting_for_incantation      = false;
 		this.aPlayerIsWaiting             = -1;
 		this.trainDatas                   = [];
 		this.checkingRessourcesOnTheFloor = -1;
@@ -161,8 +163,8 @@ module.exports = class Bot {
 				console.log('COMMAND IS UNDEFINED !!!');
 			} else {
 				console.log(chalk.blue(this.getDate() + '[Sending] ' + cmd));
-				this.queue.push(cmd.split(/(\\n)| /g)[0]);
-				this.oldCommands.push(cmd.split(/(\\n)| /g)[0]);
+				this.queue.push(cmd.split(/(\\n)| /g)[ 0 ]);
+				this.oldCommands.push(cmd.split(/(\\n)| /g)[ 0 ]);
 				this.output(this.queue);
 				this.totalCommands++;
 			}
@@ -192,7 +194,7 @@ module.exports = class Bot {
 				return (el === 'player');
 			});
 
-			datas[i] = {
+			datas[ i ] = {
 				items  : onFloor,
 				length : onFloor.length,
 				players: players.length,
@@ -200,20 +202,28 @@ module.exports = class Bot {
 			};
 		});
 
-		this.view.here = datas[0];
-		console.log("players.length", datas[0].players);
-		this.view.up = datas[2];
+		this.view.here = datas[ 0 ];
+		console.log("players.length", datas[ 0 ].players);
+		this.view.up = datas[ 2 ];
 
+		//* -- Check for incantation
+
+		//if case is empty
 		if (this.view.here.items && this.view.here.items.length !== 0) {
-			if (!this.willMove() || this.view.here.players <= this.lv[this.level + 1].players) {
-				this.send('Take ' + this.view.here.items[0]);
-			} else {
+			//If player will not move
+			if (!this.willMove()) {
+				/*if (this.enoughResForIncantationOnTheFloor(this.view.here)/!* && this.view.here.players !== this.lv[this.level + 1].players*!/) {
+				 this.waiting_for_incantation = true;
+				 }*/
 
-				//Here, check if enough materials
-				if (this.enoughResForIncantationOnTheFloor(this.view.here) && this.view.here.players <= this.lv[this.level + 1].players)
-					this.send("Incantation");
-				else
-					this.goRandomDir();
+				/*if (this.view.here.players === this.lv[ this.level + 1 ].players) {
+				 this.send("Incantation");
+				 }
+				 else {*/
+				this.send('Take ' + this.view.here.items[ 0 ]);
+				//}
+			} else {
+				this.send('Look');
 			}
 		} else {
 			this.send('Inventory');
@@ -247,6 +257,8 @@ module.exports = class Bot {
 	}
 
 	onIncantation () {
+		this.incantating             = false;
+		this.waiting_for_incantation = false;
 		this.output('Incantation done, now level ' + this.level);
 		this.send('Fork');
 		this.send('Look');
@@ -255,11 +267,45 @@ module.exports = class Bot {
 	onTeam () {
 		const a     = {};
 		const split = this.msg.split(/[\\n\s]/g);
-		a.remaining = split[0];
-		a.w         = split[1];
-		a.h         = split[2];
+		a.remaining = split[ 0 ] * 1;
+		a.w         = split[ 1 ] * 1;
+		a.h         = split[ 2 ] * 1;
 
 		this.send('Look');
+	}
+
+	moveTo (tile) {
+		tile = tile * 1;
+		console.log("Move to " + tile);
+		if (tile === 1) {
+			this.send("Forward");
+		} else if (tile === 2) {
+			this.send("Forward");
+		} else if (tile === 3) {
+			this.send("Left");
+			this.send("Forward");
+		} else if (tile === 4) {
+			this.send("Left");
+			this.send("Forward");
+		}
+		else if (tile === 5) {
+			this.send("Left");
+			this.send("Left");
+			this.send("Forward");
+		}
+		else if (tile === 6) {
+			this.send("Left");
+			this.send("Left");
+			this.send("Forward");
+		}
+		else if (tile === 7) {
+			this.send("Right");
+			this.send("Forward");
+		}
+		else if (tile === 8) {
+			this.send("Right");
+			this.send("Forward");
+		}
 	}
 
 	onInventory () {
@@ -272,7 +318,7 @@ module.exports = class Bot {
 		inventory.forEach(x => {
 			const a = x.split(' ');
 
-			obj[a[0]] = Number(a[1]); // Convert to number
+			obj[ a[ 0 ] ] = Number(a[ 1 ]); // Convert to number
 		});
 
 		// ---
@@ -283,31 +329,23 @@ module.exports = class Bot {
 		if (this.InventoryCallback) {
 			// The case contains no ressources
 			console.log("A player is waiting : " + this.aPlayerIsWaiting + " My level : " + this.level);
-			if (this.view.here.length === 0 && this.enoughResForIncantation() && this.aPlayerIsWaiting !== this.level) {
-				this.releaseRessources();
-				this.send("Broadcast Waiting " + this.level);
+			if (this.view.here.length === 0 &&
+				this.enoughResForIncantation() &&
+				this.aPlayerIsWaiting !== this.level &&
+				this.inventory.food >= 50 &&
+				this.enoughPlayersForIncantation()) {
 
-				let int = setInterval(() => {
-					if (this.dead)
-						clearInterval(int);
+				let r = Math.round(Math.random()) ;
+				console.log("Random is : " + r);
 
-					if (this.enoughPlayersForIncantation()) {
-						this.InventoryCallback = true;
-						this.send("Broadcast stopped");
-						clearInterval(int);
-						this.send('Incantation');
-					} else {
-						if (this.inventory.food <= 10) {
-							this.send('Look');
-						} else {
-							console.log("Waiting for a player");
-							console.log("a player is already waiting : " + this.aPlayerIsWaiting);
-							this.InventoryCallback = false;
-							this.send("Inventory");
-						}
-					}
-				}, 1000);
-
+				if (Math.round(Math.random()) === 0) {
+					this.releaseRessources();
+					this.send('Incantation');
+				}
+				else
+				{
+					this.send('Look');
+				}
 			} else {
 				this.send('Forward');
 			}
@@ -316,13 +354,13 @@ module.exports = class Bot {
 
 	enoughResForIncantationOnTheFloor (items) {
 		let bool = true;
-		Object.keys(this.lv[this.level + 1]).forEach(key => {
+		Object.keys(this.lv[ this.level + 1 ]).forEach(key => {
 			// If (requirement to pass level) is in (inventory)
 
 			if (key !== 'player') {
-				if (items.items[key] === undefined ||
-					items.items[key] * 1 < this.lv[this.level + 1][key]) {
-					console.log("Not enough ressources : (" + key + ") " + this.inventory[key] + " vs " + this.lv[this.level + 1][key]);
+				if (items.items[ key ] === undefined ||
+					items.items[ key ] * 1 !== this.lv[ this.level + 1 ][ key ]) {
+					console.log("Ressources not match on the floor : (" + key + ") " + this.inventory[ key ] + " vs " + this.lv[ this.level + 1 ][ key ]);
 					bool = false;
 				}
 			}
@@ -333,12 +371,12 @@ module.exports = class Bot {
 
 	enoughResForIncantation () {
 		let bool = true;
-		Object.keys(this.lv[this.level + 1]).forEach(key => {
+		Object.keys(this.lv[ this.level + 1 ]).forEach(key => {
 			// If (requirement to pass level) is in (inventory)
 
 			if (key !== 'player') {
-				if (this.inventory[key] === undefined ||
-					this.inventory[key] < this.lv[this.level + 1][key]) {
+				if (this.inventory[ key ] === undefined ||
+					this.inventory[ key ] < this.lv[ this.level + 1 ][ key ]) {
 					// Console.log("Not enough ressources : (" + key + ") " + this.inventory[key] + " vs " + this.lv[this.level + 1][key]);
 					bool = false;
 				}
@@ -350,16 +388,17 @@ module.exports = class Bot {
 
 	enoughPlayersForIncantation () {
 		let bool = true;
-		Object.keys(this.lv[this.level + 1]).forEach(key => {
+		Object.keys(this.lv[ this.level + 1 ]).forEach(key => {
 			// If (requirement to pass level) is in (inventory)
 
 			if (key === 'player') {
-				if (this.view.here.players !== this.lv[this.level + 1][key]) {
+				if (this.view.here.players !== this.lv[ this.level + 1 ][ key ]) {
 					bool = false;
-					console.log('Not enough players : ' + this.view.here.players + ' vs ' + this.lv[this.level + 1][key]);
+					console.log('Not enough players : ' + this.view.here.players + ' vs ' + this.lv[ this.level + 1 ][ key ]);
 				}
-				else
+				else {
 					console.log("Enough plaeyrrrrrrrrrrrs");
+				}
 			}
 		});
 
@@ -369,8 +408,8 @@ module.exports = class Bot {
 	releaseRessources () {
 		this.output('Releasing resources');
 
-		Object.keys(this.lv[this.level + 1]).forEach(key => {
-			for (let i = 0; i < this.lv[this.level + 1][key]; i++) {
+		Object.keys(this.lv[ this.level + 1 ]).forEach(key => {
+			for (let i = 0; i < this.lv[ this.level + 1 ][ key ]; i++) {
 				if (key !== 'player') {
 					this.send('Set ' + key);
 				}
@@ -400,7 +439,7 @@ module.exports = class Bot {
 
 	goRandomDir () {
 		const r   = this.getRandomInt(0, 1);
-		const c   = this.getRandomInt(1, 3);
+		const c   = this.getRandomInt(1, 1);
 		const dir = (r === 1 ? 'Left' : 'Right');
 
 		for (let i = 0; i < c; i++) {
