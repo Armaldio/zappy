@@ -335,15 +335,14 @@ module.exports = class Bot
 				this.inventory.food >= 50 &&
 				this.enoughPlayersForIncantation()) {
 
-				let r = Math.round(Math.random()) ;
+				let r = Math.round(Math.random());
 				console.log("Random is : " + r);
 
 				if (Math.round(Math.random()) === 0) {
 					this.releaseRessources();
 					this.send('Incantation');
 				}
-				else
-				{
+				else {
 					this.send('Look');
 				}
 			} else {

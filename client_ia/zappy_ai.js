@@ -158,6 +158,8 @@ bot.client.on('data', data => {
 				if (bot.queue[0] === 'Incantation') {
 					if (bot.incantationStep === 0) {
 						bot.incantationStep = 1;
+						bot.lastCommand = bot.queue.shift();
+						bot.send("Look");
 					} else if (bot.incantationStep === 1) {
 						bot.lastCommand = bot.queue.shift();
 						bot.incantationStep = 0;

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in {1..40}
+for i in {1..10}
 do
     node zappy_ai.js -p 4242 -n Team1&
 done
