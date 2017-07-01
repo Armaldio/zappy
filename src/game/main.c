@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Fri Jun 30 17:21:56 2017 Martin Alais
+** Last update Sat Jul  1 13:54:02 2017 Martin Alais
 */
 
 #include <time.h>
@@ -29,12 +29,11 @@ double get_micro(double data)
 void	manage_time(t_Server *server)
 {
 	struct timeval tvTime;
-
-	gettimeofday(&tvTime, NULL);
-
-	int iMilliSec = tvTime.tv_usec / 1000;
+	int iMilliSec;
 	double tmp;
 
+	gettimeofday(&tvTime, NULL);
+	iMilliSec = tvTime.tv_usec / 1000;
 	tmp = (double)iMilliSec / 1000;
 	action_update_time(server, (tmp - get_micro(server->tmp_time)));
 	update_player_life(server, (tmp - get_micro(server->tmp_time)));

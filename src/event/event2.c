@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 16:00:16 2017 Martin Alais
-** Last update Fri Jun 30 16:27:32 2017 Martin Alais
+** Last update Sat Jul  1 13:59:31 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -75,7 +75,7 @@ void event_enw(t_Server *server, int father, t_Player *player)
 	if (egg_fa == NULL)
 		return ;
 	memset(buffer2, '\0', 100);
-	sprintf(buffer2, "enw %d %d %d %d\n", egg_fa->id, player->id,
+	sprintf(buffer2, "enw %d %d %d %d\n", player->id, egg_fa->id,
 	player->pos.x, player->pos.y);
 	graphic = server->list_graphic;
 	while (graphic)
