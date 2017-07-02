@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 29 14:33:37 2017 Martin Alais
-** Last update Sun Jul  2 17:51:19 2017 martin alais
+** Last update Sun Jul  2 21:17:26 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -95,6 +95,7 @@ void	player_disconnected(t_Player *player, t_Server *server)
 {
   player->is_connected = false;
   printf("Player with id %d disconected\n", player->id);
+  send_message_death(server->list_graphic, player->id);
   my_delete_player(server, player->id);
 }
 
