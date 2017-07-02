@@ -14,7 +14,7 @@ int		check_nbr_at_level(t_Server *server, t_Player *player, int level)
 {
   t_Player	*tmp;
   int		nbr;
-  
+
   nbr = 0;
   tmp = server->list_player;
   while (tmp)
@@ -30,7 +30,7 @@ int		check_nbr_at_level(t_Server *server, t_Player *player, int level)
 int	*build_tab_1()
 {
   int	*tab;
-  
+
   tab = malloc(sizeof(int) * 7);
   tab[0] = 0;
   tab[1] = 1;

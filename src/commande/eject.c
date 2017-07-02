@@ -50,7 +50,7 @@ void		command_eject(int id, t_Server *server, char *data)
   t_Player	*tmp;
   t_Player	*player;
   char		buffer[512];
-  
+
   player = get_Player(id, server->list_player);
   if (check_valide_commande(player, 5, data))
     return ;

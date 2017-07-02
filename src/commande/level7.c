@@ -14,7 +14,7 @@
 int	*build_tab_7()
 {
   int	*tab;
-  
+
   tab = malloc(sizeof(int) * 7);
   tab[0] = 0;
   tab[1] = 2;
@@ -83,7 +83,7 @@ bool		incan_7bis(t_Server *server, t_Player *player)
 void		incan_7(t_Server *server, t_Player *player)
 {
   t_Player	**tmp2;
-	
+
   if (compare_tab(build_tab(server, player), build_tab_7()) &&
       check_nbr_at_level(server, player, 7) == 6)
     {

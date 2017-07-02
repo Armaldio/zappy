@@ -61,7 +61,7 @@ void		invalide_level6(t_Server *server, t_Player *player)
 {
   int		a;
   t_Player	*player2;
-	
+
   a = 0;
   while (a < 5)
     {

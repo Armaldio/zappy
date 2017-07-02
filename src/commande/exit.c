@@ -13,7 +13,7 @@
 void		exit_client(int id, t_Server *server, char *data)
 {
   t_Player	*tmp;
-  
+
   (void) data;
   printf("close client\n");
   tmp = server->list_player;

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:12:33 2017 Martin Alais
-** Last update Sun Jul  2 15:17:03 2017 martin alais
+** Last update Sun Jul  2 18:07:10 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -15,7 +15,7 @@ void	spawn_food(t_Server *server)
 {
   int	x;
   int	y;
-	
+
   x = 0;
   while (x < server->world->width)
     {
@@ -78,13 +78,14 @@ t_Player	*get_last_player(t_Server *server)
   return (tmp);
 }
 
-void		undefined_to_player(t_Server *server, t_undefined *undefine, t_team *team)
+void		undefined_to_player(t_Server *server,
+	t_undefined *undefine, t_team *team)
 {
-
   t_Player	*tmp;
-  
+
   my_add_player(server, undefine->fd);
   tmp = get_last_player(server);
+  tmp->teamId = team->id;
   printf("Undefine %d become Player %d !\n", undefine->id, tmp->id);
   spawn_food(server);
   get_player_team(tmp, team->name, server);

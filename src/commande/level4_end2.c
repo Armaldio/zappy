@@ -54,7 +54,7 @@ bool	error_level_4(t_Player *player, t_Server *server)
 int	*build_tab_4()
 {
   int	*tab;
-  
+
   tab = malloc(sizeof(int) * 7);
   tab[0] = 0;
   tab[1] = 1;

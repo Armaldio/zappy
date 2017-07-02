@@ -14,7 +14,7 @@ void		command_inventory(int id, t_Server *server, char *data)
 {
   char		send_data[4096];
   t_Player	*tmp;
-  
+
   (void) data;
   tmp = get_Player(id, server->list_player);
   if (check_valide_commande(tmp, 9, data))

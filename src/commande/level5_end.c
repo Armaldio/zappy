@@ -83,7 +83,7 @@ void		end_level5(t_Server *server, t_Player *player)
 {
   t_Player	*player2;
   int		a;
-  
+
   a = 0;
   if (error_level_5(player, server))
     return ;

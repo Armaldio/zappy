@@ -43,7 +43,7 @@ int		nbr_case(t_Server *server, t_Player *player)
 {
   t_Player	*tmp;
   int		nbr;
-	
+
   nbr = 0;
   tmp = server->list_player;
   while (tmp)
@@ -77,7 +77,7 @@ void	send_to_level_up(t_Player *player, t_Server *server)
   void	*mfunction_ptr[] = {end_level1, end_level2, end_level3,
 			    end_level4, end_level5, end_level6, end_level7, NULL};
   int	(*fct_ptr)(t_Server *, t_Player *);
-  
+
   fct_ptr = mfunction_ptr[player->level - 1];
   fct_ptr(server, player);
   send_message_bct_pos(server, server->list_graphic, player->pos.x,

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 11:31:38 2017 Martin Alais
-** Last update Sat Jul  1 14:27:39 2017 Martin Alais
+** Last update Sun Jul  2 18:09:08 2017 Martin Alais
 */
 
 #include "Event.h"
@@ -17,7 +17,8 @@ void send_all_player(t_Server *server, t_graphic *graphic)
 	player = server->list_player;
 	while (player)
 	{
-		commande_pnw(server, player, graphic);
+		if (player->isEgg == false && player->controlled == true)
+			commande_pnw(server, player, graphic);
 		player = player->next;
 	}
 }

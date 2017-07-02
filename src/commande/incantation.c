@@ -27,7 +27,7 @@ void		commande_incantation(int id, t_Server *server, char *data)
   t_Player	*ptmp;
   char		buffer[2048];
   char		nb[15];
-  
+
   ptmp = server->list_player;
   tmp = get_Player(id, server->list_player);
   if (check_player_level(tmp, data) || check_valide_commande(tmp, 11, data))

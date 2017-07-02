@@ -112,7 +112,7 @@ bool		incan_6bis(t_Server *server, t_Player *player)
 void		incan_6(t_Server *server, t_Player *player)
 {
   t_Player	**tmp2;
-	
+
   if (compare_tab(build_tab_6(), build_tab(server, player)) &&
       check_nbr_at_level(server, player, 6) == 6)
     {

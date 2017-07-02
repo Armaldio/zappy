@@ -13,7 +13,7 @@
 int	*build_tab_3()
 {
   int	*tab;
-  
+
   tab = malloc(sizeof(int) * 7);
   tab[0] = 0;
   tab[1] = 2;

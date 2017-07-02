@@ -50,7 +50,7 @@ void		send_else_level2(t_Server *server, t_Player *player)
 {
   char		data[100];
   t_Player	*player2;
-  
+
   player2 = get_Player(player->action->friend_list[0], server->list_player);
   memset(data, '\0', 100);
   event_endI(server, player);
@@ -69,7 +69,7 @@ void		end_level2(t_Server *server, t_Player *player)
 {
   t_Player	*player2;
   char		data[100];
-  
+
   if (repaire_level2(server, player) == false)
     return ;
   memset(data, '\0', 100);
