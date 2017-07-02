@@ -58,5 +58,5 @@ void command_eject(int id, t_Server *server, char *data)
 		tmp = tmp->next;
 	}
 	sprintf(buffer, "pex %d\n", id);
-	stok_answer(tmp, "ok\n");
+	stok_answer(player, "ok\n");
 }
