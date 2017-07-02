@@ -5,12 +5,12 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Sun Jul  2 15:43:07 2017 Martin Alais
+## Last update Sun Jul  2 23:47:28 2017 Quentin Goinaud
 ##
 
 CC    =    gcc -g
 
-RM    =    rm -rf
+RM    =    rm -f
 
 NAME    =    zappy_server
 
