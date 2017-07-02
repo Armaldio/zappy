@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 29 14:33:37 2017 Martin Alais
-** Last update Fri Jun 30 15:23:41 2017 Martin Alais
+** Last update Sun Jul  2 18:28:47 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -68,7 +68,6 @@ void complete_struct(t_Server *server, struct pollfd *poll_fd)
 {
 	t_graphic *tmp;
 	t_undefined *tmp2;
-
 	int nbr;
 
 	nbr = 0;
@@ -77,14 +76,16 @@ void complete_struct(t_Server *server, struct pollfd *poll_fd)
 	while (tmp)
 	{
 		poll_fd[nbr].fd = tmp->fd;
-		poll_fd[nbr].events = POLLIN;
+		poll_fd[nbr].events = ucbuffer_is_empty(tmp->write_buffer) ?
+		(POLLIN) : (POLLIN | POLLOUT);
 		nbr += 1;
 		tmp = tmp->next;
 	}
 	while (tmp2)
 	{
 		poll_fd[nbr].fd = tmp2->fd;
-		poll_fd[nbr].events = POLLIN;
+		poll_fd[nbr].events = ucbuffer_is_empty(tmp2->write_buffer) ?
+		(POLLIN) : (POLLIN | POLLOUT);
 		nbr += 1;
 		tmp2 = tmp2->next;
 	}

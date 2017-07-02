@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 16:06:09 2017 Martin Alais
-** Last update Sat Jul  1 14:21:21 2017 Martin Alais
+** Last update Sun Jul  2 18:29:23 2017 Martin Alais
 */
 
 #include <poll.h>
@@ -39,7 +39,8 @@ void complete_struct2(t_Server *server, void *poll_fd, int nbr)
 		if (tmp3->controlled == true)
 		{
 			data[nbr].fd = tmp3->fd;
-			data[nbr].events = POLLIN;
+			data[nbr].events = ucbuffer_is_empty(tmp3->write_buffer) ?
+				(POLLIN) : (POLLIN | POLLOUT);
 			nbr += 1;
 		}
 		tmp3 = tmp3->next;

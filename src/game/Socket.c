@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:14 2017 loic1.doyen@epitech.eu
-** Last update Fri Jun 30 16:42:06 2017 Martin Alais
+** Last update Sun Jul  2 18:37:59 2017 Martin Alais
 */
 
 #include "Socket.h"
@@ -50,7 +50,7 @@ bool send_message(t_Player *player, char *msg)
 
 	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
 	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
-	a = zappy_ucbuffer_send(player->fd, player->write_buffer);
+	// a = zappy_ucbuffer_send(player->fd, player->write_buffer);
 	if (a <= 0)
 		return (false);
 	return (true);
