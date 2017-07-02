@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:33:40 2017 Martin Alais
-** Last update Sun Jul  2 16:00:13 2017 hamza hammouche
+** Last update Sun Jul  2 22:36:03 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -24,6 +24,7 @@ void command_fork(int id, t_Server *server, char *data)
 	egg = get_eggs(eggs_id, server->list_player);
 	start_action(server, player, 42);
 	event_pfk(server, player);
+	event_enw(server, egg->father_id, egg);
 	start_action(server, egg, 42);
 	add_data_in_line(egg, "Hatch");
 	stok_answer(player, "ok\n");

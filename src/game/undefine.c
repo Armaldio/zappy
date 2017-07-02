@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:38:41 2017 Martin Alais
-** Last update Sun Jul  2 22:02:49 2017 Martin Alais
+** Last update Sun Jul  2 22:09:53 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -67,7 +67,6 @@ void		undefined_to_graphic(t_Server *server, t_undefined *undefine)
   printf("Undefine %d become Graphic %d !\n", undefine->id, tmp->id);
   commande_graphic(tmp, server, "");
   delete_undefine(server, undefine->id);
-  // send_all_player(server, tmp);
 }
 
 void		delete_undefine(t_Server *server, int id)
