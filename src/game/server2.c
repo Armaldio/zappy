@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:21:28 2017 Martin Alais
-** Last update Sun Jul  2 17:55:18 2017 martin alais
+** Last update Sun Jul  2 22:07:07 2017 hamza hammouche
 */
 
 #include "Server.h"
@@ -19,7 +19,7 @@ void	basic_init_server(t_Server *server)
   server->socket = my_malloc(sizeof(t_Connection));
   server->world = my_malloc(sizeof(t_World));
   server->list_teams = NULL;
-  server->nbClientMax = 6;
+  server->nbClientMax = 5;
   basic_init_socket(server->socket);
   basic_init_world(server->world);
   server->f = 100;
