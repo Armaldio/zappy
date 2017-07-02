@@ -5,15 +5,15 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Fri Jun 23 11:45:52 2017 hamza hammouche
-** Last update Sun Jul  2 18:37:53 2017 Martin Alais
+** Last update Sun Jul  2 17:54:15 2017 martin alais
 */
 
 #include "zappy.h"
 #include "Incantation.h"
 
-void	send_message_position(t_graphic *head, char *msg)
+void		send_message_position(t_graphic *head, char *msg)
 {
-  t_graphic *tmp;
+  t_graphic	*tmp;
 
   tmp = head;
   while (tmp)
@@ -23,30 +23,28 @@ void	send_message_position(t_graphic *head, char *msg)
     }
 }
 
-bool send_message_undefine(t_undefined *player, char *msg)
+bool	send_message_undefine(t_undefined *player, char *msg)
 {
-	int a;
+  int	a;
 
-	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
-	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
-	// a = zappy_ucbuffer_send(player->fd, player->write_buffer);
-	if (a <= 0)
-		return (false);
-	return (true);
+  a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
+  ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
+  if (a <= 0)
+    return (false);
+  return (true);
 }
 
-bool send_message_graphic(t_graphic *player, char *msg)
+bool	send_message_graphic(t_graphic *player, char *msg)
 {
-	int a;
+  int	a;
 
-	if (msg[0] == '\0')
-		return (false);
-	if (player == NULL || player->fd == 0)
-		return (false);
-	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
-	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
-	// a = zappy_ucbuffer_send(player->fd, player->write_buffer);
-	if (a <= 0)
-		return (false);
-	return (true);
+  if (msg[0] == '\0')
+    return (false);
+  if (player == NULL || player->fd == 0)
+    return (false);
+  a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
+  ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
+  if (a <= 0)
+    return (false);
+  return (true);
 }

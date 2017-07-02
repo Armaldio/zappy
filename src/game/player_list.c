@@ -5,12 +5,12 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Tue Jun 20 16:02:11 2017 Martin Alais
-** Last update Fri Jun 30 14:28:18 2017 Martin Alais
+** Last update Sun Jul  2 18:17:45 2017 martin alais
 */
 
 #include "zappy.h"
 
-void my_init_player(t_Player *new, int fd, int id, t_Server *server)
+void	my_init_player(t_Player *new, int fd, int id, t_Server *server)
 {
   new->fd = fd;
   new->id = id;
@@ -34,26 +34,26 @@ void my_init_player(t_Player *new, int fd, int id, t_Server *server)
   printf("Player position: %d %d\n", new->pos.x, new->pos.y);
 }
 
-void my_add_player(t_Server *server, int fd)
+void	my_add_player(t_Server *server, int fd)
 {
-	t_Player *tmp;
-	t_Player *new;
+  t_Player *tmp;
+  t_Player *new;
 
-	new = my_malloc(sizeof(t_Player));
-	tmp = server->list_player;
-	if (server->list_player != NULL)
-	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-	}
-	if (server->list_player == NULL)
-		my_init_player(new, fd, 1, server);
-	else
-		my_init_player(new, fd, tmp->id + 1, server);
-	if (server->list_player == NULL)
-		server->list_player = new;
-	else
-		tmp->next = new;
+  new = my_malloc(sizeof(t_Player));
+  tmp = server->list_player;
+  if (server->list_player != NULL)
+    {
+      while (tmp->next != NULL)
+	tmp = tmp->next;
+    }
+  if (server->list_player == NULL)
+    my_init_player(new, fd, 1, server);
+  else
+    my_init_player(new, fd, tmp->id + 1, server);
+  if (server->list_player == NULL)
+    server->list_player = new;
+  else
+    tmp->next = new;
 }
 
 void	my_free_player(t_Player *tmp)
@@ -72,30 +72,30 @@ void	my_free_player(t_Player *tmp)
     }
 }
 
-void my_delete_player(t_Server *server, int id)
+void		my_delete_player(t_Server *server, int id)
 {
-	t_Player *tmp;
-	t_Player *last;
-  t_team		*team;
+  t_Player	*tmp;
+  t_Player	*last;
+  t_team	*team;
 
-	tmp = server->list_player;
-	last = NULL;
-	while (tmp != NULL)
+  tmp = server->list_player;
+  last = NULL;
+  while (tmp != NULL)
+    {
+      if (tmp->id == id)
 	{
-		if (tmp->id == id)
-		{
-			printf("Player with id %d deleted\n", tmp->id);
-	  	if ((team = get_team(server->list_teams, NULL, tmp->teamId)) != NULL)
-	    	team->nbMember--;
-	  	if (last == NULL)
-	    	server->list_player = tmp->next;
-	  	else
-	    	last->next = tmp->next;
-	  	my_free_player(tmp);
-			free(tmp);
-			return;
-		}
-		last = tmp;
-		tmp = tmp->next;
+	  printf("Player with id %d deleted\n", tmp->id);
+	  if ((team = get_team(server->list_teams, NULL, tmp->teamId)) != NULL)
+	    team->nbMember--;
+	  if (last == NULL)
+	    server->list_player = tmp->next;
+	  else
+	    last->next = tmp->next;
+	  my_free_player(tmp);
+	  free(tmp);
+	  return;
 	}
+      last = tmp;
+      tmp = tmp->next;
+    }
 }

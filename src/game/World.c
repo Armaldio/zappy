@@ -5,14 +5,14 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:45:26 2017 loic1.doyen@epitech.eu
-** Last update Thu Jun 29 10:47:42 2017 Martin Alais
+** Last update Sun Jul  2 18:14:42 2017 martin alais
 */
 
 #include "zappy.h"
 
-t_Map *init_case()
+t_Map	*init_case()
 {
-  t_Map *tmp;
+  t_Map	*tmp;
 
   tmp = malloc(sizeof(t_Map));
   tmp->deraumere = 0;
@@ -27,21 +27,21 @@ t_Map *init_case()
   tmp->phiras = 2;
   if (rand() % 5 == 0)
     tmp->phiras = 1;
-	init_case2(tmp);
+  init_case2(tmp);
   return (tmp);
 }
 
-void basic_init_world(t_World * world)
+void	basic_init_world(t_World * world)
 {
   world->height = -1;
   world->width = -1;
   world->nbr_player = 0;
 }
 
-void print_world(t_World *world)
+void	print_world(t_World *world)
 {
-  int a;
-  int b;
+  int	a;
+  int	b;
 
   a = 0;
   while (world->map[a] != NULL)
@@ -62,10 +62,10 @@ void print_world(t_World *world)
     }
 }
 
-void init_world(t_World * world)
+void	init_world(t_World * world)
 {
-  int a;
-  int b;
+  int	a;
+  int	b;
 
   b = 0;
   if (world->height == -1)

@@ -5,14 +5,14 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Tue Jun 20 09:35:13 2017 hamza hammouche
-** Last update Wed Jun 28 13:41:04 2017 Martin Alais
+** Last update Sun Jul  2 18:14:22 2017 martin alais
 */
 
 #include "Player.h"
 
-t_Player		*get_First_Player_Available(t_Player *head)
+t_Player	*get_First_Player_Available(t_Player *head)
 {
-  t_Player		*tmp;
+  t_Player	*tmp;
 
   tmp = head;
   while (tmp)
@@ -40,10 +40,10 @@ t_Player	*get_Player(int id, t_Player *head)
   return (NULL);
 }
 
-int	get_New_PlayerID(t_Player *head)
+int		get_New_PlayerID(t_Player *head)
 {
-  t_Player *tmp;
-  int	last;
+  t_Player	*tmp;
+  int		last;
 
   tmp = head;
   last = 0;

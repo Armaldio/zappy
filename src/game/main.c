@@ -5,7 +5,7 @@
 ** Login   <quentin.goinaud@epitech.eu>
 **
 ** Started on  Tue Jun 20 11:08:35 2017 Quentin Goinaud
-** Last update Sat Jul  1 13:54:02 2017 Martin Alais
+** Last update Sun Jul  2 17:41:29 2017 martin alais
 */
 
 #include <time.h>
@@ -13,49 +13,43 @@
 #include "Server.h"
 #include <sys/time.h>
 
-long getMicrotime(){
-    struct timeval currentTime;
-    gettimeofday(&currentTime, NULL);
-    return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
+double	get_micro(double data)
+{
+  while (data > 1)
+    data -= 1;
+  return (data);
 }
 
-double get_micro(double data)
+void			manage_time(t_Server *server)
 {
-	while (data > 1)
-		data -= 1;
-	return (data);
+  struct timeval	tvTime;
+  int			iMilliSec;
+  double		tmp;
+
+  gettimeofday(&tvTime, NULL);
+  iMilliSec = tvTime.tv_usec / 1000;
+  tmp = (double)iMilliSec / 1000;
+  action_update_time(server, (tmp - get_micro(server->tmp_time)));
+  update_player_life(server, (tmp - get_micro(server->tmp_time)));
+  server->tmp_time += (tmp - get_micro(server->tmp_time));
 }
 
-void	manage_time(t_Server *server)
+void		check_order_player(t_Server *server)
 {
-	struct timeval tvTime;
-	int iMilliSec;
-	double tmp;
+  t_Player	*tmp;
 
-	gettimeofday(&tvTime, NULL);
-	iMilliSec = tvTime.tv_usec / 1000;
-	tmp = (double)iMilliSec / 1000;
-	action_update_time(server, (tmp - get_micro(server->tmp_time)));
-	update_player_life(server, (tmp - get_micro(server->tmp_time)));
-	server->tmp_time += (tmp - get_micro(server->tmp_time));
+  tmp = server->list_player;
+  while (tmp != NULL)
+    {
+      if (tmp->is_connected == true && tmp->action->is_working == false)
+	parser_commande(tmp->id, server, get_data_from_line(tmp));
+      tmp = tmp->next;
+    }
 }
 
-void check_order_player(t_Server *server)
+void		add_default_team(t_Server *server)
 {
-	t_Player *tmp;
-
-	tmp = server->list_player;
-	while (tmp != NULL)
-	{
-		if (tmp->is_connected == true && tmp->action->is_working == false)
-			parser_commande(tmp->id, server, get_data_from_line(tmp));
-		tmp = tmp->next;
-	}
-}
-
-void	add_default_team(t_Server *server)
-{
-  t_team *head;
+  t_team	*head;
 
   head = NULL;
   head = add_team(head, "Team1");
@@ -65,27 +59,27 @@ void	add_default_team(t_Server *server)
   server->list_teams = head;
 }
 
-int main(int ac, char **argv)
+int		main(int ac, char **argv)
 {
-	t_Server *server;
+  t_Server	*server;
 
-	srand(time(NULL));
-	server = my_malloc(sizeof(t_Server));
-	basic_init_server(server);
-	parser_data(server, ac, argv);
-	init_server(server);
+  srand(time(NULL));
+  server = my_malloc(sizeof(t_Server));
+  basic_init_server(server);
+  parser_data(server, ac, argv);
+  init_server(server);
   if (server->list_teams == NULL)
     add_default_team(server);
-	while (1)
-	{
-		manage_time(server);
-		check_new_player(server);
-		check_order_player(server);
-		check_action_status(server);
-		check_player_death(server);
-		check_player_leveling(server);
-		my_poll(server);
-		end_game(server);
-	}
-	return (0);
+  while (1)
+    {
+      manage_time(server);
+      check_new_player(server);
+      check_order_player(server);
+      check_action_status(server);
+      check_player_death(server);
+      check_player_leveling(server);
+      my_poll(server);
+      end_game(server);
+    }
+  return (0);
 }

@@ -5,14 +5,14 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:23:19 2017 hamza hammouche
-** Last update Fri Jun 30 16:26:38 2017 Martin Alais
+** Last update Sun Jul  2 17:31:17 2017 martin alais
 */
 
 #include "zappy.h"
 #include "Event.h"
 #include "Graphic.h"
 
-void	send_message_bct(t_Server *serv, t_graphic *head, t_Player *player)
+void		send_message_bct(t_Server *serv, t_graphic *head, t_Player *player)
 {
   t_graphic	*tmp;
 
@@ -24,7 +24,7 @@ void	send_message_bct(t_Server *serv, t_graphic *head, t_Player *player)
     }
 }
 
-void	send_message_bct_pos(t_Server *serv, t_graphic *head, int x, int y)
+void		send_message_bct_pos(t_Server *serv, t_graphic *head, int x, int y)
 {
   t_graphic	*tmp;
 
@@ -36,26 +36,26 @@ void	send_message_bct_pos(t_Server *serv, t_graphic *head, int x, int y)
     }
 }
 
-void	send_message_plv(t_graphic *head, t_Player *hlist, t_Player *p)
+void		send_message_plv(t_graphic *head, t_Player *hlist, t_Player *p)
 {
   t_graphic	*tmp;
   t_Player	*ptmp;
-  char			buffer[200];
+  char		buffer[200];
 
   tmp = head;
   while (tmp)
     {
       ptmp = hlist;
       while (ptmp)
-			{
-	  		if (ptmp->pos.x == p->pos.x && ptmp->pos.y == p->pos.y)
-	    	{
-          memset(buffer, '\0', 200);
-          sprintf(buffer, "plv %d %d\n", ptmp->id, ptmp->level);
-  	  		send_message_graphic(tmp, buffer);
-	    	}
-	  		ptmp = ptmp->next;
-			}
+	{
+	  if (ptmp->pos.x == p->pos.x && ptmp->pos.y == p->pos.y)
+	    {
+	      memset(buffer, '\0', 200);
+	      sprintf(buffer, "plv %d %d\n", ptmp->id, ptmp->level);
+	      send_message_graphic(tmp, buffer);
+	    }
+	  ptmp = ptmp->next;
+	}
       tmp = tmp->next;
     }
 }

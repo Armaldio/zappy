@@ -5,16 +5,16 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:24:38 2017 Martin Alais
-** Last update Fri Jun 30 16:28:55 2017 Martin Alais
+** Last update Sun Jul  2 17:39:07 2017 martin alais
 */
 
 #include "zappy.h"
 
-t_team	*check_team_win(t_Server *serv)
+t_team		*check_team_win(t_Server *serv)
 {
-  t_team *tmp;
-  t_Player *ptmp;
-  int				i;
+  t_team	*tmp;
+  t_Player	*ptmp;
+  int		i;
 
   tmp = serv->list_teams;
   while (tmp)
@@ -24,20 +24,20 @@ t_team	*check_team_win(t_Server *serv)
       while (ptmp)
         {
           if (tmp->id == ptmp->teamId && ptmp->level >= 8)
-    				i++;
+	    i++;
           ptmp = ptmp->next;
         }
       if (i >= 6)
-				return (tmp);
+	return (tmp);
       tmp = tmp->next;
     }
   return (NULL);
 }
 
-void send_winner(t_graphic *head, t_team *winner)
+void		send_winner(t_graphic *head, t_team *winner)
 {
-  t_graphic *tmp;
-  char			buff[512];
+  t_graphic	*tmp;
+  char		buff[512];
 
   tmp = head;
   while (tmp)
@@ -48,9 +48,9 @@ void send_winner(t_graphic *head, t_team *winner)
     }
 }
 
-bool end_game(t_Server *serv)
+bool		end_game(t_Server *serv)
 {
-  t_team *winner;
+  t_team	*winner;
 
   if ((winner = check_team_win(serv)) == NULL)
     return (false);

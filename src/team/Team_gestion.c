@@ -5,29 +5,29 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Mon Jun 19 16:04:19 2017 hamza hammouche
-** Last update Tue Jun 27 16:56:57 2017 hamza hammouche
+** Last update Sun Jul  2 18:21:20 2017 martin alais
 */
 
 #include "Team.h"
 
-t_team *get_team(t_team *head, char *name, int id)
+t_team		*get_team(t_team *head, char *name, int id)
 {
-  t_team *tmp;
+  t_team	*tmp;
 
   tmp = head;
   if (name != NULL && name[strlen(name) - 1] == '\n')
     name[strlen(name) - 1] = '\0';
   while (tmp) {
     if ((name != NULL && strcmp(tmp->name, name) == 0) || id == tmp->id)
-			return (tmp);
+      return (tmp);
     tmp = tmp->next;
   }
   return (NULL);
 }
 
-t_team *create_team(char *name)
+t_team		*create_team(char *name)
 {
-  t_team *new;
+  t_team	*new;
 
   if ((new = malloc(sizeof(t_team))) == NULL)
     {
@@ -41,10 +41,10 @@ t_team *create_team(char *name)
   return (new);
 }
 
-t_team *add_team(t_team *head, char *name)
+t_team		*add_team(t_team *head, char *name)
 {
-  t_team *new;
-  t_team *tmp;
+  t_team	*new;
+  t_team	*tmp;
 
   if (strcmp(name, "GRAPHIC") == 0)
     {
@@ -69,10 +69,10 @@ t_team *add_team(t_team *head, char *name)
   return (head);
 }
 
-int	parser_team(t_Server *serv, char **argv, int a)
+int		parser_team(t_Server *serv, char **argv, int a)
 {
-  t_team *head;
-  int				i;
+  t_team	*head;
+  int		i;
 
   i = 0;
   head = NULL;
