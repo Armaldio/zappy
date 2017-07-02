@@ -5,7 +5,7 @@
 ** Login   <loic1.doyen@epitech.eu@epitech.eu>
 **
 ** Started on  Thu Jun 22 13:36:04 2017 loic1.doyen@epitech.eu
-** Last update Sun Jul  2 15:39:40 2017 Martin Alais
+** Last update Sun Jul  2 14:45:10 2017 martin alais
 */
 
 #include "zappy.h"
@@ -61,18 +61,18 @@ int		command_broadcast(int id, t_Server *server, char *data)
     return (1);
   message = my_malloc(strlen(data));
   while (tmp) {
-      res = perfect_projection(server->world, tmp, saying, server);
-      if (tmp->pos.x - res.x == 0 && tmp->pos.y - res.y > 0)
-	sprintf(message, "message %d", (0 + tmp->gaze * 2) % 8 + 1);
-      else if ((tmp->pos.x - res.x < 0 || res.x < 0) && tmp->pos.y - res.y > 0)
+    res = perfect_projection(server->world, tmp, saying, server);
+    if (tmp->pos.x - res.x == 0 && tmp->pos.y - res.y > 0)
+      sprintf(message, "message %d", (0 + tmp->gaze * 2) % 8 + 1);
+    else if ((tmp->pos.x - res.x < 0 || res.x < 0) && tmp->pos.y - res.y > 0)
 	sprintf(message, "message %d", (1 + tmp->gaze * 2) % 8 + 1);
-      else if ((tmp->pos.x - res.x < 0 || res.x < 0) &&
-	       tmp->pos.y - res.y == 0)
-	sprintf(message, "message %d", (2 + tmp->gaze * 2) % 8 + 1);
-      else if (k(tmp, res, &message));
-      else
-	bonsoir(tmp, res, &message);
-      ouais_fini(id, message, data, &tmp);
+    else if ((tmp->pos.x - res.x < 0 || res.x < 0) &&
+	     tmp->pos.y - res.y == 0)
+      sprintf(message, "message %d", (2 + tmp->gaze * 2) % 8 + 1);
+    else if (k(tmp, res, &message));
+    else
+      bonsoir(tmp, res, &message);
+    ouais_fini(id, message, data, &tmp);
   }
   free(message);
   return (0);
