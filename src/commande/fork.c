@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:33:40 2017 Martin Alais
-** Last update Mon Jun 26 13:34:28 2017 Martin Alais
+** Last update Sun Jul  2 14:09:27 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -18,8 +18,9 @@ void command_fork(int id, t_Server *server, char *data)
 	int eggs_id;
 
 	(void) id;
-	(void) data;
 	player = get_Player(id, server->list_player);
+	if (check_valide_commande(player, 4, data))
+		return ;
 	eggs_id = my_add_eggs(server, player);
 	egg = get_eggs(eggs_id, server->list_player);
 	start_action(server, player, 42);

@@ -5,14 +5,14 @@
 ## Login   <quentin.goinaud@epitech.eu>
 ##
 ## Started on  Wed Jan 25 14:44:21 2017 Quentin Goinaud
-## Last update Fri Jun 30 15:48:17 2017 Martin Alais
+## Last update Sun Jul  2 15:43:07 2017 Martin Alais
 ##
 
 CC    =    gcc -g
 
 RM    =    rm -rf
 
-NAME    =    server
+NAME    =    zappy_server
 
 SRC    =	src/commande/broadcast.c \
 			src/commande/broadcast2.c \

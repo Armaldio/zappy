@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:34:48 2017 Martin Alais
-** Last update Mon Jun 26 13:35:09 2017 Martin Alais
+** Last update Sun Jul  2 14:12:34 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -17,6 +17,8 @@ void command_inventory(int id, t_Server *server, char *data)
 
 	(void) data;
 	tmp = get_Player(id, server->list_player);
+	if (check_valide_commande(tmp, 9, data))
+		return ;
 	start_action(server, tmp, 1);
 	memset(send_data, '\0', 4096);
 	sprintf(send_data, "[food %d, linemate %d, deraumere %d, sibur %d, \

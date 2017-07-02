@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:35:18 2017 Martin Alais
-** Last update Mon Jun 26 13:35:53 2017 Martin Alais
+** Last update Sun Jul  2 15:33:20 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -53,7 +53,7 @@ int command_set(int id, t_Server *server, char *data)
 	char *all_stone[] = {"linemate", "deraumere", "sibur",
 	"mendiane", "phiras", "thystane", "food", NULL};
 	void	*mfunction_ptr[] = {set_linemate, set_deraumere,
-	set_sibur, set_mendiane, set_phiras, set_thystane, NULL};
+	set_sibur, set_mendiane, set_phiras, set_thystane, set_food, NULL};
 	void	(*fct_ptr)(int id, t_Server *);
 	int a;
 

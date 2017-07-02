@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 12:07:44 2017 Martin Alais
-** Last update Fri Jun 30 16:18:33 2017 Martin Alais
+** Last update Sun Jul  2 14:25:34 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -35,14 +35,25 @@ void eject_player(t_Server *server, t_Player *player)
 	}
 }
 
+bool check_valide_commande(t_Player *player, int size, char *data)
+{
+	if ((int)strlen(data) != size)
+	{
+		send_message(player, "ko\n");
+		return (true);
+	}
+	return (false);
+}
+
 void command_eject(int id, t_Server *server, char *data)
 {
 	t_Player *tmp;
 	t_Player *player;
 	char buffer[512];
 
-	(void) data;
 	player = get_Player(id, server->list_player);
+	if (check_valide_commande(player, 5, data))
+		return ;
 	tmp = server->list_player;
 	start_action(server, player, 7);
 	event_eject(server, tmp);

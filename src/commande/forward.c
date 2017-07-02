@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:00:57 2017 Martin Alais
-** Last update Fri Jun 30 10:59:53 2017 hamza hammouche
+** Last update Sun Jul  2 15:39:29 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -75,8 +75,9 @@ void commande_forward(int id, t_Server *server, char *data)
 {
 	t_Player *tmp;
 
-	(void) data;
   tmp = get_Player(id, server->list_player);
+  if (check_valide_commande(tmp, 7, data))
+	  return ;
 	start_action(server, tmp, 7);
 	if (tmp->gaze == UP)
 		go_up(server, id, true);

@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:07:57 2017 Martin Alais
-** Last update Fri Jun 30 16:19:07 2017 Martin Alais
+** Last update Sun Jul  2 14:29:41 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -30,7 +30,7 @@ void commande_incantation(int id, t_Server *server, char *data)
 
 	ptmp = server->list_player;
 	tmp = get_Player(id, server->list_player);
-	if (check_player_level(tmp, data))
+	if (check_player_level(tmp, data) || check_valide_commande(tmp, 11, data))
 		return;
 	start_action(server, tmp, 300);
 	tmp->action->is_leveling = true;
