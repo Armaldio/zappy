@@ -5,6 +5,7 @@ server
 test
 *.o
 a.out
+zappy_server
 vgcore*
 
 client_ia/\.idea/

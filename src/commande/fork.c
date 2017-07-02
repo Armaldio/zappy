@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:33:40 2017 Martin Alais
-** Last update Sun Jul  2 14:09:27 2017 Martin Alais
+** Last update Sun Jul  2 16:00:13 2017 hamza hammouche
 */
 
 #include "zappy.h"
@@ -17,7 +17,6 @@ void command_fork(int id, t_Server *server, char *data)
 	t_Player *player;
 	int eggs_id;
 
-	(void) id;
 	player = get_Player(id, server->list_player);
 	if (check_valide_commande(player, 4, data))
 		return ;
