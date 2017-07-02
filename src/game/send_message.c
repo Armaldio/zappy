@@ -5,7 +5,7 @@
 ** Login   <hamza.hammouche@epitech.eu>
 **
 ** Started on  Fri Jun 23 11:45:52 2017 hamza hammouche
-** Last update Sun Jul  2 11:12:58 2017 Martin Alais
+** Last update Sun Jul  2 11:42:19 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -41,7 +41,7 @@ bool send_message_graphic(t_graphic *player, char *msg)
 
 	if (msg[0] == '\0')
 		return (false);
-	if (player != NULL && player->fd != 0)
+	if (player == NULL || player->fd == 0)
 		return (false);
 	a = ucbuffer_write(player->write_buffer, msg, strlen(msg));
 	ucbuffer_move(player->write_buffer, &player->write_buffer->tail, a);
