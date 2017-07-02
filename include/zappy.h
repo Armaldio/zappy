@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 19 19:00:24 2017 Martin Alais
-** Last update Sun Jul  2 19:05:06 2017 Martin Alais
+** Last update Sun Jul  2 19:11:01 2017 Martin Alais
 */
 
 #ifndef ZAPPY_MAIN_H_
@@ -133,5 +133,7 @@ void complete_read_undefine(t_undefined *player, char *data_recv,
 bool send_message_undefine(t_undefined *player, char *msg);
 bool send_message_graphic(t_graphic *player, char *msg);
 bool check_valide_commande(t_Player *player, int size, char *data);
+void check_poll_data(struct pollfd *poll_fd, int nbr, t_Server *server);
+void send_to_struct(t_Server *server, int fd);
 
 #endif /* !ZAPPY_MAIN_H_ */
