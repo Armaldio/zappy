@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Mon Jun 26 13:33:40 2017 Martin Alais
-** Last update Sun Jul  2 22:41:59 2017 Martin Alais
+** Last update Sun Jul  2 22:48:26 2017 Martin Alais
 */
 
 #include "zappy.h"
@@ -40,7 +40,7 @@ void command_hatch(int id, t_Server *server, char *data)
 	if (tmp == NULL)
 		tmp = get_Player(id, server->list_player);
 	start_action(server, tmp, 600);
-	event_enw(server, tmp, tmp);
+	// event_enw(server, tmp, tmp);
 	add_data_in_line(tmp, "Bloom");
 	if (tmp->controlled == true)
     	stok_answer(tmp, "ok\n");
