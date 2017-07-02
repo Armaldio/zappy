@@ -5,10 +5,11 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Sat Jun 24 15:12:52 2017 Martin Alais
-** Last update Sun Jul  2 17:38:14 2017 martin alais
+** Last update Sun Jul  2 21:56:04 2017 Martin Alais
 */
 
 #include "zappy.h"
+#include "unix_cbuffer.h"
 
 int		get_eggs_id(t_Server *server)
 {
@@ -32,6 +33,8 @@ void	my_init_eggs(t_Player *new, int id, t_Server *server, int father_id)
   new->id = id;
   new->father_id = father_id;
   new->pos = get_spaw_pos(server);
+  new->write_buffer = ucbuffer_new(4066);
+  new->read_buffer = ucbuffer_new(4066);
   new->gaze = UP;
   new->level = 1;
   new->is_connected = true;
