@@ -5,7 +5,7 @@
 ** Login   <bonett_w@epitech.eu>
 **
 ** Started on  Fri Jun 30 10:23:29 2017 Walter Bonetti
-** Last update Fri Jun 30 12:17:34 2017 Walter Bonetti
+** Last update Sun Jul  2 22:22:28 2017 Walter Bonetti
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ t_ucbuffer	*ucbuffer_new(size_t buffer_size)
 {
   t_ucbuffer	*rb;
 
-  buffer_size = (buffer_size < 4096) ? 4096 : buffer_size;
+  buffer_size = (buffer_size < 65536) ? 65536 : buffer_size;
   buffer_size = upper_power_of_two(buffer_size);
   if ((rb = (t_ucbuffer *)malloc(sizeof(t_ucbuffer))) == NULL)
     return (NULL);
