@@ -1,6 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.6
 # -*- coding: UTF-8 -*-
 
+from __future__ import print_function
 import os
 import logging
 import logging.handlers
@@ -38,130 +39,127 @@ error3 = "Take hamza\n"
 error4 = "Set Inventory\n"
 error5 = "Eject 3\n"
 
-print("Connection: "),
-try:
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect(('127.0.0.1', 4242))
-	s.sendall(commande_team.encode())
-	time.sleep(1)
-	answer = s.recv(250)
-	print("Answer: " + answer),
-	print("OK")
-except:
-	print("KO")
-	exit(1)
+print("Connection: ")
 
-print("Commande: " + commande_forward),
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('127.0.0.1', 4242))
+s.sendall(commande_team.encode())
+time.sleep(1)
+answer = s.recv(250)
+print("Answer: " + answer.decode("utf-8"), end='')
+print("OK")
+
+print("Commande: " + commande_forward, end='')
 s.sendall(commande_forward.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_right),
+print("Commande: " + commande_right, end='')
 s.sendall(commande_right.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_left),
+print("Commande: " + commande_left, end='')
 s.sendall(commande_left.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_look),
+print("Commande: " + commande_look, end='')
 s.sendall(commande_look.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_inventory),
+print("Commande: " + commande_inventory, end='')
 s.sendall(commande_inventory.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_connect),
+print("Commande: " + commande_connect, end='')
 s.sendall(commande_connect.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
 time.sleep(3)
-print("Commande: " + commande_fork),
+print("Commande: " + commande_fork, end='')
 s.sendall(commande_fork.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_eject),
+print("Commande: " + commande_eject, end='')
 s.sendall(commande_eject.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_take1),
+print("Commande: " + commande_take1, end='')
 s.sendall(commande_take1.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_take2),
+print("Commande: " + commande_take2, end='')
 s.sendall(commande_take2.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_set1),
+print("Commande: " + commande_set1, end='')
 s.sendall(commande_set1.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + commande_set2),
+print("Commande: " + commande_set2, end='')
 s.sendall(commande_set2.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
 # s.sendall(commande_incantation.encode())
 print("\n\nMultiple commande")
 
 time.sleep(2)
 
-print("Commande: " + multiple1),
+print("Commande: " + multiple1, end='')
 s.sendall(multiple1.encode())
 time.sleep(5)
 answer = s.recv(25000)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
 time.sleep(2)
-print("Commande: " + multiple2),
+print("Commande: " + multiple2, end='')
 s.sendall(multiple2.encode())
 time.sleep(5)
 answer = s.recv(25000)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
 time.sleep(2)
-print("Commande: " + multiple3),
+print("Commande: " + multiple3, end='')
 s.sendall(multiple3.encode())
 time.sleep(5)
 answer = s.recv(25000)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
 time.sleep(2)
 
 print("\n\nError commande")
-print("Commande: " + error1),
+print("Commande: " + error1, end='')
 s.sendall(error1.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + error2),
+print("Commande: " + error2, end='')
 s.sendall(error2.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + error3),
+print("Commande: " + error3, end='')
 s.sendall(error3.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + error4),
+print("Commande: " + error4, end='')
 s.sendall(error4.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 
-print("Commande: " + error5),
+print("Commande: " + error5, end='')
 s.sendall(error5.encode())
 answer = s.recv(250)
-print("Answer: " + answer),
+print("Answer: " + answer.decode("utf-8"), end='')
 print("end")
