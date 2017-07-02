@@ -1,3 +1,3 @@
 #!/bin/bash
-./server& > log
+./zappy_server& > log
 sleep 2
