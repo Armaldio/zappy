@@ -5,7 +5,7 @@
 ** Login   <martin.alais@epitech.eu>
 **
 ** Started on  Thu Jun 22 15:55:33 2017 Martin Alais
-** Last update Sun Jul  2 23:46:56 2017 Quentin Goinaud
+** Last update Sun Jul  2 23:49:55 2017 Quentin Goinaud
 */
 
 #include "zappy.h"
@@ -74,7 +74,6 @@ void	commande_graphic(t_graphic *player, t_Server *server, char *data)
   commande_sgt(player, server, data);
   commande_mct(player, server, data);
   commande_tna(player, server, data);
-  //my_pnw(player, server, data);
   my_enw(player, server, data);
 }
 
